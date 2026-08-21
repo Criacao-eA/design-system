@@ -3,6 +3,7 @@ projeto: Design System e-Auditoria
 status: v4 entregue — catálogo, tokens, assets, skill e registry
 atualizado: 2026-08-21
 confidencialidade: material proprietário — repositório privado, site com acesso controlado
+autoria: Tamires Fernandes — equipe de Criação da e-Auditoria
 responsável: equipe de Criação (dona do banco de elementos)
 ---
 

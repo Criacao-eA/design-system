@@ -3,6 +3,10 @@
 > ⛔ **Material proprietário — todos os direitos reservados.** Não é material aberto.
 > Uso restrito a colaboradores e fornecedores autorizados. Ver [`LICENSE`](LICENSE).
 
+**Concepção, pesquisa, curadoria e construção:** Tamires Fernandes — equipe de Criação da e-Auditoria.
+O sistema foi levantado, unificado e documentado por ela a partir de seis landing pages,
+trinta e dois módulos de e-mail, o brandbook e o guia técnico.
+
 Banco de elementos oficial da <span>e-Auditoria</span>, controlado pela equipe de Criação.
 Marca, sub-marcas, tokens e blocos prontos para landing page (WordPress + HubSpot),
 newsletter e peça de rede social.
