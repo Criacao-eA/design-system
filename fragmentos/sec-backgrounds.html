@@ -1,0 +1,442 @@
+<!-- ============ BACKGROUNDS ============ -->
+<section id="backgrounds">
+  <div class="sec-head">
+    <h2>Backgrounds</h2>
+    <span class="tag marca">Marca</span>
+    <span class="tag web">Web</span>
+    <span class="tag novo">Novo na v3</span>
+  </div>
+  <p class="sec-desc">Fundos para landing page e para peça estática. A galeria é <b>banco de inspiração</b> — direção, não asset. O entregável são as <b>seis receitas em CSS</b> logo abaixo: copiar, colar, trocar as cores. No catálogo a classe do preview se chama <code>k-bg-…</code> por convenção interna; <b>na peça, use o nome que está no código: <code>ea-bg-…</code></b>.</p>
+
+  <!-- ---------- 1. GALERIA DE INSPIRAÇÃO ---------- -->
+  <div class="comp">
+    <div class="comp-head"><h3>Banco de inspiração</h3><span class="id">referência de direção · 10 peças</span></div>
+    <div class="preview stack">
+      <div class="k-ref-flag">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 16v-5M12 8h.01"/></svg>
+        <span><b>Referência, não asset.</b> Nada aqui deve ser reaproveitado direto numa peça nova: são arquivos de 110 KB a 1,5 MB, feitos para contextos que já passaram. Leia a legenda pela <b>estrutura</b> (degradê base + forma + textura + ruído) e reconstrua em CSS.</span>
+      </div>
+
+      <div class="k-bg-gal">
+        <figure>
+          <img src="{{IMG:bg-rectangle}}" alt="Degradê de malha quadrado com pêssego no canto superior esquerdo e azul-milho embaixo à direita" loading="lazy" decoding="async">
+          <figcaption><b>Malha de 4 pontos, sem forma</b>Pêssego quente no topo esquerdo, cinza-lavanda no meio, azul-milho embaixo à direita. Estrutura: uma cúpula desfocada de raio enorme atravessa o quadro e faz a virada de temperatura quente → frio sem nenhuma borda visível. Zero forma, zero textura. É a base da receita 1.</figcaption>
+        </figure>
+        <figure>
+          <img src="{{IMG:bg-02}}" alt="Fundo escuro com feixe diagonal navy, azul e ciano e clarão lilás no canto inferior direito" loading="lazy" decoding="async">
+          <figcaption><b>Auréola única sobre preto</b>Uma só auréola radial gigante, deslocada para fora do quadro, varrendo navy → azul → ciano até um clarão lilás. Funciona porque ~70% da área continua quase preta: sobra lugar para o texto. O clarão estoura para branco — texto ali é ilegível.</figcaption>
+        </figure>
+        <figure>
+          <img src="{{IMG:bg-aulao1}}" alt="Fundo claro lavanda com três módulos quadrados de canto arredondado" loading="lazy" decoding="async">
+          <figcaption><b>Gradiente claro + forma da marca</b>Base lavanda→branco e três módulos quadrados de canto arredondado — a forma do símbolo. Dois com preenchimento de gradiente muito lavado, um só com fio azul de 1px. O exemplo mais limpo do repertório: gradiente + forma, sem textura.</figcaption>
+        </figure>
+        <figure>
+          <img src="{{IMG:bg-aulao2}}" alt="Mesma composição de módulos com um deles preenchido em violeta e ciano saturados" loading="lazy" decoding="async">
+          <figcaption><b>A mesma peça, com um módulo aceso</b>Composição idêntica, mas um módulo vira violeta→ciano→azul saturado, com grão visível dentro da forma. Prova a hierarquia: <b>uma</b> forma acesa, as outras rebaixadas. Acender duas destrói o ponto focal.</figcaption>
+        </figure>
+        <figure>
+          <img src="{{IMG:bg-crossell}}" alt="Degradê diagonal azul e violeta coberto por malha branca fina" loading="lazy" decoding="async">
+          <figcaption><b>Malha fina sobre cor saturada</b>Degradê diagonal azul→violeta com grade branca de ~40px por cima, em opacidade baixíssima. A malha faz duas coisas: dá escala (o olho entende o tamanho do plano) e disfarça o <i>banding</i> do degradê em área grande. É a receita 3 na versão saturada.</figcaption>
+        </figure>
+        <figure>
+          <img src="{{IMG:bg-infografico}}" alt="Degradê azul e violeta com padrão de pontos e fita cromada tridimensional na borda direita" loading="lazy" decoding="async">
+          <figcaption><b>Padrão de pontos + objeto 3D sangrando</b>Mesmo degradê, padrão de pontos em vez de grade, e uma fita cromada entrando pela borda direita. O objeto ocupa só o terço direito; o texto vive no lado liso. Único item da galeria que exige asset 3D — os outros nove são reproduzíveis em CSS.</figcaption>
+        </figure>
+        <figure>
+          <img src="{{IMG:bg-vidroroxo}}" alt="Fundo navy escuro com coluna violeta central em lâminas verticais" loading="lazy" decoding="async">
+          <figcaption><b>Auréola sob máscara de lâminas</b>Navy quase preto com uma coluna violeta central quebrada em lâminas verticais de larguras irregulares — vidro canelado retroiluminado. Estrutura: degradê escuro + auréola violeta + máscara de faixas. O rodapé escurece de propósito: é onde entra o CTA.</figcaption>
+        </figure>
+        <figure>
+          <img src="{{IMG:bg-capa}}" alt="Fundo preto com cone de luz azul descendo do topo e poeira fina" loading="lazy" decoding="async">
+          <figcaption><b>Cone de luz + poeira</b>Preto puro e um cone azul descendo do topo, com partículas finas dentro do cone. Estrutura mínima: gradiente elíptico + ruído. O contraste é total, mas o fundo só aceita texto <b>dentro</b> do cone, e curto. Capa de material, não hero de LP.</figcaption>
+        </figure>
+        <figure>
+          <img src="{{IMG:bg-image1}}" alt="Aurora clara em ciano, periwinkle, lavanda e creme" loading="lazy" decoding="async">
+          <figcaption><b>Aurora clara canônica</b>Ciano no topo esquerdo → periwinkle → lavanda → creme quente à direita. Quatro paradas, nenhuma forma, nenhuma textura. É literalmente a receita 1 desta seção, só que exportada como imagem de 110 KB em vez de 0,4 KB de CSS.</figcaption>
+        </figure>
+        <figure>
+          <img src="{{IMG:bg-imagem2}}" alt="Fundo quase branco com grade fina e auréola difusa no canto superior esquerdo" loading="lazy" decoding="async">
+          <figcaption><b>Quase branco, grade + auréola</b>Degradê gelo→azul muito claro, grade de 1px e uma auréola branca difusa no topo esquerdo. O fundo mais seguro do repertório para bloco de texto longo: o contraste com navy passa folgado em qualquer ponto do quadro. É a receita 3.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <p class="comp-note warn"><b>Não reutilize esses arquivos numa peça nova.</b> Oito dos dez estão entre 380 KB e 1,5 MB — quatro a trinta vezes acima do teto de fundo em imagem. Sete dos dez são reproduzíveis em CSS com resultado equivalente, e as receitas abaixo cobrem todos eles.</p>
+  </div>
+
+  <!-- ---------- 2. RECEITAS ---------- -->
+
+  <!-- 2.1 AURORA CLARA -->
+  <div class="comp">
+    <div class="comp-head"><h3>1 · Aurora clara</h3><span class="id">.ea-bg-aurora · ~0,45 KB</span></div>
+    <div class="preview stack">
+      <div class="k-bg-demo k-bg-aurora">
+        <div class="k-bg-txt">
+          <h4>Reforma Tributária sem achismo</h4>
+          <p>Fundo padrão de hero claro e de seção de conteúdo longo. Lavanda, azul e pêssego em auréolas grandes sobre um degradê linear frio.</p>
+          <span class="k-bg-chip k-on-light">texto navy #050634 · contraste 16:1</span>
+        </div>
+      </div>
+    </div>
+    <p class="comp-note">Três auréolas radiais grandes (uma quente, duas frias) sobre um degradê linear. O pêssego entra em <b>uma</b> auréola só e nunca passa de 85% de opacidade — mais que isso a peça vira "pastel de banco digital" e sai da marca. Use para hero claro, seção de texto longo e fundo de captura.</p>
+    <p class="comp-note warn"><b>Não coloque CTA amarelo em cima do pêssego.</b> #FEC008 sobre <code>rgba(255,224,186,…)</code> some. Posicione a auréola quente do lado oposto ao botão.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>.ea-bg-aurora{
+  position:relative;
+  color:var(--ea-text);              /* navy #050634 */
+  background:
+    radial-gradient(90% 70% at 12% 6%,   rgba(255,224,186,.85) 0%, rgba(255,224,186,0) 55%),
+    radial-gradient(80% 65% at 88% 18%,  rgba(226,214,255,.90) 0%, rgba(226,214,255,0) 60%),
+    radial-gradient(95% 80% at 70% 100%, rgba(180,206,255,.95) 0%, rgba(180,206,255,0) 62%),
+    linear-gradient(200deg,#f7f4ff 0%,#eef2ff 45%,#e3ecff 100%);
+}</pre></div>
+  </div>
+
+  <!-- 2.2 NOITE PROFUNDA -->
+  <div class="comp">
+    <div class="comp-head"><h3>2 · Noite profunda</h3><span class="id">.ea-bg-noite · ~0,7 KB</span></div>
+    <div class="preview stack">
+      <div class="k-bg-demo k-bg-noite">
+        <div class="k-bg-txt">
+          <h4>R$ 1,4 mi recuperados em 2025</h4>
+          <p>Navy de base, duas auréolas violeta fora do eixo e um fio ciano de 1px fechando a seção embaixo.</p>
+          <span class="k-bg-chip k-on-dark">texto <code>--ea-text-on-dark</code> #e9ecfb · nunca #fff</span>
+        </div>
+      </div>
+    </div>
+    <p class="comp-note">Seção escura pontual: prova social, números-âncora, rodapé de LP. Duas auréolas violeta <b>assimétricas</b> (uma alta à direita, outra baixa à esquerda) — simétrico parece papel de parede. O fio ciano no rodapé é o único ciano da peça; é acento, não cor de área.</p>
+    <p class="comp-note warn">Ciano <code>#00FFEA</code> como fundo ou como texto de corpo não passa em nenhum critério de contraste. Só fio, borda, número curto ou ícone.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>.ea-bg-noite{
+  position:relative;
+  color:var(--ea-text-on-dark);      /* #e9ecfb — nunca #fff puro */
+  background:
+    radial-gradient(58% 52% at 80% 8%,  rgba(132,57,230,.55) 0%, rgba(132,57,230,0) 66%),
+    radial-gradient(55% 46% at 14% 82%, rgba(79,69,245,.45)  0%, rgba(79,69,245,0)  68%),
+    linear-gradient(160deg,#050634 0%,#0a0942 48%,#140a4e 100%);
+}
+/* fio ciano — acento, 1px, some nas pontas */
+.ea-bg-noite::after{
+  content:""; position:absolute; left:0; right:0; bottom:0; height:1px;
+  pointer-events:none;
+  background:linear-gradient(90deg,
+    transparent 0%, rgba(0,255,234,.55) 28%,
+    rgba(0,255,234,.80) 50%, rgba(0,255,234,.55) 72%, transparent 100%);
+}</pre></div>
+  </div>
+
+  <!-- 2.3 MALHA + AURÉOLA -->
+  <div class="comp">
+    <div class="comp-head"><h3>3 · Malha + auréola</h3><span class="id">.ea-bg-malha · ~0,8 KB</span></div>
+    <div class="preview stack">
+      <div class="k-bg-demo k-bg-malha">
+        <div class="k-bg-txt">
+          <h4>Cada obrigação no lugar certo</h4>
+          <p>Grade de 48px em opacidade baixíssima, recortada por uma máscara radial. A grade não termina — ela desaparece.</p>
+          <span class="k-bg-chip k-on-light">grade some nas bordas · sem linha cortada</span>
+        </div>
+      </div>
+    </div>
+    <p class="comp-note">Padrão geométrico sutil sobre degradê. O detalhe que separa isto de "papel milimetrado" é a <code>mask-image</code>: sem ela a grade bate na borda e a peça ganha uma moldura acidental. Sirva para seção de features, tabela, infográfico e fundo de screenshot de produto.</p>
+    <p class="comp-note warn">Grade acima de <code>.10</code> de opacidade briga com texto de 16px — dá a sensação de tela suja. Se precisar de mais presença, aumente a célula (64px, 80px), não a opacidade.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>.ea-bg-malha{
+  position:relative;
+  color:var(--ea-text);
+  background:
+    radial-gradient(52% 46% at 22% 16%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 62%),
+    linear-gradient(155deg,#eef7ff 0%,#e3f2fb 45%,#dce9ff 100%);
+}
+.ea-bg-malha::before{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background-image:
+    linear-gradient(rgba(47,36,255,.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(47,36,255,.07) 1px, transparent 1px);
+  background-size:48px 48px;
+  -webkit-mask-image:radial-gradient(78% 72% at 50% 45%, #000 38%, transparent 100%);
+          mask-image:radial-gradient(78% 72% at 50% 45%, #000 38%, transparent 100%);
+}
+/* versão saturada (ver bg-crossell): troque a base e a cor da linha */
+/* background:linear-gradient(118deg,#2488ff,#4f45f5 52%,#8439e6);
+   linhas em rgba(255,255,255,.10) */</pre></div>
+  </div>
+
+  <!-- 2.4 VIDRO SOBRE COR -->
+  <div class="comp">
+    <div class="comp-head"><h3>4 · Vidro sobre cor</h3><span class="id">.ea-bg-vidro · ~0,95 KB</span></div>
+    <div class="preview stack">
+      <div class="k-bg-demo k-bg-vidro">
+        <div class="k-vidro-painel">
+          <h4>Painel de vidro</h4>
+          <p>Superfície translúcida sobre o bloco de cor da vertical. O painel <b>clareia</b> o fundo — meça o contraste dentro dele, não fora.</p>
+          <span class="k-bg-chip k-on-dark">azul coringa → íris → roxo</span>
+        </div>
+      </div>
+    </div>
+    <p class="comp-note">O bloco de cor é a assinatura da vertical (aqui: azul coringa → íris → roxo). Troque só as três paradas do <code>linear-gradient</code> e o mesmo painel serve para Reforma, Recuperação de Créditos ou SPED. Use para card de destaque, formulário sobre cor e caixa de dado dentro de banner.</p>
+    <p class="comp-note warn"><b>Duas armadilhas de <code>backdrop-filter</code>.</b> (1) Um ancestral com <code>transform</code>, <code>filter</code> ou <code>will-change</code> cria contexto novo e o desfoque simplesmente não acontece — sem erro no console. (2) O painel clareia o fundo: texto branco que passava fora dele pode não passar dentro. O <code>@supports</code> abaixo garante um fundo opaco o bastante quando o desfoque não existe.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>.ea-bg-vidro{
+  position:relative;
+  /* bloco de cor da vertical — só estas 3 paradas mudam por produto */
+  background:linear-gradient(118deg,#2488ff 0%,#4f45f5 52%,#8439e6 100%);
+}
+.ea-bg-vidro .ea-vidro-painel{
+  position:relative; z-index:2;
+  color:#fff;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:var(--ea-radius-lg);          /* 28px */
+  padding:var(--ea-space-6);
+  -webkit-backdrop-filter:blur(16px) saturate(140%);
+          backdrop-filter:blur(16px) saturate(140%);
+  box-shadow:0 24px 60px rgba(5,6,52,.28), inset 0 1px 0 rgba(255,255,255,.35);
+}
+/* fallback: sem desfoque, o vidro vira véu opaco */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .ea-bg-vidro .ea-vidro-painel{ background:rgba(20,10,78,.42); }
+}</pre></div>
+    <p class="comp-note cro">Um painel de vidro por dobra. Cada camada com <code>backdrop-filter</code> é recomposta a cada quadro de rolagem — cinco na mesma página fazem o scroll travar no celular, e scroll travado derruba conversão antes de qualquer argumento de copy.</p>
+  </div>
+
+  <!-- 2.5 RUÍDO / GRÃO -->
+  <div class="comp">
+    <div class="comp-head"><h3>5 · Ruído / grão</h3><span class="id">.ea-bg-grao · ~0,6 KB</span></div>
+    <div class="preview stack">
+      <div class="k-bg-demo k-bg-grao">
+        <svg class="k-grao" aria-hidden="true" focusable="false" preserveAspectRatio="none">
+          <filter id="ea-grao-cat"><feTurbulence type="fractalNoise" baseFrequency="0.82" numOctaves="2" stitchTiles="stitch"/></filter>
+          <rect width="100%" height="100%" filter="url(#ea-grao-cat)"/>
+        </svg>
+        <div class="k-bg-txt">
+          <h4>Tira o aspecto "digital liso demais"</h4>
+          <p>Camada de <code>feTurbulence</code> em <code>overlay</code> sobre o degradê. Também é o jeito mais barato de matar o <i>banding</i> em área grande.</p>
+          <span class="k-bg-chip k-on-dark">um grão, zero requisição</span>
+        </div>
+      </div>
+    </div>
+    <p class="comp-note">Degradê saturado + ruído. Serve para banner de evento, capa de material rico e qualquer bloco de cor chapada acima de 600px de altura, onde o degradê puro mostra faixas. Opacidade útil: <code>.16</code> a <code>.30</code>. Acima disso vira televisão sem sinal.</p>
+    <p class="comp-note warn"><b>O <code>id</code> do filtro é global no documento.</b> Duas peças na mesma página com <code>id="grao"</code> e a segunda perde o efeito, em silêncio — prefixe sempre (<code>ea-grao-lp224</code>). E <code>mix-blend-mode</code> cria contexto de empilhamento: o conteúdo precisa de <code>position:relative;z-index:2</code> para não sumir por baixo do grão.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;div class="ea-bg-grao"&gt;
+  &lt;svg class="ea-grao" aria-hidden="true" focusable="false" preserveAspectRatio="none"&gt;
+    &lt;filter id="ea-grao-lp224"&gt;
+      &lt;feTurbulence type="fractalNoise" baseFrequency="0.82"
+                    numOctaves="2" stitchTiles="stitch"/&gt;
+    &lt;/filter&gt;
+    &lt;rect width="100%" height="100%" filter="url(#ea-grao-lp224)"/&gt;
+  &lt;/svg&gt;
+  &lt;div class="ea-bg-conteudo"&gt;…&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+.ea-bg-grao{
+  position:relative; overflow:hidden;
+  color:var(--ea-text-on-dark);
+  background:linear-gradient(135deg,#2f24ff 0%,#5b4bf2 46%,#8439e6 100%);
+}
+.ea-bg-grao .ea-grao{
+  position:absolute; inset:0; width:100%; height:100%;
+  opacity:.22; mix-blend-mode:overlay; pointer-events:none;
+}
+.ea-bg-grao .ea-bg-conteudo{ position:relative; z-index:2; }
+&lt;/style&gt;</pre></div>
+  </div>
+
+  <!-- 2.6 MÓDULOS eA -->
+  <div class="comp">
+    <div class="comp-head"><h3>6 · Módulos <span class="ea-brand">e-Auditoria</span></h3><span class="id">.ea-bg-modulos · ~0,9 KB</span></div>
+    <div class="preview stack">
+      <div class="k-bg-demo k-bg-modulos">
+        <span class="k-mod k-m1" aria-hidden="true"></span>
+        <span class="k-mod k-m2" aria-hidden="true"></span>
+        <span class="k-mod k-m3" aria-hidden="true"></span>
+        <div class="k-bg-txt">
+          <h4>A forma do símbolo como fundo</h4>
+          <p>Reprodução em CSS do fundo dos aulões: base clara, três módulos quadrados de canto arredondado, <b>um</b> aceso.</p>
+          <span class="k-bg-chip k-on-light">um módulo aceso · dois rebaixados</span>
+        </div>
+      </div>
+    </div>
+    <p class="comp-note">Substitui os arquivos <code>BG Aulão eA.png</code> (1,1 MB) e <code>BG Aulão eA_2.png</code> (1,2 MB) por menos de 1 KB de CSS. O raio de 26% é o que mantém a leitura de módulo do símbolo — em 12px vira card, em 50% vira círculo. Os módulos ficam sempre à direita e abaixo do meio, deixando o quadrante superior esquerdo livre para o título.</p>
+    <p class="comp-note warn">Precisa de <code>overflow:hidden</code> no container: os módulos sangram de propósito. Sem isso, eles empurram a largura da página e criam rolagem horizontal — que no WordPress aparece só na página publicada, nunca no editor.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;div class="ea-bg-modulos"&gt;
+  &lt;span class="ea-mod ea-mod-1" aria-hidden="true"&gt;&lt;/span&gt;
+  &lt;span class="ea-mod ea-mod-2" aria-hidden="true"&gt;&lt;/span&gt;
+  &lt;span class="ea-mod ea-mod-3" aria-hidden="true"&gt;&lt;/span&gt;
+  &lt;div class="ea-bg-conteudo"&gt;…&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+.ea-bg-modulos{
+  position:relative; overflow:hidden;   /* obrigatório: os módulos sangram */
+  color:var(--ea-text);
+  background:linear-gradient(120deg,#f8f0ff 0%,#f3f2ff 42%,#eaf1ff 100%);
+}
+.ea-bg-modulos .ea-mod{ position:absolute; aspect-ratio:1; border-radius:26%; pointer-events:none; }
+/* 1 — o módulo aceso: só ele tem cor saturada */
+.ea-bg-modulos .ea-mod-1{ width:34%; left:28%; top:50%;
+  background:linear-gradient(135deg,#8439e6 0%,#4f45f5 45%,#2488ff 100%); opacity:.62; }
+/* 2 — contorno de 1px */
+.ea-bg-modulos .ea-mod-2{ width:30%; left:54%; top:26%;
+  border:1px solid rgba(47,36,255,.42); }
+/* 3 — mancha desfocada, quase fundo */
+.ea-bg-modulos .ea-mod-3{ width:32%; left:68%; top:-8%;
+  background:linear-gradient(160deg,rgba(47,36,255,.30),rgba(36,136,255,0)); filter:blur(18px); }
+.ea-bg-modulos .ea-bg-conteudo{ position:relative; z-index:2; }
+&lt;/style&gt;</pre></div>
+  </div>
+
+  <!-- ---------- 3. REGRAS ---------- -->
+  <div class="comp">
+    <div class="comp-head"><h3>Regras de fundo</h3><span class="id">o que manda quando há conflito</span></div>
+    <div class="preview stack">
+      <div class="rules" style="width:100%">
+        <div class="rule">
+          <div class="n">01</div>
+          <h4>Contraste do texto manda — sempre</h4>
+          <p>Se o fundo bonito não deixa o texto passar em <b>4,5:1</b> (corpo) e <b>3:1</b> (título ≥ 24px em 700), o fundo muda. Nunca o texto. E meça no <b>pior ponto</b> do fundo, não no centro: degradê tem um extremo claro e um escuro, e o texto atravessa os dois.</p>
+        </div>
+        <div class="rule">
+          <div class="n">02</div>
+          <h4>Fundo em imagem: teto de ~40 KB</h4>
+          <p>Acima disso não é fundo, é conteúdo — e conteúdo de decoração não paga o próprio custo. Se o arquivo passar de 40 KB depois de comprimir em WebP/AVIF, o caminho é outro: refazer em CSS, ou cortar a imagem para uma faixa e completar o resto com degradê.</p>
+        </div>
+        <div class="rule">
+          <div class="n">03</div>
+          <h4>CSS antes de imagem, quando o resultado empata</h4>
+          <p>Sete dos dez fundos da galeria empatam em CSS. CSS não faz requisição, não borra em tela retina, não precisa de versão 2x, escala para qualquer largura e você troca a cor da vertical editando três hex. Imagem só quando há fotografia, render 3D ou textura que o CSS não descreve.</p>
+        </div>
+        <div class="rule">
+          <div class="n">04</div>
+          <h4>Em fundo escuro, o texto vem de <code>--ea-text-on-dark</code></h4>
+          <p><code>#e9ecfb</code>, nunca <code>#ffffff</code> puro. Branco puro sobre navy vibra na borda das letras e cansa em bloco longo. O token já é levemente azulado e assenta na cor de base — e continua acima de 15:1 sobre <code>#050634</code>. O par secundário é <code>--ea-text-muted-on-dark</code> (<code>#9aa3d6</code>).</p>
+        </div>
+        <div class="rule">
+          <div class="n">05</div>
+          <h4>Um elemento aceso por fundo</h4>
+          <p>Uma auréola dominante, ou uma forma saturada, ou um objeto 3D. Nunca dois. Fundo com dois focos vira concorrente do conteúdo — e o conteúdo perde, porque o fundo ocupa a tela inteira.</p>
+        </div>
+        <div class="rule">
+          <div class="n">06</div>
+          <h4>O fundo nunca chega perto do amarelo do CTA</h4>
+          <p><code>#FEC008</code> é a cor única de ação. Se o fundo tem pêssego, âmbar, creme ou qualquer quente no quadrante do botão, o CTA deixa de ser o ponto mais quente da tela e a dobra perde o foco. Quente no fundo, botão no lado frio — ou quente nenhum.</p>
+        </div>
+      </div>
+    </div>
+    <p class="comp-note cro">Teste rápido de dobra: aperte os olhos até a tela desfocar. O que sobra tem que ser o título e o botão. Se sobra o fundo, o fundo está errado.</p>
+  </div>
+
+  <!-- ---------- 4. PERFORMANCE ---------- -->
+  <div class="callout" style="border-left-color:var(--cyan);background:linear-gradient(135deg,rgba(0,255,234,.09),rgba(47,36,255,.04))">
+    <b>Performance — o que custa o quê.</b>
+    <b>Degradê em CSS é de graça:</b> zero requisição, algumas centenas de bytes, pintado pelo compositor junto com o resto da caixa. Pode empilhar quatro camadas de <code>radial-gradient</code> sem pensar.
+    <b><code>feTurbulence</code> é barato parado e caro animado:</b> o navegador rasteriza o ruído uma vez e reusa o bitmap. Se você animar <code>baseFrequency</code>, <code>seed</code> ou o tamanho do elemento, o filtro reprocessa a cada quadro na CPU — no celular isso é queda direta de frame rate. <b>Não anime.</b> Ruído é textura, não movimento.
+    <b>Imagem de fundo grande em hero compete com o LCP:</b> o navegador só descobre um <code>background-image</code> depois de baixar e casar o CSS, e aí ela disputa banda com o elemento que <i>é</i> o LCP (normalmente o H1 ou a imagem do produto). Fundo de hero: CSS. Se tiver mesmo que ser imagem, ela vai abaixo da dobra, com <code>loading="lazy"</code>, ou entra como <code>&lt;img&gt;</code> com <code>fetchpriority</code> declarado — não escondida dentro do CSS.
+    <b><code>backdrop-filter</code> custa por quadro,</b> não por carregamento: um painel de vidro por dobra.
+  </div>
+</section>
+
+<!--CSS-INICIO-->
+/* ---------- backgrounds: galeria de referência ---------- */
+.k-ref-flag{display:flex;gap:11px;align-items:flex-start;width:100%;
+  background:rgba(255,0,113,.06);border-left:3px solid var(--pink);
+  border-radius:0 10px 10px 0;padding:12px 14px;font-size:13.5px;line-height:1.55;color:var(--ink-soft)}
+.k-ref-flag b{color:var(--ink)}
+.k-ref-flag svg{width:18px;height:18px;flex:none;margin-top:1px;color:var(--pink)}
+.k-bg-gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));gap:14px;width:100%}
+.k-bg-gal figure{margin:0;border:1px solid var(--line);border-radius:var(--r-md);
+  overflow:hidden;background:var(--panel);display:flex;flex-direction:column}
+.k-bg-gal img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}
+.k-bg-gal figcaption{padding:11px 13px 14px;font-size:12.5px;line-height:1.5;color:var(--ink-soft)}
+.k-bg-gal figcaption b{display:block;color:var(--ink);font-family:var(--font-body);
+  font-weight:700;font-size:13px;margin-bottom:5px}
+.k-bg-gal figcaption b + b{display:inline;font-size:inherit;margin:0}
+.k-bg-gal figcaption i{font-style:italic}
+
+/* ---------- backgrounds: caixa de preview das receitas ---------- */
+.k-bg-demo{position:relative;overflow:hidden;width:100%;min-height:264px;
+  border:1px solid var(--line);border-radius:var(--r-md);
+  display:flex;align-items:center;padding:30px 32px;isolation:isolate}
+.k-bg-txt{position:relative;z-index:2;max-width:30em}
+.k-bg-txt h4{font-family:var(--font-display);font-weight:700;letter-spacing:-.02em;
+  font-size:clamp(1.25rem,2.2vw,1.65rem);line-height:1.1;margin:0 0 10px}
+.k-bg-txt p{font-size:14px;line-height:1.6;margin:0 0 14px}
+.k-bg-txt code{font-family:var(--font-mono);font-size:.86em;padding:1px 5px;border-radius:5px}
+.k-bg-chip{display:inline-flex;align-items:center;font-family:var(--font-mono);
+  font-size:11.5px;letter-spacing:.02em;padding:6px 12px;border-radius:var(--r-pill)}
+.k-bg-chip.k-on-light{background:rgba(5,6,52,.07);color:#050634}
+.k-bg-chip.k-on-dark{background:rgba(255,255,255,.12);color:#e9ecfb}
+.k-bg-chip code{background:none;padding:0;color:inherit}
+
+/* 1 · aurora clara */
+.k-bg-aurora{color:#050634;
+  background:
+    radial-gradient(90% 70% at 12% 6%,   rgba(255,224,186,.85) 0%, rgba(255,224,186,0) 55%),
+    radial-gradient(80% 65% at 88% 18%,  rgba(226,214,255,.90) 0%, rgba(226,214,255,0) 60%),
+    radial-gradient(95% 80% at 70% 100%, rgba(180,206,255,.95) 0%, rgba(180,206,255,0) 62%),
+    linear-gradient(200deg,#f7f4ff 0%,#eef2ff 45%,#e3ecff 100%)}
+.k-bg-aurora .k-bg-txt p{color:#3a3f66}
+.k-bg-aurora .k-bg-txt code{background:rgba(5,6,52,.08)}
+
+/* 2 · noite profunda */
+.k-bg-noite{color:#e9ecfb;
+  background:
+    radial-gradient(58% 52% at 80% 8%,  rgba(132,57,230,.55) 0%, rgba(132,57,230,0) 66%),
+    radial-gradient(55% 46% at 14% 82%, rgba(79,69,245,.45)  0%, rgba(79,69,245,0)  68%),
+    linear-gradient(160deg,#050634 0%,#0a0942 48%,#140a4e 100%)}
+.k-bg-noite .k-bg-txt p{color:#9aa3d6}
+.k-bg-noite .k-bg-txt code{background:rgba(255,255,255,.10);color:#c9d3ff}
+.k-bg-noite::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+  pointer-events:none;z-index:3;
+  background:linear-gradient(90deg,transparent 0%,rgba(0,255,234,.55) 28%,
+    rgba(0,255,234,.80) 50%,rgba(0,255,234,.55) 72%,transparent 100%)}
+
+/* 3 · malha + auréola */
+.k-bg-malha{color:#050634;
+  background:
+    radial-gradient(52% 46% at 22% 16%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 62%),
+    linear-gradient(155deg,#eef7ff 0%,#e3f2fb 45%,#dce9ff 100%)}
+.k-bg-malha .k-bg-txt p{color:#3a4a66}
+.k-bg-malha::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+  background-image:
+    linear-gradient(rgba(47,36,255,.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(47,36,255,.07) 1px, transparent 1px);
+  background-size:48px 48px;
+  -webkit-mask-image:radial-gradient(78% 72% at 50% 45%, #000 38%, transparent 100%);
+          mask-image:radial-gradient(78% 72% at 50% 45%, #000 38%, transparent 100%)}
+
+/* 4 · vidro sobre cor */
+.k-bg-vidro{background:linear-gradient(118deg,#2488ff 0%,#4f45f5 52%,#8439e6 100%)}
+.k-vidro-painel{position:relative;z-index:2;max-width:30em;color:#fff;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);
+  border-radius:var(--r-lg);padding:24px 26px;
+  -webkit-backdrop-filter:blur(16px) saturate(140%);
+          backdrop-filter:blur(16px) saturate(140%);
+  box-shadow:0 24px 60px rgba(5,6,52,.28), inset 0 1px 0 rgba(255,255,255,.35)}
+.k-vidro-painel h4{font-family:var(--font-display);font-weight:700;letter-spacing:-.02em;
+  font-size:1.4rem;line-height:1.1;margin:0 0 10px}
+.k-vidro-painel p{font-size:14px;line-height:1.6;margin:0 0 14px;color:rgba(255,255,255,.86)}
+.k-vidro-painel b{color:#fff}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .k-vidro-painel{background:rgba(20,10,78,.42)}
+}
+
+/* 5 · ruído / grão */
+.k-bg-grao{color:#e9ecfb;
+  background:linear-gradient(135deg,#2f24ff 0%,#5b4bf2 46%,#8439e6 100%)}
+.k-bg-grao .k-grao{position:absolute;inset:0;width:100%;height:100%;
+  opacity:.24;mix-blend-mode:overlay;pointer-events:none;z-index:1}
+.k-bg-grao .k-bg-txt p{color:rgba(233,236,251,.88)}
+.k-bg-grao .k-bg-txt code{background:rgba(255,255,255,.14);color:#eef1ff}
+
+/* 6 · módulos e-Auditoria */
+.k-bg-modulos{color:#050634;
+  background:linear-gradient(120deg,#f8f0ff 0%,#f3f2ff 42%,#eaf1ff 100%)}
+.k-bg-modulos .k-bg-txt p{color:#3a3f66}
+.k-bg-modulos .k-mod{position:absolute;aspect-ratio:1;border-radius:26%;pointer-events:none;z-index:1}
+.k-bg-modulos .k-m1{width:34%;left:52%;top:44%;
+  background:linear-gradient(135deg,#8439e6 0%,#4f45f5 45%,#2488ff 100%);opacity:.62}
+.k-bg-modulos .k-m2{width:30%;left:70%;top:14%;border:1px solid rgba(47,36,255,.42)}
+.k-bg-modulos .k-m3{width:32%;left:84%;top:-14%;
+  background:linear-gradient(160deg,rgba(47,36,255,.30),rgba(36,136,255,0));filter:blur(18px)}
+
+@media (max-width:640px){
+  .k-bg-demo{min-height:230px;padding:22px 20px}
+  .k-bg-gal{grid-template-columns:1fr 1fr}
+}
+<!--CSS-FIM-->

@@ -1,0 +1,546 @@
+<section id="parcerias">
+  <div class="sec-head">
+    <h2>Programa de Parcerias</h2>
+    <span class="tag marca">Marca</span>
+    <span class="tag novo">Novo na v3</span>
+  </div>
+  <p class="sec-desc">O programa tem <b>um ativo pronto</b>: o selo <b>Parceiro Oficial</b>. Ele é
+  entregue a terceiros — o parceiro aplica no site dele, na apresentação dele, na assinatura de
+  proposta dele. Por isso as regras aqui são de <b>uso por quem não é da casa</b>: quem recebe o
+  selo não tem o brandbook aberto do lado. Os demais ativos do programa (níveis de parceria,
+  cartela de banners, kit de assinatura de e-mail, certificado) entram numa próxima rodada.</p>
+
+  <div class="comp">
+        <div class="comp-head"><h3>Os seis arquivos oficiais</h3><span class="id">SVG vetorial</span></div>
+        <p class="comp-note">Estes são os arquivos <b>originais</b> do programa, em vetor. Substituem
+        a reconstrução anterior, que distorcia a geometria do selo. Cada versão tem um fundo
+        para o qual foi desenhada — não force uma onde a outra é a certa.</p>
+        <div class="preview stack">
+          <div class="k-par-grid">
+            <div class="k-asset" data-svg-name="parceria-padrao">
+              {{SVG:parceria-padrao}}
+              <span class="k-asset__cap">LOGO PADRÃO — fundo claro</span>
+            </div>
+            <div class="k-asset" data-svg-name="parceria-secundaria">
+              {{SVG:parceria-secundaria}}
+              <span class="k-asset__cap">SECUNDÁRIA — fundo claro, versão alternativa</span>
+            </div>
+            <div class="k-asset k-asset--dark" data-svg-name="parceria-branca">
+              {{SVG:parceria-branca}}
+              <span class="k-asset__cap">VERSÃO BRANCA — fundo escuro ou foto</span>
+            </div>
+            <div class="k-asset k-asset--dark" data-svg-name="parceria-negativa">
+              {{SVG:parceria-negativa}}
+              <span class="k-asset__cap">NEGATIVA — fundo escuro</span>
+            </div>
+            <div class="k-asset" data-svg-name="parceria-outline">
+              {{SVG:parceria-outline}}
+              <span class="k-asset__cap">OUTLINE — uma cor, traço</span>
+            </div>
+            <div class="k-asset k-asset--dark" data-svg-name="parceria-outline-branca">
+              {{SVG:parceria-outline-branca}}
+              <span class="k-asset__cap">OUTLINE BRANCA — traço sobre escuro</span>
+            </div>
+          </div>
+        </div>
+        <p class="comp-note"><b>As cores do selo.</b> Azul <code>#0051FF</code> e navy
+        <code>#2B2E6F</code>. O navy é exatamente o azul do logotipo da
+        <span class="ea-brand">e-Auditoria</span> — a ligação entre as duas marcas é essa, e é
+        suficiente. O azul <code>#0051FF</code> <b>não existe nos tokens</b> (ΔE ≈ 9 do violeta
+        mais próximo): é cor própria do programa e deve entrar como tal, não ser normalizada.</p>
+        <p class="comp-note warn"><b>Armadilha ao colar estes SVGs em qualquer página.</b> Os seis
+        foram exportados do Illustrator usando as mesmas classes (<code>.cls-1</code>,
+        <code>.cls-2</code>…) com cores diferentes em cada arquivo. Inline na mesma página, a última
+        regra vence e <b>todos os logotipos ficam com a cor do último</b> — o logo aparece, só que
+        errado, sem nenhum aviso. Aqui as classes foram renomeadas por arquivo
+        (<code>.par-padrao-1</code>, <code>.par-negativa-1</code>…). Se for usar os originais em
+        outro lugar, ou renomeie as classes, ou use <code>&lt;img src="…svg"&gt;</code> em vez de inline.</p>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;!-- inline: renomeie as classes por arquivo antes --&gt;
+&lt;svg viewBox="0 0 128.88 134.38"&gt;
+  &lt;defs&gt;&lt;style&gt;.par-padrao-1{fill:#2b2e6f}.par-padrao-4{fill:#0051ff}&lt;/style&gt;&lt;/defs&gt;
+  ...
+&lt;/svg&gt;
+
+&lt;!-- ou, mais simples e sem risco de colisao: --&gt;
+&lt;img src="/assets/marca/parceria-padrao.svg" alt="Parceiro Oficial e-Auditoria" width="120"&gt;</pre></div>
+      </div>
+
+  
+
+  <div class="comp">
+    <div class="comp-head"><h3>Respiro e tamanho mínimo</h3><span class="id">ea-selo-parceiro</span></div>
+    <div class="preview stack">
+      <div class="k-pcr-respiro">
+        <div class="k-pcr-selo k-pcr-selo-sm">
+          <div class="k-pcr-selo-txt"><b>Parceiro</b><b>Oficial</b></div>
+          <svg class="k-pcr-simb" viewBox="0 0 460 210" aria-hidden="true">
+            <g fill="#FFFFFF">
+              <circle cx="43" cy="30" r="25"/><circle cx="93" cy="30" r="25"/><circle cx="143" cy="30" r="25"/>
+              <path d="M145 122 L25 122 A60 60 0 1 1 137 153" fill="none" stroke="#FFFFFF" stroke-width="40"/>
+              <rect x="185" y="104" width="72" height="40" rx="4"/>
+              <path d="M271 200 L350 26 L429 200" fill="none" stroke="#FFFFFF" stroke-width="44" stroke-linejoin="miter"/>
+              <path d="M307 146 H393" fill="none" stroke="#FFFFFF" stroke-width="44"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <ul class="k-pcr-lista">
+      <li><b>Tamanho mínimo em tela: 96&#160;px de lado.</b> Abaixo disso os três pontos do símbolo
+      colam num traço só — eles têm 4,3% da largura do selo.</li>
+      <li><b>Tamanho mínimo em impresso: 25&#160;mm de lado.</b> Em serigrafia ou bordado, 35&#160;mm.</li>
+      <li><b>Respiro: um quarto do lado do selo</b>, nos quatro lados (a área tracejada). O selo é um
+      bloco chapado; com menos respiro ele encosta no elemento vizinho e passa a parecer parte dele.</li>
+      <li>Nada entra no respiro: nem texto, nem borda de card, nem o logo do parceiro, nem outro selo.</li>
+    </ul>
+    <p class="comp-note">Em uma barra com vários selos de fornecedor, o respiro conta a partir da
+    borda do quadrado — não da borda do texto. Isso mantém a fileira alinhada mesmo com selos de
+    proporções diferentes ao lado.</p>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Fundos permitidos</h3><span class="id">fundo</span></div>
+    <div class="preview stack">
+      <div class="k-pcr-fundos">
+        <div class="k-pcr-fundo k-pcr-ok" style="background:#FFFFFF"><i></i><b>Branco</b><span>Padrão</span></div>
+        <div class="k-pcr-fundo k-pcr-ok" style="background:#F5F9FC"><i></i><b>Claro neutro</b><span>Até 8% de cinza</span></div>
+        <div class="k-pcr-fundo k-pcr-ok" style="background:#050634"><i></i><b>Navy chapado</b><span>Ou preto</span></div>
+        <div class="k-pcr-fundo k-pcr-nao" style="background:#0051FF"><i></i><b>Azul saturado</b><span>O selo some</span></div>
+      </div>
+    </div>
+    <p class="comp-note"><b>Permitido:</b> branco, cinza muito claro (até 8%), navy chapado
+    <code>#050634</code> ou preto. Nada mais.</p>
+    <p class="comp-note warn"><b>Proibido:</b> foto, degradê, textura, e qualquer azul entre
+    <code>#2B2E6F</code> e <code>#0051FF</code> — o selo desaparece dentro do próprio fundo.
+    Se o lugar for uma foto ou um hero com degradê, coloque o selo dentro de uma placa branca com o
+    mesmo arredondamento e o respiro por dentro. Não contorne o selo, não coloque sombra nele.</p>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>O que o parceiro não pode fazer</h3><span class="id">regras de uso</span></div>
+    <div class="preview stack">
+      <ul class="k-pcr-lista k-pcr-veto">
+        <li><b>Recolorir.</b> Nem em uma cor, nem em branco, nem na cor da marca dele, nem em degradê.</li>
+        <li><b>Distorcer.</b> Esticar em um eixo, comprimir, inclinar, girar. O selo é quadrado e fica de pé.</li>
+        <li><b>Recortar.</b> Cortar o recorte curvo do canto, arredondar mais, transformar em círculo,
+        cortar o símbolo fora. O canto curvo <b>é</b> o desenho.</li>
+        <li><b>Usar como se fosse a marca da <span class="ea-brand">e-Auditoria</span>.</b> O selo não vai
+        no lugar do logotipo, não abre o site do parceiro, não vira favicon, não vira avatar de rede
+        social, não entra no nome nem no domínio dele.</li>
+        <li><b>Montar lockup.</b> Nada de encostar o logotipo da <span class="ea-brand">e-Auditoria</span>
+        no selo para formar uma assinatura conjunta. O selo já é a assinatura fechada.</li>
+        <li><b>Editar o texto.</b> Trocar palavras, traduzir, acrescentar ano, cidade, nível ou slogan.</li>
+        <li><b>Aplicar efeito.</b> Sombra, brilho, contorno, bisel, transparência, animação de flutuação.</li>
+        <li><b>Dar tamanho maior que o logotipo do próprio parceiro</b> na mesma peça. O selo credencia;
+        quem assina a peça é o parceiro.</li>
+      </ul>
+    </div>
+    <p class="comp-note">Entregue o selo em <b>PNG com fundo transparente e SVG</b>, mais este bloco
+    de regras em uma página só. Quem recebe um único PNG por e-mail redimensiona no Word e o resultado
+    volta distorcido — é o erro mais comum do programa.</p>
+    <p class="comp-note cro">Na página de parceiros, o selo funciona como prova: coloque-o perto do
+    nome da empresa e do que ela entrega, não solto no rodapé. Selo isolado no rodapé é lido como
+    ícone de rede social e não é clicado nem olhado.</p>
+  </div>
+</section>
+
+<section id="jornada">
+  <div class="sec-head">
+    <h2>Jornada do Especialista</h2>
+    <span class="tag marca">Marca</span>
+    <span class="tag evento">Evento</span>
+    <span class="tag novo">Novo na v3</span>
+  </div>
+  <p class="sec-desc">A Jornada do Especialista já tem identidade completa — tema, paleta pastel,
+  turmas de manhã e de tarde com motivo sol/lua, contagem regressiva e o stepper de jornada
+  gamificada — e <b>não tem logotipo</b>. Esta seção propõe três. São propostas de autoria,
+  desenhadas em cima do que já está construído; nenhuma está aprovada.</p>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Status</h3><span class="id">proposta</span></div>
+    <div class="preview stack">
+      <div class="k-jor-alerta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16.5v.01"/>
+        </svg>
+        <span><b>Os três logotipos abaixo são PROPOSTAS e aguardam aprovação da liderança de Criação.</b>
+        Não suba nenhum deles em página, e-mail, peça de anúncio ou material impresso antes do
+        aceite. As regras de uso descritas aqui valem para a proposta escolhida, depois de
+        aprovada.</span>
+      </div>
+    </div>
+    <p class="comp-note">O que <b>já é definitivo</b> no projeto: fontes, paleta pastel, motivo
+    sol/lua das turmas, stepper e o fundo. O logotipo é a única peça em aberto.</p>
+    <p class="comp-note warn"><b>Nenhuma das propostas carrega a marca-mãe.</b> A Jornada é
+    autossuficiente: não existe assinatura "Jornada do Especialista" encostada no logotipo da
+    <span class="ea-brand">e-Auditoria</span>. Quando a produção pedir os dois na mesma peça, eles
+    entram como dois logotipos separados, com respiro entre si.</p>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Proposta A — Etapa acesa</h3><span class="id">jornada-a</span></div>
+    <div class="preview stack">
+      <div class="k-jor-logo">
+        <div class="k-asset" data-svg-name="jornada-proposta-a">
+          <svg viewBox="0 0 320 72" role="img">
+            <title>Jornada do Especialista — proposta A</title>
+            <path d="M16 36 H66" fill="none" stroke="#DDD8FF" stroke-width="6" stroke-linecap="round"/>
+            <path d="M16 36 H40" fill="none" stroke="#4F45F5" stroke-width="6" stroke-linecap="round"/>
+            <circle cx="16" cy="36" r="6" fill="#4F45F5"/>
+            <circle cx="40" cy="36" r="6" fill="#4F45F5"/>
+            <circle cx="60" cy="36" r="12" fill="#2F24FF"/>
+            <circle cx="60" cy="36" r="4.5" fill="#FFFFFF"/>
+            <text x="92" y="35" font-family="Familjen Grotesk, Manrope, sans-serif" font-size="27" font-weight="700" fill="#050634">Jornada</text>
+            <text x="93" y="55" font-family="Manrope, sans-serif" font-size="12.5" font-weight="700" letter-spacing="2.6" fill="#4F45F5">DO ESPECIALISTA</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <p class="comp-note">Racional: o logotipo é o próprio stepper da página reduzido a marca — a
+    identidade sai do componente que o participante usa, não de um enfeite colado por cima.</p>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Proposta B — A rota</h3><span class="id">jornada-b</span></div>
+    <div class="preview stack">
+      <div class="k-jor-logo">
+        <div class="k-asset" data-svg-name="jornada-proposta-b">
+          <svg viewBox="0 0 320 72" role="img">
+            <title>Jornada do Especialista — proposta B</title>
+            <path d="M16 56 C34 56 32 34 46 34 S58 16 70 16" fill="none" stroke="#DDD8FF" stroke-width="6" stroke-linecap="round"/>
+            <path d="M16 56 C34 56 32 34 46 34" fill="none" stroke="#4F45F5" stroke-width="6" stroke-linecap="round"/>
+            <circle cx="16" cy="56" r="6" fill="#4F45F5"/>
+            <circle cx="46" cy="34" r="5" fill="#4F45F5"/>
+            <circle cx="70" cy="16" r="11" fill="#2F24FF"/>
+            <circle cx="70" cy="16" r="4" fill="#FFFFFF"/>
+            <text x="98" y="35" font-family="Familjen Grotesk, Manrope, sans-serif" font-size="27" font-weight="700" fill="#050634">Jornada</text>
+            <text x="99" y="55" font-family="Manrope, sans-serif" font-size="12.5" font-weight="700" letter-spacing="2.6" fill="#4F45F5">DO ESPECIALISTA</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <p class="comp-note">Racional: uma rota que sobe entre três paradas — o trecho percorrido em
+    violeta cheio e o que falta em lilás, o mesmo par de cores da barra de progresso do tema.</p>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Proposta C — O arco que nasce</h3><span class="id">jornada-c</span></div>
+    <div class="preview stack">
+      <div class="k-jor-logo">
+        <div class="k-asset" data-svg-name="jornada-proposta-c">
+          <svg viewBox="0 0 320 72" role="img">
+            <title>Jornada do Especialista — proposta C</title>
+            <path d="M14 52 A32 32 0 0 1 78 52" fill="none" stroke="#DDD8FF" stroke-width="6" stroke-linecap="round"/>
+            <path d="M14 52 A32 32 0 0 1 55.9 21.6" fill="none" stroke="#4F45F5" stroke-width="6" stroke-linecap="round"/>
+            <circle cx="55.9" cy="21.6" r="10.5" fill="#2F24FF"/>
+            <path d="M12 61 H80" fill="none" stroke="#050634" stroke-width="4.5" stroke-linecap="round"/>
+            <text x="102" y="35" font-family="Familjen Grotesk, Manrope, sans-serif" font-size="27" font-weight="700" fill="#050634">Jornada</text>
+            <text x="103" y="55" font-family="Manrope, sans-serif" font-size="12.5" font-weight="700" letter-spacing="2.6" fill="#4F45F5">DO ESPECIALISTA</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <p class="comp-note">Racional: um único desenho que é ao mesmo tempo o sol subindo (o motivo
+    manhã/tarde que o tema já usa) e o arco de progresso — o disco marca onde a turma está e a
+    linha do horizonte fecha a base.</p>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Recomendação: seguir a Proposta C</h3><span class="id">jornada-c</span></div>
+    <div class="preview stack">
+      <div class="k-jor-red">
+        <div class="k-jor-red-item">
+          <svg class="k-jor-mark k-jor-m1" viewBox="0 0 92 72" aria-hidden="true">
+            <path d="M14 52 A32 32 0 0 1 78 52" fill="none" stroke="#DDD8FF" stroke-width="6" stroke-linecap="round"/>
+            <path d="M14 52 A32 32 0 0 1 55.9 21.6" fill="none" stroke="#4F45F5" stroke-width="6" stroke-linecap="round"/>
+            <circle cx="55.9" cy="21.6" r="10.5" fill="#2F24FF"/>
+            <path d="M12 61 H80" fill="none" stroke="#050634" stroke-width="4.5" stroke-linecap="round"/>
+          </svg>
+          <span>48&#160;px</span>
+        </div>
+        <div class="k-jor-red-item">
+          <svg class="k-jor-mark k-jor-m2" viewBox="0 0 92 72" aria-hidden="true">
+            <path d="M14 52 A32 32 0 0 1 78 52" fill="none" stroke="#DDD8FF" stroke-width="6" stroke-linecap="round"/>
+            <path d="M14 52 A32 32 0 0 1 55.9 21.6" fill="none" stroke="#4F45F5" stroke-width="6" stroke-linecap="round"/>
+            <circle cx="55.9" cy="21.6" r="10.5" fill="#2F24FF"/>
+            <path d="M12 61 H80" fill="none" stroke="#050634" stroke-width="4.5" stroke-linecap="round"/>
+          </svg>
+          <span>32&#160;px</span>
+        </div>
+        <div class="k-jor-red-item">
+          <svg class="k-jor-mark k-jor-m3" viewBox="0 0 92 72" aria-hidden="true">
+            <path d="M14 52 A32 32 0 0 1 78 52" fill="none" stroke="#DDD8FF" stroke-width="6" stroke-linecap="round"/>
+            <path d="M14 52 A32 32 0 0 1 55.9 21.6" fill="none" stroke="#4F45F5" stroke-width="6" stroke-linecap="round"/>
+            <circle cx="55.9" cy="21.6" r="10.5" fill="#2F24FF"/>
+            <path d="M12 61 H80" fill="none" stroke="#050634" stroke-width="4.5" stroke-linecap="round"/>
+          </svg>
+          <span>24&#160;px</span>
+        </div>
+      </div>
+    </div>
+    <p class="comp-note"><b>Siga a C.</b> Três motivos, em ordem de peso:</p>
+    <ul class="k-pcr-lista">
+      <li><b>Não inventa metáfora nova.</b> Sol e lua já estão na contagem regressiva e nos cards de
+      turma manhã/tarde. A C usa o que o participante já viu; a A e a B pedem uma leitura extra.</li>
+      <li><b>Sobrevive reduzida.</b> Aos 24&#160;px, o arco e o disco continuam separados. A A vira
+      três borrões grudados e a B vira um risco torto — as duas dependem de espaço entre nós.</li>
+      <li><b>Tem variante nativa para a turma da tarde:</b> o disco vira crescente e a mesma marca
+      atende os dois horários sem virar um segundo logotipo.</li>
+    </ul>
+    <p class="comp-note warn">A variante de crescente é <b>motivo de interface</b> — cabeçalho de
+    card de turma, ícone de horário. O logotipo oficial é sempre o disco cheio. Duas versões
+    circulando como "o logo" acabam em peça com as duas na mesma tela.</p>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Uso da Proposta C</h3><span class="id">jornada-logo</span></div>
+    <div class="preview stack">
+      <div class="k-jor-respiro">
+        <div class="k-jor-logo k-jor-logo-md">
+          <svg viewBox="0 0 320 72" aria-hidden="true">
+            <path d="M14 52 A32 32 0 0 1 78 52" fill="none" stroke="#DDD8FF" stroke-width="6" stroke-linecap="round"/>
+            <path d="M14 52 A32 32 0 0 1 55.9 21.6" fill="none" stroke="#4F45F5" stroke-width="6" stroke-linecap="round"/>
+            <circle cx="55.9" cy="21.6" r="10.5" fill="#2F24FF"/>
+            <path d="M12 61 H80" fill="none" stroke="#050634" stroke-width="4.5" stroke-linecap="round"/>
+            <text x="102" y="35" font-family="Familjen Grotesk, Manrope, sans-serif" font-size="27" font-weight="700" fill="#050634">Jornada</text>
+            <text x="103" y="55" font-family="Manrope, sans-serif" font-size="12.5" font-weight="700" letter-spacing="2.6" fill="#4F45F5">DO ESPECIALISTA</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <ul class="k-pcr-lista">
+      <li><b>Horizontal (padrão):</b> símbolo à esquerda, <b>Jornada</b> em Familjen Grotesk 700 e
+      <b>DO ESPECIALISTA</b> em Manrope 700 caixa alta, com entreletra de 2,6. Proporção 320&#215;72.
+      Use em topo de página, capa de e-mail, rodapé e crachá.</li>
+      <li><b>Reduzida:</b> só o símbolo (arco + disco + horizonte), quadro 92&#215;72. Use em favicon,
+      avatar, marca d'água de slide e selo de certificado — <b>só depois</b> que a horizontal já
+      apareceu na mesma peça.</li>
+      <li><b>Respiro:</b> a altura do símbolo dividida por dois, nos quatro lados (a área tracejada).</li>
+      <li><b>Tamanho mínimo — horizontal: 180&#160;px de largura</b> em tela, 50&#160;mm em impresso.
+      Abaixo disso a linha <b>DO ESPECIALISTA</b> cai para menos de 7&#160;px e some.</li>
+      <li><b>Tamanho mínimo — reduzida: 24&#160;px de altura.</b> Abaixo disso o disco encosta no arco.</li>
+    </ul>
+    <div class="preview stack dark">
+      <div class="k-jor-logo k-jor-logo-md k-jor-inv">
+        <svg viewBox="0 0 320 72" aria-hidden="true">
+          <path d="M14 52 A32 32 0 0 1 78 52" fill="none" stroke="#3B2F86" stroke-width="6" stroke-linecap="round"/>
+          <path d="M14 52 A32 32 0 0 1 55.9 21.6" fill="none" stroke="#00FFEA" stroke-width="6" stroke-linecap="round"/>
+          <circle cx="55.9" cy="21.6" r="10.5" fill="#00FFEA"/>
+          <path d="M12 61 H80" fill="none" stroke="#F4F3FF" stroke-width="4.5" stroke-linecap="round"/>
+          <text x="102" y="35" font-family="Familjen Grotesk, Manrope, sans-serif" font-size="27" font-weight="700" fill="#F4F3FF">Jornada</text>
+          <text x="103" y="55" font-family="Manrope, sans-serif" font-size="12.5" font-weight="700" letter-spacing="2.6" fill="#C7BFF5">DO ESPECIALISTA</text>
+        </svg>
+      </div>
+    </div>
+    <p class="comp-note"><b>Fundos permitidos:</b> branco, <code>#F7F7FF</code>, as superfícies
+    pastel do tema (<code>#E7E2FF</code>, <code>#DBE7FF</code>, <code>#FFF0C4</code>,
+    <code>#FFE1F0</code>) e as seções noite (<code>#0F0A3D</code>, <code>#140A4A</code>) com a
+    versão invertida acima. Sobre o fundo de degradê, só no terço esquerdo — a parte calma.</p>
+    <p class="comp-note warn"><b>O que quebra:</b> pintar o logotipo de amarelo (é a cor do CTA e o
+    olho passa a ler o logo como botão); mudar a abertura do arco para "completar" o círculo;
+    preencher o símbolo com degradê ou foto; girar; aplicar sombra ou contorno; separar o símbolo do
+    texto e remontar com outro espaçamento; e escrever "Jornada do Especialista" por extenso onde
+    caberia o logotipo — palavra solta, fora de oração, é logotipo.</p>
+    <div class="k-jor-pal">
+      <div class="k-pcr-cor"><i style="background:#2F24FF"></i><b>#2F24FF</b><span>Disco — violeta ação</span></div>
+      <div class="k-pcr-cor"><i style="background:#4F45F5"></i><b>#4F45F5</b><span>Arco percorrido</span></div>
+      <div class="k-pcr-cor"><i style="background:#DDD8FF"></i><b>#DDD8FF</b><span>Arco restante</span></div>
+      <div class="k-pcr-cor"><i style="background:#050634"></i><b>#050634</b><span>Horizonte e wordmark</span></div>
+      <div class="k-pcr-cor"><i style="background:#00FFEA"></i><b>#00FFEA</b><span>Só sobre noite</span></div>
+      <div class="k-pcr-cor"><i style="background:#FEC008"></i><b>#FEC008</b><span>CTA — nunca no logo</span></div>
+    </div>
+    <p class="comp-note">A paleta do logotipo é a mesma do tema, sem cor nova. O <b>CTA da página
+    continua <code>#FEC008</code> com texto navy <code>#050634</code></b>; o violeta fica para o
+    logotipo, o arco de progresso e o foco de teclado. Botão violeta e logo violeta na mesma dobra
+    competem, e o botão perde.</p>
+    <p class="comp-note">Em qualquer texto da Jornada, as expressões fiscais não quebram linha e vão
+    com inicial maiúscula: <span class="ea-nb">Simples Nacional</span>,
+    <span class="ea-nb">Simples Híbrido</span>, <span class="ea-nb">Lucro Real</span>,
+    <span class="ea-nb">Lucro Presumido</span> e <span class="ea-nb">Reforma Tributária</span> —
+    todas dentro de <code>.ea-nb</code>. Vale inclusive quando aparecem sozinhas: "o Simples",
+    "a Reforma".</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;!-- horizontal, herda a cor do wordmark; símbolo mantém as cores próprias --&gt;
+&lt;a class="jor-logo" href="/jornada" aria-label="Jornada do Especialista"&gt;
+  &lt;svg viewBox="0 0 320 72" role="img"&gt;&lt;title&gt;Jornada do Especialista&lt;/title&gt;…&lt;/svg&gt;
+&lt;/a&gt;
+
+.jor-logo{ display:inline-flex; }
+.jor-logo svg{ display:block; height:40px; width:auto; }   /* ~178px de largura */
+.jor-noite .jor-logo svg{ --jor-tinta:#F4F3FF; --jor-acento:#00FFEA; }
+
+/* expressão fiscal nunca quebra */
+.ea-nb{ white-space:nowrap; }
+&lt;p&gt;Turma da manhã: apuração no &lt;span class="ea-nb"&gt;Simples&amp;nbsp;Nacional&lt;/span&gt;.&lt;/p&gt;</pre></div>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Fundo da Jornada</h3><span class="id">jornada-bg</span></div>
+    <div class="preview">
+      <div class="k-jor-bgfig">
+        <img src="{{IMG:jornada-bg}}" alt="Fundo em degradê de malha: branco-lilás à esquerda, azul e violeta no alto ao centro, rosa à direita e pêssego na base" loading="lazy" decoding="async">
+        <p class="k-pcr-cap">Arquivo original — 2018&#215;1268</p>
+      </div>
+      <div class="k-jor-bgfig">
+        <div class="k-jor-bgcss"></div>
+        <p class="k-pcr-cap">Receita em CSS — sem imagem</p>
+      </div>
+    </div>
+    <p class="comp-note">É um degradê de malha em quatro manchas, todas empurradas para a direita:
+    azul-céu e violeta no alto ao centro, rosa forte descendo pela direita, rosa claro e pêssego na
+    base. <b>O terço esquerdo fica limpo em <code>#F7F7FF</code></b> — não é sobra de espaço, é a
+    zona de texto. Título, subtítulo e CTA vivem ali; a mancha colorida serve de respiro para a foto
+    ou o card de inscrição do lado direito.</p>
+    <p class="comp-note warn"><b>Este fundo é da Jornada, não da casa.</b> Ele tem rosa e pêssego —
+    cores que não entram quando o assunto é a <span class="ea-brand">e-Auditoria</span> como empresa.
+    Em página institucional o degradê fica só nos azuis e lilases. Aqui vale porque é sub-marca.</p>
+    <p class="comp-note">Prefira a receita em CSS ao PNG: o arquivo tem 2018&#215;1268 e pesa mais que
+    a dobra inteira, e o degradê em CSS não tem banding quando a tela estica. Guarde o PNG para
+    e-mail e para peça impressa, onde degradê em código não existe.</p>
+    <a class="k-dl" href="{{IMG:jornada-bg}}" download="jornada-background.png">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/>
+      </svg>PNG
+    </a>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>.jor-fundo{
+  background-color:#F7F7FF;
+  background-repeat:no-repeat;
+  background-image:
+    radial-gradient(58% 52% at 74% 8%,  #A37FED 0%, rgba(163,127,237,0) 62%),
+    radial-gradient(46% 42% at 53% 6%,  #8FC0FC 0%, rgba(143,192,252,0) 66%),
+    radial-gradient(40% 40% at 62% 20%, #8A8DF3 0%, rgba(138,141,243,0) 64%),
+    radial-gradient(52% 46% at 67% 45%, #F0709F 0%, rgba(240,112,159,0) 60%),
+    radial-gradient(46% 42% at 80% 68%, #FEB9D5 0%, rgba(254,185,213,0) 66%),
+    radial-gradient(44% 40% at 55% 92%, #FCD3BE 0%, rgba(252,211,190,0) 68%),
+    radial-gradient(40% 50% at 99% 96%, #FCD8D7 0%, rgba(252,216,215,0) 70%);
+}
+/* zona de texto: o terço esquerdo é limpo de propósito */
+.jor-fundo .jor-texto{ max-width:min(46ch, 38%); }
+
+/* mobile: as manchas sobem, o texto vem por baixo */
+@media (max-width:600px){
+  .jor-fundo{ background-size:100% 46%, 100% 46%, 100% 46%,
+              100% 46%, 100% 46%, 100% 46%, 100% 46%; }
+  .jor-fundo .jor-texto{ max-width:none; }
+}</pre></div>
+    <p class="comp-note cro">Texto escuro sobre a mancha rosa não passa em contraste. Se o título
+    precisar entrar na área colorida, ele vai em <code>#FFFFFF</code> com uma sobreposição escura
+    por baixo — não em navy com "um pouquinho" de sombra.</p>
+  </div>
+</section>
+
+<!--CSS-INICIO-->
+  .k-par-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;width:100%}
+  .k-par-grid .k-asset{align-items:center;text-align:center;padding:20px}
+  .k-par-grid .k-asset svg{max-width:132px;margin:0 auto}
+
+/* ---------- Parcerias ---------- */
+.k-pcr-fig{display:flex;flex-direction:column;align-items:center;gap:10px;flex:none}
+.k-pcr-fig img,.k-pcr-fig svg{display:block;width:176px;height:auto;border-radius:var(--r-md)}
+.k-pcr-fig .k-asset{display:block}
+.k-pcr-cap{margin:0;font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);
+  letter-spacing:.02em;text-align:center}
+.k-pcr-meta{display:flex;flex-direction:column;gap:6px;min-width:220px}
+.k-pcr-meta b{font-family:var(--font-display);font-size:.98rem;color:var(--ink);margin-top:6px}
+.k-pcr-meta b:first-child{margin-top:0}
+.k-pcr-meta span{font-size:13px;color:var(--ink-soft);line-height:1.6}
+
+/* reconstrução do selo em dois elementos: quadro marinho + disco azul */
+.k-pcr-selo{position:relative;width:176px;aspect-ratio:578/600;border-radius:15%;
+  background:#2B2E6F;overflow:hidden;display:flex;flex-direction:column;justify-content:center;
+  gap:6px;padding:0 11% 2%}
+.k-pcr-selo::before{content:"";position:absolute;left:30.6%;top:71%;width:138.3%;aspect-ratio:1;
+  border-radius:50%;background:#0051FF;transform:translate(-50%,-50%)}
+.k-pcr-selo-txt{position:relative;z-index:1;display:flex;flex-direction:column;line-height:.98}
+.k-pcr-selo-txt b{font-family:var(--font-display);color:#FFFFFF;font-weight:700}
+.k-pcr-selo-txt b:first-child{font-size:22px}
+.k-pcr-selo-txt b:last-child{font-size:31px}
+.k-pcr-simb{position:relative;z-index:1;display:block;width:74%;height:auto;margin-top:8px}
+.k-pcr-selo-sm{width:132px}
+.k-pcr-selo-sm .k-pcr-selo-txt b:first-child{font-size:17px}
+.k-pcr-selo-sm .k-pcr-selo-txt b:last-child{font-size:23px}
+
+.k-pcr-cores{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:13px;
+  margin:0 0 14px}
+.k-pcr-cor{display:flex;flex-direction:column;gap:4px}
+.k-pcr-cor i{display:block;height:48px;border-radius:var(--r-md)}
+.k-pcr-cor b{font-family:var(--font-mono);font-size:11.5px;color:var(--ink);text-transform:uppercase}
+.k-pcr-cor span{font-size:11.5px;color:var(--ink-soft)}
+
+.k-pcr-respiro{display:inline-flex;padding:44px;border:1px dashed var(--line);
+  border-radius:var(--r-md);background:var(--panel-2)}
+
+.k-pcr-fundos{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:14px;
+  width:100%}
+.k-pcr-fundo{border-radius:var(--r-md);border:1px solid var(--line);padding:18px 16px 14px;
+  display:flex;flex-direction:column;gap:6px;position:relative}
+.k-pcr-fundo i{display:block;width:52px;height:54px;border-radius:13%;background:#2B2E6F;
+  position:relative;overflow:hidden}
+.k-pcr-fundo i::before{content:"";position:absolute;left:30.6%;top:71%;width:138.3%;
+  aspect-ratio:1;border-radius:50%;background:#0051FF;transform:translate(-50%,-50%)}
+.k-pcr-fundo b{font-family:var(--font-display);font-size:13.5px;color:#1a1a2e}
+.k-pcr-fundo span{font-size:11.5px;color:#5a6478}
+.k-pcr-fundo[style*="#050634"] b{color:#F4F3FF}
+.k-pcr-fundo[style*="#050634"] span{color:#a9b2c9}
+.k-pcr-fundo[style*="#0051FF"] b{color:#FFFFFF}
+.k-pcr-fundo[style*="#0051FF"] span{color:#d8e2ff}
+.k-pcr-ok::after,.k-pcr-nao::after{position:absolute;top:12px;right:14px;font-family:var(--font-mono);
+  font-size:10.5px;letter-spacing:.06em;padding:3px 8px;border-radius:var(--r-pill)}
+.k-pcr-ok::after{content:"OK";background:rgba(0,140,90,.14);color:#0a7a52}
+.k-pcr-ok[style*="#050634"]::after{background:rgba(0,255,190,.16);color:#7ff3c6}
+.k-pcr-nao::after{content:"NAO";background:rgba(255,255,255,.22);color:#FFFFFF}
+
+.k-pcr-lista{margin:0 0 14px;padding-left:19px;color:var(--ink-soft);font-size:13.5px;
+  line-height:1.75}
+.k-pcr-lista b{color:var(--ink)}
+.k-pcr-veto{width:100%;margin-bottom:0}
+
+/* ---------- Jornada do Especialista ---------- */
+.k-jor-alerta{display:flex;gap:13px;align-items:flex-start;width:100%;padding:16px 18px;
+  border-radius:var(--r-md);border:1px solid var(--line);background:var(--panel-2)}
+.k-jor-alerta svg{width:21px;height:21px;flex:none;color:var(--iris);margin-top:1px}
+.k-jor-alerta span{font-size:13.5px;line-height:1.65;color:var(--ink-soft)}
+.k-jor-alerta b{color:var(--ink)}
+
+.k-jor-logo{display:flex;align-items:center;justify-content:center;width:100%;padding:8px 0}
+.k-jor-logo svg{display:block;width:100%;max-width:340px;height:auto}
+.k-jor-logo-md svg{max-width:280px}
+.k-jor-inv svg{max-width:280px}
+
+.k-jor-red{display:flex;align-items:flex-end;justify-content:center;gap:34px;flex-wrap:wrap;
+  width:100%;padding:6px 0}
+.k-jor-red-item{display:flex;flex-direction:column;align-items:center;gap:9px}
+.k-jor-red-item span{font-family:var(--font-mono);font-size:11px;color:var(--ink-soft)}
+.k-jor-mark{display:block;width:auto}
+.k-jor-m1{height:48px}
+.k-jor-m2{height:32px}
+.k-jor-m3{height:24px}
+
+.k-jor-respiro{display:inline-flex;padding:36px;border:1px dashed var(--line);
+  border-radius:var(--r-md);background:var(--panel-2)}
+
+.k-jor-pal{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:13px;
+  margin:2px 0 14px}
+
+.k-jor-bgfig{display:flex;flex-direction:column;gap:10px;flex:1 1 260px;min-width:0}
+.k-jor-bgfig img{display:block;width:100%;height:auto;border-radius:var(--r-md);
+  border:1px solid var(--line)}
+.k-jor-bgcss{width:100%;aspect-ratio:2018/1268;border-radius:var(--r-md);
+  border:1px solid var(--line);background-color:#F7F7FF;background-repeat:no-repeat;
+  background-image:
+    radial-gradient(58% 52% at 74% 8%,  #A37FED 0%, rgba(163,127,237,0) 62%),
+    radial-gradient(46% 42% at 53% 6%,  #8FC0FC 0%, rgba(143,192,252,0) 66%),
+    radial-gradient(40% 40% at 62% 20%, #8A8DF3 0%, rgba(138,141,243,0) 64%),
+    radial-gradient(52% 46% at 67% 45%, #F0709F 0%, rgba(240,112,159,0) 60%),
+    radial-gradient(46% 42% at 80% 68%, #FEB9D5 0%, rgba(254,185,213,0) 66%),
+    radial-gradient(44% 40% at 55% 92%, #FCD3BE 0%, rgba(252,211,190,0) 68%),
+    radial-gradient(40% 50% at 99% 96%, #FCD8D7 0%, rgba(252,216,215,0) 70%)}
+
+@media (max-width:640px){
+  .k-pcr-meta{min-width:0}
+  .k-pcr-respiro{padding:26px}
+  .k-jor-respiro{padding:22px}
+  .k-jor-red{gap:22px}
+}
+<!--CSS-FIM-->

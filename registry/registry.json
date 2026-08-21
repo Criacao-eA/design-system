@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "eauditoria",
+  "homepage": "https://design.e-auditoria.com.br",
+  "items": [
+    {
+      "name": "tokens",
+      "type": "registry:style",
+      "title": "Tokens da e-Auditoria",
+      "description": "Cor, tipografia, espaçamento, raio e sombra da marca, como variáveis CSS. É a fonte da verdade — não copie hexadecimal.",
+      "files": [
+        {
+          "path": "src/eauditoria-tokens.css",
+          "type": "registry:file",
+          "target": "styles/eauditoria-tokens.css"
+        },
+        {
+          "path": "src/eauditoria-tokens.json",
+          "type": "registry:file",
+          "target": "styles/eauditoria-tokens.json"
+        }
+      ]
+    }
+  ]
+}

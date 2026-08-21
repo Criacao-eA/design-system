@@ -1,0 +1,42 @@
+      <div class="comp">
+        <div class="comp-head"><h3>O modelo fundido — e a prova de fogo</h3><span class="id">ea-lm-2026</span></div>
+        <p class="comp-note">O diagnóstico acima virou entrega: o tema <code>ea-lm-2026</code> é o
+        <b>esqueleto do LM 1 com a disciplina de cor do LM 2</b>, codificado no mesmo padrão do
+        <span class="ea-nb">Radar Tributário</span> — CSS no template, módulo só com HubL e campos.
+        7 módulos, 640px, tabela e estilo inline.</p>
+        <div class="preview stack">
+          <div class="k-tbl-wrap">
+            <table class="k-tbl">
+              <thead><tr><th>Critério medido</th><th>LM 1</th><th>LM 2</th><th>Fundido</th></tr></thead>
+              <tbody>
+                <tr><td>Toda cor existe nos tokens (ΔE00 &lt; 1)</td><td><span class="k-status bad">5 fora</span></td><td><span class="k-status bad">4 fora</span></td><td><span class="k-status ok">16/16</span></td></tr>
+                <tr><td>Tipografia parte da marca</td><td><span class="k-status bad">Arial</span></td><td><span class="k-status bad">Arial</span></td><td><span class="k-status ok">sim</span></td></tr>
+                <tr><td>CTA <code>#FEC008</code> + navy + pílula</td><td><span class="k-status bad">parcial</span></td><td><span class="k-status bad">sem CTA</span></td><td><span class="k-status ok">sim</span></td></tr>
+                <tr><td>Contraste WCAG AA em todo texto</td><td><span class="k-status ok">passa</span></td><td><span class="k-status bad">3,54:1</span></td><td><span class="k-status ok">passa</span></td></tr>
+                <tr><td>Tabela + inline, sem flexbox, sem <code>&amp;&amp;</code></td><td><span class="k-status ok">passa</span></td><td><span class="k-status ok">passa</span></td><td><span class="k-status ok">passa</span></td></tr>
+                <tr><td>Expressões fiscais protegidas</td><td><span class="k-status warn">não</span></td><td><span class="k-status warn">não</span></td><td><span class="k-status ok">sim</span></td></tr>
+                <tr><td><b>Resultado</b></td><td><b>2/6</b></td><td><b>1/6</b></td><td><b>6/6</b></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p class="comp-note"><b>A cor do bloco de destaque é um campo de escolha</b> ligado às 6 paletas
+        de vertical. É o único ponto do e-mail onde a cor muda — o resto é fixo. Assim a peça se
+        adapta à campanha sem ninguém precisar digitar hexadecimal.</p>
+        <p class="comp-note warn"><b>A prova de fogo achou uma dívida no sistema, não no modelo novo.</b>
+        O token <code>#7377A0</code> — o "meta" que o tema da newsletter já usa — dá <b>4,31:1</b> sobre
+        branco e <b>reprova AA</b> para texto pequeno. Não foi o modelo que fugiu do tema: foi o tema que
+        tinha um token ruim. O modelo novo usa <code>#576B86</code> (5,45:1). <b>Vale revisar o
+        <code>ea-radar-news-2026</code> pelo mesmo motivo.</b></p>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre># subir (na pasta "Modelo LM e-A/")
+hs cms upload --account=ea-principal --cms-publish-mode=publish hubspot/ ea-lm-2026
+
+# depois: Marketing > E-mail > Criar > aba "Modelos codificados"
+#         escolher "Modelo LM - nutricao de material rico"</pre></div>
+        <p class="comp-note cro"><b>O que a prova de fogo é, e por que ela importa mais que o modelo.</b>
+        É um verificador que confronta uma peça contra o sistema sem opinião: mede ΔE00 de cada cor
+        contra a paleta inteira, checa a pilha tipográfica, a regra do CTA, o contraste de cada texto,
+        as regras de e-mail da casa e a proteção das expressões fiscais. Rodar isso antes de publicar
+        é o que impede o sistema de virar decoração — e foi assim que descobrimos o
+        <code>#7377A0</code>, que estava em produção há meses sem ninguém medir.</p>
+      </div>

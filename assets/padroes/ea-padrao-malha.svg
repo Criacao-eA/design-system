@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="480" role="img" aria-label="Padrao e-Auditoria: malha fina 24px">
+  <defs>
+    <pattern id="ea-padrao-malha" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 .5H.5V24" fill="none" stroke="currentColor" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="480" height="480" fill="url(#ea-padrao-malha)"/>
+</svg>

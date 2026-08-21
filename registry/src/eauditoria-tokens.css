@@ -1,0 +1,232 @@
+/* =====================================================================
+   e-AUDITORIA · DESIGN TOKENS (v1)
+   Arquivo ÚNICO e canônico de tokens da marca.
+   Resolve a fragmentação: aqui, cada cor/medida existe UMA vez, com um
+   nome semântico só. Todo componente novo referencia estas variáveis —
+   nunca redeclara hex solto nem inventa prefixo próprio.
+
+   Como usar (web / WordPress / HubSpot LP):
+     1. Cole este bloco dentro de <style> no topo da peça (ou @import).
+     2. Use var(--ea-...) em vez de hex literais.
+   Convenção de nome: --ea-<grupo>-<papel>. Namespace único: --ea-*.
+
+   ⚠️ E-MAIL: clientes de e-mail (Outlook) NÃO suportam var(). Para
+   newsletter, use a TABELA DE EQUIVALÊNCIA no fim deste arquivo (valores
+   hex literais inline). Os tokens web e os valores email são os MESMOS —
+   só muda a forma de aplicar.
+   ===================================================================== */
+
+:root {
+  /* -----------------------------------------------------------------
+     1. COR — paleta bruta da marca (fonte: Paleta de cores eA)
+     Use preferencialmente os papéis semânticos da seção 2, não estes.
+     ----------------------------------------------------------------- */
+  --ea-navy:        #050634; /* ink / fundo escuro / texto forte */
+  --ea-blue:        #2488ff; /* azul vibrante — coringa das verticais */
+  --ea-iris:        #2f24ff; /* azul-violeta — primária de UI */
+  --ea-violet:      #4f45f5;
+  --ea-purple:      #8439e6;
+  --ea-cyan:        #00ffea; /* dados em fundo escuro (acento) */
+  --ea-yellow:      #fec008; /* CTA — cor única de ação */
+  --ea-orange:      #fb5507; /* energia / ao vivo */
+  --ea-pink:        #ff0071; /* expressivo */
+  --ea-red:         #ff2f34; /* alerta / urgência / erro */
+
+  /* Neutras (escala azulada) */
+  --ea-white:       #ffffff;
+  --ea-ice:         #f5f9fc; /* branco gelo — fundo claro padrão */
+  --ea-gray-200:    #a2b9da; /* bordas, divisores, texto disabled/escuro */
+  --ea-gray-500:    #576b86; /* texto secundário sobre claro */
+  --ea-graphite:    #1e2126; /* grafite */
+  --ea-black:       #000000; /* uso restrito */
+
+  /* -----------------------------------------------------------------
+     2. COR — papéis semânticos (USE ESTES no dia a dia)
+     ----------------------------------------------------------------- */
+  --ea-color-primary:        var(--ea-iris);   /* botões/links primários de UI */
+  --ea-color-primary-hover:  #241bcf;
+  --ea-color-cta:            var(--ea-yellow);  /* botão de ação principal */
+  --ea-color-cta-ink:        var(--ea-navy);    /* texto sobre o CTA amarelo */
+  --ea-color-accent:         var(--ea-cyan);    /* números/dados em fundo escuro */
+
+  /* Superfícies */
+  --ea-surface:              var(--ea-white);   /* card claro padrão */
+  --ea-surface-muted:        var(--ea-ice);     /* fundo de seção clara */
+  --ea-surface-dark:         var(--ea-navy);    /* fundo de seção escura */
+
+  /* Texto */
+  --ea-text:                 var(--ea-navy);    /* corpo sobre claro */
+  --ea-text-muted:           var(--ea-gray-500);
+  --ea-text-on-dark:         #e9ecfb;           /* corpo sobre escuro */
+  --ea-text-muted-on-dark:   #9aa3d6;
+
+  /* Bordas / divisores */
+  --ea-border:               #e4e9f5;
+  --ea-border-strong:        var(--ea-gray-200);
+
+  /* Estados semânticos */
+  --ea-success:              #10b981;
+  --ea-warning:              var(--ea-yellow);
+  --ea-danger:               var(--ea-red);
+  --ea-info:                 var(--ea-blue);
+
+  /* Vidro (glassmorphism) */
+  --ea-glass-light:          rgba(255,255,255,.70);
+  --ea-glass-dark:           rgba(255,255,255,.06);
+  --ea-glass-border:         rgba(255,255,255,.14);
+
+  /* -----------------------------------------------------------------
+     3. COR — pastéis (superfícies/fundos: "pastel é palco, cor é ator")
+     ----------------------------------------------------------------- */
+  --ea-pastel-lilas:  #e7e2ff;
+  --ea-pastel-peri:   #dfe2ff;
+  --ea-pastel-azul:   #dbe7ff;
+  --ea-pastel-lav:    #efe6ff;
+  --ea-pastel-baun:   #fff0c4;
+  --ea-pastel-ciano:  #d9f5f0;
+  --ea-pastel-uva:    #f0e3ff;
+  --ea-pastel-rosa:   #ffe1f0;
+
+  /* -----------------------------------------------------------------
+     4. GRADIENTES — biblioteca oficial (use as receitas, não invente)
+     ----------------------------------------------------------------- */
+  --ea-grad-text:      linear-gradient(135deg, #4f45f5, #8439e6);            /* palavra em destaque */
+  --ea-grad-text-tri:  linear-gradient(125deg, #2f24ff 0%, #8439e6 55%, #ff0071 100%);
+  --ea-grad-data:      linear-gradient(90deg, #00ffea, #4f45f5, #8439e6);   /* dados/tech */
+  --ea-grad-dark:      linear-gradient(140deg, #06063a 0%, #0d0540 50%, #1c0860 100%);
+  --ea-grad-dark-soft: linear-gradient(180deg, #050634 0%, #0a0c44 50%, #050634 100%);
+  --ea-grad-light:     linear-gradient(220deg, #ddd6fe 0%, #c7dbff 48%, #e5daff 100%);
+  --ea-grad-aurora:    linear-gradient(135deg, #d8e8ff 0%, #eeeaff 40%, #f8e8ff 70%, #fff8ee 100%);
+  --ea-grad-masthead:  linear-gradient(122deg, #8439e6 0%, #5b4bf2 46%, #2488ff 100%); /* fallback: #4f45f5 */
+  --ea-grad-live:      linear-gradient(135deg, #fb5507, #ff2f34); /* AO VIVO */
+
+  /* -----------------------------------------------------------------
+     5. TIPOGRAFIA — duas famílias oficiais e únicas
+     Importe uma vez por peça:
+     @import url('https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
+     ----------------------------------------------------------------- */
+  --ea-font-display: 'Familjen Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif; /* títulos/números — 700, nunca itálico */
+  --ea-font-body:    'Manrope', 'Helvetica Neue', Helvetica, Arial, sans-serif;          /* corpo/CTA — 400–600 */
+
+  /* Escala tipográfica fluida (min → max) */
+  --ea-fs-display: clamp(2.5rem, 5vw + 1rem, 5.25rem);   /* 40 → 84px  (hero) */
+  --ea-fs-h1:      clamp(2.25rem, 4vw + 0.5rem, 4rem);   /* 36 → 64px */
+  --ea-fs-h2:      clamp(1.75rem, 3vw + 0.5rem, 3.625rem);/* 28 → 58px */
+  --ea-fs-h3:      clamp(1.375rem, 1.5vw + 0.5rem, 2rem);/* 22 → 32px */
+  --ea-fs-stat:    clamp(2.5rem, 4vw + 0.5rem, 4rem);    /* 40 → 64px  (números-âncora) */
+  --ea-fs-lead:    clamp(1.0625rem, 0.6vw + 0.9rem, 1.1875rem); /* 17 → 19px */
+  --ea-fs-body:    1rem;      /* 16px */
+  --ea-fs-sm:      0.875rem;  /* 14px */
+  --ea-fs-xs:      0.75rem;   /* 12px  (eyebrow/label) */
+
+  --ea-lh-tight:   1.05;      /* títulos */
+  --ea-lh-snug:    1.3;
+  --ea-lh-body:    1.6;
+  --ea-tracking-tight: -0.02em; /* títulos display */
+  --ea-tracking-wide:  0.12em;  /* eyebrow uppercase */
+
+  /* -----------------------------------------------------------------
+     6. ESPAÇAMENTO — escala base 8px (antes não era tokenizado!)
+     ----------------------------------------------------------------- */
+  --ea-space-1: 0.25rem; /* 4  */
+  --ea-space-2: 0.5rem;  /* 8  */
+  --ea-space-3: 0.75rem; /* 12 */
+  --ea-space-4: 1rem;    /* 16 */
+  --ea-space-5: 1.5rem;  /* 24 */
+  --ea-space-6: 2rem;    /* 32 */
+  --ea-space-7: 3rem;    /* 48 */
+  --ea-space-8: 4rem;    /* 64 */
+  --ea-space-9: 6rem;    /* 96 */
+  --ea-section-y: clamp(4rem, 9vw, 7.5rem); /* respiro vertical de seção */
+
+  /* -----------------------------------------------------------------
+     7. RAIO
+     ----------------------------------------------------------------- */
+  --ea-radius-sm:   12px;  /* chips, imagens de e-mail */
+  --ea-radius-md:   20px;  /* cards */
+  --ea-radius-lg:   28px;  /* cards grandes */
+  --ea-radius-xl:   40px;  /* seções/painéis */
+  --ea-radius-pill: 999px; /* botões/pílulas */
+
+  /* -----------------------------------------------------------------
+     8. SOMBRA / GLOW (família violeta da marca)
+     ----------------------------------------------------------------- */
+  --ea-shadow-sm: 0 4px 24px rgba(5,6,52,.08);
+  --ea-shadow-md: 0 12px 40px rgba(60,40,140,.14);
+  --ea-shadow-lg: 0 32px 80px rgba(47,36,255,.22);
+  --ea-glow-cta:  0 0 44px rgba(254,192,8,.36);
+  --ea-blur-glass: blur(16px);
+
+  /* -----------------------------------------------------------------
+     9. MOVIMENTO (sempre atrás de prefers-reduced-motion)
+     ----------------------------------------------------------------- */
+  --ea-ease:      cubic-bezier(.16, 1, .3, 1);
+  --ea-dur-fast:  0.2s;
+  --ea-dur:       0.4s;
+  --ea-dur-slow:  0.8s;
+
+  /* -----------------------------------------------------------------
+     10. LAYOUT
+     ----------------------------------------------------------------- */
+  --ea-container: 1180px;
+  --ea-z-header:  1000;
+  --ea-z-overlay: 2000;
+}
+
+/* =====================================================================
+   HELPER — seção escura
+   Aplique .ea-on-dark num contêiner de fundo escuro para remapear os
+   tokens de texto/superfície automaticamente (menos if mental).
+   ===================================================================== */
+.ea-on-dark {
+  --ea-text:        var(--ea-text-on-dark);
+  --ea-text-muted:  var(--ea-text-muted-on-dark);
+  --ea-surface:     var(--ea-glass-dark);
+  --ea-border:      var(--ea-glass-border);
+  color: var(--ea-text);
+}
+
+/* =====================================================================
+   HELPER — nome da marca (REGRA INEGOCIÁVEL)
+   A palavra "e-Auditoria" NUNCA pode ser quebrada (nem por hífen, nem por
+   quebra de linha). Sempre envolva o nome nesta classe:
+   <span class="ea-brand">e-Auditoria</span>
+   ===================================================================== */
+.ea-brand { white-space: nowrap; }
+
+/* =====================================================================
+   HELPER — palavra em degradê (título)
+   <h1>Simule a Reforma <span class="ea-grad">antes que ela chegue</span></h1>
+   ===================================================================== */
+.ea-grad {
+  background: var(--ea-grad-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* =====================================================================
+   TABELA DE EQUIVALÊNCIA PARA E-MAIL (Outlook não suporta var())
+   Use estes hex LITERAIS inline nos módulos de newsletter.
+   ---------------------------------------------------------------------
+   Papel                     | Token web              | Hex p/ e-mail
+   --------------------------|------------------------|---------------
+   Navy (cards escuros)      | --ea-navy              | #050634
+   Primária (botão/link)     | --ea-color-primary     | #2f24ff
+   CTA amarelo               | --ea-color-cta         | #fec008  (texto #050634)
+   Acento ciano (no navy)    | --ea-color-accent      | #00ffea
+   Corpo                     | --ea-text              | #4a4d6b
+   Texto secundário/meta     | --ea-text-muted        | #7377a0
+   Superfície card claro     | --ea-surface-muted     | #f1f2ff / #f7f9fd
+   Moldura externa e-mail    | (só e-mail)            | #e7ecf6
+   Botão secundário (bg)     | (só e-mail)            | #e7e9ff  (texto #2f24ff)
+   Divisor hairline          | --ea-border            | #e4e9f5
+   Masthead (gradiente)      | --ea-grad-masthead     | 122deg #8439e6→#5b4bf2→#2488ff (fallback #4f45f5)
+   Badge AO VIVO             | --ea-grad-live         | #fb5507→#ff2f34 (fallback #fb5507)
+   Impacto ALTO              | (email)                | bg #ffe7e7 / txt #c7202b 🔴
+   Impacto MÉDIO             | (email)                | bg #fff3d1 / txt #9a6a00 🟡
+   Impacto OPERACIONAL       | (email)                | bg #e2eeff / txt #1667d6 🔵
+   Larguras fixas            | —                      | e-mail 640 · full 560 · em card 436
+   Raio                      | --ea-radius-*          | cartão 24 · cards 20 · imagens 14–16 · pílula 100
+   ===================================================================== */

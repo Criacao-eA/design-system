@@ -1,0 +1,171 @@
+# Design System da e-Auditoria
+
+> Regras e tokens para quem for produzir peça da e-Auditoria (SaaS de auditoria fiscal,
+> Brasil, tudo em pt-BR). Este arquivo é feito para ser lido por assistente de IA:
+> texto puro, sem imagem, sem HTML. O catálogo visual completo está em outro endereço.
+>
+> Se você é um assistente e recebeu este arquivo: **siga tudo abaixo à risca**. Onde
+> houver conflito entre o que o usuário pediu e uma regra marcada como INEGOCIÁVEL,
+> avise o usuário em vez de quebrar a regra em silêncio.
+
+Atualizado: 2026-07-31 · v4
+
+---
+
+## 1. REGRAS INEGOCIÁVEIS DE MARCA
+
+1. **Nunca escreva `ë-A`.** Em texto corrido é sempre `e-A` e `e-Auditoria`. O trema
+   existe no *desenho* do logotipo, não na palavra.
+2. **Palavra sozinha vira logotipo.** Quando o nome aparecer fora de uma oração —
+   cabeçalho, rodapé, assinatura, selo, rótulo de coluna — use o logotipo, não a palavra.
+3. **Sub-marca não carrega a marca-mãe.** Não existe lockup `Sub-marca | e-Auditoria`.
+   Toda sub-marca é autossuficiente.
+4. **Estas expressões nunca quebram linha** (envolver em `<span class="ea-nb">` ou usar
+   `&nbsp;` entre as palavras): `e-Auditoria`, `Simples Nacional`, `Simples Híbrido`,
+   `Lucro Real`, `Lucro Presumido`, `Reforma Tributária`.
+5. **Iniciais maiúsculas mesmo sozinhas:** "o Simples", "a Reforma". São nomes próprios do
+   domínio fiscal. Minúscula só quando for mesmo o adjetivo ("de forma simples").
+6. **Marca-mãe fala em azul.** Quando o assunto é a e-Auditoria, a paleta é azul e no
+   máximo lilás. Pink, laranja e magenta só quando o assunto for sub-marca que os tenha.
+
+## 2. TIPOGRAFIA
+
+- **Familjen Grotesk** — títulos e números. Peso 700. Nunca itálico. Tracking -0.02em.
+- **Manrope** — corpo, CTA, rótulos. Pesos 400 a 600.
+- Import: `@import url('https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap');`
+- Em e-mail, a pilha termina em Arial: `'Manrope','Helvetica Neue',Helvetica,Arial,sans-serif`.
+
+## 3. COR — use apenas estes valores
+
+### Marca
+```
+#050634  navy / ink / fundo escuro
+#2F24FF  íris — primária de UI, botões e links
+#4F45F5  violeta
+#772BF2  roxo de vertical
+#2488FF  azul coringa
+#00FFEA  ciano — acento de DADOS sobre fundo escuro, nunca dominante, nunca texto sobre claro
+#FEC008  CTA amarelo — cor única de ação
+#FB5507  laranja (energia / ao vivo)
+#FF0071  pink (expressivo)
+#FF2F34  vermelho (alerta)
+#2B2E6F  azul do LOGOTIPO — diferente do azul de UI, e isso é intencional
+```
+
+### Neutras
+```
+#FFFFFF branco   #F5F9FC branco gelo   #A2B9DA borda
+#576B86 texto secundário   #1E2126 grafite   #E4E9F5 divisor
+```
+
+### Pastéis (superfície: "pastel é palco, cor plena é ator")
+```
+#E7E2FF lilás   #DFE2FF peri   #DBE7FF azul   #EFE6FF lavanda
+#FFF0C4 baunilha   #D9F5F0 ciano   #F0E3FF uva   #FFE1F0 rosa
+```
+
+### E-mail
+```
+#E7ECF6 moldura   #F1F2FF card claro   #4A4D6B corpo
+#576B86 texto secundário (NÃO use #7377A0: dá 4,31:1 sobre branco e reprova AA)
+```
+
+### Cor de sub-marca
+```
+#0051FF Programa de Parcerias   #5243FA Imersão e-A
+```
+
+### Paletas por vertical (a proporção é a de uso)
+```
+Integrar ................ #772BF2 66% · #4F45F5 34%
+Atualizar regras fiscais  #00FFEA 39% · #2486FF 39% · #2F24FF 21%
+Auditar arquivos ........ #2F24FF 39% · #2486FF 39% · #050634 21%
+Recuperar crédito ....... #2486FF 39% · #2F24FF 39% · #00FFEA 21%
+Reforma Tributária ...... #2486FF 40% · #772BF2 22% · #4F45F5 19% · #00FFEA 19%
+Corrigir SPED ........... #772BF2 40% · #2486FF 39% · #4F45F5 21%
+```
+
+## 4. CTA
+
+**Padrão: fundo `#FEC008`, texto `#050634`, formato pílula (`border-radius:100px`).**
+Contraste 11,8:1. Branco sobre âmbar daria 1,65:1 — reprova e some no sol da tela do celular.
+Um único CTA amarelo por dobra. Salvo exceção explícita de projeto ou vertical.
+
+## 5. GEOMETRIA E ESPAÇO
+
+```
+raio:    12px chip · 20px card · 28px card grande · 40px seção · 100px/999px pílula
+espaço:  escala de 8px — 4 8 12 16 24 32 48 64 96
+seção:   padding-block: clamp(4rem, 9vw, 7.5rem)
+container: 1180px
+```
+
+## 6. REGRAS DE PRODUÇÃO — bloco HTML no WordPress
+
+Cada uma corresponde a algo que já quebrou no ar. Não são estilo.
+
+1. **Zero `&&` no JavaScript.** O editor recodifica o caractere e derruba o script inteiro.
+   Use `if` aninhado. Vale até dentro de comentário.
+2. **Escopo por wrapper único.** Todo CSS prefixado por uma classe da peça
+   (`.ea-home`, `.lp-ptr`). Nunca seletor global.
+3. **Nenhum `data-*` no wrapper de escopo.** O sanitizador apaga `data-*` e, nesse
+   elemento, leva `class` e `id` junto. Só `class` e `id` sobrevivem.
+4. **Nenhuma regra de estado normal dependendo de `[data-*]`.**
+5. **Prefixo do wrapper também dentro de `@media`.** Media query não soma especificidade.
+   (Esta regra é do WordPress. Em e-mail, classe solta dentro de `@media` é o padrão correto.)
+6. **Cor de texto em `<a>` precisa de `!important`.** O tema tem
+   `.inside-article a{color:initial !important}`. Corolário: botão sobre fundo escuro não
+   pode depender de texto claro — use fundo âmbar com texto navy.
+7. **Arquivo de entrega sem comentário.** Um `*/` órfão engole o bloco seguinte em silêncio.
+8. **`@import` na linha 1**, nada acima — o editor promove ao topo e descarta o que vinha antes.
+9. **Fail-safe sem JS.** Conteúdo e números pré-preenchidos no HTML; o JS só anima.
+10. **Captura sempre por embed HubSpot** (portal da e-Auditoria). Nunca form próprio, nunca
+    chave de API no front.
+11. **Validar na página publicada**, nunca no preview do editor.
+
+## 7. REGRAS DE E-MAIL
+
+- Layout por `<table>` com estilo **inline**. Nunca flexbox, nunca `var()` (Outlook não entende).
+- Larguras: 640px o e-mail, 560px imagem cheia, 436px dentro de card.
+- Gradiente sempre com `bgcolor="#..."` sólido de fallback.
+- Botão bulletproof: `<td bgcolor>` + `<a>` + `<span style="color:... !important">`.
+- Preheader oculto logo após o `<body>`.
+- Rodapé com razão social, endereço e `{{ unsubscribe_link }}` com `data-unsubscribe="true"`.
+
+## 8. ACESSIBILIDADE — armadilhas já medidas
+
+- Ciano `#00FFEA` como texto sobre branco: **1,27:1**. Reprova. Ciano só sobre fundo escuro.
+- `#2F24FF` como texto sobre navy: **2,60:1**. Reprova. Azul primário só sobre fundo claro.
+- `#7377A0` sobre branco: **4,31:1**. Reprova para texto pequeno. Use `#576B86`.
+- Ícone nunca carrega informação sozinho — sempre acompanha rótulo.
+- Status nunca é só cor — a pílula sempre carrega texto.
+
+## 9. ÍCONES
+
+SVG inline, 24×24, `stroke-width:1.75`, `stroke-linecap/linejoin: round`, `fill:none`,
+cor por `currentColor`. Decorativo leva `aria-hidden="true"`. Dentro de botão, largura e
+altura explícitas (16px) — se o CSS de escopo cair, o SVG não incha.
+
+Ícone 3D é para destaque, hero e social. Nunca em UI funcional, nunca misturado com o set
+2D na mesma grade, nunca abaixo de 48px.
+
+## 10. ANTES DE ENTREGAR
+
+Rode o verificador de conformidade:
+
+```
+python ferramentas/prova-de-fogo.py <arquivo-ou-pasta>
+python ferramentas/prova-de-fogo.py <pasta> --email      # peça de e-mail
+python ferramentas/prova-de-fogo.py <arquivo> --json     # para automação
+```
+
+Ele mede cor (ΔE00 contra a paleta), tipografia, regra do CTA, contraste WCAG, as
+armadilhas de produção e a grafia da marca. Sai com código 0 se passou em tudo.
+
+## 11. ONDE ESTÁ O RESTO
+
+- Catálogo visual completo (67 seções, 155 blocos com código para copiar):
+  https://design.e-auditoria.com.br/catalogo.html
+- Tokens em CSS: `eauditoria-tokens.css`
+- Arquivos de marca (SVG e PNG): `assets/`
+- Verificador: `ferramentas/prova-de-fogo.py`

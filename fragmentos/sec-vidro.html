@@ -1,0 +1,649 @@
+<section id="vidro">
+  <div class="sec-head">
+    <h2>Vidro</h2>
+    <span class="tag marca">Marca</span>
+    <span class="tag web">Web</span>
+    <span class="tag novo">Novo na v3</span>
+  </div>
+  <p class="sec-desc">O vidro é o material da <span class="ea-brand">e-Auditoria</span>: superfície translúcida que deixa o fundo atravessar, com borda de luz e franja iridescente azul&nbsp;→&nbsp;violeta&nbsp;→&nbsp;rosa. Aqui está o material decomposto em camadas, a escala de três níveis, os valores para fundo claro e escuro, e as formas decorativas em CSS/SVG puro. Vidro é acabamento, não estrutura: se a informação depende dele para ser lida, o componente está errado.</p>
+
+  <!-- ============================================================
+       1. ANATOMIA
+       ============================================================ -->
+  <div class="comp">
+    <div class="comp-head"><h3>Anatomia do vidro</h3><span class="id">ea-glass — 7 camadas</span></div>
+    <div class="preview stack">
+      <p class="k-vd-lead">Cada célula abaixo mostra a mesma cena de fundo com <b>uma única camada ligada</b>. A última soma todas. O fundo tem listras finas de propósito: desfoque só é perceptível sobre detalhe.</p>
+      <div class="k-vd-anat">
+
+        <figure class="k-vd-cell">
+          <div class="k-vd-scene"><div class="k-vd-pane is-fundo"></div></div>
+          <figcaption><b>1. Fundo que atravessa</b><span>Sem propriedade. É a cena por trás — o vidro não existe sem ela.</span></figcaption>
+        </figure>
+
+        <figure class="k-vd-cell">
+          <div class="k-vd-scene"><div class="k-vd-pane is-tint"></div></div>
+          <figcaption><b>2. Tinta (tint)</b><span><code>background: rgba(255,255,255,.42)</code></span></figcaption>
+        </figure>
+
+        <figure class="k-vd-cell">
+          <div class="k-vd-scene"><div class="k-vd-pane is-blur"></div></div>
+          <figcaption><b>3. Desfoque</b><span><code>backdrop-filter: blur(14px) saturate(1.4)</code></span></figcaption>
+        </figure>
+
+        <figure class="k-vd-cell">
+          <div class="k-vd-scene"><div class="k-vd-pane is-edge"></div></div>
+          <figcaption><b>4. Borda de luz</b><span><code>border: 1px solid rgba(255,255,255,.85)</code></span></figcaption>
+        </figure>
+
+        <figure class="k-vd-cell">
+          <div class="k-vd-scene"><div class="k-vd-pane is-top"></div></div>
+          <figcaption><b>5. Realce superior</b><span><code>inset 0 1px 0 rgba(255,255,255,.9)</code> + gradiente de topo</span></figcaption>
+        </figure>
+
+        <figure class="k-vd-cell">
+          <div class="k-vd-scene"><div class="k-vd-pane is-sombra"></div></div>
+          <figcaption><b>6. Sombra projetada</b><span><code>box-shadow: 0 18px 34px rgba(3,4,40,.55)</code></span></figcaption>
+        </figure>
+
+        <figure class="k-vd-cell">
+          <div class="k-vd-scene"><div class="k-vd-pane is-croma"></div></div>
+          <figcaption><b>7. Aberração cromática</b><span>Anel de gradiente de 1px em <code>mask-composite</code>, azul&nbsp;→&nbsp;violeta&nbsp;→&nbsp;rosa.</span></figcaption>
+        </figure>
+
+        <figure class="k-vd-cell is-final">
+          <div class="k-vd-scene"><div class="k-vd-pane is-tudo"></div></div>
+          <figcaption><b>Somadas</b><span>As 7 camadas juntas. É esta a receita de referência.</span></figcaption>
+        </figure>
+
+      </div>
+    </div>
+    <p class="comp-note">A ordem importa: tinta e desfoque ficam no elemento; realce superior e franja cromática são <code>::before</code>/<code>::after</code> com <code>border-radius: inherit</code>; a sombra projetada é a única camada que sai para fora da caixa.</p>
+    <p class="comp-note warn">A camada 7 (aberração cromática) usa <code>mask-composite</code>. Sem suporte, o anel vira um retângulo colorido sólido por cima do conteúdo — por isso ele leva <code>pointer-events:none</code> e fica atrás do texto (<code>z-index:0</code>), nunca na frente.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>/* Receita completa — as 7 camadas somadas (fundo claro) */
+.ea-glass{
+  position:relative;
+  isolation:isolate;                                   /* 7 não vaza pra fora */
+  border-radius:var(--ea-r-md);
+
+  /* 2. tinta */
+  background:linear-gradient(160deg,
+              rgba(255,255,255,.50) 0%,
+              rgba(255,255,255,.34) 100%);
+
+  /* 3. desfoque */
+  -webkit-backdrop-filter:blur(18px) saturate(1.4);
+          backdrop-filter:blur(18px) saturate(1.4);
+
+  /* 4. borda de luz + 5. realce superior + 6. sombra projetada */
+  border:1px solid rgba(255,255,255,.70);
+  box-shadow:
+    0 12px 40px rgba(60,40,140,.16),                   /* projetada */
+    inset 0 1px 0 rgba(255,255,255,.90),               /* realce topo */
+    inset 0 -1px 0 rgba(255,255,255,.25);              /* retorno inferior */
+}
+
+/* 5b. realce superior como véu, para vidro alto (hero) */
+.ea-glass::before{
+  content:"";position:absolute;inset:0;z-index:-1;
+  border-radius:inherit;pointer-events:none;
+  background:linear-gradient(180deg,
+              rgba(255,255,255,.55) 0%,
+              rgba(255,255,255,0) 58%);
+}
+
+/* 7. aberração cromática — anel de 1px */
+.ea-glass::after{
+  content:"";position:absolute;inset:-1px;z-index:-1;
+  border-radius:inherit;pointer-events:none;
+  padding:1px;
+  background:linear-gradient(118deg,
+    #00ffea 0%, #2f24ff 26%, #8439e6 54%, #ff0071 80%, #ff7ad9 100%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,
+               linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+          mask-composite:exclude;
+  opacity:.55;
+}</pre></div>
+  </div>
+
+  <!-- ============================================================
+       2. ESCALA
+       ============================================================ -->
+  <div class="comp">
+    <div class="comp-head"><h3>Escala de vidro</h3><span class="id">ea-glass--1 / --2 / --3</span></div>
+    <div class="preview stack">
+      <p class="k-vd-lead">Três níveis. Não invente um quarto — se precisou de mais desfoque, o problema é o fundo, não o vidro.</p>
+      <div class="k-vd-stage light">
+        <div class="k-vd-stage__art" aria-hidden="true"></div>
+        <div class="k-vd-row">
+          <div class="k-vd-card lv1">
+            <span class="k-vd-lv">Nível 1 — Sutil</span>
+            <b>blur(8px)</b>
+            <p>UI e cards de conteúdo. Mal se percebe: serve para separar do fundo sem virar efeito.</p>
+          </div>
+          <div class="k-vd-card lv2">
+            <span class="k-vd-lv">Nível 2 — Médio</span>
+            <b>blur(18px)</b>
+            <p>Painel sobre imagem, header em pílula, card de destaque. É o padrão da marca.</p>
+          </div>
+          <div class="k-vd-card lv3">
+            <span class="k-vd-lv">Nível 3 — Pesado</span>
+            <b>blur(36px)</b>
+            <p>Herói e forma decorativa. Um por tela. Texto longo aqui não passa em contraste.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="k-vd-tokens">
+        <div class="k-vd-trow k-vd-thead"><span>Nível</span><span>backdrop-filter</span><span>background</span><span>border</span><span>box-shadow</span></div>
+        <div class="k-vd-trow"><span><b>1 Sutil</b></span><span><code>blur(8px) saturate(1.2)</code></span><span><code>rgba(255,255,255,.55)</code></span><span><code>1px rgba(255,255,255,.65)</code></span><span><code>0 4px 24px rgba(5,6,52,.08)</code></span></div>
+        <div class="k-vd-trow"><span><b>2 Médio</b></span><span><code>blur(18px) saturate(1.4)</code></span><span><code>rgba(255,255,255,.42)</code></span><span><code>1px rgba(255,255,255,.70)</code></span><span><code>0 12px 40px rgba(60,40,140,.16)</code> + <code>inset 0 1px 0 #fff .9</code></span></div>
+        <div class="k-vd-trow"><span><b>3 Pesado</b></span><span><code>blur(36px) saturate(1.7)</code></span><span><code>linear-gradient(.34 → .14)</code></span><span><code>1px rgba(255,255,255,.55)</code></span><span><code>0 32px 80px rgba(47,36,255,.22)</code> + 2 <code>inset</code></span></div>
+      </div>
+    </div>
+    <p class="comp-note"><b>Quando usar cada um:</b> nível 1 quando o fundo é quase liso e o vidro só precisa dar profundidade; nível 2 quando há foto ou gradiente atrás e o texto precisa ganhar base; nível 3 só em bloco de abertura, com título curto e nada de parágrafo.</p>
+    <p class="comp-note warn">Não use nível 3 em card de listagem. Além do custo, o desfoque forte apaga a hierarquia entre cards vizinhos — todos viram a mesma mancha branca.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>/* tokens — eauditoria-tokens.css */
+:root{
+  --ea-glass-blur-1:blur(8px)  saturate(1.2);
+  --ea-glass-blur-2:blur(18px) saturate(1.4);
+  --ea-glass-blur-3:blur(36px) saturate(1.7);
+
+  --ea-glass-bg-1:rgba(255,255,255,.55);
+  --ea-glass-bg-2:rgba(255,255,255,.42);
+  --ea-glass-bg-3:linear-gradient(150deg,rgba(255,255,255,.34),rgba(255,255,255,.14));
+
+  --ea-glass-edge-1:rgba(255,255,255,.65);
+  --ea-glass-edge-2:rgba(255,255,255,.70);
+  --ea-glass-edge-3:rgba(255,255,255,.55);
+}
+
+.ea-glass--1{
+  background:var(--ea-glass-bg-1);
+  border:1px solid var(--ea-glass-edge-1);
+  box-shadow:0 4px 24px rgba(5,6,52,.08);
+  -webkit-backdrop-filter:var(--ea-glass-blur-1);
+          backdrop-filter:var(--ea-glass-blur-1);
+}
+.ea-glass--2{
+  background:var(--ea-glass-bg-2);
+  border:1px solid var(--ea-glass-edge-2);
+  box-shadow:0 12px 40px rgba(60,40,140,.16),
+             inset 0 1px 0 rgba(255,255,255,.90);
+  -webkit-backdrop-filter:var(--ea-glass-blur-2);
+          backdrop-filter:var(--ea-glass-blur-2);
+}
+.ea-glass--3{
+  background:var(--ea-glass-bg-3);
+  border:1px solid var(--ea-glass-edge-3);
+  box-shadow:0 32px 80px rgba(47,36,255,.22),
+             inset 0 1px 0 rgba(255,255,255,.90),
+             inset 0 -1px 0 rgba(255,255,255,.25);
+  -webkit-backdrop-filter:var(--ea-glass-blur-3);
+          backdrop-filter:var(--ea-glass-blur-3);
+}</pre></div>
+  </div>
+
+  <!-- ============================================================
+       3. CLARO x ESCURO
+       ============================================================ -->
+  <div class="comp">
+    <div class="comp-head"><h3>Vidro sobre claro × sobre escuro</h3><span class="id">ea-glass-on-light / ea-glass-on-dark</span></div>
+    <div class="preview stack">
+      <p class="k-vd-lead">Não é o mesmo componente com o fundo trocado. Sobre claro, o vidro é <b>branco com alfa alto</b> e a borda quase some. Sobre escuro, a tinta cai para <b>alfa muito baixo</b> (senão vira leitoso) e a <b>borda de luz sobe</b>, porque é ela que desenha a forma.</p>
+      <div class="k-vd-vs">
+
+        <div class="k-vd-stage light">
+          <div class="k-vd-stage__art" aria-hidden="true"></div>
+          <span class="k-vd-stage__tag">Sobre claro</span>
+          <div class="k-vd-card lv2 k-vd-card--wide">
+            <b>Crédito recuperado</b>
+            <p>Tinta <code>rgba(255,255,255,.42)</code>, borda <code>.70</code>, texto <code>#050634</code>.</p>
+            <span class="k-vd-pill dark">R$ 1,4 mi</span>
+          </div>
+        </div>
+
+        <div class="k-vd-stage dark">
+          <div class="k-vd-stage__art" aria-hidden="true"></div>
+          <span class="k-vd-stage__tag">Sobre escuro</span>
+          <div class="k-vd-card lv2 on-dark k-vd-card--wide">
+            <b>Crédito recuperado</b>
+            <p>Tinta <code>rgba(255,255,255,.08)</code>, borda <code>.22</code>, texto <code>#FFFFFF</code>.</p>
+            <span class="k-vd-pill cyan">R$ 1,4 mi</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <p class="comp-note">Sobre escuro a saturação sobe (<code>saturate(1.6)</code>) para o gradiente por trás não morrer no desfoque, e entra um brilho ciano de baixa opacidade na borda superior — é o único lugar onde o ciano <code>#00FFEA</code> aparece no vidro.</p>
+    <p class="comp-note warn">Erro comum: reaproveitar <code>rgba(255,255,255,.42)</code> no escuro. O painel fica cinza-leitoso, perde a translucidez e o fundo deixa de atravessar. No escuro o teto é <code>.12</code>.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>/* SOBRE CLARO — foto clara, gradiente pastel, #F5F9FC */
+.ea-glass-on-light{
+  background:rgba(255,255,255,.42);
+  border:1px solid rgba(255,255,255,.70);
+  box-shadow:0 12px 40px rgba(60,40,140,.16),
+             inset 0 1px 0 rgba(255,255,255,.90);
+  color:#050634;
+  -webkit-backdrop-filter:blur(18px) saturate(1.4);
+          backdrop-filter:blur(18px) saturate(1.4);
+}
+
+/* SOBRE ESCURO — navy #050634, gradiente violeta, foto escura */
+.ea-glass-on-dark{
+  background:rgba(255,255,255,.08);          /* teto: .12 */
+  border:1px solid rgba(255,255,255,.22);    /* borda mais forte */
+  box-shadow:0 18px 50px rgba(0,0,0,.45),
+             inset 0 1px 0 rgba(255,255,255,.38),
+             inset 0 0 24px rgba(0,255,234,.06);
+  color:#ffffff;
+  -webkit-backdrop-filter:blur(18px) saturate(1.6);
+          backdrop-filter:blur(18px) saturate(1.6);
+}</pre></div>
+  </div>
+
+  <!-- ============================================================
+       4. FORMAS EM CSS/SVG
+       ============================================================ -->
+  <div class="comp">
+    <div class="comp-head"><h3>Formas de vidro em CSS/SVG</h3><span class="id">ea-shape--*</span></div>
+    <div class="preview stack">
+      <p class="k-vd-lead">Quatro formas decorativas sem uma única imagem. São <b>elemento de fundo de LP</b>: entram atrás do conteúdo, com <code>pointer-events:none</code> e <code>aria-hidden</code>. Nenhuma delas usa <code>backdrop-filter</code> — são gradientes, então não contam no orçamento de superfícies de vidro.</p>
+      <div class="k-vd-formas">
+
+        <figure class="k-vd-forma">
+          <div class="k-vd-forma__box">
+            <div class="k-vd-cube" aria-hidden="true"><i></i><b></b></div>
+          </div>
+          <figcaption><b>Cubo / losango</b><span><code>ea-shape--cube</code> — quadrado arredondado a 45°, núcleo navy e anel iridescente. Âncora de hero.</span></figcaption>
+        </figure>
+
+        <figure class="k-vd-forma">
+          <div class="k-vd-forma__box">
+            <svg class="k-vd-svg" viewBox="0 0 480 210" role="img" aria-label="Fita ondulada de vidro iridescente">
+              <defs>
+                <linearGradient id="eaVdFita" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#00c8ff"/>
+                  <stop offset=".34" stop-color="#2f24ff"/>
+                  <stop offset=".66" stop-color="#8439e6"/>
+                  <stop offset="1" stop-color="#ff0071"/>
+                </linearGradient>
+                <linearGradient id="eaVdFitaLuz" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#ffffff" stop-opacity=".85"/>
+                  <stop offset=".5" stop-color="#ffffff" stop-opacity=".08"/>
+                  <stop offset="1" stop-color="#ffffff" stop-opacity=".45"/>
+                </linearGradient>
+              </defs>
+              <path d="M0,118 C90,30 170,38 240,108 C310,178 390,186 480,96 L480,142 C390,232 310,224 240,154 C170,84 90,76 0,164 Z" fill="url(#eaVdFita)" opacity=".42"/>
+              <path d="M0,118 C90,30 170,38 240,108 C310,178 390,186 480,96 L480,142 C390,232 310,224 240,154 C170,84 90,76 0,164 Z" fill="url(#eaVdFitaLuz)"/>
+              <path d="M0,124 C90,36 170,44 240,114 C310,184 390,192 480,102" fill="none" stroke="#ffffff" stroke-opacity=".9" stroke-width="1.6"/>
+              <path d="M0,134 C90,46 170,54 240,124 C310,194 390,202 480,112" fill="none" stroke="#2f24ff" stroke-opacity=".55" stroke-width="1.2"/>
+              <path d="M0,146 C90,58 170,66 240,136 C310,206 390,214 480,124" fill="none" stroke="#ff0071" stroke-opacity=".38" stroke-width="1"/>
+              <path d="M0,158 C90,70 170,78 240,148 C310,218 390,226 480,136" fill="none" stroke="#00ffea" stroke-opacity=".35" stroke-width="1"/>
+            </svg>
+          </div>
+          <figcaption><b>Fita ondulada</b><span><code>ea-shape--ribbon</code> — banda fechada + fios de luz paralelos. Divisor entre dobras.</span></figcaption>
+        </figure>
+
+        <figure class="k-vd-forma">
+          <div class="k-vd-forma__box">
+            <div class="k-vd-stack" aria-hidden="true">
+              <span class="pl p1"></span><span class="pl p2"></span><span class="pl p3"></span><span class="pl p4"></span>
+            </div>
+          </div>
+          <figcaption><b>Camadas empilhadas</b><span><code>ea-shape--layers</code> — 4 lâminas em <code>perspective</code>. Boa metáfora para camadas de apuração.</span></figcaption>
+        </figure>
+
+        <figure class="k-vd-forma">
+          <div class="k-vd-forma__box">
+            <svg class="k-vd-svg" viewBox="0 0 320 230" role="img" aria-label="Arcos concêntricos de vidro iridescente">
+              <defs>
+                <linearGradient id="eaVdArco" x1="0" y1="1" x2="1" y2="0">
+                  <stop offset="0" stop-color="#ff0071"/>
+                  <stop offset=".38" stop-color="#8439e6"/>
+                  <stop offset=".72" stop-color="#2f24ff"/>
+                  <stop offset="1" stop-color="#00c8ff"/>
+                </linearGradient>
+              </defs>
+              <g fill="none" stroke="url(#eaVdArco)" stroke-linecap="round">
+                <path d="M112.2,210.8 A48,48 0 0 1 207.8,210.8" stroke-width="3" opacity=".9"/>
+                <path d="M92.3,208.9 A68,68 0 0 1 227.7,208.9" stroke-width="2.4" opacity=".75"/>
+                <path d="M72.4,207.1 A88,88 0 0 1 247.6,207.1" stroke-width="2" opacity=".62"/>
+                <path d="M52.4,205.4 A108,108 0 0 1 267.6,205.4" stroke-width="1.6" opacity=".5"/>
+                <path d="M32.5,203.9 A128,128 0 0 1 287.5,203.9" stroke-width="1.3" opacity=".38"/>
+                <path d="M12.6,202.1 A148,148 0 0 1 307.4,202.1" stroke-width="1" opacity=".28"/>
+              </g>
+              <g fill="none" stroke="#ffffff" stroke-linecap="round" opacity=".6">
+                <path d="M97.3,209.4 A63,63 0 0 1 222.7,209.4" stroke-width=".8"/>
+                <path d="M57.4,205.8 A103,103 0 0 1 262.6,205.8" stroke-width=".8"/>
+              </g>
+            </svg>
+          </div>
+          <figcaption><b>Arco concêntrico</b><span><code>ea-shape--arc</code> — sangra pela borda do bloco, nunca centralizado.</span></figcaption>
+        </figure>
+
+      </div>
+    </div>
+    <p class="comp-note">Regra de uso: uma forma por dobra, sangrando por um canto, com <code>opacity</code> entre <code>.5</code> e <code>.8</code> e <code>filter:blur(0.5px)</code> se estiver muito nítida. Sob o texto principal, nunca por cima.</p>
+    <p class="comp-note warn">Não coloque texto em cima da parte densa da forma — os gradientes vão de <code>#00c8ff</code> a <code>#ff0071</code> e o contraste muda ao longo do caminho. Se precisar de texto ali, meça no ponto mais claro <b>e</b> no mais escuro do gradiente.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>/* CUBO / LOSANGO — ea-shape--cube */
+.ea-shape--cube{
+  width:190px;aspect-ratio:1;position:relative;
+  transform:rotate(45deg);border-radius:44px;overflow:hidden;
+  background:conic-gradient(from 205deg at 58% 38%,
+    #ff4fd8 0deg,#ff0071 52deg,#8439e6 128deg,
+    #2f24ff 200deg,#00c8ff 262deg,#ff7ad9 330deg,#ff4fd8 360deg);
+  box-shadow:inset 0 0 44px rgba(255,255,255,.55),
+             0 34px 64px rgba(47,36,255,.30);
+}
+.ea-shape--cube::before{                 /* núcleo escuro */
+  content:"";position:absolute;inset:15%;border-radius:28px;
+  background:radial-gradient(120% 120% at 30% 25%,
+             rgba(20,10,70,.55),#050634 62%);
+}
+.ea-shape--cube::after{                  /* estria especular */
+  content:"";position:absolute;left:6%;top:4%;width:34%;height:52%;
+  border-radius:50%;filter:blur(9px);
+  background:linear-gradient(150deg,rgba(255,255,255,.95),rgba(255,255,255,0));
+}
+
+/* CAMADAS EMPILHADAS — ea-shape--layers */
+.ea-shape--layers{width:230px;height:210px;perspective:820px;position:relative}
+.ea-shape--layers i{
+  position:absolute;left:50%;top:50%;width:152px;height:152px;
+  margin:-76px 0 0 -76px;border-radius:10px;
+  transform:rotateX(58deg) rotateZ(45deg) translateZ(var(--z));
+  background:linear-gradient(135deg,
+    rgba(47,36,255,.34),rgba(132,57,230,.22) 48%,rgba(255,0,113,.26));
+  border:1px solid rgba(255,255,255,.55);
+  box-shadow:0 10px 26px rgba(47,36,255,.20),
+             inset 0 1px 0 rgba(255,255,255,.65);
+}
+.ea-shape--layers i:nth-child(1){--z:-66px}
+.ea-shape--layers i:nth-child(2){--z:-22px}
+.ea-shape--layers i:nth-child(3){--z: 22px}
+.ea-shape--layers i:nth-child(4){--z: 66px}
+
+/* posicionamento em LP — sempre atrás */
+.dobra{position:relative;isolation:isolate}
+.dobra .ea-shape{
+  position:absolute;z-index:-1;pointer-events:none;
+  right:-8%;top:-14%;opacity:.7;
+}</pre></div>
+  </div>
+
+  <!-- ============================================================
+       5. REFERÊNCIAS FOTOGRÁFICAS
+       ============================================================ -->
+  <div class="comp">
+    <div class="comp-head"><h3>Referências fotográficas</h3><span class="id">direção visual — não é asset</span></div>
+    <div class="preview stack">
+      <p class="k-vd-lead">Imagens de <b>banco</b> usadas como referência de direção do material. Servem para calibrar cor, densidade e tipo de forma. <b>Não são assets da marca</b> — não entram em LP nem em peça publicada sem checar a licença do arquivo original.</p>
+      <div class="k-vd-refs">
+        <figure><img src="{{IMG:vidro-cubo}}" alt="Cubo 3D translúcido iridescente em rosa e violeta com núcleo escuro" loading="lazy" decoding="async"><figcaption>Cubo — núcleo denso, anel iridescente</figcaption></figure>
+        <figure><img src="{{IMG:vidro-onda}}" alt="Ondas de vidro translúcido azul e violeta sobre fundo branco" loading="lazy" decoding="async"><figcaption>Onda — fios de luz paralelos</figcaption></figure>
+        <figure><img src="{{IMG:vidro-grafico}}" alt="Gráfico de barras 3D em vidro violeta e rosa com seta ascendente" loading="lazy" decoding="async"><figcaption>Gráfico — objeto de dado em vidro</figcaption></figure>
+        <figure><img src="{{IMG:vidro-camadas}}" alt="Placas de vidro empilhadas em perspectiva, azul no topo e violeta na base" loading="lazy" decoding="async"><figcaption>Camadas — lâminas empilhadas</figcaption></figure>
+        <figure><img src="{{IMG:vidro-lamina}}" alt="Lâminas curvas de vidro azul e violeta flutuando" loading="lazy" decoding="async"><figcaption>Lâmina — corte fino e curvo</figcaption></figure>
+        <figure><img src="{{IMG:vidro-arco}}" alt="Arcos concêntricos finos em azul, violeta e rosa" loading="lazy" decoding="async"><figcaption>Arco — linhas concêntricas</figcaption></figure>
+        <figure><img src="{{IMG:vidro-fita1}}" alt="Fita de vidro em S com reflexos iridescentes" loading="lazy" decoding="async"><figcaption>Fita 1 — torção em S</figcaption></figure>
+        <figure><img src="{{IMG:vidro-fita2}}" alt="Fita de vidro atravessando uma moldura quadrada translúcida" loading="lazy" decoding="async"><figcaption>Fita 2 — fita e moldura</figcaption></figure>
+      </div>
+    </div>
+    <p class="comp-note">O que ler nessas imagens: fundo sempre branco ou navy limpo, uma única forma por quadro, cor concentrada nas <b>bordas</b> (o miolo é quase incolor), e sombra curta. Quando a peça pedir uma dessas formas, prefira recriar em CSS/SVG (bloco anterior) — pesa menos e escala sem serrilhar.</p>
+    <p class="comp-note warn">Os arquivos estão em <code>Brandbook/Apresentação/Links</code>. Não republique com o nome <code>AdobeStock_*</code> nem trate como logo/símbolo: aparecer no catálogo é referência, não liberação de uso.</p>
+  </div>
+
+  <!-- ============================================================
+       6. REGRAS
+       ============================================================ -->
+  <div class="comp">
+    <div class="comp-head"><h3>Regras do vidro</h3><span class="id">orçamento, fallback e contraste</span></div>
+    <div class="preview stack">
+      <div class="checklist">
+        <label><input type="checkbox"><span><b>No máximo 2 superfícies de vidro simultâneas na viewport.</b> <code>backdrop-filter</code> força o navegador a recompor e reamostrar tudo que está atrás, a cada frame de rolagem. Header em pílula já conta como uma.</span></label>
+        <label><input type="checkbox"><span><b>Nunca vidro sobre vidro.</b> A segunda camada desfoca o resultado já desfocado da primeira: o custo dobra e o ganho visual é zero. Card de vidro dentro de painel de vidro vira mancha.</span></label>
+        <label><input type="checkbox"><span><b>Sempre um fallback sólido.</b> Com <code>@supports not (backdrop-filter: blur(1px))</code> o mesmo bloco recebe fundo opaco. Sem isso, quem não suporta vê texto claro sobre foto.</span></label>
+        <label><input type="checkbox"><span><b>Contraste medido com o pior fundo possível</b>, não com o fundo do mockup. Recorte a região mais clara e a mais escura da imagem que passa atrás e meça as duas.</span></label>
+        <label><input type="checkbox"><span><b>Vidro nunca carrega informação crítica sozinho.</b> Preço, prazo, número de auditoria e CTA vão em superfície sólida ou com véu sólido local atrás do texto.</span></label>
+        <label><input type="checkbox"><span><b>Em e-mail, vidro não existe.</b> <code>backdrop-filter</code> não é suportado — use um PNG achatado com a aparência de vidro.</span></label>
+      </div>
+    </div>
+    <p class="comp-note warn"><b>Contraste:</b> um painel <code>rgba(255,255,255,.42)</code> sobre foto clara dá razão confortável; sobre a mesma foto com uma área escura, o texto <code>#050634</code> despenca. Se a imagem varia, ou o alfa sobe para <code>.62</code>, ou entra um véu sólido só atrás do bloco de texto. Meça no pior ponto — o desfoque não salva contraste, ele só embaralha o que já está lá.</p>
+    <p class="comp-note cro">Em dobra de conversão, vidro no cartão e CTA <b>sólido</b>. CTA de vidro perde a leitura de "botão" e derruba clique. O amarelo <code>#FEC008</code> com texto escuro continua sendo o CTA; o azul/violeta continua com texto <code>#FFFFFF</code>.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>/* 1. FALLBACK — obrigatório em todo bloco de vidro */
+@supports not (backdrop-filter: blur(1px)){
+  .ea-glass,
+  .ea-glass--1,.ea-glass--2,.ea-glass--3{
+    background:rgba(255,255,255,.94);
+    border-color:rgba(5,6,52,.10);
+  }
+  .ea-glass-on-dark{
+    background:rgba(9,10,60,.92);
+    border-color:rgba(255,255,255,.16);
+  }
+}
+
+/* 2. VÉU SÓLIDO LOCAL — quando o fundo atrás é imprevisível */
+.ea-glass .ea-glass__safe{
+  background:rgba(255,255,255,.88);
+  border-radius:12px;
+  padding:10px 14px;
+}
+
+/* 3. ORÇAMENTO — trava de desenvolvimento
+      se este seletor casar, há vidro dentro de vidro */
+/* .ea-glass .ea-glass{ outline:3px solid #ff0071 } */
+
+/* 4. MOBILE — desliga o desfoque abaixo de 640px.
+      Ganho visual pequeno, custo de rolagem alto. */
+@media (max-width:640px){
+  .ea-glass--3{
+    -webkit-backdrop-filter:var(--ea-glass-blur-1);
+            backdrop-filter:var(--ea-glass-blur-1);
+    background:rgba(255,255,255,.82);
+  }
+}</pre></div>
+  </div>
+
+</section>
+
+<!--CSS-INICIO-->
+/* ============================================================
+   SEÇÃO VIDRO — k-vd-*
+   Os "palcos" (.k-vd-scene / .k-vd-stage) têm fundo fixo de propósito:
+   são amostras de material sobre um fundo conhecido. Todo o resto
+   (rótulos, legendas, tabela) usa as variáveis do catálogo.
+   ============================================================ */
+
+.k-vd-lead{margin:0 0 16px;font-size:14px;color:var(--ink-soft);max-width:78ch;line-height:1.62}
+.k-vd-lead b{color:var(--ink)}
+.k-vd-lead code,
+.k-vd-cell code,
+.k-vd-forma code,
+.k-vd-trow code{font-family:var(--font-mono);font-size:11.5px;background:var(--panel-2);
+  border:1px solid var(--line);padding:1px 5px;border-radius:6px;color:var(--ink);white-space:nowrap}
+
+/* ---------- 1. anatomia ---------- */
+.k-vd-anat{display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:14px;width:100%}
+.k-vd-cell{margin:0;border:1px solid var(--line);border-radius:var(--r-md);
+  overflow:hidden;background:var(--panel)}
+.k-vd-cell.is-final{border-color:var(--iris);box-shadow:0 0 0 2px rgba(47,36,255,.14)}
+.k-vd-cell figcaption{display:block;padding:11px 13px 13px;font-size:12px;color:var(--ink-soft);line-height:1.5}
+.k-vd-cell figcaption b{display:block;font-family:var(--font-display);font-size:13.5px;
+  color:var(--ink);margin-bottom:4px;letter-spacing:-.01em}
+.k-vd-cell figcaption span{display:block}
+
+.k-vd-scene{position:relative;height:126px;display:grid;place-items:center;padding:18px;
+  background-color:#0a0b3d;
+  background-image:
+    radial-gradient(58% 92% at 10% 18%, rgba(47,36,255,.95) 0%, rgba(47,36,255,0) 62%),
+    radial-gradient(52% 86% at 88% 12%, rgba(255,0,113,.85) 0%, rgba(255,0,113,0) 64%),
+    radial-gradient(70% 96% at 74% 96%, rgba(0,255,234,.55) 0%, rgba(0,255,234,0) 60%),
+    linear-gradient(122deg,#150b52 0%,#2a0b5e 52%,#06073a 100%)}
+.k-vd-scene::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:repeating-linear-gradient(58deg,
+    rgba(255,255,255,.34) 0 2px, rgba(255,255,255,0) 2px 13px)}
+
+.k-vd-pane{position:relative;z-index:1;width:100%;height:100%;border-radius:14px;
+  border:1px solid transparent;background:transparent}
+.k-vd-pane.is-fundo{border:1px dashed rgba(255,255,255,.55)}
+.k-vd-pane.is-tint{background:rgba(255,255,255,.42)}
+.k-vd-pane.is-blur{-webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4)}
+.k-vd-pane.is-edge{border:1px solid rgba(255,255,255,.85);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)}
+.k-vd-pane.is-top{background:linear-gradient(180deg,rgba(255,255,255,.58) 0%,rgba(255,255,255,0) 56%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9)}
+.k-vd-pane.is-sombra{background:rgba(255,255,255,.10);box-shadow:0 18px 34px rgba(3,4,40,.55)}
+
+.k-vd-pane.is-croma::after,
+.k-vd-pane.is-tudo::after{content:"";position:absolute;inset:-1px;border-radius:inherit;
+  pointer-events:none;padding:1px;
+  background:linear-gradient(118deg,#00ffea 0%,#2f24ff 26%,#8439e6 54%,#ff0071 80%,#ff7ad9 100%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude}
+.k-vd-pane.is-croma::after{opacity:.95}
+.k-vd-pane.is-tudo::after{opacity:.55}
+
+.k-vd-pane.is-tudo{
+  background:linear-gradient(160deg,rgba(255,255,255,.50) 0%,rgba(255,255,255,.34) 100%);
+  border:1px solid rgba(255,255,255,.70);
+  box-shadow:0 18px 34px rgba(3,4,40,.45),
+             inset 0 1px 0 rgba(255,255,255,.90),
+             inset 0 -1px 0 rgba(255,255,255,.25);
+  -webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4)}
+
+/* ---------- 2 e 3. palcos ---------- */
+.k-vd-stage{position:relative;width:100%;border-radius:var(--r-md);overflow:hidden;
+  padding:30px 22px;isolation:isolate;border:1px solid var(--line)}
+.k-vd-stage.light{background:#eaf1ff}
+.k-vd-stage.dark{background:#050634}
+.k-vd-stage__art{position:absolute;inset:0;z-index:0}
+.k-vd-stage.light .k-vd-stage__art{
+  background-image:
+    radial-gradient(44% 74% at 14% 24%, rgba(47,36,255,.55) 0%, rgba(47,36,255,0) 66%),
+    radial-gradient(40% 66% at 62% 8%, rgba(255,0,113,.42) 0%, rgba(255,0,113,0) 68%),
+    radial-gradient(52% 82% at 92% 88%, rgba(0,200,255,.55) 0%, rgba(0,200,255,0) 64%),
+    repeating-linear-gradient(62deg, rgba(5,6,52,.10) 0 2px, rgba(5,6,52,0) 2px 15px)}
+.k-vd-stage.dark .k-vd-stage__art{
+  background-image:
+    radial-gradient(46% 76% at 12% 20%, rgba(47,36,255,.95) 0%, rgba(47,36,255,0) 66%),
+    radial-gradient(42% 68% at 66% 6%, rgba(255,0,113,.70) 0%, rgba(255,0,113,0) 68%),
+    radial-gradient(54% 84% at 94% 92%, rgba(0,255,234,.42) 0%, rgba(0,255,234,0) 62%),
+    repeating-linear-gradient(62deg, rgba(255,255,255,.16) 0 2px, rgba(255,255,255,0) 2px 15px)}
+.k-vd-stage__tag{position:absolute;z-index:2;top:10px;left:12px;
+  font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 9px;border-radius:var(--r-pill)}
+.k-vd-stage.light .k-vd-stage__tag{background:rgba(5,6,52,.82);color:#fff}
+.k-vd-stage.dark .k-vd-stage__tag{background:rgba(255,255,255,.90);color:#050634}
+
+.k-vd-row{position:relative;z-index:1;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px}
+.k-vd-vs{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;width:100%}
+.k-vd-vs .k-vd-stage{padding:44px 22px 26px}
+
+/* cartões de vidro (amostras) */
+.k-vd-card{position:relative;z-index:1;border-radius:var(--r-sm);padding:16px 17px;color:#050634}
+.k-vd-card--wide{max-width:340px}
+.k-vd-card b{display:block;font-family:var(--font-display);font-size:1.05rem;letter-spacing:-.01em}
+.k-vd-card p{margin:6px 0 0;font-size:12.5px;line-height:1.5;color:rgba(5,6,52,.78)}
+.k-vd-card p code{background:rgba(255,255,255,.62);border-color:rgba(5,6,52,.10);color:#050634}
+.k-vd-lv{display:block;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.09em;
+  text-transform:uppercase;color:rgba(5,6,52,.62);margin-bottom:7px}
+
+.k-vd-card.lv1{background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.65);
+  box-shadow:0 4px 24px rgba(5,6,52,.08);
+  -webkit-backdrop-filter:blur(8px) saturate(1.2);backdrop-filter:blur(8px) saturate(1.2)}
+.k-vd-card.lv2{background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.70);
+  box-shadow:0 12px 40px rgba(60,40,140,.16),inset 0 1px 0 rgba(255,255,255,.90);
+  -webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4)}
+.k-vd-card.lv3{background:linear-gradient(150deg,rgba(255,255,255,.34),rgba(255,255,255,.14));
+  border:1px solid rgba(255,255,255,.55);
+  box-shadow:0 32px 80px rgba(47,36,255,.22),inset 0 1px 0 rgba(255,255,255,.90),
+             inset 0 -1px 0 rgba(255,255,255,.25);
+  -webkit-backdrop-filter:blur(36px) saturate(1.7);backdrop-filter:blur(36px) saturate(1.7)}
+
+.k-vd-card.on-dark{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);
+  box-shadow:0 18px 50px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.38),
+             inset 0 0 24px rgba(0,255,234,.06);
+  color:#fff;
+  -webkit-backdrop-filter:blur(18px) saturate(1.6);backdrop-filter:blur(18px) saturate(1.6)}
+.k-vd-card.on-dark p{color:rgba(255,255,255,.82)}
+.k-vd-card.on-dark p code{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.22);color:#fff}
+
+.k-vd-pill{display:inline-block;margin-top:11px;font-family:var(--font-display);font-weight:700;
+  font-size:13px;padding:5px 12px;border-radius:var(--r-pill)}
+.k-vd-pill.dark{background:#050634;color:#fff}
+.k-vd-pill.cyan{background:#00ffea;color:#00312c}
+
+@supports not ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
+  .k-vd-card.lv1,.k-vd-card.lv2,.k-vd-card.lv3{background:rgba(255,255,255,.94)}
+  .k-vd-card.on-dark{background:rgba(9,10,60,.92)}
+  .k-vd-pane.is-blur,.k-vd-pane.is-tudo{background:rgba(255,255,255,.90)}
+}
+
+/* tabela de tokens */
+.k-vd-tokens{width:100%;margin-top:18px;border:1px solid var(--line);
+  border-radius:var(--r-md);overflow:hidden;background:var(--panel)}
+.k-vd-trow{display:grid;grid-template-columns:minmax(84px,.7fr) 1.1fr 1.1fr 1.1fr 1.6fr;
+  gap:10px;padding:11px 14px;border-top:1px solid var(--line);
+  font-size:12px;color:var(--ink-soft);align-items:center}
+.k-vd-trow:first-child{border-top:0}
+.k-vd-trow b{color:var(--ink)}
+.k-vd-thead{background:var(--panel-2);font-family:var(--font-mono);font-size:10.5px;
+  letter-spacing:.08em;text-transform:uppercase}
+@media (max-width:820px){
+  .k-vd-trow{grid-template-columns:1fr;gap:5px}
+  .k-vd-thead{display:none}
+}
+
+/* ---------- 4. formas ---------- */
+.k-vd-formas{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;width:100%}
+.k-vd-forma{margin:0;border:1px solid var(--line);border-radius:var(--r-md);
+  overflow:hidden;background:var(--panel)}
+.k-vd-forma__box{position:relative;height:230px;display:grid;place-items:center;padding:16px;
+  background:
+    radial-gradient(120% 120% at 20% 0%, rgba(255,255,255,.9) 0%, rgba(255,255,255,0) 60%),
+    linear-gradient(150deg,#f2f5ff 0%,#e8ecff 55%,#f7f1ff 100%)}
+.k-vd-forma figcaption{display:block;padding:12px 14px 14px;font-size:12px;
+  color:var(--ink-soft);line-height:1.5}
+.k-vd-forma figcaption b{display:block;font-family:var(--font-display);font-size:13.5px;
+  color:var(--ink);margin-bottom:4px;letter-spacing:-.01em}
+.k-vd-svg{width:100%;height:auto;max-height:190px;display:block}
+
+.k-vd-cube{width:158px;aspect-ratio:1;position:relative;transform:rotate(45deg);
+  border-radius:38px;overflow:hidden;
+  background:conic-gradient(from 205deg at 58% 38%,
+    #ff4fd8 0deg,#ff0071 52deg,#8439e6 128deg,#2f24ff 200deg,
+    #00c8ff 262deg,#ff7ad9 330deg,#ff4fd8 360deg);
+  box-shadow:inset 0 0 44px rgba(255,255,255,.55),0 30px 58px rgba(47,36,255,.30)}
+.k-vd-cube i{position:absolute;inset:15%;border-radius:24px;
+  background:radial-gradient(120% 120% at 30% 25%,rgba(20,10,70,.55),#050634 62%)}
+.k-vd-cube b{position:absolute;left:6%;top:4%;width:34%;height:52%;border-radius:50%;
+  filter:blur(9px);
+  background:linear-gradient(150deg,rgba(255,255,255,.95),rgba(255,255,255,0))}
+
+.k-vd-stack{width:210px;height:196px;perspective:820px;position:relative}
+.k-vd-stack .pl{position:absolute;left:50%;top:50%;width:140px;height:140px;
+  margin:-70px 0 0 -70px;border-radius:10px;
+  background:linear-gradient(135deg,rgba(47,36,255,.34),rgba(132,57,230,.22) 48%,rgba(255,0,113,.26));
+  border:1px solid rgba(255,255,255,.60);
+  box-shadow:0 10px 26px rgba(47,36,255,.20),inset 0 1px 0 rgba(255,255,255,.70)}
+.k-vd-stack .p1{transform:rotateX(58deg) rotateZ(45deg) translateZ(-64px)}
+.k-vd-stack .p2{transform:rotateX(58deg) rotateZ(45deg) translateZ(-21px)}
+.k-vd-stack .p3{transform:rotateX(58deg) rotateZ(45deg) translateZ(21px)}
+.k-vd-stack .p4{transform:rotateX(58deg) rotateZ(45deg) translateZ(64px)}
+
+/* ---------- 5. referências ---------- */
+.k-vd-refs{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;width:100%}
+.k-vd-refs figure{margin:0;border:1px solid var(--line);border-radius:var(--r-md);
+  overflow:hidden;background:var(--panel)}
+.k-vd-refs img{display:block;width:100%;height:142px;object-fit:contain;
+  background:linear-gradient(150deg,#f6f8ff,#eef1ff);padding:6px}
+.k-vd-refs figcaption{padding:9px 12px 11px;font-size:11.5px;color:var(--ink-soft);line-height:1.45}
+
+@media (max-width:560px){
+  .k-vd-scene{height:104px}
+  .k-vd-forma__box{height:200px}
+}
+<!--CSS-FIM-->

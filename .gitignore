@@ -1,0 +1,16 @@
+# derivado, regerado pelos scripts
+_paginas-legado-multipagina/
+# catalogo-v2.bak.html e a BASE de montagem: precisa ser versionado
+assets/_fonte/
+
+# sistema
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# saida temporaria dos scripts (SCRATCH padrao)
+_tmp/
+
+# cache do Python
+__pycache__/
+*.pyc

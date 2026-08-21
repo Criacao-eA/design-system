@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="480" role="img" aria-label="Padrao e-Auditoria: barras verticais cortadas na diagonal">
+  <defs>
+    <clipPath id="ea-barras-a"><path d="M0 0L160 160L80 160L0 80ZM80 0L160 0L160 80Z"/></clipPath>
+    <clipPath id="ea-barras-b"><path d="M0 80L80 160L0 160ZM0 0L160 160L160 80L80 0Z"/></clipPath>
+    <pattern id="ea-padrao-barras-diagonal" width="160" height="160" patternUnits="userSpaceOnUse">
+      <g fill="currentColor">
+        <g clip-path="url(#ea-barras-a)"><path d="M0 0h40v160H0zM80 0h40v160H80z"/></g>
+        <g clip-path="url(#ea-barras-b)"><path d="M40 0h40v160H40zM120 0h40v160h-40z"/></g>
+      </g>
+    </pattern>
+  </defs>
+  <rect width="480" height="480" fill="url(#ea-padrao-barras-diagonal)"/>
+</svg>

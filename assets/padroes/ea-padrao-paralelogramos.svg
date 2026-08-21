@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="480" role="img" aria-label="Padrao e-Auditoria: blocos em paralelogramo encaixados">
+  <defs>
+    <pattern id="ea-padrao-paralelogramos" width="120" height="64" patternUnits="userSpaceOnUse">
+      <path fill="currentColor"
+            d="M0 0H80L48 32H-32ZM120 0H200L168 32H88ZM60 32H140L108 64H28ZM-60 32H20L-12 64H-92Z"/>
+    </pattern>
+  </defs>
+  <rect width="480" height="480" fill="url(#ea-padrao-paralelogramos)"/>
+</svg>

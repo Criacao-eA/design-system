@@ -1,0 +1,633 @@
+<section id="imersao">
+  <div class="sec-head">
+    <h2>Imersão e-A</h2>
+    <span class="tag marca">Sub-marca</span>
+    <span class="tag evento">Evento</span>
+    <span class="tag novo">Novo na v3</span>
+  </div>
+  <p class="sec-desc">Sub-marca dos ciclos de aulas gratuitas da <span class="ea-brand">e-Auditoria</span>. Tem logotipo próprio (pílula azul com borda em degradê), pílula de formato, sistema de fundos pastel e um padrão de post e de cartão de aula. Use quando a peça for de uma edição da Imersão. Não use as cores nem os fundos da Imersão para comunicação institucional da <span class="ea-brand">e-Auditoria</span>.</p>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Logotipo — reconstrução em CSS</h3><span class="id">.k-im-lockup</span></div>
+    <div class="preview stack">
+      <div class="k-im-stage">
+        <span class="k-im-lockup" role="img" aria-label="Logotipo Imersão e-A">
+          <svg class="k-im-spark" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <linearGradient id="kImSparkA" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#00FFEA"></stop>
+              <stop offset="1" stop-color="#2094FD"></stop>
+            </linearGradient>
+            <path fill="url(#kImSparkA)" d="M50 0C52.5 32 68 47.5 100 50 68 52.5 52.5 68 50 100 47.5 68 32 52.5 0 50 32 47.5 47.5 32 50 0Z"></path>
+          </svg>
+          <span class="k-im-word">Imersão</span>
+          <span class="k-im-circle"><span class="k-im-ea"><span class="k-im-e">e</span>-A</span></span>
+        </span>
+      </div>
+      <div class="k-im-stage">
+        <span class="k-im-free" role="img" aria-label="Pílula online e gratuito">
+          <svg class="k-im-spark k-im-spark-r" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <linearGradient id="kImSparkC" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#00FFEA"></stop>
+              <stop offset="1" stop-color="#2094FD"></stop>
+            </linearGradient>
+            <path fill="url(#kImSparkC)" d="M50 0C52.5 32 68 47.5 100 50 68 52.5 52.5 68 50 100 47.5 68 32 52.5 0 50 32 47.5 47.5 32 50 0Z"></path>
+          </svg>
+          <span>online e <b>gratuito</b></span>
+        </span>
+      </div>
+    </div>
+    <p class="comp-note">São três peças sobrepostas: a pílula (preenchimento chapado <code>#2488FF</code>), a borda em degradê de 10 px e o círculo branco que ocupa exatamente a tampa direita. O círculo tem borda em degradê própria — ciano no arco esquerdo, íris no arco direito — e não herda o degradê da pílula.</p>
+    <p class="comp-note">Medidas do arquivo original (1000 × 446 px): pílula com 879 × 266 px, raio total (<code>999px</code>), borda de 10 px = 1/26,6 da altura. Círculo de 266 px de diâmetro, centro a 133 px da borda direita. Sparkle de 4 pontas com 104 × 140 px, centro a 26% da largura, atravessando a linha da borda superior.</p>
+    <p class="comp-note">Preenchimento da pílula secundária: <code>#2B2E6F</code> — é o azul oficial do logotipo da <span class="ea-brand">e-Auditoria</span>, não o navy <code>#050634</code> e não o azul primário de UI <code>#2F24FF</code>. Em "online e <b>gratuito</b>", "online e" vai em peso regular e "gratuito" em bold; o sparkle vai a 72% da largura.</p>
+    <p class="comp-note warn">A borda em degradê é o traço distintivo. Pílula azul sem a borda não é o logotipo — é só uma tag. Se o meio não suportar borda em degradê (e-mail, favicon minúsculo), use o PNG, não uma borda sólida.</p>
+    <p class="comp-note warn">Os três pontos sobre o "e" são <strong>desenho</strong>, não caractere. Aqui eles são desenhados por <code>box-shadow</code> sobre a letra "e". Em texto corrido escreva sempre <strong>e-A</strong> e <strong class="ea-brand">e-Auditoria</strong> — nunca com trema. O próprio material de origem faz isso: no corpo do story a frase traz "curso gratuito de Monitoramento Fiscal da <span class="ea-brand">e-Auditoria</span>" com a palavra limpa, e o desenho com pontos fica reservado para a assinatura isolada no rodapé. A altura dos pontos é calibrada pela variável <code>--dy</code> — reajuste se trocar a fonte display.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;span class="k-im-lockup"&gt;
+  &lt;svg class="k-im-spark" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"&gt;…&lt;/svg&gt;
+  &lt;span class="k-im-word"&gt;Imersão&lt;/span&gt;
+  &lt;span class="k-im-circle"&gt;
+    &lt;span class="k-im-ea"&gt;&lt;span class="k-im-e"&gt;e&lt;/span&gt;-A&lt;/span&gt;
+  &lt;/span&gt;
+&lt;/span&gt;
+
+.k-im-lockup{
+  --h: 120px;                    /* altura total da pílula */
+  --b: calc(var(--h) * .0376);   /* borda = 10/266 da altura */
+  box-sizing: border-box; position: relative;
+  display: inline-flex; align-items: center;
+  height: var(--h);
+  padding-left: calc(var(--h) * .447);
+  padding-right: calc(var(--h) * 1.143);
+  border: var(--b) solid transparent;
+  border-radius: 999px;
+  background:
+    linear-gradient(#2488FF, #2488FF) padding-box,
+    linear-gradient(90deg, #00FFEA 0%, #11C6F4 17%, #2488FF 38%,
+                           #3868FA 52%, #4F45F5 74%) border-box;
+}
+.k-im-circle{
+  position: absolute; top: calc(var(--b) * -1); right: calc(var(--b) * -1);
+  box-sizing: border-box; width: var(--h); height: var(--h);
+  border: var(--b) solid transparent; border-radius: 50%;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(90deg, #00FFEA 0%, #4F45F5 100%) border-box;
+}
+/* os três pontos do desenho — nunca um caractere com trema */
+.k-im-e::before{
+  content: ""; position: absolute; left: 50%; top: -.46em;
+  width: .185em; height: .185em; border-radius: 50%; background: #000;
+  transform: translateX(-50%);
+  box-shadow: -.25em 0 0 #000, .25em 0 0 #000;
+}</pre></div>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Sparkle isolado</h3><span class="id">imersao-sparkle</span></div>
+    <div class="preview">
+      <div class="k-asset" data-svg-name="imersao-sparkle">
+        <svg width="104" height="140" viewBox="0 0 100 100" preserveAspectRatio="none" role="img" aria-label="Sparkle de quatro pontas da Imersão">
+          <linearGradient id="kImSparkB" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#00FFEA"></stop>
+            <stop offset="1" stop-color="#2094FD"></stop>
+          </linearGradient>
+          <path fill="url(#kImSparkB)" d="M50 0C52.5 32 68 47.5 100 50 68 52.5 52.5 68 50 100 47.5 68 32 52.5 0 50 32 47.5 47.5 32 50 0Z"></path>
+        </svg>
+      </div>
+    </div>
+    <p class="comp-note">Quatro pontas, braços côncavos, mais alto que largo (proporção 104 : 140). Degradê horizontal <code>#00FFEA</code> → <code>#2094FD</code>. Sempre atravessando a borda superior de uma pílula — metade fora, metade dentro.</p>
+    <p class="comp-note warn">Não use o sparkle solto como ícone decorativo, nem em outra cor. Ele é o acento da pílula.</p>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Versões de arquivo</h3><span class="id">imersao-logo · imersao-online-gratuito</span></div>
+    <div class="preview stack">
+      <div class="k-im-files">
+        <figure class="k-im-file">
+          <img src="{{IMG:imersao-logo}}" alt="Logotipo Imersão e-A: pílula azul com borda em degradê ciano-azul-violeta, palavra Imersão em branco, círculo branco à direita com a assinatura e-A em preto e sparkle ciano no topo" loading="lazy" decoding="async">
+          <figcaption>
+            <b>Logotipo principal</b>
+            <span>PNG 1000 × 446 px, fundo transparente</span>
+            <a class="k-dl" href="{{IMG:imersao-logo}}" download="imersao-ea-logotipo.png">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>PNG
+            </a>
+          </figcaption>
+        </figure>
+        <figure class="k-im-file">
+          <img src="{{IMG:imersao-online-gratuito}}" alt="Pílula secundária online e gratuito: fundo azul #2B2E6F com a mesma borda em degradê e sparkle ciano no canto superior direito" loading="lazy" decoding="async">
+          <figcaption>
+            <b>Pílula de formato</b>
+            <span>PNG 1001 × 421 px, fundo transparente</span>
+            <a class="k-dl" href="{{IMG:imersao-online-gratuito}}" download="imersao-ea-online-e-gratuito.png">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>PNG
+            </a>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+    <p class="comp-note">Os dois PNG são as únicas versões aprovadas. O vetor de origem está em <code>Material_rico/eA Imersão/Imersão eA.ai</code>, e os PNG em <code>1x/</code>.</p>
+    <p class="comp-note warn">Não existe versão em negativo nem monocromática — foram descartadas. Para aplicar sobre foto ou sobre azul cheio, coloque a pílula sobre uma faixa de fundo pastel claro; não recolora o logotipo.</p>
+    <p class="comp-note warn">A sub-marca é autossuficiente: está proibido pendurar a marca-mãe ao lado dela com barra, traço ou linha de assinatura. Quando a peça precisar das duas marcas — como no story e no feed — elas aparecem <strong>separadas e em blocos diferentes</strong>: a assinatura da <span class="ea-brand">e-Auditoria</span> no topo (story) ou no rodapé (feed), e a pílula da Imersão no seu próprio bloco, com respiro entre as duas.</p>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Sistema de fundo</h3><span class="id">.k-im-bg-lp · .k-im-bg-post</span></div>
+    <div class="preview stack">
+      <div class="k-im-bgs">
+        <figure class="k-im-file k-im-file-wide">
+          <img src="{{IMG:imersao-bg-lp}}" alt="Fundo de landing page: degradê pastel muito claro, ciano à esquerda, rosa no canto inferior esquerdo, lavanda e violeta no topo à direita, azul no canto inferior direito e branco no centro" loading="lazy" decoding="async">
+          <figcaption><b>Fundo de LP</b><span>1920 × 1080 — degradê pastel arejado. É o fundo padrão da Imersão.</span>
+            <a class="k-dl" href="{{IMG:imersao-bg-lp}}" download="imersao-ea-bg-lp.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>PNG</a>
+          </figcaption>
+        </figure>
+        <figure class="k-im-file k-im-file-wide">
+          <img src="{{IMG:imersao-bg1}}" alt="Fundo azul cheio com granulado: degradê de ciano claro no topo para azul saturado na base" loading="lazy" decoding="async">
+          <figcaption><b>bg 1 — azul cheio</b><span>Degradê ciano → azul com grão. Para blocos de respiro e capas.</span>
+            <a class="k-dl" href="{{IMG:imersao-bg1}}" download="imersao-ea-bg1.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>PNG</a>
+          </figcaption>
+        </figure>
+        <figure class="k-im-file k-im-file-wide">
+          <img src="{{IMG:imersao-bg2}}" alt="Fundo branco com um círculo azul granulado muito grande subindo a partir da borda inferior" loading="lazy" decoding="async">
+          <figcaption><b>bg 2 — disco azul</b><span>Círculo azul gigante entrando pela base sobre branco.</span>
+            <a class="k-dl" href="{{IMG:imersao-bg2}}" download="imersao-ea-bg2.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>PNG</a>
+          </figcaption>
+        </figure>
+        <figure class="k-im-file k-im-file-wide">
+          <img src="{{IMG:imersao-bg3}}" alt="Fundo branco com o disco azul ao centro e duas ondas de vidro azul brilhante entrando pelas bordas esquerda e direita" loading="lazy" decoding="async">
+          <figcaption><b>bg 3 — ondas azuis</b><span>Fitas de vidro azul entrando pelas laterais, sobre branco.</span>
+            <a class="k-dl" href="{{IMG:imersao-bg3}}" download="imersao-ea-bg3.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>PNG</a>
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="k-im-recipes">
+        <div class="k-im-recipe"><div class="k-im-bg-lp"></div><b>Receita 1 — pastel de LP</b><span>Malha de 4 radiais sobre branco-lilás. Reproduz o <code>BG_Lp.png</code>.</span></div>
+        <div class="k-im-recipe"><div class="k-im-bg-post"></div><b>Receita 2 — pastel de post</b><span>Violeta no topo esquerdo, azul no topo direito, rosa no canto inferior direito.</span></div>
+        <div class="k-im-recipe"><div class="k-im-bg-disc"></div><b>Receita 3 — disco azul</b><span>Reproduz o <code>bg 2</code> sem o grão.</span></div>
+        <div class="k-im-recipe"><div class="k-im-bg-onda"></div><b>Receita 4 — onda (aproximação)</b><span>Aproximação da fita. O original é render 3D.</span></div>
+      </div>
+    </div>
+    <p class="comp-note">Cores medidas no arquivo — pastel de LP: ciano <code>#B6FCF9</code> (esquerda), rosa <code>#FCDBEB</code> (base esquerda), violeta <code>#D7B3F8</code> (topo direito), azul <code>#ADD8FF</code> (base direita), centro <code>#F5F6FE</code>. Pastel de post: violeta <code>#C99AF5</code>, azul <code>#A3D1FE</code>, rosa <code>#F1A1FF</code>, centro <code>#F4F6FD</code>.</p>
+    <p class="comp-note warn">As ondas de vidro (bg 3 a bg 5) são render 3D com grão. Não há equivalente fiel em CSS — a Receita 4 entrega o volume, não o material. Se a peça depende do brilho da fita, use o PNG.</p>
+    <p class="comp-note warn">O grão dos fundos azuis é ruído gerado no arquivo, não CSS. As receitas entregam o degradê limpo. Se o grão importar, use o PNG.</p>
+    <p class="comp-note warn">Fundo pastel e fundo azul cheio não convivem na mesma dobra. Escolha um por dobra; a alternância é entre dobras.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>/* Receita 1 — degradê pastel de LP */
+.k-im-bg-lp{
+  background:
+    radial-gradient(120% 95% at 0% 42%,    #B6FCF9 0%, rgba(182,252,249,0) 58%),
+    radial-gradient(85% 70% at 2% 100%,    #FCDBEB 0%, rgba(252,219,235,0) 58%),
+    radial-gradient(95% 90% at 100% 0%,    #D7B3F8 0%, rgba(215,179,248,0) 62%),
+    radial-gradient(110% 100% at 100% 100%,#ADD8FF 0%, rgba(173,216,255,0) 62%),
+    #F5F6FE;
+}
+
+/* Receita 2 — degradê pastel de post (story e feed) */
+.k-im-bg-post{
+  background:
+    radial-gradient(85% 70% at 0% 0%,     #C99AF5 0%, rgba(201,154,245,0) 62%),
+    radial-gradient(75% 62% at 100% 6%,   #A3D1FE 0%, rgba(163,209,254,0) 60%),
+    radial-gradient(70% 58% at 100% 100%, #F1A1FF 0%, rgba(241,161,255,0) 55%),
+    radial-gradient(60% 52% at 4% 100%,   #EAFEFF 0%, rgba(234,254,255,0) 55%),
+    #F4F6FD;
+}
+
+/* Receita 3 — disco azul sobre branco (bg 2) */
+.k-im-bg-disc{
+  background:
+    radial-gradient(circle 150% at 50% 175%,
+      #2E8BFF 0%, #56A6FA 42%, #8FC4F8 62%,
+      rgba(143,196,248,0) 62.4%),
+    #FFFFFF;
+}
+
+/* Receita 4 — onda azul sobre branco (aproximação da fita 3D) */
+.k-im-bg-onda{
+  background:
+    radial-gradient(120% 70% at 12% 130%, #0A3AE0 0%, #1E6BFF 28%,
+                    #56B8FF 44%, rgba(86,184,255,0) 56%),
+    radial-gradient(90% 55% at 92% 150%,  #0B2FC8 0%, #2F6BFF 34%,
+                    rgba(47,107,255,0) 58%),
+    radial-gradient(60% 22% at 40% 96%,   rgba(255,255,255,.85) 0%,
+                    rgba(255,255,255,0) 60%),
+    #FBFCFE;
+}</pre></div>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Padrão de post</h3><span class="id">imersao-story1 · imersao-story2 · imersao-feed</span></div>
+    <div class="preview stack">
+      <div class="k-im-posts">
+        <figure class="k-im-file">
+          <img src="{{IMG:imersao-story1}}" alt="Story da Imersão: fundo pastel violeta e azul, assinatura da e-Auditoria no topo, pílula Imersão e-A ao centro, manchete com as palavras tem erros no cadastro fiscal em degradê azul-violeta e prints do produto em perspectiva na base" loading="lazy" decoding="async">
+          <figcaption><b>Story 01</b><span>1080 × 1920 — abre o problema</span>
+            <a class="k-dl" href="{{IMG:imersao-story1}}" download="imersao-ea-story-01.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>PNG</a>
+          </figcaption>
+        </figure>
+        <figure class="k-im-file">
+          <img src="{{IMG:imersao-story2}}" alt="Story da Imersão: mesmo fundo pastel, manchete prejuízo, risco fiscal e oportunidades perdidas em degradê azul-violeta, moedas 3D douradas e uma mão 3D entrando pela base" loading="lazy" decoding="async">
+          <figcaption><b>Story 02</b><span>1080 × 1920 — vira para a promessa</span>
+            <a class="k-dl" href="{{IMG:imersao-story2}}" download="imersao-ea-story-02.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>PNG</a>
+          </figcaption>
+        </figure>
+        <figure class="k-im-file">
+          <img src="{{IMG:imersao-feed}}" alt="Post de feed da Imersão: pílula Imersão e-A no topo, título Curso gratuito de Monitoramento Fiscal com as duas últimas palavras em degradê, pílula online e gratuito, capelo e diploma 3D e assinatura da e-Auditoria no rodapé" loading="lazy" decoding="async">
+          <figcaption><b>Feed</b><span>1080 × 1350 — peça de anúncio</span>
+            <a class="k-dl" href="{{IMG:imersao-feed}}" download="imersao-ea-feed.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>PNG</a>
+          </figcaption>
+        </figure>
+        <div class="k-im-anat" aria-hidden="true">
+          <div class="k-im-anat-frame">
+            <span class="k-im-anat-sig"></span>
+            <span class="k-im-anat-pill"></span>
+            <span class="k-im-anat-l1"></span>
+            <span class="k-im-anat-l2"></span>
+            <span class="k-im-anat-l3"></span>
+            <span class="k-im-anat-free"></span>
+            <span class="k-im-anat-3d"></span>
+          </div>
+          <p>Esqueleto do story: assinatura, pílula, apoio, manchete em degradê, pílula de formato, ilustração 3D sangrando pela base.</p>
+        </div>
+      </div>
+    </div>
+    <p class="comp-note"><b>Fixo em todo post:</b> fundo pastel (Receita 2); assinatura isolada da <span class="ea-brand">e-Auditoria</span> — topo no story, rodapé no feed; pílula "Imersão e-A" centralizada, sempre acima do texto; linha de apoio em <code>#252A71</code>; manchete com o núcleo da promessa em degradê <code>#5878FB</code> → <code>#8C4EEF</code>; uma ilustração 3D sangrando por uma borda.</p>
+    <p class="comp-note"><b>Varia por peça:</b> a copy; quais palavras recebem o degradê (1 a 3 palavras, nunca a frase inteira); a ilustração 3D (moedas, mão, capelo, print do produto); a presença e a posição da pílula "online e gratuito"; o formato (1080 × 1920 story, 1080 × 1350 feed).</p>
+    <p class="comp-note">Hierarquia medida em 1080 px de largura: manchete com cerca do dobro do corpo da linha de apoio, ambas no display bold, centralizadas no story e alinhadas à esquerda no feed. A ilustração 3D nunca cobre a pílula.</p>
+    <p class="comp-note warn">O degradê do texto vai no eixo horizontal, do azul para o violeta, e atravessa a linha inteira destacada — não é uma cor por palavra. Aplicar cor sólida violeta mata o efeito.</p>
+    <p class="comp-note warn">Rosa e magenta aparecem só como respingo do fundo pastel. Quando o assunto for a <span class="ea-brand">e-Auditoria</span> (marca-mãe), fique em azuis e, no máximo, lilases.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;h2 class="k-im-headline"&gt;
+  Sabia que a maioria das empresas
+  &lt;em&gt;tem erros no cadastro fiscal&lt;/em&gt;
+  dos seus produtos?
+&lt;/h2&gt;
+
+.k-im-headline{ color: #252A71; font-family: var(--font-display); font-weight: 700; }
+.k-im-headline em{
+  display: block; font-style: normal; font-size: 1.9em; line-height: 1.02;
+  background: linear-gradient(90deg, #5878FB 0%, #8C4EEF 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}</pre></div>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Cartão de aula</h3><span class="id">.k-im-card</span></div>
+    <div class="preview stack">
+      <div class="k-im-cardstage">
+        <article class="k-im-card">
+          <p class="k-im-card-kicker">Aula 2</p>
+          <h4 class="k-im-card-title">Auditoria de Estoque na prática, utilizando o e-Auditor</h4>
+          <div class="k-im-card-people">
+            <div class="k-im-person">
+              <span class="k-im-ava" aria-hidden="true">CG</span>
+              <span class="k-im-name">Camila Goulart</span>
+            </div>
+            <div class="k-im-person">
+              <span class="k-im-ava" aria-hidden="true">LJ</span>
+              <span class="k-im-name">Luiz Júnior</span>
+            </div>
+          </div>
+          <p class="k-im-date">19 de Março</p>
+        </article>
+      </div>
+      <div class="k-im-posts">
+        <figure class="k-im-file">
+          <img src="{{IMG:imersao-aula1}}" alt="Cartão da Aula 1: card de vidro com borda em degradê ciano-azul, título Aula 1 em azul, tema A Relevância da Classificação Fiscal e um avatar circular com anel ciano e pílula de nome" loading="lazy" decoding="async">
+          <figcaption><b>Aula — 1 palestrante</b><span>1362 × 1086, sem pílula de data</span>
+            <a class="k-dl" href="{{IMG:imersao-aula1}}" download="imersao-ea-aula-1.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>PNG</a>
+          </figcaption>
+        </figure>
+        <figure class="k-im-file">
+          <img src="{{IMG:imersao-aula2}}" alt="Cartão da Aula 2: dois avatares circulares com anel ciano, pílulas de nome em degradê e pílula de data em ciano com texto preto na base do card" loading="lazy" decoding="async">
+          <figcaption><b>Aula — 2 palestrantes + data</b><span>1362 × 1254, com pílula de data</span>
+            <a class="k-dl" href="{{IMG:imersao-aula2}}" download="imersao-ea-aula-2.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>PNG</a>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+    <p class="comp-note">O card é de vidro: o preenchimento tem 42% de opacidade e vai de branco-frio no topo a azul <code>#2D8AFF</code> na base. Por isso ele precisa de um fundo por baixo — sobre branco chapado ele some. A borda é opaca, 14 px em 1254 px, em degradê ciano <code>#00FFEA</code> (topo) → azul <code>#3F7CFF</code> (base).</p>
+    <p class="comp-note">Peças fixas: rótulo "Aula N" em <code>#2486FF</code> (o mesmo azul do preenchimento do logotipo); tema em quase-preto; avatar circular com anel ciano→azul e halo externo; pílula de nome em degradê ciano→azul sobrepondo o rodapé do avatar. A pílula de data em ciano <code>#00FFEA</code> com texto preto só entra quando a data já está fechada.</p>
+    <p class="comp-note">Este é o modelo de vidro da casa para a Imersão. Ele tem prioridade sobre qualquer variação nova de vidro.</p>
+    <p class="comp-note warn">A pílula de data parece botão, mas não é. Ela não é clicável e não substitui o CTA. O CTA da Imersão continua sendo <code>#FEC008</code> com texto navy <code>#050634</code>.</p>
+    <p class="comp-note cro">Um card por aula, empilhados na dobra de programação. Com data fechada, mantenha a pílula de data — ela é o elemento que mais empurra a inscrição nessa dobra. Sem data definida, tire a pílula em vez de escrever "em breve".</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>.k-im-card{
+  --brd: 6px;
+  box-sizing: border-box; border-radius: 42px;
+  border: var(--brd) solid transparent;
+  background:
+    linear-gradient(180deg,
+      rgba(243,246,248,.42) 0%, rgba(203,224,250,.42) 26%,
+      rgba(161,203,250,.42) 42%, rgba(45,138,255,.42) 100%) padding-box,
+    linear-gradient(160deg, #00FFEA 0%, #2AA9FB 46%, #3F7CFF 100%) border-box;
+  box-shadow: 0 0 0 6px rgba(255,255,255,.28), 0 26px 54px rgba(5,6,52,.24);
+}
+.k-im-card-kicker{ color: #2486FF; font-family: var(--font-display); font-weight: 700; }
+.k-im-card-title{ color: #0A0A0A; font-family: var(--font-display); font-weight: 700; }
+
+.k-im-ava{                       /* anel ciano→azul + halo */
+  box-sizing: border-box; border-radius: 50%;
+  border: 8px solid transparent;
+  background:
+    linear-gradient(#D3DDE8, #A9BACB) padding-box,
+    linear-gradient(150deg, #00FFEA 0%, #2BA6FA 55%, #3F7CFF 100%) border-box;
+  box-shadow: 0 0 0 7px rgba(120,170,255,.42);
+}
+.k-im-name{                      /* pílula de nome, sobrepõe o avatar */
+  border-radius: 12px; color: #fff; font-weight: 700;
+  background: linear-gradient(90deg, #00E5EE 0%, #2486FF 62%, #3B4FE0 100%);
+}
+.k-im-date{                      /* pílula de data — ciano chapado, texto preto */
+  border-radius: 22px; background: #00FFEA; color: #000; font-weight: 700;
+}</pre></div>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>CTA da Imersão</h3><span class="id">.k-im-cta</span></div>
+    <div class="preview">
+      <a class="k-im-cta" href="#inscricao">Garantir minha vaga</a>
+    </div>
+    <p class="comp-note">Amarelo <code>#FEC008</code> com texto navy <code>#050634</code>. É o único botão de ação da peça, em qualquer dobra. O ciano da pílula de data e o azul do logotipo não viram botão.</p>
+    <p class="comp-note cro">Sobre o fundo pastel o amarelo é a única cor quente da tela — é o que dá o contraste. Não coloque o CTA em cima da ilustração 3D nem sobre a fita azul; ele precisa de fundo claro liso.</p>
+    <p class="comp-note">Se a edição da Imersão tratar de <span class="ea-nb">Reforma Tributária</span>, <span class="ea-nb">Simples Nacional</span>, <span class="ea-nb">Simples Híbrido</span>, <span class="ea-nb">Lucro Real</span> ou <span class="ea-nb">Lucro Presumido</span>, essas expressões vão em <code>.ea-nb</code> no título do cartão de aula e na manchete do post — elas não quebram linha e vão sempre com inicial maiúscula.</p>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Regras rápidas</h3><span class="id">imersao — checagem</span></div>
+    <div class="preview stack">
+      <ul class="k-im-rules">
+        <li class="k-ok">Aplicação isolada da marca — cabeçalho, rodapé, selo, assinatura — usa o <b>logotipo</b>, nunca a palavra escrita.</li>
+        <li class="k-ok">Em texto corrido: <b>e-A</b> e <b class="ea-brand">e-Auditoria</b>, sem trema. Os pontos são desenho do logotipo.</li>
+        <li class="k-ok">Borda em degradê ciano → azul → violeta em toda pílula da Imersão.</li>
+        <li class="k-ok">Card de aula sempre sobre fundo pastel ou azul — nunca sobre branco chapado.</li>
+        <li class="k-ok">CTA <code>#FEC008</code> com texto navy.</li>
+        <li class="k-no">Pendurar a marca-mãe ao lado da sub-marca com barra ou traço — essa construção não existe na identidade.</li>
+        <li class="k-no">Logotipo em negativo, monocromático ou recolorido.</li>
+        <li class="k-no">Pílula azul sem a borda em degradê.</li>
+        <li class="k-no">Pílula de data usada como botão.</li>
+        <li class="k-no">Rosa, laranja ou magenta como cor de assunto quando se fala da marca-mãe.</li>
+      </ul>
+    </div>
+    <p class="comp-note">O título <code>&lt;h2&gt;</code> desta seção é rótulo de navegação do catálogo. Em peça de produção, a mesma palavra sozinha vira logotipo.</p>
+  </div>
+</section>
+
+<!--CSS-INICIO-->
+/* ===== Imersão e-A ===== */
+.k-im-stage{
+  display:flex; align-items:center; justify-content:center;
+  width:100%; padding:clamp(24px,5vw,52px) clamp(16px,4vw,40px);
+  border-radius:var(--r-lg); overflow:hidden;
+  background:
+    radial-gradient(120% 95% at 0% 42%,     #B6FCF9 0%, rgba(182,252,249,0) 58%),
+    radial-gradient(85% 70% at 2% 100%,     #FCDBEB 0%, rgba(252,219,235,0) 58%),
+    radial-gradient(95% 90% at 100% 0%,     #D7B3F8 0%, rgba(215,179,248,0) 62%),
+    radial-gradient(110% 100% at 100% 100%, #ADD8FF 0%, rgba(173,216,255,0) 62%),
+    #F5F6FE;
+}
+.k-im-lockup{
+  --h: clamp(74px, 13vw, 132px);
+  --b: calc(var(--h) * .0376);
+  box-sizing:border-box; position:relative;
+  display:inline-flex; align-items:center;
+  height:var(--h); max-width:100%;
+  padding-left:calc(var(--h) * .447);
+  padding-right:calc(var(--h) * 1.143);
+  border:var(--b) solid transparent; border-radius:999px;
+  background:
+    linear-gradient(#2488FF,#2488FF) padding-box,
+    linear-gradient(90deg,#00FFEA 0%,#11C6F4 17%,#2488FF 38%,#3868FA 52%,#4F45F5 74%) border-box;
+}
+.k-im-word{
+  font-family:var(--font-display); font-weight:700; font-style:normal;
+  color:#FFFFFF; letter-spacing:-.012em; line-height:1;
+  font-size:calc(var(--h) * .41);
+}
+/* centro do sparkle sobre a linha da borda superior, a 84% de --h da borda interna esquerda */
+.k-im-spark{
+  position:absolute; z-index:2; pointer-events:none;
+  left:calc(var(--h) * .84); top:calc(var(--h) * -.285);
+  width:calc(var(--h) * .391); height:calc(var(--h) * .527);
+  transform:translateX(-50%);
+}
+.k-im-circle{
+  position:absolute; top:calc(var(--b) * -1); right:calc(var(--b) * -1);
+  box-sizing:border-box; width:var(--h); height:var(--h);
+  display:flex; align-items:center; justify-content:center;
+  border:var(--b) solid transparent; border-radius:50%;
+  background:
+    linear-gradient(#FFFFFF,#FFFFFF) padding-box,
+    linear-gradient(90deg,#00FFEA 0%,#4F45F5 100%) border-box;
+}
+.k-im-ea{
+  font-family:var(--font-display); font-weight:700; font-style:normal;
+  color:#000000; line-height:1; letter-spacing:-.02em;
+  font-size:calc(var(--h) * .345);
+  transform:translateY(.03em);
+}
+/* três pontos desenhados; --dy calibra a altura conforme a fonte display em uso */
+.k-im-e{ position:relative; --dy:-.46em; }
+.k-im-e::before{
+  content:""; position:absolute; left:50%; top:var(--dy);
+  width:.185em; height:.185em; border-radius:50%; background:#000000;
+  transform:translateX(-50%);
+  box-shadow:-.25em 0 0 #000000, .25em 0 0 #000000;
+}
+.k-im-free{
+  --h: clamp(58px, 9vw, 92px);
+  --b: calc(var(--h) * .0457);
+  box-sizing:border-box; position:relative;
+  display:inline-flex; align-items:center; justify-content:center;
+  height:var(--h); max-width:100%;
+  padding:0 calc(var(--h) * .40);
+  border:var(--b) solid transparent; border-radius:999px;
+  background:
+    linear-gradient(#2B2E6F,#2B2E6F) padding-box,
+    linear-gradient(90deg,#00FFEA 0%,#11C6F4 17%,#2488FF 38%,#3868FA 52%,#4F45F5 74%) border-box;
+  color:#FFFFFF; font-family:var(--font-body); font-weight:400;
+  font-size:calc(var(--h) * .40); line-height:1; letter-spacing:-.01em;
+}
+.k-im-free b{ font-weight:700; }
+.k-im-spark-r{ left:auto; right:calc(var(--h) * .79); top:calc(var(--h) * -.29); transform:none; }
+
+.k-im-files,
+.k-im-bgs,
+.k-im-posts{
+  display:grid; gap:clamp(14px,2.4vw,22px); width:100%;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+}
+.k-im-file{
+  margin:0; display:flex; flex-direction:column; gap:10px;
+  padding:14px; border:1px solid var(--line); border-radius:var(--r-md);
+  background:var(--panel-2);
+}
+.k-im-file img{
+  display:block; width:100%; height:auto; border-radius:var(--r-sm);
+  background:
+    conic-gradient(from 45deg, rgba(120,130,160,.14) 0 25%, transparent 0 50%) 0 0/16px 16px;
+}
+.k-im-file-wide img{ aspect-ratio:16/9; object-fit:cover; }
+.k-im-file figcaption{ display:flex; flex-direction:column; gap:6px; }
+.k-im-file figcaption b{ color:var(--ink); font-size:.95rem; }
+.k-im-file figcaption span{ color:var(--ink-soft); font-size:.82rem; line-height:1.45; }
+.k-im-file .k-dl{ align-self:flex-start; margin-top:2px; }
+
+.k-im-recipes{
+  display:grid; gap:clamp(14px,2.4vw,22px); width:100%;
+  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+}
+.k-im-recipe{
+  display:flex; flex-direction:column; gap:8px;
+  padding:14px; border:1px solid var(--line); border-radius:var(--r-md); background:var(--panel-2);
+}
+.k-im-recipe b{ color:var(--ink); font-size:.92rem; }
+.k-im-recipe span{ color:var(--ink-soft); font-size:.8rem; line-height:1.45; }
+.k-im-recipe div{ aspect-ratio:16/9; border-radius:var(--r-sm); border:1px solid var(--line); }
+.k-im-bg-lp{
+  background:
+    radial-gradient(120% 95% at 0% 42%,     #B6FCF9 0%, rgba(182,252,249,0) 58%),
+    radial-gradient(85% 70% at 2% 100%,     #FCDBEB 0%, rgba(252,219,235,0) 58%),
+    radial-gradient(95% 90% at 100% 0%,     #D7B3F8 0%, rgba(215,179,248,0) 62%),
+    radial-gradient(110% 100% at 100% 100%, #ADD8FF 0%, rgba(173,216,255,0) 62%),
+    #F5F6FE;
+}
+.k-im-bg-post{
+  background:
+    radial-gradient(85% 70% at 0% 0%,     #C99AF5 0%, rgba(201,154,245,0) 62%),
+    radial-gradient(75% 62% at 100% 6%,   #A3D1FE 0%, rgba(163,209,254,0) 60%),
+    radial-gradient(70% 58% at 100% 100%, #F1A1FF 0%, rgba(241,161,255,0) 55%),
+    radial-gradient(60% 52% at 4% 100%,   #EAFEFF 0%, rgba(234,254,255,0) 55%),
+    #F4F6FD;
+}
+.k-im-bg-disc{
+  background:
+    radial-gradient(circle 150% at 50% 175%,
+      #2E8BFF 0%, #56A6FA 42%, #8FC4F8 62%, rgba(143,196,248,0) 62.4%),
+    #FFFFFF;
+}
+.k-im-bg-onda{
+  background:
+    radial-gradient(120% 70% at 12% 130%, #0A3AE0 0%, #1E6BFF 28%, #56B8FF 44%, rgba(86,184,255,0) 56%),
+    radial-gradient(90% 55% at 92% 150%,  #0B2FC8 0%, #2F6BFF 34%, rgba(47,107,255,0) 58%),
+    radial-gradient(60% 22% at 40% 96%,   rgba(255,255,255,.85) 0%, rgba(255,255,255,0) 60%),
+    #FBFCFE;
+}
+
+.k-im-anat{
+  display:flex; flex-direction:column; gap:10px;
+  padding:14px; border:1px solid var(--line); border-radius:var(--r-md); background:var(--panel-2);
+}
+.k-im-anat p{ color:var(--ink-soft); font-size:.8rem; line-height:1.45; margin:0; }
+.k-im-anat-frame{
+  position:relative; width:100%; aspect-ratio:9/16; border-radius:var(--r-sm); overflow:hidden;
+  background:
+    radial-gradient(85% 70% at 0% 0%,     #C99AF5 0%, rgba(201,154,245,0) 62%),
+    radial-gradient(75% 62% at 100% 6%,   #A3D1FE 0%, rgba(163,209,254,0) 60%),
+    radial-gradient(70% 58% at 100% 100%, #F1A1FF 0%, rgba(241,161,255,0) 55%),
+    #F4F6FD;
+}
+.k-im-anat-frame span{ position:absolute; left:50%; transform:translateX(-50%); border-radius:99px; }
+.k-im-anat-sig{ top:5%; width:52%; height:4%; background:#0A0A0A; border-radius:3px; }
+.k-im-anat-pill{
+  top:15%; width:46%; height:6%;
+  background:linear-gradient(90deg,#2488FF,#2488FF) padding-box,
+             linear-gradient(90deg,#00FFEA,#4F45F5) border-box;
+  border:2px solid transparent;
+}
+.k-im-anat-l1{ top:28%; width:56%; height:3.2%; background:#252A71; border-radius:3px; }
+.k-im-anat-l2{ top:34%; width:78%; height:6%; background:linear-gradient(90deg,#5878FB,#8C4EEF); border-radius:5px; }
+.k-im-anat-l3{ top:42%; width:66%; height:6%; background:linear-gradient(90deg,#5878FB,#8C4EEF); border-radius:5px; }
+.k-im-anat-free{
+  top:56%; width:38%; height:5%; border:2px solid transparent;
+  background:linear-gradient(#2B2E6F,#2B2E6F) padding-box, linear-gradient(90deg,#00FFEA,#4F45F5) border-box;
+}
+.k-im-anat-3d{
+  left:auto; right:-8%; transform:none; bottom:-6%; top:auto;
+  width:74%; height:32%; border-radius:44% 40% 30% 36%;
+  background:radial-gradient(circle at 35% 30%, #9BE0FF 0%, #2F6BFF 55%, #1533C8 100%);
+  opacity:.9;
+}
+
+.k-im-cardstage{
+  width:100%; padding:clamp(20px,4vw,40px); border-radius:var(--r-lg);
+  display:flex; justify-content:center;
+  background:
+    radial-gradient(120% 95% at 0% 42%,     #B6FCF9 0%, rgba(182,252,249,0) 58%),
+    radial-gradient(95% 90% at 100% 0%,     #D7B3F8 0%, rgba(215,179,248,0) 62%),
+    radial-gradient(110% 100% at 100% 100%, #ADD8FF 0%, rgba(173,216,255,0) 62%),
+    #F5F6FE;
+}
+.k-im-card{
+  --brd:6px;
+  box-sizing:border-box; width:min(520px,100%);
+  padding:clamp(20px,4vw,34px) clamp(18px,3.4vw,30px) clamp(22px,4vw,34px);
+  display:flex; flex-direction:column; align-items:center; gap:clamp(14px,2.6vw,22px);
+  isolation:isolate;
+  border:var(--brd) solid transparent; border-radius:42px;
+  background:
+    linear-gradient(180deg, rgba(243,246,248,.42) 0%, rgba(203,224,250,.42) 26%,
+                            rgba(161,203,250,.42) 42%, rgba(45,138,255,.42) 100%) padding-box,
+    linear-gradient(160deg, #00FFEA 0%, #2AA9FB 46%, #3F7CFF 100%) border-box;
+  box-shadow:0 0 0 6px rgba(255,255,255,.28), 0 26px 54px rgba(5,6,52,.24);
+}
+.k-im-card-kicker{
+  margin:0; color:#2486FF; font-family:var(--font-display); font-weight:700; font-style:normal;
+  font-size:clamp(1.7rem,4.4vw,2.5rem); line-height:1;
+}
+.k-im-card-title{
+  margin:0; text-align:center; color:#0A0A0A;
+  font-family:var(--font-display); font-weight:700; font-style:normal;
+  font-size:clamp(1.05rem,2.6vw,1.5rem); line-height:1.16; text-wrap:balance;
+}
+.k-im-card-people{ display:flex; flex-wrap:wrap; justify-content:center; gap:clamp(16px,3.4vw,30px); }
+.k-im-person{ position:relative; display:flex; flex-direction:column; align-items:center; }
+.k-im-ava{
+  box-sizing:border-box; width:clamp(96px,20vw,140px); height:clamp(96px,20vw,140px);
+  display:flex; align-items:center; justify-content:center;
+  border:8px solid transparent; border-radius:50%;
+  background:linear-gradient(160deg,#D3DDE8,#A9BACB) padding-box,
+             linear-gradient(150deg,#00FFEA 0%,#2BA6FA 55%,#3F7CFF 100%) border-box;
+  box-shadow:0 0 0 7px rgba(120,170,255,.42);
+  color:#4A5468; font-family:var(--font-display); font-weight:700; font-size:1.5rem; letter-spacing:.02em;
+}
+.k-im-name{
+  position:relative; margin-top:-18px; z-index:2;
+  padding:7px 16px; border-radius:12px; white-space:nowrap;
+  background:linear-gradient(90deg,#00E5EE 0%,#2486FF 62%,#3B4FE0 100%);
+  color:#FFFFFF; font-family:var(--font-body); font-weight:700; font-size:.86rem;
+  box-shadow:0 4px 12px rgba(5,6,52,.22);
+}
+.k-im-date{
+  position:relative; margin:6px 0 0; padding:14px 42px; border-radius:22px;
+  background:#00FFEA; color:#000000;
+  font-family:var(--font-display); font-weight:700; font-style:normal;
+  font-size:clamp(1.1rem,2.8vw,1.5rem); line-height:1;
+}
+.k-im-date::before{
+  content:""; position:absolute; inset:-10px -14px 10px 14px; z-index:-1;
+  border-radius:24px; background:rgba(255,255,255,.30);
+}
+
+.k-im-cta{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:16px 30px; border-radius:var(--r-pill);
+  background:#FEC008; color:#050634;
+  font-family:var(--font-body); font-weight:700; font-size:1rem; text-decoration:none;
+  box-shadow:0 10px 24px rgba(254,192,8,.34);
+  transition:transform .18s var(--ease), box-shadow .18s var(--ease);
+}
+.k-im-cta:hover{ box-shadow:0 14px 30px rgba(254,192,8,.44); }
+
+.k-im-rules{ list-style:none; margin:0; padding:0; display:grid; gap:9px; width:100%; }
+.k-im-rules li{
+  position:relative; padding:10px 14px 10px 42px;
+  border:1px solid var(--line); border-radius:var(--r-md);
+  background:var(--panel-2); color:var(--ink); font-size:.9rem; line-height:1.45;
+}
+.k-im-rules li::before{
+  content:""; position:absolute; left:14px; top:14px;
+  width:14px; height:14px; border-radius:50%;
+}
+.k-im-rules li.k-ok::before{ background:#00C48C; }
+.k-im-rules li.k-no::before{ background:#E4483C; }
+
+@media (prefers-reduced-motion:no-preference){
+  .k-im-cta:hover{ transform:translateY(-2px); }
+}
+<!--CSS-FIM-->

@@ -1,0 +1,418 @@
+<section id="padroes">
+  <div class="sec-head">
+    <h2>Padrões gráficos</h2>
+    <span class="tag marca">Marca</span>
+    <span class="tag web">Web</span>
+    <span class="tag novo">Novo na v3</span>
+  </div>
+  <p class="sec-desc">Os oito padrões da <span class="ea-brand">e-Auditoria</span> foram reautorados de PNG para SVG de <code>&lt;pattern&gt;</code> tileável. Cada um pesa cerca de 1 KB, escala sem serrilhado e assume a cor do container por <code>currentColor</code> — o mesmo arquivo serve para fundo claro e escuro.</p>
+
+  <div class="comp">
+    <div class="comp-head"><h3>A regra que vale para todos</h3><span class="id">opacidade 0,05–0,15</span></div>
+    <div class="preview stack">
+      <div class="k-regra">
+        <p class="k-regra-frase">Padrão é textura de fundo, nunca competidor do conteúdo.</p>
+        <p class="k-regra-sub">Sobre fundo claro: opacidade <strong>0,05 a 0,12</strong>. Sobre fundo escuro: <strong>0,06 a 0,15</strong>. Fora dessa faixa o padrão vira ruído e derruba o contraste do texto.</p>
+      </div>
+      <div class="k-op-escala">
+        <div class="k-op-item"><div class="k-pat k-pat--claro k-op-04"></div><span>0,04 — some</span></div>
+        <div class="k-op-item"><div class="k-pat k-pat--claro k-op-08"></div><span>0,08 — certo</span></div>
+        <div class="k-op-item"><div class="k-pat k-pat--claro k-op-12"></div><span>0,12 — limite</span></div>
+        <div class="k-op-item k-op-erro"><div class="k-pat k-pat--claro k-op-24"></div><span>0,24 — errado</span></div>
+      </div>
+    </div>
+    <p class="comp-note">A opacidade fica no elemento do padrão, não no container. Se você baixar a opacidade do container, o texto desbota junto.</p>
+    <p class="comp-note warn">Não coloque padrão atrás de texto corrido, tabela ou gráfico. Padrão vai em faixa, cabeçalho de seção, rodapé, cartão vazio e área de respiro.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;!-- estrutura recomendada: padrão isolado numa camada própria --&gt;
+&lt;section class="faixa"&gt;
+  &lt;div class="faixa__padrao" aria-hidden="true"&gt;&lt;/div&gt;
+  &lt;div class="faixa__conteudo"&gt;...&lt;/div&gt;
+&lt;/section&gt;
+
+.faixa            { position: relative; isolation: isolate; }
+.faixa__padrao    { position: absolute; inset: 0; z-index: 0; opacity: .08; }
+.faixa__conteudo  { position: relative; z-index: 1; }</pre></div>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Como recolorir</h3><span class="id">currentColor · mask-image</span></div>
+    <p class="comp-note">Duas formas de entrega, com comportamentos diferentes. O SVG inline herda a cor do container. O data URI em CSS <strong>não herda</strong> — a cor está congelada dentro da string. Para recolorir em CSS, use <code>mask-image</code> em vez de <code>background-image</code>.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>/* A) SVG inline: troque a cor do container e o padrão acompanha */
+.faixa__padrao { color: var(--ea-navy); opacity: .08; }
+
+/* B) CSS background: a cor vive dentro do data URI (%23050634) */
+.faixa__padrao { background-image: url("data:image/svg+xml,..."); }
+
+/* C) CSS recolorível: máscara + cor do container */
+.faixa__padrao {
+  background-color: currentColor;
+  -webkit-mask-image: url("data:image/svg+xml,...");
+          mask-image: url("data:image/svg+xml,...");
+  -webkit-mask-repeat: repeat;
+          mask-repeat: repeat;
+  color: var(--ea-navy);
+  opacity: .08;
+}</pre></div>
+    <p class="comp-note warn">Dentro de um data URI o <code>#</code> precisa virar <code>%23</code>, os <code>&lt;</code> e <code>&gt;</code> viram <code>%3C</code> e <code>%3E</code>, e os atributos usam aspas simples. Um <code>#</code> cru corta a string no ponto do fragmento e o fundo some sem erro no console.</p>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Malha fina</h3><span class="id">ea-padrao-malha · tile 24 px</span></div>
+    <div class="preview stack">
+      <div class="k-pat-trio">
+        <div class="k-pat k-pat--geo k-asset" data-svg-name="ea-padrao-malha">
+          <span class="k-pat-tag">Geometria</span>
+          <svg width="100%" height="100%" aria-hidden="true" focusable="false"><defs><pattern id="kpMalha" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 .5H.5V24" fill="none" stroke="currentColor" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(#kpMalha)"/></svg>
+        </div>
+        <div class="k-pat k-pat--claro"><span class="k-pat-tag">Claro · 0,10</span><div class="k-mask k-mask--malha"></div></div>
+        <div class="k-pat k-pat--escuro"><span class="k-pat-tag">Escuro · 0,14</span><div class="k-mask k-mask--malha"></div></div>
+      </div>
+    </div>
+    <p class="comp-note"><strong>Densidade média.</strong> Funciona nos dois fundos. É o padrão-base: papel milimetrado, leitura de precisão, apoio para blocos de dado. Use em cabeçalho de seção e em fundo de cartão de número.</p>
+    <p class="comp-note warn">Abaixo de 24 px o traço de 1 px vira cinza chapado em telas 1×. Não reduza o tile.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;svg width="100%" height="100%" aria-hidden="true" focusable="false"&gt;
+  &lt;defs&gt;
+    &lt;pattern id="ea-padrao-malha" width="24" height="24" patternUnits="userSpaceOnUse"&gt;
+      &lt;path d="M24 .5H.5V24" fill="none" stroke="currentColor" stroke-width="1"/&gt;
+    &lt;/pattern&gt;
+  &lt;/defs&gt;
+  &lt;rect width="100%" height="100%" fill="url(#ea-padrao-malha)"/&gt;
+&lt;/svg&gt;</pre></div>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M24 .5H.5V24' fill='none' stroke='%23050634' stroke-width='1'/%3E%3C/svg%3E");
+background-repeat: repeat;
+opacity: .08;</pre></div>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Malha marcada</h3><span class="id">ea-padrao-malha-marcada · tile 96 px</span></div>
+    <div class="preview stack">
+      <div class="k-pat-trio">
+        <div class="k-pat k-pat--geo k-asset" data-svg-name="ea-padrao-malha-marcada">
+          <span class="k-pat-tag">Geometria</span>
+          <svg width="100%" height="100%" aria-hidden="true" focusable="false"><defs><pattern id="kpMalhaM" width="96" height="96" patternUnits="userSpaceOnUse"><path d="M.5 0V96M24.5 0V96M48.5 0V96M72.5 0V96M0 .5H96M0 24.5H96M0 48.5H96M0 72.5H96" fill="none" stroke="currentColor" stroke-width="1" opacity=".6"/><circle cx="48.5" cy="48.5" r="1.8" fill="currentColor"/></pattern></defs><rect width="100%" height="100%" fill="url(#kpMalhaM)"/></svg>
+        </div>
+        <div class="k-pat k-pat--claro"><span class="k-pat-tag">Claro · 0,10</span><div class="k-mask k-mask--malha-marcada"></div></div>
+        <div class="k-pat k-pat--escuro"><span class="k-pat-tag">Escuro · 0,14</span><div class="k-mask k-mask--malha-marcada"></div></div>
+      </div>
+    </div>
+    <p class="comp-note"><strong>Densidade média-baixa.</strong> Melhor sobre claro (<code>#F5F9FC</code>). A marca a cada 4 células dá escala e ritmo — é a textura para material técnico: relatório, e-book, planilha, slide de dado.</p>
+    <p class="comp-note">A malha está a 60% de opacidade dentro do próprio SVG; o ponto fica a 100%. Isso preserva a hierarquia mesmo quando você baixa a opacidade do conjunto.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;svg width="100%" height="100%" aria-hidden="true" focusable="false"&gt;
+  &lt;defs&gt;
+    &lt;pattern id="ea-padrao-malha-marcada" width="96" height="96" patternUnits="userSpaceOnUse"&gt;
+      &lt;path d="M.5 0V96M24.5 0V96M48.5 0V96M72.5 0V96M0 .5H96M0 24.5H96M0 48.5H96M0 72.5H96"
+            fill="none" stroke="currentColor" stroke-width="1" opacity=".6"/&gt;
+      &lt;circle cx="48.5" cy="48.5" r="1.8" fill="currentColor"/&gt;
+    &lt;/pattern&gt;
+  &lt;/defs&gt;
+  &lt;rect width="100%" height="100%" fill="url(#ea-padrao-malha-marcada)"/&gt;
+&lt;/svg&gt;</pre></div>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Cpath d='M.5 0V96M24.5 0V96M48.5 0V96M72.5 0V96M0 .5H96M0 24.5H96M0 48.5H96M0 72.5H96' fill='none' stroke='%23050634' stroke-width='1' opacity='.6'/%3E%3Ccircle cx='48.5' cy='48.5' r='1.8' fill='%23050634'/%3E%3C/svg%3E");
+background-repeat: repeat;
+opacity: .08;</pre></div>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Pontos</h3><span class="id">ea-padrao-pontos · tile 20 px</span></div>
+    <div class="preview stack">
+      <div class="k-pat-trio">
+        <div class="k-pat k-pat--geo k-asset" data-svg-name="ea-padrao-pontos">
+          <span class="k-pat-tag">Geometria</span>
+          <svg width="100%" height="100%" aria-hidden="true" focusable="false"><defs><pattern id="kpPontos" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1.1" fill="currentColor"/></pattern></defs><rect width="100%" height="100%" fill="url(#kpPontos)"/></svg>
+        </div>
+        <div class="k-pat k-pat--claro"><span class="k-pat-tag">Claro · 0,12</span><div class="k-mask k-mask--pontos k-mask--leve"></div></div>
+        <div class="k-pat k-pat--escuro"><span class="k-pat-tag">Escuro · 0,15</span><div class="k-mask k-mask--pontos k-mask--leve"></div></div>
+      </div>
+    </div>
+    <p class="comp-note"><strong>Densidade baixa.</strong> O único padrão que aguenta ficar sob texto — e ainda assim só sob título, nunca sob parágrafo. Funciona nos dois fundos e é a escolha padrão quando você está em dúvida.</p>
+    <p class="comp-note">Por ser leve, aceita a ponta superior da faixa: 0,12 no claro e 0,15 no escuro.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;svg width="100%" height="100%" aria-hidden="true" focusable="false"&gt;
+  &lt;defs&gt;
+    &lt;pattern id="ea-padrao-pontos" width="20" height="20" patternUnits="userSpaceOnUse"&gt;
+      &lt;circle cx="10" cy="10" r="1.1" fill="currentColor"/&gt;
+    &lt;/pattern&gt;
+  &lt;/defs&gt;
+  &lt;rect width="100%" height="100%" fill="url(#ea-padrao-pontos)"/&gt;
+&lt;/svg&gt;</pre></div>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Ccircle cx='10' cy='10' r='1.1' fill='%23050634'/%3E%3C/svg%3E");
+background-repeat: repeat;
+opacity: .10;</pre></div>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Pontos com cruz</h3><span class="id">ea-padrao-pontos-cruz · tile 20 / 80 px</span></div>
+    <div class="preview stack">
+      <div class="k-pat-trio">
+        <div class="k-pat k-pat--geo k-asset" data-svg-name="ea-padrao-pontos-cruz">
+          <span class="k-pat-tag">Geometria</span>
+          <svg width="100%" height="100%" aria-hidden="true" focusable="false"><defs><pattern id="kpPontosB" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1.1" fill="currentColor"/></pattern><pattern id="kpCruzes" width="80" height="80" patternUnits="userSpaceOnUse"><path d="M10 4.5v11M4.5 10h11" fill="none" stroke="currentColor" stroke-width="1.6"/></pattern></defs><rect width="100%" height="100%" fill="url(#kpPontosB)"/><rect width="100%" height="100%" fill="url(#kpCruzes)"/></svg>
+        </div>
+        <div class="k-pat k-pat--claro"><span class="k-pat-tag">Claro · 0,12</span><div class="k-mask k-mask--pontos-cruz k-mask--leve"></div></div>
+        <div class="k-pat k-pat--escuro"><span class="k-pat-tag">Escuro · 0,15</span><div class="k-mask k-mask--pontos-cruz k-mask--leve"></div></div>
+      </div>
+    </div>
+    <p class="comp-note"><strong>Densidade baixa.</strong> É o padrão assinatura da marca: base de pontos a cada 20 px e uma cruz a cada 4 pontos (80 px). Serve nos dois fundos e é o melhor para seção inteira e fundo de hero.</p>
+    <p class="comp-note">São duas camadas, não uma. Em CSS empilhe as duas imagens na mesma propriedade; a cruz vem primeiro porque a ordem de <code>background-image</code> é de cima para baixo.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;svg width="100%" height="100%" aria-hidden="true" focusable="false"&gt;
+  &lt;defs&gt;
+    &lt;pattern id="ea-pontos-base" width="20" height="20" patternUnits="userSpaceOnUse"&gt;
+      &lt;circle cx="10" cy="10" r="1.1" fill="currentColor"/&gt;
+    &lt;/pattern&gt;
+    &lt;pattern id="ea-cruzes" width="80" height="80" patternUnits="userSpaceOnUse"&gt;
+      &lt;path d="M10 4.5v11M4.5 10h11" fill="none" stroke="currentColor" stroke-width="1.6"/&gt;
+    &lt;/pattern&gt;
+  &lt;/defs&gt;
+  &lt;rect width="100%" height="100%" fill="url(#ea-pontos-base)"/&gt;
+  &lt;rect width="100%" height="100%" fill="url(#ea-cruzes)"/&gt;
+&lt;/svg&gt;</pre></div>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>background-image:
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M10 4.5v11M4.5 10h11' fill='none' stroke='%23050634' stroke-width='1.6'/%3E%3C/svg%3E"),
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Ccircle cx='10' cy='10' r='1.1' fill='%23050634'/%3E%3C/svg%3E");
+background-repeat: repeat, repeat;
+opacity: .10;</pre></div>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Barras na diagonal</h3><span class="id">ea-padrao-barras-diagonal · tile 160 px</span></div>
+    <div class="preview stack">
+      <div class="k-pat-trio">
+        <div class="k-pat k-pat--geo k-asset" data-svg-name="ea-padrao-barras-diagonal">
+          <span class="k-pat-tag">Geometria</span>
+          <svg width="100%" height="100%" aria-hidden="true" focusable="false"><defs><clipPath id="kpBarA"><path d="M0 0L160 160L80 160L0 80ZM80 0L160 0L160 80Z"/></clipPath><clipPath id="kpBarB"><path d="M0 80L80 160L0 160ZM0 0L160 160L160 80L80 0Z"/></clipPath><pattern id="kpBarras" width="160" height="160" patternUnits="userSpaceOnUse"><g fill="currentColor"><g clip-path="url(#kpBarA)"><path d="M0 0h40v160H0zM80 0h40v160H80z"/></g><g clip-path="url(#kpBarB)"><path d="M40 0h40v160H40zM120 0h40v160h-40z"/></g></g></pattern></defs><rect width="100%" height="100%" fill="url(#kpBarras)"/></svg>
+        </div>
+        <div class="k-pat k-pat--claro"><span class="k-pat-tag">Claro · 0,06</span><div class="k-mask k-mask--barras k-mask--denso"></div></div>
+        <div class="k-pat k-pat--escuro"><span class="k-pat-tag">Escuro · 0,09</span><div class="k-mask k-mask--barras k-mask--denso"></div></div>
+      </div>
+    </div>
+    <p class="comp-note"><strong>Densidade alta (50% de cobertura).</strong> Barras de 40 px que trocam de fase ao cruzar uma diagonal a 45°. É gesto, não textura: use em faixa de topo, rodapé, capa e corte de imagem. Fica melhor sobre navy com azul <code>#2F24FF</code> ou ciano <code>#00FFEA</code>.</p>
+    <p class="comp-note warn">Nunca sob texto, mesmo a 0,05 — as barras criam bandas de contraste que atrapalham a leitura. Ficando obrigatoriamente atrás de texto, troque por Pontos.</p>
+    <p class="comp-note">O tile é 160 × 160 e é contínuo nos quatro lados: a diagonal fecha porque há duas retas paralelas por tile e a largura é múltipla do período das barras (80 px). Não mude só a largura sem refazer as duas <code>clipPath</code>.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;svg width="100%" height="100%" aria-hidden="true" focusable="false"&gt;
+  &lt;defs&gt;
+    &lt;clipPath id="ea-barras-a"&gt;&lt;path d="M0 0L160 160L80 160L0 80ZM80 0L160 0L160 80Z"/&gt;&lt;/clipPath&gt;
+    &lt;clipPath id="ea-barras-b"&gt;&lt;path d="M0 80L80 160L0 160ZM0 0L160 160L160 80L80 0Z"/&gt;&lt;/clipPath&gt;
+    &lt;pattern id="ea-padrao-barras-diagonal" width="160" height="160" patternUnits="userSpaceOnUse"&gt;
+      &lt;g fill="currentColor"&gt;
+        &lt;g clip-path="url(#ea-barras-a)"&gt;&lt;path d="M0 0h40v160H0zM80 0h40v160H80z"/&gt;&lt;/g&gt;
+        &lt;g clip-path="url(#ea-barras-b)"&gt;&lt;path d="M40 0h40v160H40zM120 0h40v160h-40z"/&gt;&lt;/g&gt;
+      &lt;/g&gt;
+    &lt;/pattern&gt;
+  &lt;/defs&gt;
+  &lt;rect width="100%" height="100%" fill="url(#ea-padrao-barras-diagonal)"/&gt;
+&lt;/svg&gt;</pre></div>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3CclipPath id='a'%3E%3Cpath d='M0 0L160 160L80 160L0 80ZM80 0L160 0L160 80Z'/%3E%3C/clipPath%3E%3CclipPath id='b'%3E%3Cpath d='M0 80L80 160L0 160ZM0 0L160 160L160 80L80 0Z'/%3E%3C/clipPath%3E%3Cg fill='%232F24FF'%3E%3Cg clip-path='url(%23a)'%3E%3Cpath d='M0 0h40v160H0zM80 0h40v160H80z'/%3E%3C/g%3E%3Cg clip-path='url(%23b)'%3E%3Cpath d='M40 0h40v160H40zM120 0h40v160h-40z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+background-repeat: repeat;
+opacity: .06;</pre></div>
+  </div>
+
+  
+
+  
+
+  <div class="comp">
+    <div class="comp-head"><h3>Paralelogramos</h3><span class="id">ea-padrao-paralelogramos · tile 120 × 64 px</span></div>
+    <div class="preview stack">
+      <div class="k-pat-trio">
+        <div class="k-pat k-pat--geo k-asset" data-svg-name="ea-padrao-paralelogramos">
+          <span class="k-pat-tag">Geometria</span>
+          <svg width="100%" height="100%" aria-hidden="true" focusable="false"><defs><pattern id="kpParal" width="120" height="64" patternUnits="userSpaceOnUse"><path fill="currentColor" d="M0 0H80L48 32H-32ZM120 0H200L168 32H88ZM60 32H140L108 64H28ZM-60 32H20L-12 64H-92Z"/></pattern></defs><rect width="100%" height="100%" fill="url(#kpParal)"/></svg>
+        </div>
+        <div class="k-pat k-pat--claro"><span class="k-pat-tag">Claro · 0,06</span><div class="k-mask k-mask--paralelogramos k-mask--denso"></div></div>
+        <div class="k-pat k-pat--escuro"><span class="k-pat-tag">Escuro · 0,09</span><div class="k-mask k-mask--paralelogramos k-mask--denso"></div></div>
+      </div>
+    </div>
+    <p class="comp-note"><strong>Densidade alta.</strong> Blocos com as pontas cortadas a 45°, em fiadas defasadas meio módulo — o encaixe de tijolo do brandbook. Use em faixa horizontal fina (60–160 px de altura), topo de card e rodapé. É o único padrão com direção óbvia: ele empurra a leitura para a direita.</p>
+    <p class="comp-note warn">Não use em área grande e quadrada: o desenho fica repetitivo e a defasagem vira listra. Se a área passar de duas fiadas visíveis, troque por Malha marcada.</p>
+    <p class="comp-note">Tile retangular (120 × 64). Em CSS, deixe <code>background-size</code> no automático — o SVG já carrega a proporção certa nos atributos <code>width</code>/<code>height</code>.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;svg width="100%" height="100%" aria-hidden="true" focusable="false"&gt;
+  &lt;defs&gt;
+    &lt;pattern id="ea-padrao-paralelogramos" width="120" height="64" patternUnits="userSpaceOnUse"&gt;
+      &lt;path fill="currentColor"
+            d="M0 0H80L48 32H-32ZM120 0H200L168 32H88ZM60 32H140L108 64H28ZM-60 32H20L-12 64H-92Z"/&gt;
+    &lt;/pattern&gt;
+  &lt;/defs&gt;
+  &lt;rect width="100%" height="100%" fill="url(#ea-padrao-paralelogramos)"/&gt;
+&lt;/svg&gt;</pre></div>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='64'%3E%3Cpath fill='%232F24FF' d='M0 0H80L48 32H-32ZM120 0H200L168 32H88ZM60 32H140L108 64H28ZM-60 32H20L-12 64H-92Z'/%3E%3C/svg%3E");
+background-repeat: repeat;
+opacity: .06;</pre></div>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Escolha rápida</h3><span class="id">densidade × fundo</span></div>
+    <div class="preview stack">
+      <div class="k-tabela-wrap">
+        <table class="k-tabela">
+          <thead>
+            <tr><th scope="col">Padrão</th><th scope="col">Tile</th><th scope="col">Densidade</th><th scope="col">Claro</th><th scope="col">Escuro</th><th scope="col">Onde usar</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Malha fina</td><td>24</td><td>Média</td><td>0,08</td><td>0,10</td><td>Cabeçalho de seção, card de número</td></tr>
+            <tr><td>Malha marcada</td><td>96</td><td>Média-baixa</td><td>0,08</td><td>0,10</td><td>Material técnico, e-book, slide de dado</td></tr>
+            <tr><td>Pontos</td><td>20</td><td>Baixa</td><td>0,12</td><td>0,15</td><td>Seção inteira; aguenta título por cima</td></tr>
+            <tr><td>Pontos com cruz</td><td>20 / 80</td><td>Baixa</td><td>0,12</td><td>0,15</td><td>Hero e fundo de página — padrão assinatura</td></tr>
+            <tr><td>Barras na diagonal</td><td>160</td><td>Alta</td><td>0,06</td><td>0,09</td><td>Faixa de topo, capa, corte de imagem</td></tr>
+            <tr><td>Paralelogramos</td><td>120 × 64</td><td>Alta</td><td>0,06</td><td>0,09</td><td>Faixa horizontal fina, topo de card, rodapé</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p class="comp-note">Cor do padrão: navy <code>#050634</code> sobre fundo claro; branco ou ciano <code>#00FFEA</code> sobre navy. Azul de UI <code>#2F24FF</code> só nos padrões densos, e só quando o padrão for o gesto principal da peça.</p>
+    <p class="comp-note warn">Um padrão por peça. Dois padrões na mesma tela cancelam um ao outro e a peça perde a marca em vez de ganhar.</p>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>O que não fazer</h3><span class="id">checklist</span></div>
+    <ul class="k-nao">
+      <li>Padrão atrás de parágrafo, tabela ou gráfico. O contraste do texto cai e não há opacidade que salve.</li>
+      <li>Padrão em PNG. Os PNGs do brandbook estão em uma cor fixa, pesam 4–120 KB e serrilham em tela retina. Use o SVG.</li>
+      <li>Esticar o SVG com <code>viewBox</code> + <code>preserveAspectRatio="none"</code>. O tile deforma. Deixe o SVG em <code>width="100%" height="100%"</code> sem <code>viewBox</code>: o <code>pattern</code> em <code>userSpaceOnUse</code> mantém o tile no tamanho real em px.</li>
+      <li>Opacidade no container em vez do padrão. Desbota o texto junto.</li>
+      <li><code>#</code> sem escape dentro do data URI. Vira fragmento de URL, o fundo some e o console não reclama.</li>
+      <li>Repetir o mesmo <code>id</code> de <code>pattern</code> em dois SVGs inline da mesma página. O segundo herda o primeiro. Sufixe o id por instância.</li>
+      <li>Padrão sobre foto. Foto já tem textura; some as duas e vira sujeira.</li>
+    </ul>
+    <p class="comp-note">Os oito arquivos estão em <code>design-system/assets/padroes/</code>, com <code>width</code>/<code>height</code> de 480 px para terem tamanho intrínseco. Ao colar inline, troque por <code>100%</code>.</p>
+  </div>
+</section>
+
+<!--CSS-INICIO-->
+.k-regra{
+  border:1px solid var(--line);
+  border-left:4px solid var(--iris);
+  border-radius:var(--r-md);
+  background:var(--panel-2);
+  padding:18px 20px;
+}
+.k-regra-frase{
+  margin:0 0 6px;
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:clamp(17px,2.2vw,21px);
+  line-height:1.25;
+  color:var(--ink);
+}
+.k-regra-sub{ margin:0; color:var(--ink-soft); font-size:14px; line-height:1.55; }
+.k-regra-sub strong{ color:var(--ink); }
+
+.k-op-escala{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:16px; }
+.k-op-item{ display:flex; flex-direction:column; gap:8px; }
+.k-op-item > span{ font-family:var(--font-mono); font-size:11.5px; color:var(--ink-soft); }
+.k-op-erro > span{ color:var(--pink); }
+.k-op-item .k-pat{ min-height:88px; }
+.k-op-item .k-pat::after{
+  content:""; position:absolute; inset:0;
+  background-repeat:repeat;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M10 4.5v11M4.5 10h11' fill='none' stroke='%23050634' stroke-width='1.6'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Ccircle cx='10' cy='10' r='1.1' fill='%23050634'/%3E%3C/svg%3E");
+}
+.k-pat.k-op-04::after{ opacity:.04; }
+.k-pat.k-op-08::after{ opacity:.08; }
+.k-pat.k-op-12::after{ opacity:.12; }
+.k-pat.k-op-24::after{ opacity:.24; }
+
+.k-pat-trio{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.k-pat{
+  --k-op:.10;
+  position:relative;
+  overflow:hidden;
+  min-height:180px;
+  border:1px solid var(--line);
+  border-radius:var(--r-md);
+}
+.k-pat > svg{ display:block; width:100%; height:180px; opacity:var(--k-op); }
+.k-pat--geo{ background:var(--panel-2); color:var(--iris); --k-op:.55; }
+.k-pat--claro{ background:#F5F9FC; color:#050634; --k-op:.10; }
+.k-pat--escuro{ background:#050634; color:#FFFFFF; --k-op:.14; }
+.k-pat-tag{
+  position:absolute; left:10px; top:10px; z-index:3;
+  font-family:var(--font-body); font-size:10.5px; font-weight:600;
+  letter-spacing:.05em; text-transform:uppercase;
+  padding:5px 9px; border-radius:var(--r-pill);
+  background:var(--panel); color:var(--ink-soft);
+  box-shadow:inset 0 0 0 1px var(--line);
+}
+.k-pat--escuro .k-pat-tag{ background:rgba(5,6,52,.78); color:#FFFFFF; box-shadow:inset 0 0 0 1px rgba(255,255,255,.28); }
+.k-pat--claro .k-pat-tag{ background:rgba(255,255,255,.86); color:#050634; box-shadow:inset 0 0 0 1px rgba(5,6,52,.14); }
+.k-pat .k-asset-dl,.k-pat a[download]{ position:relative; z-index:3; }
+
+.k-mask{
+  position:absolute; inset:0;
+  background-color:currentColor;
+  opacity:var(--k-op);
+  -webkit-mask-repeat:repeat;
+          mask-repeat:repeat;
+  -webkit-mask-position:0 0;
+          mask-position:0 0;
+}
+.k-mask--leve{ --k-op:.12; }
+.k-pat--escuro .k-mask--leve{ --k-op:.15; }
+.k-mask--denso{ --k-op:.06; }
+.k-pat--escuro .k-mask--denso{ --k-op:.09; }
+
+.k-mask--malha{
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M24 .5H.5V24' fill='none' stroke='%23050634' stroke-width='1'/%3E%3C/svg%3E");
+          mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M24 .5H.5V24' fill='none' stroke='%23050634' stroke-width='1'/%3E%3C/svg%3E");
+}
+.k-mask--malha-marcada{
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Cpath d='M.5 0V96M24.5 0V96M48.5 0V96M72.5 0V96M0 .5H96M0 24.5H96M0 48.5H96M0 72.5H96' fill='none' stroke='%23050634' stroke-width='1' opacity='.6'/%3E%3Ccircle cx='48.5' cy='48.5' r='1.8' fill='%23050634'/%3E%3C/svg%3E");
+          mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Cpath d='M.5 0V96M24.5 0V96M48.5 0V96M72.5 0V96M0 .5H96M0 24.5H96M0 48.5H96M0 72.5H96' fill='none' stroke='%23050634' stroke-width='1' opacity='.6'/%3E%3Ccircle cx='48.5' cy='48.5' r='1.8' fill='%23050634'/%3E%3C/svg%3E");
+}
+.k-mask--pontos{
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Ccircle cx='10' cy='10' r='1.1' fill='%23050634'/%3E%3C/svg%3E");
+          mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Ccircle cx='10' cy='10' r='1.1' fill='%23050634'/%3E%3C/svg%3E");
+}
+.k-mask--pontos-cruz{
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M10 4.5v11M4.5 10h11' fill='none' stroke='%23050634' stroke-width='1.6'/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Ccircle cx='10' cy='10' r='1.1' fill='%23050634'/%3E%3C/svg%3E");
+          mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M10 4.5v11M4.5 10h11' fill='none' stroke='%23050634' stroke-width='1.6'/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Ccircle cx='10' cy='10' r='1.1' fill='%23050634'/%3E%3C/svg%3E");
+}
+.k-mask--barras{
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3CclipPath id='a'%3E%3Cpath d='M0 0L160 160L80 160L0 80ZM80 0L160 0L160 80Z'/%3E%3C/clipPath%3E%3CclipPath id='b'%3E%3Cpath d='M0 80L80 160L0 160ZM0 0L160 160L160 80L80 0Z'/%3E%3C/clipPath%3E%3Cg fill='%23050634'%3E%3Cg clip-path='url(%23a)'%3E%3Cpath d='M0 0h40v160H0zM80 0h40v160H80z'/%3E%3C/g%3E%3Cg clip-path='url(%23b)'%3E%3Cpath d='M40 0h40v160H40zM120 0h40v160h-40z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+          mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3CclipPath id='a'%3E%3Cpath d='M0 0L160 160L80 160L0 80ZM80 0L160 0L160 80Z'/%3E%3C/clipPath%3E%3CclipPath id='b'%3E%3Cpath d='M0 80L80 160L0 160ZM0 0L160 160L160 80L80 0Z'/%3E%3C/clipPath%3E%3Cg fill='%23050634'%3E%3Cg clip-path='url(%23a)'%3E%3Cpath d='M0 0h40v160H0zM80 0h40v160H80z'/%3E%3C/g%3E%3Cg clip-path='url(%23b)'%3E%3Cpath d='M40 0h40v160H40zM120 0h40v160h-40z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.k-mask--paralelogramos{
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='64'%3E%3Cpath fill='%23050634' d='M0 0H80L48 32H-32ZM120 0H200L168 32H88ZM60 32H140L108 64H28ZM-60 32H20L-12 64H-92Z'/%3E%3C/svg%3E");
+          mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='64'%3E%3Cpath fill='%23050634' d='M0 0H80L48 32H-32ZM120 0H200L168 32H88ZM60 32H140L108 64H28ZM-60 32H20L-12 64H-92Z'/%3E%3C/svg%3E");
+}
+
+.k-tabela-wrap{ overflow-x:auto; border:1px solid var(--line); border-radius:var(--r-md); }
+.k-tabela{ width:100%; min-width:640px; border-collapse:collapse; font-size:13.5px; }
+.k-tabela th,.k-tabela td{ padding:11px 14px; text-align:left; border-bottom:1px solid var(--line); }
+.k-tabela thead th{
+  font-family:var(--font-body); font-size:11px; font-weight:600;
+  letter-spacing:.06em; text-transform:uppercase;
+  color:var(--ink-soft); background:var(--panel-2);
+}
+.k-tabela tbody td{ color:var(--ink-soft); }
+.k-tabela tbody td:first-child{ color:var(--ink); font-weight:600; }
+.k-tabela tbody td:nth-child(2),.k-tabela tbody td:nth-child(4),.k-tabela tbody td:nth-child(5){
+  font-family:var(--font-mono); font-size:12.5px;
+}
+.k-tabela tbody tr:last-child td{ border-bottom:0; }
+
+.k-nao{ list-style:none; margin:0; padding:0; display:grid; gap:10px; }
+.k-nao li{
+  position:relative; padding:12px 14px 12px 40px;
+  border:1px solid var(--line); border-radius:var(--r-md);
+  background:var(--panel-2); color:var(--ink-soft);
+  font-size:14px; line-height:1.5;
+}
+.k-nao li::before{
+  content:""; position:absolute; left:14px; top:16px;
+  width:14px; height:14px; border-radius:50%;
+  background:var(--pink);
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M4 4l6 6M10 4l-6 6' stroke='%23000' stroke-width='2' stroke-linecap='round' fill='none'/%3E%3C/svg%3E");
+          mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M4 4l6 6M10 4l-6 6' stroke='%23000' stroke-width='2' stroke-linecap='round' fill='none'/%3E%3C/svg%3E");
+  -webkit-mask-size:14px 14px; mask-size:14px 14px;
+  -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+}
+
+@media (max-width:900px){
+  .k-pat-trio{ grid-template-columns:1fr 1fr; }
+  .k-op-escala{ grid-template-columns:1fr 1fr; }
+}
+@media (max-width:560px){
+  .k-pat-trio{ grid-template-columns:1fr; }
+}
+<!--CSS-FIM-->

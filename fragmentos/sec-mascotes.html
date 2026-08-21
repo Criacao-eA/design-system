@@ -1,0 +1,635 @@
+<section id="mascotes">
+  <div class="sec-head">
+    <h2>Mascotes</h2>
+    <span class="tag marca">Marca</span>
+    <span class="tag novo">Novo na v3</span>
+  </div>
+  <p class="sec-desc">Dois personagens, dois públicos. O <b>e-Bot</b> é o mascote da <span class="ea-brand">e-Auditoria</span> e fala com o cliente dentro do produto. A <b>Incendiária</b> é o mascote do time de vendas e só circula para dentro de casa. Trocar um pelo outro é o erro mais caro desta página: mascote interno em peça de cliente vira ruído de marca.</p>
+
+  <!-- ============================ e-BOT ============================ -->
+
+  <div class="comp">
+    <div class="comp-head"><h3>e-Bot — ficha</h3><span class="id">mascote/e-bot</span></div>
+    <div class="preview stack">
+      <div class="k-masc">
+        <figure class="k-masc-fig">
+          <img src="{{IMG:ebot-corpo}}" alt="e-Bot: robô 3D de corpo arredondado azul-lilás, antena com esfera no topo, visor escuro com olhos retangulares ciano, segurando um tablet com o símbolo da marca" loading="lazy" decoding="async">
+        </figure>
+        <div>
+          <dl class="k-masc-dl">
+            <dt>Nome</dt><dd><b>e-Bot</b></dd>
+            <dt>De quem é</dt><dd>Da marca <span class="ea-brand">e-Auditoria</span>. É mascote de produto, uso externo liberado.</dd>
+            <dt>Forma</dt><dd>Robô 3D de corpo arredondado azul/lilás, antena com esfera no topo, olhos retangulares ciano brilhante num visor escuro, tablet com o símbolo da marca nas mãos.</dd>
+            <dt>Personalidade</dt><dd>
+              <span class="k-trait">Prestativo</span><span class="k-trait">Preciso</span><span class="k-trait">Calmo</span>
+            </dd>
+            <dt>Papel</dt><dd>Guia do produto. Ele explica funcionalidade — não vende, não faz piada, não opina sobre lei.</dd>
+          </dl>
+          <p class="k-lbl">Onde ele aparece</p>
+          <ul class="k-list">
+            <li><b>Onboarding:</b> boas-vindas, primeiro passo, checklist de configuração.</li>
+            <li><b>Tutorial e tour de produto:</b> ao lado do balão que explica um campo ou um botão.</li>
+            <li><b>Estado vazio:</b> "nenhum arquivo importado ainda" com o próximo passo.</li>
+            <li><b>Central de ajuda e vídeo curto:</b> abertura e encerramento.</li>
+          </ul>
+          <p class="k-lbl">Paleta dele</p>
+          <div class="k-masc-pal">
+            <span class="k-swatch"><i style="background:#C7D3FF"></i>#C7D3FF corpo</span>
+            <span class="k-swatch"><i style="background:#38D1FF"></i>#38D1FF olhos</span>
+            <span class="k-swatch"><i style="background:#4F45F5"></i>#4F45F5 placas</span>
+            <span class="k-swatch"><i style="background:#050634"></i>#050634 visor</span>
+          </div>
+        </div>
+      </div>
+      <div class="k-masc-thumbs">
+        <figure>
+          <img src="{{IMG:ebot-perfil}}" alt="e-Bot em recorte de rosto, versão para foto de perfil" loading="lazy" decoding="async">
+          <figcaption>Perfil A — avatar redondo</figcaption>
+        </figure>
+        <figure>
+          <img src="{{IMG:ebot-perfil2}}" alt="e-Bot em recorte de rosto, segunda variação para foto de perfil" loading="lazy" decoding="async">
+          <figcaption>Perfil B — avatar alternativo</figcaption>
+        </figure>
+      </div>
+    </div>
+    <p class="comp-note"><b>Corpo inteiro × perfil.</b> Use o corpo inteiro quando ele acompanha um texto (tour, estado vazio, hero de onboarding). Use o recorte de rosto só em avatar redondo — chat, assinatura de bot, ícone de canal. O corpo inteiro cortado em círculo perde a antena e o tablet, que são o que identifica o personagem.</p>
+    <p class="comp-note">Os dois azuis do e-Bot não são os azuis de UI. O corpo <code>#C7D3FF</code> e os olhos <code>#38D1FF</code> foram amostrados do render; o azul primário de interface é <code>#2F24FF</code> e o azul do logotipo é <code>#2B2E6F</code>. São três famílias diferentes e é assim de propósito — não force o mascote para o azul de botão.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;figure class="ea-masc ea-masc--bot"&gt;
+  &lt;!-- alt vazio + aria-hidden: o mascote é decorativo, quem carrega a informação é o texto ao lado --&gt;
+  &lt;img src="/img/mascotes/ebot-corpo@1x.png"
+       srcset="/img/mascotes/ebot-corpo@2x.png 2x,
+               /img/mascotes/ebot-corpo@3x.png 3x"
+       width="320" height="380"
+       alt="" aria-hidden="true"
+       loading="lazy" decoding="async"&gt;
+&lt;/figure&gt;
+
+/* nunca deixe a altura livre: sem width/height o mascote empurra o layout no carregamento */
+.ea-masc{ margin:0; width:clamp(140px,22vw,320px); }
+.ea-masc img{ display:block; width:100%; height:auto; }</pre></div>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>e-Bot — formatos de arquivo</h3><span class="id">mascote/e-bot/formatos</span></div>
+    <div class="preview stack">
+      <div class="k-fmt-grid">
+        <div class="k-fmt">
+          <span class="k-st ok">Disponível</span>
+          <h4>PNG com transparência</h4>
+          <p>Master do render, fundo alfa. As escalas saem deste arquivo.</p>
+          <span class="sz">@1x 320&nbsp;px · @2x 640&nbsp;px · @3x 960&nbsp;px de largura</span>
+          <div class="k-dl-row">
+            <a class="k-dl solid" href="{{IMG:ebot-corpo}}" download="ebot-corpo-master.png">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>PNG master
+            </a>
+          </div>
+        </div>
+        <div class="k-fmt">
+          <span class="k-st ok">Disponível</span>
+          <h4>PNG — avatar</h4>
+          <p>Recorte de rosto para foto de perfil e ícone de chat. Duas variações.</p>
+          <span class="sz">quadrado, alfa preservado</span>
+          <div class="k-dl-row">
+            <a class="k-dl" href="{{IMG:ebot-perfil}}" download="ebot-perfil-a.png">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>Perfil A
+            </a>
+            <a class="k-dl" href="{{IMG:ebot-perfil2}}" download="ebot-perfil-b.png">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>Perfil B
+            </a>
+          </div>
+        </div>
+        <div class="k-fmt">
+          <span class="k-st der">Derivado</span>
+          <h4>WebP</h4>
+          <p>Formato de web. Sai do PNG master com um comando; não existe arte separada.</p>
+          <span class="sz">~60–70% mais leve que o PNG equivalente</span>
+          <div class="k-dl-row"><span class="k-dl off">Gerar do master</span></div>
+        </div>
+        <div class="k-fmt">
+          <span class="k-st pend">Pendente</span>
+          <h4>SVG</h4>
+          <p>Não existe. O e-Bot hoje é render 3D — vetorizar automaticamente devolve milhares de paths e fica mais pesado que o PNG.</p>
+          <span class="sz">precisa de redesenho vetorial simplificado</span>
+          <div class="k-dl-row"><span class="k-dl off">Não disponível</span></div>
+        </div>
+        <div class="k-fmt">
+          <span class="k-st pend">Pendente</span>
+          <h4>Sprite sheet PNG</h4>
+          <p>Motion frame a frame. Depende de renderizar a sequência no 3D e montar a folha em grade fixa.</p>
+          <span class="sz">proposta: 12 quadros, grade 6×2, célula 512×512</span>
+          <div class="k-dl-row"><span class="k-dl off">Não disponível</span></div>
+        </div>
+        <div class="k-fmt">
+          <span class="k-st pend">Pendente</span>
+          <h4>Lottie / JSON</h4>
+          <p>Motion leve em web e app. Só faz sentido depois do redesenho vetorial.</p>
+          <span class="sz">meta: menos de 120&nbsp;KB por animação</span>
+          <div class="k-dl-row"><span class="k-dl off">Não disponível</span></div>
+        </div>
+      </div>
+
+      <div class="k-tbl-wrap">
+        <table class="k-tbl">
+          <thead><tr><th>Formato</th><th>Serve para</th><th>Não serve para</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><b>PNG @1x/@2x/@3x</b> (alfa)</td><td>Peça estática, post de social, slide de apresentação, e-mail</td><td>Animação; página com muitos mascotes (peso)</td><td>Disponível</td></tr>
+            <tr><td><b>WebP</b></td><td>Web e landing page — é o formato padrão do site</td><td>Cliente de e-mail antigo; arquivo para gráfica</td><td>Derivado do PNG</td></tr>
+            <tr><td><b>SVG</b></td><td>Vinheta que precisa escalar sem peso e mudar de cor por CSS</td><td>Reproduzir o render 3D como ele é hoje</td><td>Pendente</td></tr>
+            <tr><td><b>Sprite sheet PNG</b></td><td>Motion simples quadro a quadro (banner, e-mail com fallback)</td><td>Qualquer peça estática</td><td>Pendente</td></tr>
+            <tr><td><b>Lottie / JSON</b></td><td>Motion em web e app, com controle de play/pause</td><td>E-mail; impressão</td><td>Pendente</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p class="comp-note"><b>Os arquivos-fonte estão fora do catálogo.</b> Master do e-Bot: <code>Brandbook/Apresentação/Links/ebot 1.png</code>. Avatares: <code>ebot foto de perfil.png</code> e <code>ebot foto de perfil_2.png</code>. O catálogo publica o master; as escalas @1x/@2x/@3x são exportação, não arte nova.</p>
+    <p class="comp-note warn"><b>SVG e Lottie são pendências reais, não "em breve".</b> Para o SVG existir, alguém precisa redesenhar o e-Bot em vetor simplificado — silhueta, visor, antena, tablet em formas chapadas, sem tentar imitar o sombreado do 3D. Sem esse redesenho, o Lottie também não sai: o Bodymovin exporta vetor, e animar o render 3D no After Effects gera um JSON com PNGs embutidos que pesa mais que um vídeo. O caminho é um só: <b>vetor primeiro, animação depois</b>.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre># WebP a partir do PNG master (alfa sem perda)
+cwebp -q 82 -alpha_q 100 ebot-corpo@2x.png -o ebot-corpo@2x.webp
+
+# escalas, do master para baixo — nunca amplie um @1x para gerar @3x
+magick ebot-corpo-master.png -resize 960x ebot-corpo@3x.png
+magick ebot-corpo-master.png -resize 640x ebot-corpo@2x.png
+magick ebot-corpo-master.png -resize 320x ebot-corpo@1x.png</pre></div>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;picture&gt;
+  &lt;source type="image/webp"
+          srcset="/img/mascotes/ebot-corpo@1x.webp 1x,
+                  /img/mascotes/ebot-corpo@2x.webp 2x,
+                  /img/mascotes/ebot-corpo@3x.webp 3x"&gt;
+  &lt;img src="/img/mascotes/ebot-corpo@1x.png"
+       srcset="/img/mascotes/ebot-corpo@2x.png 2x,
+               /img/mascotes/ebot-corpo@3x.png 3x"
+       width="320" height="380" alt="" aria-hidden="true"
+       loading="lazy" decoding="async"&gt;
+&lt;/picture&gt;</pre></div>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>e-Bot — kit de motion</h3><span class="id">.ea-masc-bot--idle / --in / --aceno</span></div>
+    <div class="preview stack">
+      <button type="button" class="k-stage" aria-label="Demonstração: passe o mouse ou dê foco para o e-Bot acenar">
+        <span class="k-lay k-in-bot">
+          <span class="k-lay k-idle-bot">
+            <img class="k-wave-bot" src="{{IMG:ebot-corpo}}" alt="" aria-hidden="true" loading="lazy" decoding="async">
+          </span>
+        </span>
+      </button>
+      <p class="k-hint">entrada roda uma vez no carregamento · idle em loop · aceno no hover ou no foco por teclado</p>
+
+      <div class="k-tbl-wrap">
+        <table class="k-tbl">
+          <thead><tr><th>Estado</th><th>Gatilho</th><th>O que anima</th><th>Duração</th><th>Curva</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><b>idle</b> (respiração)</td><td>Sempre, em loop</td><td><code>translateY</code> 0 → −7px, <code>scale</code> 1 → 1.014</td><td>4200&nbsp;ms, infinito</td><td><code>cubic-bezier(.45,0,.55,1)</code></td><td>Implementado</td></tr>
+            <tr><td><b>entrada</b></td><td>Ao entrar na viewport, uma vez</td><td><code>opacity</code> 0 → 1, <code>translateY</code> 18px → 0, <code>scale</code> .82 → 1.06 → 1</td><td>620&nbsp;ms</td><td><code>cubic-bezier(.22,1.2,.36,1)</code> — overshoot</td><td>Implementado</td></tr>
+            <tr><td><b>aceno</b></td><td>Hover/foco, ou fim de um passo do tour</td><td><code>rotate</code> 0 → −6° → 5° → −2° → 0, origem <code>50% 92%</code></td><td>900&nbsp;ms</td><td><code>cubic-bezier(.34,1.56,.64,1)</code></td><td>Implementado</td></tr>
+            <tr><td><b>pensando</b></td><td>Enquanto o passo do tour carrega</td><td>Esfera da antena: <code>opacity</code> .5 → 1, <code>scale</code> 1 → 1.25</td><td>1400&nbsp;ms, infinito</td><td><code>ease-in-out</code></td><td>Pendente — exige a antena em camada separada</td></tr>
+            <tr><td><b>saída</b></td><td>Ao fechar o tour</td><td><code>opacity</code> 1 → 0, <code>scale</code> 1 → .9, <code>translateY</code> 0 → 10px</td><td>280&nbsp;ms</td><td><code>cubic-bezier(.4,0,1,1)</code></td><td>Especificado, não implementado</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p class="comp-note"><b>Ritmo do e-Bot é lento.</b> Ele é o guia: 4,2&nbsp;s de respiração e curva simétrica passam calma. Se a respiração descer para 2&nbsp;s ele parece ansioso e disputa atenção com o texto que está explicando. O aceno é a única coisa rápida, e só porque é resposta a uma ação.</p>
+    <p class="comp-note warn"><b>Três animações, três camadas — nunca no mesmo elemento.</b> <code>transform</code> é uma propriedade só: se entrada, idle e aceno estiverem no mesmo nó, a última declarada apaga as outras e o mascote pula. Por isso o preview usa três elementos aninhados (entrada &rarr; idle &rarr; imagem). Só <code>transform</code> e <code>opacity</code> entram no kit; <code>filter: blur()</code> ou <code>box-shadow</code> animados num PNG de 900&nbsp;px derrubam o scroll no celular.</p>
+    <p class="comp-note warn"><b>O idle começa depois da entrada.</b> <code>animation-delay</code> igual à duração da entrada (620&nbsp;ms) e <code>animation-fill-mode: backwards</code> — sem isso os dois competem no primeiro meio segundo e o mascote entra tremendo.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;!-- uma camada por estado --&gt;
+&lt;div class="ea-masc-in"&gt;
+  &lt;div class="ea-masc-idle"&gt;
+    &lt;img class="ea-masc-aceno" src="ebot-corpo@2x.png" alt="" aria-hidden="true"&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>@keyframes ea-bot-in{
+  0%   { opacity:0; transform:translateY(18px) scale(.82) }
+  60%  { opacity:1; transform:translateY(-4px) scale(1.06) }
+  100% { opacity:1; transform:translateY(0)    scale(1)    }
+}
+@keyframes ea-bot-idle{
+  0%,100% { transform:translateY(0)    scale(1)     }
+  50%     { transform:translateY(-7px) scale(1.014) }
+}
+@keyframes ea-bot-aceno{
+  0%   { transform:rotate(0) }
+  25%  { transform:rotate(-6deg) }
+  55%  { transform:rotate(5deg) }
+  80%  { transform:rotate(-2deg) }
+  100% { transform:rotate(0) }
+}
+
+.ea-masc-aceno{ transform-origin:50% 92%; }
+
+/* animação é camada extra: sem ela a página continua correta */
+@media (prefers-reduced-motion:no-preference){
+  .ea-masc-in   { animation:ea-bot-in   620ms cubic-bezier(.22,1.2,.36,1) both }
+  .ea-masc-idle { animation:ea-bot-idle 4200ms cubic-bezier(.45,0,.55,1) 620ms infinite backwards }
+  .ea-masc-tour:hover .ea-masc-aceno,
+  .ea-masc-tour:focus-visible .ea-masc-aceno{
+    animation:ea-bot-aceno 900ms cubic-bezier(.34,1.56,.64,1)
+  }
+}</pre></div>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>e-Bot — regras de uso</h3><span class="id">mascote/e-bot/regras</span></div>
+    <div class="preview stack">
+      <ul class="k-dont">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 8l8 8M16 8l-8 8"/></svg>
+          <span><b>Nunca cobre informação.</b> O e-Bot não fica por cima de número, tabela, campo de formulário nem CTA. Ele ocupa a margem — e se não sobra margem, ele sai da peça.</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 8l8 8M16 8l-8 8"/></svg>
+          <span><b>Nunca em peça de compliance ou jurídica.</b> Fora de contrato, termo de uso, política de privacidade, LGPD, comunicado de reajuste, aviso de indisponibilidade e qualquer texto que cite legislação. Mascote nesse contexto lê como piada e derruba a credibilidade do documento.</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 8l8 8M16 8l-8 8"/></svg>
+          <span><b>Nunca redesenhado nem recolorido.</b> Sem novo ângulo feito à mão, sem outra pose, sem trocar o corpo <code>#C7D3FF</code> por verde para combinar com a campanha, sem filtro, sem contorno, sem sombra dura. Precisa de pose nova? Volta para o 3D.</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 8l8 8M16 8l-8 8"/></svg>
+          <span><b>Nunca com texto dentro da imagem.</b> Balão de fala é HTML ao lado do mascote, não pixel. Texto rasterizado não é lido por leitor de tela, não traduz e serrilha no @1x.</span>
+        </li>
+      </ul>
+      <ul class="k-do">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          <span><b>Pode:</b> espelhar na horizontal para ele "olhar" para o texto, escalar proporcionalmente, recortar em círculo <i>só</i> a versão de perfil, e pôr sobre fundo claro ou sobre o navy <code>#050634</code>.</span>
+        </li>
+      </ul>
+    </div>
+    <p class="comp-note">Regra prática de tamanho: em desktop o e-Bot não passa de <code>320&nbsp;px</code> de largura e nunca fica maior que o título ao lado dele. Em telas abaixo de <code>560&nbsp;px</code> ele encolhe para no máximo <code>140&nbsp;px</code> ou é escondido com <code>display:none</code> — empilhar mascote grande em cima do conteúdo empurra o CTA para fora da primeira dobra.</p>
+    <p class="comp-note cro"><b>Conversão.</b> Em onboarding o mascote ajuda porque quebra a parede de texto do primeiro acesso. Em página de preço e em checkout ele atrapalha: aumenta o tempo até a decisão e concorre com o botão. Mascote na etapa de aprender, nunca na etapa de pagar.</p>
+  </div>
+
+  <!-- ========================= INCENDIÁRIA ========================= -->
+
+  <div class="comp">
+    <div class="comp-head"><h3>Incendiária — ficha</h3><span class="id">mascote/incendiaria · uso interno</span></div>
+    <div class="preview stack">
+      <div class="k-masc">
+        <figure class="k-masc-fig fogo">
+          <img src="{{IMG:incendiaria-corpo}}" alt="Incendiária: personagem-chama 3D com rosto kawaii, cabelo em degradê amarelo, laranja e vermelho, olhos grandes castanhos e bochechas rosadas" loading="lazy" decoding="async">
+        </figure>
+        <div>
+          <dl class="k-masc-dl">
+            <dt>Nome</dt><dd><b>Incendiária</b></dd>
+            <dt>De quem é</dt><dd>Da equipe <b>Incendiários</b>, o time de vendas. <b>Uso interno.</b> Não é mascote da marca <span class="ea-brand">e-Auditoria</span>.</dd>
+            <dt>Forma</dt><dd>Chama-personagem 3D com rosto kawaii: cabelo/chama em degradê amarelo &rarr; laranja &rarr; vermelho, olhos grandes castanhos, bochechas rosadas.</dd>
+            <dt>Personalidade</dt><dd>
+              <span class="k-trait fogo">Intensa</span><span class="k-trait fogo">Competitiva</span><span class="k-trait fogo">Brincalhona</span>
+            </dd>
+            <dt>Papel</dt><dd>Energia do time comercial. Ela puxa ritmo, provoca e comemora — não explica produto e não fala com cliente.</dd>
+          </dl>
+          <p class="k-lbl">Onde ela aparece</p>
+          <ul class="k-list">
+            <li><b>Campanha interna:</b> abertura de trimestre, gincana, desafio de prospecção.</li>
+            <li><b>Ranking:</b> quadro de placar, pódio, destaque da semana.</li>
+            <li><b>Celebração de meta:</b> bateu a meta, virou o mês, fechou o maior contrato.</li>
+            <li><b>Canal interno:</b> figurinha no chat do time, capa de apresentação de kick-off.</li>
+          </ul>
+          <p class="k-lbl">Paleta dela</p>
+          <div class="k-masc-pal">
+            <span class="k-swatch"><i style="background:#FF4F00"></i>#FF4F00 laranja de referência</span>
+            <span class="k-swatch"><i style="background:linear-gradient(135deg,#FFC800,#FF4F00 55%,#D81E05)"></i>degradê da chama</span>
+            <span class="k-swatch"><i style="background:#6B4226"></i>olhos castanhos</span>
+            <span class="k-swatch"><i style="background:#FF9CA8"></i>bochechas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="comp-note"><b>Ela não é uma variação do e-Bot.</b> São dois sistemas: o e-Bot pertence à marca e sai para o mercado; a Incendiária pertence a um time e fica dentro de casa. Não coloque os dois na mesma peça — a leitura vira "a empresa tem dois mascotes", que é exatamente o que não queremos.</p>
+    <p class="comp-note warn"><b>O laranja dela não entra na paleta da marca.</b> <code>#FF4F00</code> é cor do personagem, não token de UI. Não use esse laranja como cor de botão, de destaque em landing page ou de gráfico. Para calor e urgência em peça pública existe o CTA âmbar <code>#FEC008</code>.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;!-- peça interna: ranking semanal --&gt;
+&lt;div class="int-ranking"&gt;
+  &lt;img class="int-ranking__masc" src="/interno/incendiaria@2x.png"
+       width="180" height="220" alt="" aria-hidden="true" loading="lazy"&gt;
+  &lt;h3&gt;Placar da semana&lt;/h3&gt;
+  &lt;ol&gt;...&lt;/ol&gt;
+&lt;/div&gt;
+
+/* pasta separada de propósito: /interno/ nunca é publicada no site */</pre></div>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Incendiária — formatos de arquivo</h3><span class="id">mascote/incendiaria/formatos</span></div>
+    <div class="preview stack">
+      <div class="k-fmt-grid">
+        <div class="k-fmt">
+          <span class="k-st ok">Disponível</span>
+          <h4>PNG com transparência</h4>
+          <p>Master do render, fundo alfa. Base de todas as escalas e do WebP.</p>
+          <span class="sz">@1x 280&nbsp;px · @2x 560&nbsp;px · @3x 840&nbsp;px de largura</span>
+          <div class="k-dl-row">
+            <a class="k-dl solid" href="{{IMG:incendiaria-corpo}}" download="incendiaria-master.png">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>PNG master
+            </a>
+            <a class="k-dl" href="{{IMG:incendiaria-corpo}}" download="incendiaria-figurinha.png">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>PNG figurinha
+            </a>
+          </div>
+        </div>
+        <div class="k-fmt">
+          <span class="k-st der">Derivado</span>
+          <h4>WebP</h4>
+          <p>Para o painel interno e o quadro de ranking na intranet. Sai do master.</p>
+          <span class="sz">mesmo comando do e-Bot</span>
+          <div class="k-dl-row"><span class="k-dl off">Gerar do master</span></div>
+        </div>
+        <div class="k-fmt">
+          <span class="k-st pend">Pendente</span>
+          <h4>SVG</h4>
+          <p>Não existe. O degradê da chama e o sombreado do 3D não sobrevivem a uma vetorização automática.</p>
+          <span class="sz">precisa de redesenho vetorial simplificado</span>
+          <div class="k-dl-row"><span class="k-dl off">Não disponível</span></div>
+        </div>
+        <div class="k-fmt">
+          <span class="k-st pend">Pendente</span>
+          <h4>Sprite sheet PNG</h4>
+          <p>Tremulação da chama quadro a quadro. É o formato mais provável de sair primeiro — o loop de fogo funciona bem em poucos quadros.</p>
+          <span class="sz">proposta: 8 quadros, grade 4×2, célula 512×512</span>
+          <div class="k-dl-row"><span class="k-dl off">Não disponível</span></div>
+        </div>
+        <div class="k-fmt">
+          <span class="k-st pend">Pendente</span>
+          <h4>Lottie / JSON</h4>
+          <p>Comemoração de meta no painel interno. Depende do vetor.</p>
+          <span class="sz">meta: menos de 120&nbsp;KB por animação</span>
+          <div class="k-dl-row"><span class="k-dl off">Não disponível</span></div>
+        </div>
+      </div>
+
+      <div class="k-tbl-wrap">
+        <table class="k-tbl">
+          <thead><tr><th>Formato</th><th>Serve para</th><th>Não serve para</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><b>PNG @1x/@2x/@3x</b> (alfa)</td><td>Slide de kick-off, cartaz interno, figurinha de chat, post de rede interna</td><td>Animação; qualquer peça que saia para cliente</td><td>Disponível</td></tr>
+            <tr><td><b>WebP</b></td><td>Intranet e painel de ranking</td><td>Apresentação em PowerPoint antigo; e-mail</td><td>Derivado do PNG</td></tr>
+            <tr><td><b>SVG</b></td><td>Selo e vinheta que escalam para cartaz grande</td><td>Reproduzir o degradê do render</td><td>Pendente</td></tr>
+            <tr><td><b>Sprite sheet PNG</b></td><td>Loop de chama em banner interno, sem JS</td><td>Peça estática; impressão</td><td>Pendente</td></tr>
+            <tr><td><b>Lottie / JSON</b></td><td>Comemoração de meta no painel, com play sob demanda</td><td>E-mail; impressão</td><td>Pendente</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p class="comp-note"><b>Arquivo-fonte:</b> <code>Brandbook/Apresentação/Links/incendiarios.png</code>. É o único arquivo dela hoje — não existe versão de perfil nem recorte de rosto. Se precisar de avatar, o recorte tem que ser feito a partir do master e voltar para a pasta de origem com nome próprio, não improvisado dentro da peça.</p>
+    <p class="comp-note warn"><b>Sprite sheet exige grade rígida.</b> Todas as células com o mesmo tamanho, personagem centralizado, sem quadro de folga variável. Se um quadro nasce 3&nbsp;px maior, o loop treme. E o arquivo cresce rápido: 8 células de 512×512 com alfa passam de 1&nbsp;MB — reduza a célula antes de aumentar a quantidade de quadros.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>/* sprite sheet: 8 quadros em grade 4x2, célula 512x512 (folha 2048x1024) */
+.int-chama{
+  width:128px; height:128px;
+  background-image:url('/interno/incendiaria-sprite.png');
+  background-size:512px 256px;   /* folha reduzida para 4x2 células de 128px */
+  background-repeat:no-repeat;
+}
+@media (prefers-reduced-motion:no-preference){
+  .int-chama{ animation:int-chama-x 640ms steps(4) infinite,
+                        int-chama-y 1280ms steps(2) infinite }
+}
+@keyframes int-chama-x{ to { background-position-x:-512px } }
+@keyframes int-chama-y{ to { background-position-y:-256px } }
+
+/* sem sprite disponível, o fallback é o PNG parado — e a peça continua correta */</pre></div>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Incendiária — kit de motion</h3><span class="id">.int-masc--idle / --in / --comemora</span></div>
+    <div class="preview stack">
+      <button type="button" class="k-stage fogo" aria-label="Demonstração: passe o mouse ou dê foco para a Incendiária comemorar">
+        <span class="k-lay k-in-fogo">
+          <span class="k-lay k-idle-fogo">
+            <img class="k-pop-fogo" src="{{IMG:incendiaria-corpo}}" alt="" aria-hidden="true" loading="lazy" decoding="async">
+          </span>
+        </span>
+      </button>
+      <p class="k-hint">entrada de labareda · tremulação em loop · comemoração no hover ou no foco por teclado</p>
+
+      <div class="k-tbl-wrap">
+        <table class="k-tbl">
+          <thead><tr><th>Estado</th><th>Gatilho</th><th>O que anima</th><th>Duração</th><th>Curva</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><b>idle</b> (tremulação)</td><td>Sempre, em loop</td><td><code>translateY</code> 0 → −5px → −2px, <code>scale</code> assimétrico (.985,1.03) e (1.015,.985)</td><td>2400&nbsp;ms, infinito</td><td><code>cubic-bezier(.45,0,.55,1)</code></td><td>Implementado</td></tr>
+            <tr><td><b>entrada</b> (labareda)</td><td>Ao abrir o painel de ranking</td><td><code>opacity</code> 0 → 1, <code>translateY</code> 26px → 0, <code>scale</code> .7 → 1.05 → 1</td><td>540&nbsp;ms</td><td><code>cubic-bezier(.2,1.3,.4,1)</code> — overshoot forte</td><td>Implementado</td></tr>
+            <tr><td><b>comemora</b> (pulso)</td><td>Meta batida, hover, foco</td><td><code>scale</code> 1 → 1.12 → .97 → 1 com <code>rotate</code> −4° → 3° → 0</td><td>700&nbsp;ms</td><td><code>cubic-bezier(.34,1.56,.64,1)</code></td><td>Implementado</td></tr>
+            <tr><td><b>faísca</b></td><td>Junto com comemora</td><td>Partículas subindo ao redor da chama</td><td>900&nbsp;ms</td><td><code>ease-out</code></td><td>Pendente — exige sprite ou Lottie</td></tr>
+            <tr><td><b>saída</b></td><td>Ao fechar o painel</td><td><code>opacity</code> 1 → 0, <code>scale</code> 1 → .8, <code>translateY</code> 0 → −14px (sobe, não cai)</td><td>240&nbsp;ms</td><td><code>cubic-bezier(.4,0,1,1)</code></td><td>Especificado, não implementado</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p class="comp-note"><b>Ritmo dela é o oposto do e-Bot: rápido e irregular.</b> A tremulação usa escala assimétrica — <code>scaleX</code> e <code>scaleY</code> em direções contrárias — porque fogo se estica e se comprime, não infla igual balão. Três paradas em vez de duas quebram a simetria e tiram a cara de "objeto pulsando".</p>
+    <p class="comp-note warn"><b>Mesma armadilha de camada.</b> Entrada, idle e comemoração ficam em nós separados; empilhar tudo num <code>transform</code> só apaga dois dos três estados. E vale o mesmo limite: nada de animar <code>filter</code> para simular brilho de fogo — em painel com dez avatares o navegador engasga.</p>
+    <p class="comp-note warn"><b>Comemoração é evento, não decoração.</b> O pulso dispara quando algo aconteceu (meta batida, posição trocou no ranking). Loop infinito de comemoração vira poluição em três minutos de tela aberta e ninguém mais olha quando a meta bate de verdade.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>@keyframes int-chama-in{
+  0%   { opacity:0; transform:translateY(26px) scale(.7)  }
+  62%  { opacity:1; transform:translateY(-6px) scale(1.05)}
+  100% { opacity:1; transform:translateY(0)    scale(1)   }
+}
+@keyframes int-chama-idle{
+  0%,100% { transform:translateY(0)    scale(1,1)        }
+  35%     { transform:translateY(-5px) scale(.985,1.03)  }
+  70%     { transform:translateY(-2px) scale(1.015,.985) }
+}
+@keyframes int-chama-comemora{
+  0%   { transform:scale(1)    rotate(0)     }
+  35%  { transform:scale(1.12) rotate(-4deg) }
+  65%  { transform:scale(.97)  rotate(3deg)  }
+  100% { transform:scale(1)    rotate(0)     }
+}
+
+.int-masc-comemora{ transform-origin:50% 90%; }
+
+@media (prefers-reduced-motion:no-preference){
+  .int-masc-in       { animation:int-chama-in   540ms cubic-bezier(.2,1.3,.4,1) both }
+  .int-masc-idle     { animation:int-chama-idle 2400ms cubic-bezier(.45,0,.55,1) 540ms infinite backwards }
+  .int-masc.is-meta .int-masc-comemora,
+  .int-masc:hover .int-masc-comemora,
+  .int-masc:focus-visible .int-masc-comemora{
+    animation:int-chama-comemora 700ms cubic-bezier(.34,1.56,.64,1)
+  }
+}</pre></div>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Incendiária — regras de uso</h3><span class="id">mascote/incendiaria/regras</span></div>
+    <div class="preview stack">
+      <ul class="k-dont">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 8l8 8M16 8l-8 8"/></svg>
+          <span><b>Nunca em material de cliente.</b> Fora de site, landing page, proposta comercial, e-mail para lead, apresentação de venda, post público e qualquer peça institucional. Ela é linguagem de time, não de marca — para quem está de fora, uma chama sorrindo ao lado de um relatório fiscal não significa nada.</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 8l8 8M16 8l-8 8"/></svg>
+          <span><b>Nunca cobre informação.</b> Em quadro de ranking ela fica na margem, nunca sobre nome, número ou posição. Placar tem que ser legível de longe e de relance.</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 8l8 8M16 8l-8 8"/></svg>
+          <span><b>Nunca em peça de compliance ou jurídica.</b> Vale o mesmo que para o e-Bot, e com mais força: comunicado de RH sobre política, aviso disciplinar, documento assinado — nada disso leva mascote.</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 8l8 8M16 8l-8 8"/></svg>
+          <span><b>Nunca redesenhada nem recolorida.</b> A chama é amarelo &rarr; laranja &rarr; vermelho. Chama azul, roxa ou verde para "combinar com o slide" descaracteriza o personagem. Sem chapéu, sem óculos, sem acessório de data comemorativa.</span>
+        </li>
+      </ul>
+      <ul class="k-do">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          <span><b>Pode:</b> espelhar, escalar proporcionalmente, usar sobre fundo escuro (é onde a chama rende melhor) e recortar em figurinha para o chat interno.</span>
+        </li>
+      </ul>
+    </div>
+    <p class="comp-note"><b>Teste de uma pergunta antes de usar.</b> "Alguém de fora da empresa vai ver isso?" Se a resposta for sim ou talvez, não use a Incendiária. Arquivos dela ficam em <code>/interno/</code> justamente para o vazamento ser difícil por acidente.</p>
+    <p class="comp-note cro"><b>Por que ela existe.</b> Campanha interna com personagem tem mais adesão que campanha com planilha — o ranking vira jogo. Isso só funciona enquanto a Incendiária for exclusiva do time: no dia em que ela aparecer num anúncio, ela deixa de ser "nossa" e vira mais um elemento de marketing.</p>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Pendências de arte</h3><span class="id">mascotes/backlog</span></div>
+    <div class="preview stack">
+      <div class="k-tbl-wrap">
+        <table class="k-tbl">
+          <thead><tr><th>Item</th><th>Mascote</th><th>O que precisa ser feito</th><th>Bloqueia</th></tr></thead>
+          <tbody>
+            <tr><td>Redesenho vetorial simplificado</td><td>e-Bot</td><td>Silhueta, visor, antena e tablet em formas chapadas, sem imitar o sombreado do 3D. Máximo de 3 tons por área.</td><td>SVG e Lottie</td></tr>
+            <tr><td>Redesenho vetorial simplificado</td><td>Incendiária</td><td>Chama em 3 camadas de degradê aproximado + rosto. Manter <code>#FF4F00</code> como tom central.</td><td>SVG e Lottie</td></tr>
+            <tr><td>Sequência renderizada</td><td>e-Bot</td><td>12 quadros do ciclo de respiração, câmera travada, alfa, célula 512×512.</td><td>Sprite sheet</td></tr>
+            <tr><td>Sequência renderizada</td><td>Incendiária</td><td>8 quadros do ciclo de tremulação, câmera travada, alfa, célula 512×512.</td><td>Sprite sheet</td></tr>
+            <tr><td>Recorte de avatar</td><td>Incendiária</td><td>Versão de rosto quadrada, equivalente aos dois perfis que o e-Bot já tem.</td><td>Figurinha e ícone de canal</td></tr>
+            <tr><td>Amostragem de cor</td><td>e-Bot</td><td>Confirmar o azul médio das placas do corpo. Hoje só <code>#C7D3FF</code> e <code>#38D1FF</code> estão medidos.</td><td>Ficha de paleta</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p class="comp-note"><b>Caminho do Lottie, em ordem.</b> 1) redesenho vetorial; 2) montagem das camadas no After Effects a partir do vetor; 3) exportação com o plugin Bodymovin. Pular o passo 1 e animar o render direto produz um JSON com PNG embutido — funciona, mas pesa mais que um MP4 e perde a única vantagem do formato, que é escalar sem serrilhar.</p>
+    <p class="comp-note warn"><b>Enquanto as pendências existirem, motion só com CSS.</b> Os três estados implementados aqui (entrada, idle, aceno/comemora) cobrem quase todo uso real e custam zero KB. Não importe biblioteca de animação para resolver o que <code>transform</code> e <code>opacity</code> já resolvem.</p>
+  </div>
+</section>
+
+<!--CSS-INICIO-->
+/* ---------- mascotes ---------- */
+.k-masc{display:grid;grid-template-columns:minmax(190px,250px) 1fr;gap:22px;width:100%;align-items:start}
+@media (max-width:760px){.k-masc{grid-template-columns:1fr}}
+.k-masc-fig{margin:0;border:1px solid var(--line);border-radius:var(--r-lg);padding:16px;
+  background:radial-gradient(120% 95% at 50% 0%,rgba(47,36,255,.14),transparent 70%),var(--panel);
+  display:grid;place-items:center;min-height:210px;overflow:hidden}
+.k-masc-fig.fogo{background:radial-gradient(120% 95% at 50% 0%,rgba(255,79,0,.16),transparent 70%),var(--panel)}
+.k-masc-fig img{display:block;width:auto;max-width:100%;max-height:230px;height:auto}
+
+.k-masc-dl{display:grid;grid-template-columns:auto 1fr;gap:9px 16px;margin:0 0 16px;font-size:13.5px}
+@media (max-width:560px){.k-masc-dl{grid-template-columns:1fr;gap:2px 0}.k-masc-dl dd{margin-bottom:9px}}
+.k-masc-dl dt{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.07em;
+  color:var(--ink-soft);padding-top:3px;white-space:nowrap}
+.k-masc-dl dd{margin:0;color:var(--ink)}
+
+.k-lbl{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.07em;
+  color:var(--ink-soft);margin:16px 0 7px}
+.k-list{margin:0;padding-left:18px;font-size:13.5px;color:var(--ink-soft)}
+.k-list li{margin:0 0 5px}
+.k-list li b{color:var(--ink)}
+
+.k-trait{display:inline-flex;align-items:center;font-size:12px;font-weight:700;padding:5px 12px;
+  border-radius:var(--r-pill);background:rgba(47,36,255,.11);color:var(--iris);margin:0 6px 6px 0}
+.k-trait.fogo{background:rgba(255,79,0,.14);color:#d94a06}
+
+.k-masc-pal{display:flex;gap:8px;flex-wrap:wrap}
+.k-swatch{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:11.5px;
+  color:var(--ink-soft);background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--r-pill);padding:4px 12px 4px 5px}
+.k-swatch i{width:17px;height:17px;border-radius:50%;flex:none;box-shadow:inset 0 0 0 1px rgba(128,128,128,.35)}
+
+.k-masc-thumbs{display:flex;gap:14px;flex-wrap:wrap;width:100%}
+.k-masc-thumbs figure{margin:0;text-align:center}
+.k-masc-thumbs img{width:104px;height:104px;object-fit:contain;border-radius:50%;
+  background:var(--panel);border:1px solid var(--line);padding:6px;display:block}
+.k-masc-thumbs figcaption{font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);margin-top:8px}
+
+/* grade de formatos */
+.k-fmt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;width:100%}
+.k-fmt{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-md);
+  padding:15px;display:flex;flex-direction:column;gap:9px}
+.k-fmt h4{margin:0;font-family:var(--font-display);font-size:1.02rem;color:var(--ink)}
+.k-fmt p{margin:0;font-size:12.5px;color:var(--ink-soft);flex:1}
+.k-fmt .sz{font-family:var(--font-mono);font-size:11px;color:var(--ink-soft)}
+
+.k-st{align-self:flex-start;display:inline-flex;align-items:center;gap:7px;font-size:10.5px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.07em;padding:4px 11px;border-radius:var(--r-pill);
+  border:1px solid var(--line);background:var(--panel-2);color:var(--ink)}
+.k-st::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ink-soft);flex:none}
+.k-st.ok::before{background:#12b886}
+.k-st.der::before{background:var(--blue)}
+.k-st.pend::before{background:var(--pink)}
+
+/* botão de download */
+.k-dl-row{display:flex;flex-wrap:wrap;gap:8px}
+.k-dl{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-body);font-weight:700;
+  font-size:12.5px;padding:9px 15px;border-radius:var(--r-pill);border:1px solid var(--line);
+  background:var(--panel-2);color:var(--ink);text-decoration:none;transition:.18s var(--ease)}
+.k-dl svg{width:15px;height:15px;flex:none}
+.k-dl:hover{border-color:var(--iris);color:var(--iris)}
+.k-dl.solid{background:var(--iris);border-color:var(--iris);color:#fff}
+.k-dl.solid:hover{color:#fff;filter:brightness(1.1)}
+.k-dl.off{opacity:.55;cursor:not-allowed;font-weight:600}
+.k-dl.off:hover{border-color:var(--line);color:var(--ink)}
+
+/* palco de motion */
+.k-stage{width:100%;min-height:260px;display:grid;place-items:center;padding:20px;
+  border:1px dashed var(--line);border-radius:var(--r-lg);background:var(--panel);
+  font:inherit;color:inherit;cursor:pointer;-webkit-appearance:none;appearance:none;overflow:hidden}
+.k-stage.fogo{background:radial-gradient(90% 80% at 50% 100%,rgba(255,79,0,.12),transparent 70%),var(--panel)}
+.k-stage:focus-visible{outline:2px solid var(--iris);outline-offset:3px}
+.k-lay{display:block}
+.k-stage img{display:block;width:auto;max-width:100%;max-height:210px;height:auto}
+.k-wave-bot{transform-origin:50% 92%}
+.k-pop-fogo{transform-origin:50% 90%}
+.k-hint{font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);text-align:center;margin:2px 0 0}
+
+@keyframes k-ebot-in{
+  0%{opacity:0;transform:translateY(18px) scale(.82)}
+  60%{opacity:1;transform:translateY(-4px) scale(1.06)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
+}
+@keyframes k-ebot-idle{
+  0%,100%{transform:translateY(0) scale(1)}
+  50%{transform:translateY(-7px) scale(1.014)}
+}
+@keyframes k-ebot-wave{
+  0%{transform:rotate(0)}
+  25%{transform:rotate(-6deg)}
+  55%{transform:rotate(5deg)}
+  80%{transform:rotate(-2deg)}
+  100%{transform:rotate(0)}
+}
+@keyframes k-flame-in{
+  0%{opacity:0;transform:translateY(26px) scale(.7)}
+  62%{opacity:1;transform:translateY(-6px) scale(1.05)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
+}
+@keyframes k-flame-idle{
+  0%,100%{transform:translateY(0) scale(1,1)}
+  35%{transform:translateY(-5px) scale(.985,1.03)}
+  70%{transform:translateY(-2px) scale(1.015,.985)}
+}
+@keyframes k-flame-pop{
+  0%{transform:scale(1) rotate(0)}
+  35%{transform:scale(1.12) rotate(-4deg)}
+  65%{transform:scale(.97) rotate(3deg)}
+  100%{transform:scale(1) rotate(0)}
+}
+
+@media (prefers-reduced-motion:no-preference){
+  .k-in-bot{animation:k-ebot-in 620ms cubic-bezier(.22,1.2,.36,1) both}
+  .k-idle-bot{animation:k-ebot-idle 4200ms cubic-bezier(.45,0,.55,1) 620ms infinite backwards}
+  .k-stage:hover .k-wave-bot,
+  .k-stage:focus-visible .k-wave-bot{animation:k-ebot-wave 900ms cubic-bezier(.34,1.56,.64,1)}
+  .k-in-fogo{animation:k-flame-in 540ms cubic-bezier(.2,1.3,.4,1) both}
+  .k-idle-fogo{animation:k-flame-idle 2400ms cubic-bezier(.45,0,.55,1) 540ms infinite backwards}
+  .k-stage:hover .k-pop-fogo,
+  .k-stage:focus-visible .k-pop-fogo{animation:k-flame-pop 700ms cubic-bezier(.34,1.56,.64,1)}
+}
+
+/* listas de regra */
+.k-dont,.k-do{display:grid;gap:9px;width:100%;margin:0;padding:0;list-style:none}
+.k-dont li,.k-do li{display:flex;gap:11px;align-items:flex-start;background:var(--panel);
+  border:1px solid var(--line);border-left:3px solid var(--pink);
+  border-radius:0 var(--r-md) var(--r-md) 0;padding:12px 14px;font-size:13.5px;color:var(--ink-soft)}
+.k-dont li b,.k-do li b{color:var(--ink)}
+.k-dont li code,.k-do li code{background:var(--panel-2);padding:1px 6px;border-radius:6px;font-size:12px}
+.k-dont svg,.k-do svg{width:17px;height:17px;flex:none;margin-top:2px;color:var(--pink)}
+.k-do li{border-left-color:var(--cyan)}
+.k-do svg{color:#0aa}
+<!--CSS-FIM-->

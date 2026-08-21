@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="480" role="img" aria-label="Padrao e-Auditoria: malha 24px com marca a cada 4 celulas">
+  <defs>
+    <pattern id="ea-padrao-malha-marcada" width="96" height="96" patternUnits="userSpaceOnUse">
+      <path d="M.5 0V96M24.5 0V96M48.5 0V96M72.5 0V96M0 .5H96M0 24.5H96M0 48.5H96M0 72.5H96"
+            fill="none" stroke="currentColor" stroke-width="1" opacity=".6"/>
+      <circle cx="48.5" cy="48.5" r="1.8" fill="currentColor"/>
+    </pattern>
+  </defs>
+  <rect width="480" height="480" fill="url(#ea-padrao-malha-marcada)"/>
+</svg>

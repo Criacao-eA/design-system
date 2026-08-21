@@ -1,0 +1,116 @@
+    <section id="email-modelos">
+      <div class="sec-head"><h2>Modelos em produção</h2><span class="tag email">E-mail</span><span class="tag novo">Novo</span></div>
+      <p class="sec-desc">O que já roda no HubSpot (portal da e-Auditoria) e como se relaciona com este sistema. Puxado e medido em 31/07/2026 pela API de conteúdo — não é impressão, é o código-fonte dos modelos.</p>
+
+      <div class="comp">
+        <div class="comp-head"><h3>Os 12 modelos da conta</h3><span class="id">EMAIL_DND_TEMPLATE</span></div>
+        <p class="comp-note">Todos são de arrastar-e-soltar. Por isso <b>não aparecem</b> em <code>hs cms list</code> — só templates codificados aparecem lá. Para alcançá-los é preciso a API de conteúdo.</p>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre># lista todos os modelos de e-mail da conta
+hs api "/content/api/v2/templates?limit=300"
+
+# traz o HTML de um modelo especifico no campo "source"
+hs api "/content/api/v2/templates/210985494593"   # Modelo LM 1
+hs api "/content/api/v2/templates/210989771122"   # Modelo LM 2
+
+# escopo necessario: "content" (a chave atual ja tem).
+# a API mais nova /marketing/v3/emails exigiria "marketing.email.read", que ela NAO tem.</pre></div>
+      </div>
+
+      <div class="comp">
+        <div class="comp-head"><h3>Modelo LM 1 e LM 2 — diagnóstico</h3><span class="id">nutrição de material rico</span></div>
+        <p class="comp-note">Os dois são e-mails de nutrição pós-download. <b>São mais próximos do sistema que os do Aulão</b> — ali a base escura era a cor padrão do HubSpot; aqui a base é neutra e cada um traz um acento de marca. Mas nenhum dos dois está pronto para virar padrão.</p>
+        <div class="preview stack">
+          <div class="k-tbl-wrap">
+            <table class="k-tbl">
+              <thead><tr><th>Cor encontrada</th><th>Onde</th><th>Token mais próximo</th><th>ΔE00</th><th>Situação</th></tr></thead>
+              <tbody>
+                <tr><td><code>#FEC008</code></td><td>LM 1 · fundo do botão</td><td>CTA amarelo</td><td>0,00</td><td><span class="k-status ok">certo</span></td></tr>
+                <tr><td><code>#2486FF</code></td><td>LM 2 · cor de título</td><td>azul coringa</td><td>0,71</td><td><span class="k-status ok">certo</span></td></tr>
+                <tr><td><code>#6631BF</code></td><td>LM 1 · cor de título</td><td>roxo <code>#772BF2</code></td><td>6,92</td><td><span class="k-status bad">fora do sistema</span></td></tr>
+                <tr><td><code>#DBC7FF</code></td><td>LM 1 · fundo de bloco</td><td>pastel lilás <code>#E7E2FF</code></td><td>9,41</td><td><span class="k-status bad">fora do sistema</span></td></tr>
+                <tr><td><code>#908C8C</code></td><td>LM 1 · texto secundário</td><td><code>#576B86</code></td><td>19,41</td><td><span class="k-status bad">fora do sistema</span></td></tr>
+                <tr><td><code>#E8F3FF</code></td><td>LM 2 · fundo de bloco</td><td>branco gelo <code>#F5F9FC</code></td><td>4,51</td><td><span class="k-status warn">parecido, distinto</span></td></tr>
+                <tr><td><code>#555555</code></td><td>LM 2 · texto secundário</td><td><code>#576B86</code></td><td>14,54</td><td><span class="k-status warn">neutro puro</span></td></tr>
+                <tr><td><code>#00A4BD</code></td><td>os dois · link de descadastro</td><td>—</td><td>22,91</td><td><span class="k-status warn">padrão do HubSpot</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p class="comp-note warn"><b>Um defeito de acessibilidade real, não estético.</b> O cinza <code>#908C8C</code> do LM 1 sobre branco dá <b>3,33:1</b>. Isso reprova para texto de corpo — só passaria em texto grande (18,66px ou 14px em negrito). O LM 2 não tem esse problema: o cinza dele dá 7,46:1.</p>
+        <p class="comp-note"><b>E há uma diferença estrutural entre os dois, que é o que mais pesa:</b></p>
+        <div class="preview stack">
+          <div class="k-tbl-wrap">
+            <table class="k-tbl">
+              <thead><tr><th></th><th>Modelo LM 1</th><th>Modelo LM 2</th></tr></thead>
+              <tbody>
+                <tr><td>Botão de ação</td><td><span class="k-status ok">tem</span> — <code>#FEC008</code>, raio 28</td><td><span class="k-status bad">não tem</span></td></tr>
+                <tr><td>Texto do botão</td><td><code>#000000</code> puro, não o navy</td><td>—</td></tr>
+                <tr><td>Bloco de destaque</td><td>tem, com fundo lavanda</td><td>tem, com fundo azul claro</td></tr>
+                <tr><td>Contraste do corpo</td><td><span class="k-status bad">3,33:1 — reprova</span></td><td><span class="k-status ok">7,46:1</span></td></tr>
+                <tr><td>Tipografia</td><td>Arial</td><td>Arial</td></tr>
+                <tr><td>Argumento da copy</td><td>prova numérica (custo por item, faturamento)</td><td>urgência de mercado (a <span class="ea-nb">Reforma Tributária</span> como gatilho)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p class="comp-note cro"><b>Veredito: não descarte nenhum dos dois — funda.</b> O LM 2 tem a disciplina de cor (só um acento de marca, contraste passando em tudo); o LM 1 tem a estrutura completa (bloco de destaque + botão). Um e-mail de nutrição <b>sem botão</b>, como o LM 2, é falha estrutural, não de estilo. O modelo padrão da casa deveria ser <b>o esqueleto do LM 1 com a disciplina de cor do LM 2</b>.</p>
+        <p class="comp-note"><b>As 8 correções, na ordem de impacto:</b></p>
+        <div class="preview stack">
+          <div class="checklist">
+            <label><input type="checkbox"><span><b>1.</b> <code>#908C8C</code> → <code>#576B86</code>. Resolve a reprovação de contraste. É a única correção urgente.</span></label>
+            <label><input type="checkbox"><span><b>2.</b> Dar um botão ao LM 2. Sem CTA, o e-mail não tem para onde levar.</span></label>
+            <label><input type="checkbox"><span><b>3.</b> Texto do botão <code>#000000</code> → <code>#050634</code>. Sobre o âmbar a diferença é sutil, mas a regra é navy.</span></label>
+            <label><input type="checkbox"><span><b>4.</b> Raio do botão 28 → 100. O sistema é pílula.</span></label>
+            <label><input type="checkbox"><span><b>5.</b> <code>#6631BF</code> → <code>#772BF2</code> (roxo de vertical) ou <code>#2F24FF</code>.</span></label>
+            <label><input type="checkbox"><span><b>6.</b> <code>#DBC7FF</code> → <code>#E7E2FF</code> · <code>#E8F3FF</code> → <code>#DBE7FF</code> ou <code>#F5F9FC</code>.</span></label>
+            <label><input type="checkbox"><span><b>7.</b> Arial → <code>'Familjen Grotesk', Arial, sans-serif</code> no título e <code>'Manrope', Arial, sans-serif</code> no corpo. Em e-mail a fonte da marca cai para Arial em vários clientes — mas cai <i>bem</i>, e onde ela carrega o e-mail fica com a cara da casa.</span></label>
+            <label><input type="checkbox"><span><b>8.</b> <code>#00A4BD</code> do link de descadastro → <code>#2F24FF</code>. É o rodapé padrão do HubSpot; ninguém notou até agora.</span></label>
+          </div>
+        </div>
+        <p class="comp-note"><b>O que aproveitar sem tocar.</b> A copy dos dois é boa e tem argumentos diferentes e complementares — o LM 1 prova por número, o LM 2 por urgência de mercado. Isso é conteúdo, não forma. Manter os dois ângulos, e escolher por campanha.</p>
+        <p class="comp-note warn"><b>Prioridade honesta:</b> só o item 1 é correção de defeito. Os outros sete são alinhamento de identidade e podem entrar na próxima revisão de fluxo. Nenhum e-mail em produção precisa ser pausado por causa disso.</p>
+      </div>
+    
+<div class="comp">
+        <div class="comp-head"><h3>O modelo fundido — e a prova de fogo</h3><span class="id">ea-lm-2026</span></div>
+        <p class="comp-note">O diagnóstico acima virou entrega: o tema <code>ea-lm-2026</code> é o
+        <b>esqueleto do LM 1 com a disciplina de cor do LM 2</b>, codificado no mesmo padrão do
+        <span class="ea-nb">Radar Tributário</span> — CSS no template, módulo só com HubL e campos.
+        7 módulos, 640px, tabela e estilo inline.</p>
+        <div class="preview stack">
+          <div class="k-tbl-wrap">
+            <table class="k-tbl">
+              <thead><tr><th>Critério medido</th><th>LM 1</th><th>LM 2</th><th>Fundido</th></tr></thead>
+              <tbody>
+                <tr><td>Toda cor existe nos tokens (ΔE00 &lt; 1)</td><td><span class="k-status bad">5 fora</span></td><td><span class="k-status bad">4 fora</span></td><td><span class="k-status ok">16/16</span></td></tr>
+                <tr><td>Tipografia parte da marca</td><td><span class="k-status bad">Arial</span></td><td><span class="k-status bad">Arial</span></td><td><span class="k-status ok">sim</span></td></tr>
+                <tr><td>CTA <code>#FEC008</code> + navy + pílula</td><td><span class="k-status bad">parcial</span></td><td><span class="k-status bad">sem CTA</span></td><td><span class="k-status ok">sim</span></td></tr>
+                <tr><td>Contraste WCAG AA em todo texto</td><td><span class="k-status ok">passa</span></td><td><span class="k-status bad">3,54:1</span></td><td><span class="k-status ok">passa</span></td></tr>
+                <tr><td>Tabela + inline, sem flexbox, sem <code>&amp;&amp;</code></td><td><span class="k-status ok">passa</span></td><td><span class="k-status ok">passa</span></td><td><span class="k-status ok">passa</span></td></tr>
+                <tr><td>Expressões fiscais protegidas</td><td><span class="k-status warn">não</span></td><td><span class="k-status warn">não</span></td><td><span class="k-status ok">sim</span></td></tr>
+                <tr><td><b>Resultado</b></td><td><b>2/6</b></td><td><b>1/6</b></td><td><b>6/6</b></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p class="comp-note"><b>A cor do bloco de destaque é um campo de escolha</b> ligado às 6 paletas
+        de vertical. É o único ponto do e-mail onde a cor muda — o resto é fixo. Assim a peça se
+        adapta à campanha sem ninguém precisar digitar hexadecimal.</p>
+        <p class="comp-note warn"><b>A prova de fogo achou uma dívida no sistema, não no modelo novo.</b>
+        O token <code>#7377A0</code> — o "meta" que o tema da newsletter já usa — dá <b>4,31:1</b> sobre
+        branco e <b>reprova AA</b> para texto pequeno. Não foi o modelo que fugiu do tema: foi o tema que
+        tinha um token ruim. O modelo novo usa <code>#576B86</code> (5,45:1). <b>Vale revisar o
+        <code>ea-radar-news-2026</code> pelo mesmo motivo.</b></p>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre># subir (na pasta "Modelo LM e-A/")
+hs cms upload --account=ea-principal --cms-publish-mode=publish hubspot/ ea-lm-2026
+
+# depois: Marketing > E-mail > Criar > aba "Modelos codificados"
+#         escolher "Modelo LM - nutricao de material rico"</pre></div>
+        <p class="comp-note cro"><b>O que a prova de fogo é, e por que ela importa mais que o modelo.</b>
+        É um verificador que confronta uma peça contra o sistema sem opinião: mede ΔE00 de cada cor
+        contra a paleta inteira, checa a pilha tipográfica, a regra do CTA, o contraste de cada texto,
+        as regras de e-mail da casa e a proteção das expressões fiscais. Rodar isso antes de publicar
+        é o que impede o sistema de virar decoração — e foi assim que descobrimos o
+        <code>#7377A0</code>, que estava em produção há meses sem ninguém medir.</p>
+      </div>
+    </section>

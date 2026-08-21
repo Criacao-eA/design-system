@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="480" role="img" aria-label="Padrao e-Auditoria: grade de pontos 20px">
+  <defs>
+    <pattern id="ea-padrao-pontos" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="10" cy="10" r="1.1" fill="currentColor"/>
+    </pattern>
+  </defs>
+  <rect width="480" height="480" fill="url(#ea-padrao-pontos)"/>
+</svg>

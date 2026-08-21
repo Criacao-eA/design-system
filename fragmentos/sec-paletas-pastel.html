@@ -1,0 +1,590 @@
+<section id="paletas-pastel">
+  <div class="sec-head">
+    <h2>Paletas claras</h2>
+    <span class="tag marca">Marca</span>
+    <span class="tag web">Web</span>
+    <span class="tag novo">Novo na v3</span>
+  </div>
+  <p class="sec-desc">Versão em tom pastel das seis paletas de vertical. As campanhas que já rodaram
+  em pastel converteram melhor, então a escala clara deixa de ser improviso de cada landing page e
+  passa a ser parte da paleta. Cada vertical ganha quatro degraus: fundo de seção, superfície,
+  realce e a cor plena como acento. O pastel não substitui a paleta plena — ele carrega a área
+  grande, e a cor plena continua sendo o que marca o dado, o ícone e o CTA.</p>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Método de derivação</h3><span class="id">mistura-com-branco-srgb</span></div>
+    <div class="preview stack">
+      <p class="k-pp-lead">Uma única operação para as seis verticais: mistura da cor plena com branco
+      em sRGB. Por canal, <code>saída = 255 − (255 − canal) × t</code>. Três degraus fixos de
+      <code>t</code>, mais a cor plena.</p>
+      <div class="k-pp-steps">
+        <div class="k-pp-step">
+          <div class="k-pp-chip" style="background:#EDF5FF"></div>
+          <b>Fundo de seção</b><span>t = 8%</span>
+          <em>Faixa inteira. Quase branco, mas com o matiz da vertical.</em>
+        </div>
+        <div class="k-pp-step">
+          <div class="k-pp-chip" style="background:#E0EEFF"></div>
+          <b>Superfície</b><span>t = 14%</span>
+          <em>Card, painel, caixa de destaque sobre o fundo de seção.</em>
+        </div>
+        <div class="k-pp-step">
+          <div class="k-pp-chip" style="background:#C2DDFF"></div>
+          <b>Realce</b><span>t = 28%</span>
+          <em>Selo, badge, cabeçalho de tabela, quadrado de ícone.</em>
+        </div>
+        <div class="k-pp-step">
+          <div class="k-pp-chip" style="background:#2486FF"></div>
+          <b>Acento</b><span>t = 100%</span>
+          <em>A cor plena. Número, traço de gráfico, ícone, borda ativa.</em>
+        </div>
+      </div>
+      <div class="k-pp-calib">
+        <b>Por que 8 / 14 / 28 e não outro número.</b>
+        <p>Os degraus foram calibrados contra os pastéis que já estão no ar na LP de Planejamento
+        Tributário, não escolhidos no olho. Aplicando a mistura sobre o azul <code>#2486FF</code>:</p>
+        <table class="k-pp-tab">
+          <thead><tr><th>t</th><th>Derivado</th><th>Produção</th><th>Δ por canal (0–255)</th></tr></thead>
+          <tbody>
+            <tr><td>8%</td><td><span class="k-pp-dot" style="background:#EDF5FF"></span>#EDF5FF</td><td><span class="k-pp-dot" style="background:#EDF3FF"></span>#EDF3FF <code>--p-mist</code></td><td>0 / 2 / 0</td></tr>
+            <tr><td>14%</td><td><span class="k-pp-dot" style="background:#E0EEFF"></span>#E0EEFF</td><td><span class="k-pp-dot" style="background:#E1EEFF"></span>#E1EEFF <code>--p-blue</code></td><td>1 / 0 / 0</td></tr>
+            <tr><td>28%</td><td><span class="k-pp-dot" style="background:#C2DDFF"></span>#C2DDFF</td><td><span class="k-pp-dot" style="background:#C4DCFF"></span>#C4DCFF <code>--p-blue-2</code></td><td>2 / 1 / 0</td></tr>
+          </tbody>
+        </table>
+        <p>Diferença máxima de 2 em 255. O que a designer fez à mão na LP é a mesma curva — a
+        fórmula só torna repetível para as outras cinco verticais.</p>
+      </div>
+    </div>
+    <p class="comp-note">Misture em sRGB, não em OKLCH nem em HSL. OKLCH clareia mantendo croma e
+    devolve pastéis mais saturados que os de produção; HSL desloca o matiz do ciano. Os valores
+    acima só batem com o que está no ar se a mistura for em sRGB.</p>
+    <p class="comp-note warn">Não gere os degraus com <code>opacity</code> sobre fundo branco. Fica
+    igual no monitor e diferente na hora que a seção sobe num fundo que não é branco — e todo card
+    que herdar a opacidade fica translúcido junto. Grave o hexadecimal.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>/* mesma operação para as seis verticais — base = cor dominante da paleta */
+--pp-fundo:      color-mix(in srgb, var(--cor-plena)  8%, #FFFFFF);
+--pp-superficie: color-mix(in srgb, var(--cor-plena) 14%, #FFFFFF);
+--pp-realce:     color-mix(in srgb, var(--cor-plena) 28%, #FFFFFF);
+--pp-acento:     var(--cor-plena);
+
+/* fallback para WordPress: grave o hexadecimal resolvido.
+   color-mix() não chega em navegador antigo e a regra inteira cai. */
+--pp-fundo:#EDF5FF; --pp-superficie:#E0EEFF; --pp-realce:#C2DDFF; --pp-acento:#2486FF;</pre></div>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>As seis escalas claras</h3><span class="id">pastel/vertical</span></div>
+    <div class="preview stack">
+      <div class="k-pp-grid">
+
+        <article class="k-pp-esc">
+          <header><h4>Integrar</h4><span class="k-pp-base">base #772BF2 · 66%</span></header>
+          <div class="k-pp-ramp">
+            <div class="k-pp-t" style="background:#F4EEFE"><b>#F4EEFE</b><i>fundo · 8%</i></div>
+            <div class="k-pp-t" style="background:#ECE1FD"><b>#ECE1FD</b><i>superfície · 14%</i></div>
+            <div class="k-pp-t" style="background:#D9C4FB"><b>#D9C4FB</b><i>realce · 28%</i></div>
+            <div class="k-pp-t k-pp-t--full" style="background:#772BF2"><b>#772BF2</b><i>acento · pleno</i></div>
+          </div>
+          <p class="k-pp-alt">Realce alternativo, da 2ª cor <b>#4F45F5</b> a 28%:
+            <span class="k-pp-dot" style="background:#CECBFC"></span>#CECBFC</p>
+        </article>
+
+        <article class="k-pp-esc">
+          <header><h4>Atualizar regras fiscais</h4><span class="k-pp-base">base #00FFEA · 39%</span></header>
+          <div class="k-pp-ramp">
+            <div class="k-pp-t" style="background:#EBFFFD"><b>#EBFFFD</b><i>fundo · 8%</i></div>
+            <div class="k-pp-t" style="background:#DBFFFC"><b>#DBFFFC</b><i>superfície · 14%</i></div>
+            <div class="k-pp-t" style="background:#B8FFF9"><b>#B8FFF9</b><i>realce · 28%</i></div>
+            <div class="k-pp-t k-pp-t--full" style="background:#00FFEA"><b>#00FFEA</b><i>acento · pleno</i></div>
+          </div>
+          <p class="k-pp-alt">Realce alternativo, da 2ª cor <b>#2486FF</b> a 28%:
+            <span class="k-pp-dot" style="background:#C2DDFF"></span>#C2DDFF</p>
+        </article>
+
+        <article class="k-pp-esc">
+          <header><h4>Auditar arquivos</h4><span class="k-pp-base">base #2F24FF · 39%</span></header>
+          <div class="k-pp-ramp">
+            <div class="k-pp-t" style="background:#EEEDFF"><b>#EEEDFF</b><i>fundo · 8%</i></div>
+            <div class="k-pp-t" style="background:#E2E0FF"><b>#E2E0FF</b><i>superfície · 14%</i></div>
+            <div class="k-pp-t" style="background:#C5C2FF"><b>#C5C2FF</b><i>realce · 28%</i></div>
+            <div class="k-pp-t k-pp-t--full" style="background:#2F24FF"><b>#2F24FF</b><i>acento · pleno</i></div>
+          </div>
+          <p class="k-pp-alt">Realce alternativo, da 2ª cor <b>#2486FF</b> a 28%:
+            <span class="k-pp-dot" style="background:#C2DDFF"></span>#C2DDFF</p>
+        </article>
+
+        <article class="k-pp-esc">
+          <header><h4>Recuperar crédito</h4><span class="k-pp-base">base #2486FF · 39%</span></header>
+          <div class="k-pp-ramp">
+            <div class="k-pp-t" style="background:#EDF5FF"><b>#EDF5FF</b><i>fundo · 8%</i></div>
+            <div class="k-pp-t" style="background:#E0EEFF"><b>#E0EEFF</b><i>superfície · 14%</i></div>
+            <div class="k-pp-t" style="background:#C2DDFF"><b>#C2DDFF</b><i>realce · 28%</i></div>
+            <div class="k-pp-t k-pp-t--full" style="background:#2486FF"><b>#2486FF</b><i>acento · pleno</i></div>
+          </div>
+          <p class="k-pp-alt">Realce alternativo, da 2ª cor <b>#2F24FF</b> a 28%:
+            <span class="k-pp-dot" style="background:#C5C2FF"></span>#C5C2FF</p>
+        </article>
+
+        <article class="k-pp-esc k-pp-esc--prod">
+          <header><h4><span class="ea-nb">Reforma Tributária</span></h4><span class="k-pp-base">base #2486FF · 40%</span></header>
+          <div class="k-pp-ramp">
+            <div class="k-pp-t" style="background:#EDF3FF"><b>#EDF3FF</b><i>fundo · <code>--p-mist</code></i></div>
+            <div class="k-pp-t" style="background:#E1EEFF"><b>#E1EEFF</b><i>superfície · <code>--p-blue</code></i></div>
+            <div class="k-pp-t" style="background:#C4DCFF"><b>#C4DCFF</b><i>realce · <code>--p-blue-2</code></i></div>
+            <div class="k-pp-t k-pp-t--full" style="background:#2486FF"><b>#2486FF</b><i>acento · pleno</i></div>
+          </div>
+          <p class="k-pp-selo">Verificado em produção — LP de Planejamento Tributário</p>
+          <p class="k-pp-alt">Realce alternativo, da 2ª cor <b>#772BF2</b> a 28%:
+            <span class="k-pp-dot" style="background:#D9C4FB"></span>#D9C4FB</p>
+        </article>
+
+        <article class="k-pp-esc">
+          <header><h4>Corrigir SPED</h4><span class="k-pp-base">base #772BF2 · 40%</span></header>
+          <div class="k-pp-ramp">
+            <div class="k-pp-t" style="background:#F4EEFE"><b>#F4EEFE</b><i>fundo · 8%</i></div>
+            <div class="k-pp-t" style="background:#ECE1FD"><b>#ECE1FD</b><i>superfície · 14%</i></div>
+            <div class="k-pp-t" style="background:#D9C4FB"><b>#D9C4FB</b><i>realce · 28%</i></div>
+            <div class="k-pp-t k-pp-t--full" style="background:#772BF2"><b>#772BF2</b><i>acento · pleno</i></div>
+          </div>
+          <p class="k-pp-alt">Realce alternativo, da 2ª cor <b>#2486FF</b> a 28%:
+            <span class="k-pp-dot" style="background:#C2DDFF"></span>#C2DDFF</p>
+        </article>
+
+      </div>
+    </div>
+    <p class="comp-note">A base de cada escala é a cor de maior participação na paleta plena. Só ela
+    entra nos três degraus claros — misturar duas cores no mesmo fundo produz um cinza-lilás que não
+    pertence a vertical nenhuma.</p>
+    <p class="comp-note">A escala de <span class="ea-nb">Reforma Tributária</span> não foi derivada:
+    são os tokens <code>--p-*</code> que já estão no ar. A derivação por 8 / 14 / 28 chegaria em
+    #EDF5FF / #E0EEFF / #C2DDFF — diferença de até 2 em 255. Quando existe cor em produção, produção ganha.</p>
+    <p class="comp-note warn">Duas colisões, de propósito: Integrar e Corrigir SPED têm a mesma
+    dominante (#772BF2) e portanto a mesma escala clara; Recuperar crédito e
+    <span class="ea-nb">Reforma Tributária</span> compartilham #2486FF. A vertical não se distingue
+    pelo fundo — se distingue pelo acento e pelo realce alternativo. Se a peça precisa dizer qual
+    vertical é olhando só a área clara, use o realce alternativo: Integrar fica em #CECBFC (violeta)
+    e Corrigir SPED em #C2DDFF (azul).</p>
+    <p class="comp-note warn">O pastel de ciano (#EBFFFD / #DBFFFC / #B8FFF9) é superfície e pode
+    ocupar área grande. Isso não libera o ciano pleno #00FFEA: ele continua sendo acento sobre fundo
+    escuro. Ciano pleno em área grande sobre claro vira zona morta — 1,27:1 contra branco.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>/* escala clara por vertical — cole no bloco de tokens da landing page */
+.lp-corrigir-sped{
+  --pp-fundo:#F4EEFE;       /* fundo de seção  — 8%  de #772BF2 */
+  --pp-superficie:#ECE1FD;  /* card, painel    — 14% de #772BF2 */
+  --pp-realce:#D9C4FB;      /* selo, badge     — 28% de #772BF2 */
+  --pp-realce-2:#C2DDFF;    /* 28% da 2ª cor #2486FF */
+  --pp-acento:#772BF2;      /* número, ícone, borda ativa */
+}
+.lp-corrigir-sped .secao--clara{ background:var(--pp-fundo); }
+.lp-corrigir-sped .card{ background:var(--pp-superficie); border:1px solid rgba(5,6,52,.07); }
+.lp-corrigir-sped .selo{ background:var(--pp-realce); color:#050634; }</pre></div>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Contraste — quem aguenta texto e quem não aguenta</h3><span class="id">wcag/navy-050634</span></div>
+    <div class="preview stack">
+      <p class="k-pp-lead">Razões calculadas pela fórmula WCAG 2.x sobre luminância relativa sRGB.
+      Corpo de texto precisa de 4,5:1; texto grande (a partir de 24px, ou 18,66px em negrito) precisa de 3:1.</p>
+
+      <h5 class="k-pp-h5">Os dezoito pastéis servem de fundo para texto navy #050634</h5>
+      <table class="k-pp-tab k-pp-tab--wide">
+        <thead><tr><th>Tom</th><th>Degrau</th><th>Navy #050634</th><th>Texto secundário #3D4063</th><th>Texto terciário #6B6E8C</th></tr></thead>
+        <tbody>
+          <tr><td><span class="k-pp-dot" style="background:#EBFFFD"></span>#EBFFFD</td><td>fundo · ciano</td><td class="ok">18,72 AAA</td><td class="ok">—</td><td>—</td></tr>
+          <tr><td><span class="k-pp-dot" style="background:#EDF5FF"></span>#EDF5FF</td><td>fundo · azul</td><td class="ok">17,66 AAA</td><td class="ok">—</td><td>—</td></tr>
+          <tr><td><span class="k-pp-dot" style="background:#EDF3FF"></span>#EDF3FF</td><td>fundo · produção</td><td class="ok">17,43 AAA</td><td class="ok">—</td><td>—</td></tr>
+          <tr><td><span class="k-pp-dot" style="background:#F4EEFE"></span>#F4EEFE</td><td>fundo · roxo</td><td class="ok">17,10 AAA</td><td class="ok">—</td><td>—</td></tr>
+          <tr><td><span class="k-pp-dot" style="background:#EEEDFF"></span>#EEEDFF</td><td>fundo · íris</td><td class="ok">16,81 AAA</td><td class="ok">—</td><td>—</td></tr>
+          <tr><td><span class="k-pp-dot" style="background:#B8FFF9"></span>#B8FFF9</td><td>realce · ciano</td><td class="ok">17,29 AAA</td><td class="ok">8,86 AAA</td><td class="ok">4,42 falha AA</td></tr>
+          <tr><td><span class="k-pp-dot" style="background:#C2DDFF"></span>#C2DDFF</td><td>realce · azul</td><td class="ok">13,94 AAA</td><td class="ok">7,14 AAA</td><td class="no">3,56 falha AA</td></tr>
+          <tr><td><span class="k-pp-dot" style="background:#C4DCFF"></span>#C4DCFF</td><td>realce · produção</td><td class="ok">13,89 AAA</td><td class="ok">7,12 AAA</td><td class="no">3,55 falha AA</td></tr>
+          <tr><td><span class="k-pp-dot" style="background:#CECBFC"></span>#CECBFC</td><td>realce · violeta</td><td class="ok">12,54 AAA</td><td class="ok">6,43 AA</td><td class="no">3,21 falha AA</td></tr>
+          <tr><td><span class="k-pp-dot" style="background:#D9C4FB"></span>#D9C4FB</td><td>realce · roxo</td><td class="ok">12,23 AAA</td><td class="ok">6,27 AA</td><td class="no">3,13 falha AA</td></tr>
+          <tr><td><span class="k-pp-dot" style="background:#C5C2FF"></span>#C5C2FF</td><td>realce · íris <b>(pior caso)</b></td><td class="ok">11,58 AAA</td><td class="ok">5,94 AA</td><td class="no">2,96 falha AA</td></tr>
+        </tbody>
+      </table>
+      <p class="k-pp-lead k-pp-lead--tight">Pior caso de toda a família: <b>11,58:1</b>. Nenhum pastel
+      da escala reprova para texto navy — nem no degrau de realce.</p>
+
+      <h5 class="k-pp-h5">Estes NÃO servem de fundo para texto navy</h5>
+      <div class="k-pp-fail">
+        <div class="k-pp-fail__i" style="background:#2F24FF"><b>#2F24FF</b><span>navy 2,60 — reprova</span><em>branco 7,45 — use branco</em></div>
+        <div class="k-pp-fail__i" style="background:#772BF2"><b>#772BF2</b><span>navy 3,15 — reprova</span><em>branco 6,15 — use branco</em></div>
+        <div class="k-pp-fail__i" style="background:#4F45F5"><b>#4F45F5</b><span>navy 3,24 — reprova</span><em>branco 6,00 — use branco</em></div>
+        <div class="k-pp-fail__i" style="background:#050634"><b>#050634</b><span>navy 1,00 — invisível</span><em>branco 19,41 — use branco</em></div>
+      </div>
+      <p class="k-pp-lead k-pp-lead--tight">São exatamente as cores plenas. A regra prática: pastel
+      aceita navy, pleno pede branco.</p>
+
+      <h5 class="k-pp-h5">Os dois casos que exigem decisão</h5>
+      <div class="k-pp-cases">
+        <div class="k-pp-case">
+          <div class="k-pp-case__sw" style="background:#2486FF"></div>
+          <div>
+            <b>#2486FF pleno</b>
+            <p>Navy <b>5,48</b> passa AA para corpo. Branco <b>3,54</b> reprova para corpo e só passa
+            em texto grande. No azul pleno o texto certo é navy, não branco — é a única cor plena da
+            marca onde isso acontece. E é o motivo de #2486FF não virar fundo de CTA: nenhum dos dois
+            textos fica confortável. Ele é cor de dado e de gráfico.</p>
+          </div>
+        </div>
+        <div class="k-pp-case">
+          <div class="k-pp-case__sw" style="background:#00FFEA"></div>
+          <div>
+            <b>#00FFEA pleno</b>
+            <p>Navy <b>15,24</b> — o número passa, mas ciano pleno em área grande sobre fundo claro
+            some (1,27:1 contra branco) e vibra na tela. Continua sendo acento sobre fundo escuro. Para
+            área clara existe o pastel de ciano.</p>
+          </div>
+        </div>
+      </div>
+
+      <h5 class="k-pp-h5">A cor plena como texto sobre o próprio pastel</h5>
+      <div class="k-pp-onown">
+        <span class="k-pp-onown__i" style="background:#E7EEFF;color:#2F24FF">#2F24FF sobre #E7EEFF — 6,41 · passa</span>
+        <span class="k-pp-onown__i" style="background:#D9C4FB;color:#772BF2">#772BF2 sobre #D9C4FB — 3,88 · reprova</span>
+        <span class="k-pp-onown__i" style="background:#EDF3FF;color:#2486FF">#2486FF sobre #EDF3FF — 3,18 · reprova</span>
+      </div>
+    </div>
+    <p class="comp-note">Texto terciário #6B6E8C reprova em todos os degraus de realce (2,96 a 4,42).
+    Sobre realce, desça no máximo até o secundário #3D4063. Legenda cinza-clara sobre badge pastel
+    é o erro mais comum dessa família.</p>
+    <p class="comp-note">O único caso em que a cor plena funciona como texto sobre o próprio pastel é
+    o íris #2F24FF sobre #E7EEFF (6,41). É o que a LP de Planejamento faz nos badges. Azul e roxo
+    plenos reprovam sobre o pastel deles — nesses use navy.</p>
+    <p class="comp-note cro">O CTA não muda com o pastel. <span class="ea-nb">#FEC008</span> com texto
+    navy #050634 dá <b>11,79:1</b> e é o maior contraste disponível na marca depois do navy sólido —
+    é justamente por isso que ele é o padrão. Sobre fundo pastel o amarelo fica mais isolado ainda,
+    porque não divide matiz com a superfície.</p>
+    <p class="comp-note warn">Não teste contraste com captura de tela do Figma. O <span class="ea-brand">e-Auditoria</span>
+    aplica essas cores dentro do WordPress, onde o tema injeta fundo branco atrás de seção. Se o pastel
+    cair, o texto continua legível — mas o realce some. Teste no bloco publicado.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;!-- texto sobre pastel: navy sempre; secundário só até o realce --&gt;
+&lt;div class="secao--clara"&gt;                 &lt;!-- #EDF3FF · navy 17,43 --&gt;
+  &lt;span class="selo"&gt;Novo&lt;/span&gt;            &lt;!-- #C4DCFF + #050634 · 13,89 --&gt;
+  &lt;h2&gt;Simulador da&amp;nbsp;Reforma&amp;nbsp;Tributária&lt;/h2&gt;
+  &lt;p class="apoio"&gt;Para o&amp;nbsp;Simples&amp;nbsp;Nacional&lt;/p&gt;  &lt;!-- #3D4063 · 7,12 --&gt;
+  &lt;a class="cta"&gt;Agendar demonstração&lt;/a&gt;   &lt;!-- #FEC008 + #050634 · 11,79 --&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Pleno x pastel</h3><span class="id">quando-usar-cada-um</span></div>
+    <div class="preview">
+      <div class="k-pp-vs">
+        <div class="k-pp-vs__col">
+          <span class="k-pp-vs__tag">Pleno</span>
+          <div class="k-pp-mini k-pp-mini--pleno">
+            <span class="k-pp-mini__eyebrow">Recuperar crédito</span>
+            <span class="k-pp-mini__num">R$ 1,4 mi</span>
+            <span class="k-pp-mini__lbl">recuperado em 12 meses</span>
+            <span class="k-pp-mini__bars">
+              <i style="height:38%"></i><i style="height:56%"></i><i style="height:74%"></i><i style="height:100%"></i>
+            </span>
+          </div>
+          <ul class="k-pp-use">
+            <li><b>Acento</b> — ícone, borda ativa, sublinhado de link.</li>
+            <li><b>Dado</b> — número grande, traço de gráfico, variação.</li>
+            <li><b>CTA</b> — o botão; e mesmo aqui o padrão da marca é amarelo #FEC008, não a cor da vertical.</li>
+          </ul>
+          <p class="k-pp-lim">Limite: pleno em área maior que um cartão cansa e come o CTA. Se a
+          seção inteira é da cor da vertical, o botão amarelo perde a função de ser a coisa mais forte da tela.</p>
+        </div>
+        <div class="k-pp-vs__col">
+          <span class="k-pp-vs__tag k-pp-vs__tag--alt">Pastel</span>
+          <div class="k-pp-mini k-pp-mini--pastel">
+            <span class="k-pp-mini__eyebrow">Recuperar crédito</span>
+            <span class="k-pp-mini__num">R$ 1,4 mi</span>
+            <span class="k-pp-mini__lbl">recuperado em 12 meses</span>
+            <span class="k-pp-mini__bars">
+              <i style="height:38%"></i><i style="height:56%"></i><i style="height:74%"></i><i style="height:100%"></i>
+            </span>
+          </div>
+          <ul class="k-pp-use">
+            <li><b>Superfície</b> — card, painel, caixa de citação, tabela zebrada.</li>
+            <li><b>Fundo de seção</b> — a faixa inteira, para separar dobras sem recorrer a escuro.</li>
+            <li><b>Realce</b> — selo, badge, cabeçalho de tabela, quadrado atrás do ícone.</li>
+          </ul>
+          <p class="k-pp-lim">Limite: pastel não é acento. Número em pastel, ícone em pastel e CTA em
+          pastel somem. Se o elemento tem que ser lido primeiro, ele é pleno.</p>
+        </div>
+      </div>
+    </div>
+    <p class="comp-note">Os dois cartões acima têm o mesmo conteúdo. O da esquerda usa #2486FF como
+    fundo; o da direita usa #EDF5FF de fundo, #C2DDFF no realce e guarda #2486FF só para o número e
+    as barras. O da direita hierarquiza — dá para dizer o que ler primeiro.</p>
+    <p class="comp-note">Regra curta: <b>pleno para acento, dado e CTA; pastel para superfície e fundo
+    de seção.</b> Numa dobra clara, o pleno deve ocupar bem menos que um quinto da área.</p>
+    <p class="comp-note warn">Pastel não substitui as dobras escuras. O tema da casa é claro com
+    seções escuras pontuais, e é a seção escura que dá o respiro e devolve o ciano. Página inteira em
+    pastel achata a leitura e tira o único lugar onde #00FFEA funciona.</p>
+    <p class="comp-note cro">O ganho das campanhas em pastel não veio da cor bonita — veio do CTA
+    ficar sozinho na tela. Ao trocar uma dobra plena por pastel, confira se o amarelo continua sendo o
+    elemento de maior contraste da dobra. Se não for, a troca foi perda.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>/* proporção alvo dentro de uma dobra clara */
+fundo de seção  --pp-fundo         ~ 70% da área
+superfície      --pp-superficie    ~ 20%
+realce          --pp-realce        ~  7%
+acento pleno    --pp-acento        ~  3%   /* número, ícone, borda */
+CTA             #FEC008 + #050634  /* fora da conta: é o ponto único de decisão */</pre></div>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Estudo de caso — Simulador da <span class="ea-nb">Reforma Tributária</span> para o <span class="ea-nb">Simples Nacional</span></h3><span class="id">lp-reforma · lilás-dominante</span></div>
+    <div class="preview stack">
+      <p class="k-pp-lead">Campanha filha da vertical <span class="ea-nb">Reforma Tributária</span>.
+      Os pastéis estão gravados direto nos degradês do arquivo
+      <code>arquivos-wordpress/lp-reforma-2-css.css</code>, sem token — foram feitos à mão, antes
+      desta escala existir.</p>
+      <div class="k-pp-caso">
+        <div class="k-pp-caso__ramp">
+          <div class="k-pp-t" style="background:#F5F9FC"><b>#F5F9FC</b><i>base da página</i></div>
+          <div class="k-pp-t" style="background:#F0EBFF"><b>#F0EBFF</b><i>seção clara · topo</i></div>
+          <div class="k-pp-t" style="background:#EDE8FF"><b>#EDE8FF</b><i>dobra de CTA · topo</i></div>
+          <div class="k-pp-t" style="background:#E8F0FF"><b>#E8F0FF</b><i>dobra de CTA · meio</i></div>
+          <div class="k-pp-t" style="background:#E8E4FF"><b>#E8E4FF</b><i>faixa de números · topo</i></div>
+          <div class="k-pp-t" style="background:#E7DEFF"><b>#E7DEFF</b><i>seção clara · base</i></div>
+          <div class="k-pp-t" style="background:#E5DAFF"><b>#E5DAFF</b><i>hero · ponto 100%</i></div>
+          <div class="k-pp-t" style="background:#DDD6FE"><b>#DDD6FE</b><i>hero · ponto 0%</i></div>
+          <div class="k-pp-t" style="background:#C7DBFF"><b>#C7DBFF</b><i>hero · ponto 48%</i></div>
+        </div>
+        <div class="k-pp-caso__demo k-pp-caso__demo--sim">
+          <span class="k-pp-caso__eyebrow">Como o hero se monta</span>
+          <p>Três brilhos radiais — roxo <code>rgba(132,57,230,.40)</code>, azul
+          <code>rgba(36,136,255,.34)</code> e ciano <code>rgba(0,255,234,.14)</code> — sobre um
+          degradê linear de 220°. O ciano entra a 14% de opacidade: presente, nunca dominante.</p>
+        </div>
+      </div>
+      <p class="k-pp-lead k-pp-lead--tight"><b>Leitura:</b> a escala é lilás/violeta dominante. O
+      hero abre em #DDD6FE, passa por #C7DBFF e fecha em #E5DAFF; as seções claras e a faixa de
+      números ficam na família #F0EBFF → #E7DEFF. É a vertical
+      <span class="ea-nb">Reforma Tributária</span> com a segunda e a terceira cor da paleta
+      (#772BF2 e #4F45F5) promovidas a superfície, e o azul dominante #2486FF recuado para brilho e
+      para acento. Contraste com navy entre 13,87 e 18,33 — a faixa inteira passa AAA.</p>
+    </div>
+    <p class="comp-note">Relação com a vertical: a paleta plena de <span class="ea-nb">Reforma Tributária</span>
+    é #2486FF 40%, #772BF2 22%, #4F45F5 19%, #00FFEA 19%. Esta LP inverteu a ordem na área clara sem
+    trocar nenhuma cor — continua sendo a mesma paleta, só que com o roxo na superfície.</p>
+    <p class="comp-note warn">Os hexadecimais estão soltos dentro de <code>linear-gradient()</code>,
+    repetidos no bloco de <code>!important</code> que reseta o fundo do tema. São nove valores em dois
+    lugares. Em página nova, declare os degraus como token uma vez e referencie — senão o ajuste de
+    cor tem que ser feito duas vezes e uma delas sempre é esquecida.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>/* Simulador da Reforma Tributária para o Simples Nacional — como está em produção */
+.lp-reforma .hero{
+  background:
+    radial-gradient(ellipse 50% 45% at 85% 12%, rgba(132,57,230,0.40), transparent 64%),
+    radial-gradient(ellipse 55% 45% at 12% 88%, rgba(36,136,255,0.34), transparent 60%),
+    radial-gradient(ellipse 38% 30% at 60% 60%, rgba(0,255,234,0.14), transparent 70%),
+    linear-gradient(220deg,#DDD6FE 0%,#C7DBFF 48%,#E5DAFF 100%);
+}
+.lp-reforma .section--soft { background:linear-gradient(180deg,#F0EBFF 0%,#E7DEFF 100%); }
+.lp-reforma .section--stats{ background:linear-gradient(180deg,#E8E4FF 0%,#DDD6FE 100%); }</pre></div>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h3>Estudo de caso — Planejamento Tributário na <span class="ea-nb">Reforma Tributária</span></h3><span class="id">lp-ptr · azul-dominante</span></div>
+    <div class="preview stack">
+      <p class="k-pp-lead">A outra campanha filha da mesma vertical. Aqui os pastéis já são <b>tokens
+      nomeados</b> no bloco <code>.lp-ptr</code> de <code>arquivos-wordpress/lp-planejamento-2-css.css</code>.
+      É esta LP que fixou a escala oficial de <span class="ea-nb">Reforma Tributária</span>.</p>
+      <div class="k-pp-caso">
+        <div class="k-pp-caso__ramp">
+          <div class="k-pp-t" style="background:#F8FAFD"><b>#F8FAFD</b><i><code>--g-50</code> · base</i></div>
+          <div class="k-pp-t" style="background:#EDF3FF"><b>#EDF3FF</b><i><code>--p-mist</code> · fundo</i></div>
+          <div class="k-pp-t" style="background:#E7EEFF"><b>#E7EEFF</b><i><code>--p-peri</code> · badge</i></div>
+          <div class="k-pp-t" style="background:#E1EEFF"><b>#E1EEFF</b><i><code>--p-blue</code> · superfície</i></div>
+          <div class="k-pp-t" style="background:#DFE5FF"><b>#DFE5FF</b><i><code>--p-indigo</code></i></div>
+          <div class="k-pp-t" style="background:#DAF9FF"><b>#DAF9FF</b><i><code>--p-cyan</code></i></div>
+          <div class="k-pp-t" style="background:#D3E2FF"><b>#D3E2FF</b><i><code>--p-peri-2</code> · borda</i></div>
+          <div class="k-pp-t" style="background:#C4DCFF"><b>#C4DCFF</b><i><code>--p-blue-2</code> · realce</i></div>
+        </div>
+        <div class="k-pp-caso__demo k-pp-caso__demo--ptr">
+          <span class="k-pp-caso__badge">Novo módulo</span>
+          <span class="k-pp-caso__eyebrow">Badge em produção</span>
+          <p>Fundo <code>--p-peri</code> #E7EEFF com texto <code>--violet-deep</code> #2F24FF: 6,41:1.
+          É o único par cor-plena-sobre-pastel da marca que passa AA. Abaixo, a borda de
+          <code>--p-peri-2</code> #D3E2FF separando bloco sem usar linha cinza.</p>
+        </div>
+      </div>
+      <p class="k-pp-lead k-pp-lead--tight"><b>Leitura:</b> escala deliberadamente azul-dominante.
+      O próprio arquivo registra a decisão em comentário: os tons foram puxados para periwinkle, sky e
+      ciano justamente para não parecer o Simulador, e o violeta ficou só como acento — com a instrução
+      de que ajuste futuro puxa para o azul, nunca para o lilás. Os degraus batem com a derivação
+      8 / 14 / 28 sobre #2486FF dentro de 2 em 255, o que torna esta LP a referência da vertical.</p>
+      <div class="k-pp-irmas">
+        <div class="k-pp-irmas__c" style="background:#DDD6FE"><b>Simulador</b><span>lilás-dominante</span></div>
+        <div class="k-pp-irmas__arrow" aria-hidden="true">
+          <svg viewBox="0 0 48 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 12h40"/><path d="m36 5 7 7-7 7"/>
+          </svg>
+        </div>
+        <div class="k-pp-irmas__c" style="background:#C4DCFF"><b>Planejamento</b><span>azul-dominante</span></div>
+      </div>
+      <p class="k-pp-lead k-pp-lead--tight">Mesma vertical, mesma paleta plena, nenhum matiz novo
+      inventado. As duas campanhas se distinguem por <b>qual cor da paleta sobe para a superfície</b>.
+      É esse o mecanismo de diferenciação entre campanhas irmãs — e é por isso que a seção anterior
+      registra um realce alternativo em cada escala.</p>
+    </div>
+    <p class="comp-note">Quando abrir uma terceira campanha de <span class="ea-nb">Reforma Tributária</span>,
+    o giro que sobra é o ciano: <code>--p-cyan</code> #DAF9FF como superfície, azul como acento.
+    Não crie um matiz que não esteja na paleta plena da vertical.</p>
+    <p class="comp-note">Os neutros <code>--g-50</code> a <code>--g-300</code> desta LP são cinzas
+    levemente azulados, não cinzas puros. Cinza neutro ao lado de pastel azul aparece amarelado.
+    Se a página tem pastel, o neutro dela também é frio.</p>
+    <p class="comp-note warn">Repare que o arquivo de origem não contém, de propósito, nenhum literal
+    de fechamento de tag de estilo — nem dentro de comentário. É bloco HTML Personalizado do
+    WordPress: o navegador encerraria a folha ali e o resto do CSS cairia. Ao copiar trecho desses
+    arquivos para outra página, o mesmo cuidado vale.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>/* escala oficial da vertical Reforma Tributária — .lp-ptr, em produção */
+--p-mist:#EDF3FF;    /* fundo de seção                        navy 17,43 */
+--p-peri:#E7EEFF;    /* badge; aceita texto #2F24FF           navy 16,70 */
+--p-blue:#E1EEFF;    /* superfície de card                    navy 16,52 */
+--p-indigo:#DFE5FF;  /* superfície alternativa                navy 15,52 */
+--p-cyan:#DAF9FF;    /* superfície de ícone                   navy 17,54 */
+--p-peri-2:#D3E2FF;  /* borda, divisória                      navy 14,87 */
+--p-blue-2:#C4DCFF;  /* realce                                navy 13,89 */
+
+/* acentos plenos, sem mistura */
+--blue:#2488FF; --violet:#4F45F5; --violet-deep:#2F24FF; --purple:#8439E6; --cyan:#00FFEA;</pre></div>
+  </div>
+</section>
+
+<!--CSS-INICIO-->
+/* ---- Paletas claras (secao paletas-pastel) ---- */
+/* .ea-nb: expressoes fiscais que nunca quebram linha. Definicao idempotente. */
+.ea-nb{white-space:nowrap}
+
+.k-pp-lead{color:var(--ink-soft);font-size:14.5px;line-height:1.65;max-width:76ch;margin:0}
+.k-pp-lead--tight{margin-top:2px}
+.k-pp-lead b{color:var(--ink)}
+.k-pp-h5{font-family:var(--font-display);font-size:14px;font-weight:700;color:var(--ink);
+  margin:22px 0 0;letter-spacing:.01em}
+.k-pp-h5:first-of-type{margin-top:4px}
+
+.k-pp-steps{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));width:100%}
+.k-pp-step{border:1px solid var(--line);border-radius:var(--r-md);background:var(--panel);
+  padding:0 0 12px;overflow:hidden}
+.k-pp-chip{height:52px}
+.k-pp-step b{display:block;font-size:13.5px;color:var(--ink);padding:11px 12px 0}
+.k-pp-step span{display:block;font-family:var(--font-mono);font-size:11.5px;color:var(--ink-soft);padding:2px 12px 0}
+.k-pp-step em{display:block;font-style:normal;font-size:12.5px;color:var(--ink-soft);padding:7px 12px 0;line-height:1.5}
+
+.k-pp-calib{border:1px solid var(--line);border-radius:var(--r-md);background:var(--panel-2);
+  padding:16px 18px;width:100%}
+.k-pp-calib b{display:block;font-size:13.5px;color:var(--ink);margin-bottom:6px}
+.k-pp-calib p{color:var(--ink-soft);font-size:13.5px;line-height:1.6;margin:0 0 10px}
+.k-pp-calib p:last-child{margin:10px 0 0}
+
+.k-pp-tab{width:100%;border-collapse:collapse;font-size:13px;background:var(--panel);
+  border:1px solid var(--line);border-radius:var(--r-sm);overflow:hidden}
+.k-pp-tab th{text-align:left;font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;
+  color:var(--ink-soft);font-weight:700;padding:9px 12px;border-bottom:1px solid var(--line);background:var(--panel-2)}
+.k-pp-tab td{padding:9px 12px;border-bottom:1px solid var(--line);color:var(--ink);vertical-align:middle}
+.k-pp-tab tr:last-child td{border-bottom:0}
+.k-pp-tab code{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-soft)}
+.k-pp-tab td.ok{color:var(--ink)}
+.k-pp-tab td.no{color:var(--ink-soft);font-weight:700}
+.k-pp-tab--wide{display:block;overflow-x:auto;white-space:nowrap}
+.k-pp-dot{display:inline-block;width:13px;height:13px;border-radius:4px;vertical-align:-2px;
+  margin-right:7px;box-shadow:inset 0 0 0 1px rgba(5,6,52,.16)}
+
+.k-pp-grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));width:100%}
+.k-pp-esc{border:1px solid var(--line);border-radius:var(--r-md);background:var(--panel);overflow:hidden}
+.k-pp-esc--prod{box-shadow:inset 0 0 0 2px var(--cyan)}
+.k-pp-esc header{padding:13px 14px 11px;border-bottom:1px solid var(--line)}
+.k-pp-esc h4{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--ink);margin:0}
+.k-pp-base{display:block;font-family:var(--font-mono);font-size:11.5px;color:var(--ink-soft);margin-top:3px}
+.k-pp-ramp{display:flex;flex-direction:column}
+.k-pp-t{padding:10px 14px;display:flex;align-items:baseline;justify-content:space-between;gap:10px;
+  flex-wrap:wrap;color:#050634}
+.k-pp-t b{font-family:var(--font-mono);font-size:12px;font-weight:700;letter-spacing:.02em}
+.k-pp-t i{font-style:normal;font-size:11.5px;opacity:.72}
+.k-pp-t code{font-family:var(--font-mono);font-size:11px}
+/* par fixo: chip da cor plena sempre com texto branco — e uma demonstracao de contraste,
+   nao um container de conteudo. */
+.k-pp-t--full{color:#FFFFFF}
+.k-pp-t--full i{opacity:.82}
+.k-pp-selo{margin:0;padding:9px 14px;font-size:11.5px;font-weight:700;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--ink);background:rgba(0,255,234,.14);border-top:1px solid var(--line)}
+.k-pp-alt{margin:0;padding:11px 14px;font-size:12.5px;color:var(--ink-soft);
+  border-top:1px solid var(--line);line-height:1.55}
+.k-pp-alt b{font-family:var(--font-mono);color:var(--ink);font-size:12px}
+
+.k-pp-fail{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(186px,1fr));width:100%}
+.k-pp-fail__i{border-radius:var(--r-md);padding:14px;color:#FFFFFF}
+.k-pp-fail__i b{display:block;font-family:var(--font-mono);font-size:13px}
+.k-pp-fail__i span{display:block;font-size:12px;margin-top:7px;color:#050634}
+.k-pp-fail__i em{display:block;font-style:normal;font-size:12px;margin-top:3px;opacity:.9}
+
+.k-pp-cases{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));width:100%}
+.k-pp-case{display:flex;gap:13px;border:1px solid var(--line);border-radius:var(--r-md);
+  background:var(--panel);padding:14px}
+.k-pp-case__sw{width:44px;height:44px;border-radius:10px;flex:none;
+  box-shadow:inset 0 0 0 1px rgba(5,6,52,.16)}
+.k-pp-case b{font-family:var(--font-mono);font-size:13px;color:var(--ink)}
+.k-pp-case p{margin:5px 0 0;font-size:12.8px;line-height:1.6;color:var(--ink-soft)}
+
+.k-pp-onown{display:flex;flex-wrap:wrap;gap:9px;width:100%}
+.k-pp-onown__i{font-family:var(--font-mono);font-size:12.5px;font-weight:700;
+  padding:9px 13px;border-radius:var(--r-pill);box-shadow:inset 0 0 0 1px rgba(5,6,52,.10)}
+
+.k-pp-vs{display:grid;gap:16px;grid-template-columns:1fr;width:100%}
+@media (min-width:760px){.k-pp-vs{grid-template-columns:1fr 1fr}}
+.k-pp-vs__col{display:flex;flex-direction:column;gap:11px}
+.k-pp-vs__tag{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.09em;
+  text-transform:uppercase;padding:4px 10px;border-radius:var(--r-pill);
+  background:rgba(47,36,255,.12);color:var(--iris)}
+.k-pp-vs__tag--alt{background:rgba(36,136,255,.12);color:var(--blue)}
+.k-pp-mini{border-radius:var(--r-lg);padding:20px;display:flex;flex-direction:column;gap:3px;
+  min-height:186px;position:relative}
+.k-pp-mini--pleno{background:#2486FF}
+.k-pp-mini--pleno .k-pp-mini__eyebrow{color:rgba(255,255,255,.82)}
+.k-pp-mini--pleno .k-pp-mini__num,.k-pp-mini--pleno .k-pp-mini__lbl{color:#FFFFFF}
+.k-pp-mini--pleno .k-pp-mini__bars i{background:rgba(255,255,255,.55)}
+.k-pp-mini--pleno .k-pp-mini__bars i:last-child{background:#FFFFFF}
+.k-pp-mini--pastel{background:#EDF5FF;box-shadow:inset 0 0 0 1px rgba(36,136,255,.20)}
+.k-pp-mini--pastel .k-pp-mini__eyebrow{color:#3D4063;background:#C2DDFF;align-self:flex-start;
+  padding:3px 9px;border-radius:var(--r-pill)}
+.k-pp-mini--pastel .k-pp-mini__num{color:#2486FF}
+.k-pp-mini--pastel .k-pp-mini__lbl{color:#3D4063}
+.k-pp-mini--pastel .k-pp-mini__bars i{background:#C2DDFF}
+.k-pp-mini--pastel .k-pp-mini__bars i:last-child{background:#2486FF}
+.k-pp-mini__eyebrow{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase}
+.k-pp-mini__num{font-family:var(--font-display);font-weight:700;font-size:30px;line-height:1.1;margin-top:8px}
+.k-pp-mini__lbl{font-size:12.5px}
+.k-pp-mini__bars{display:flex;align-items:flex-end;gap:6px;height:46px;margin-top:auto}
+.k-pp-mini__bars i{width:20px;border-radius:4px 4px 0 0}
+
+.k-pp-use{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;
+  font-size:13px;color:var(--ink-soft);line-height:1.55}
+.k-pp-use b{color:var(--ink)}
+.k-pp-lim{margin:0;font-size:12.5px;line-height:1.6;color:var(--ink-soft);
+  border-left:2px solid var(--line);padding-left:11px}
+
+.k-pp-caso{display:grid;gap:14px;grid-template-columns:1fr;width:100%}
+@media (min-width:820px){.k-pp-caso{grid-template-columns:1.1fr .9fr}}
+.k-pp-caso__ramp{border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden}
+.k-pp-caso__ramp .k-pp-t{padding:9px 13px}
+.k-pp-caso__demo{border-radius:var(--r-md);padding:18px;display:flex;flex-direction:column;
+  justify-content:center;gap:8px;color:#050634}
+.k-pp-caso__demo--sim{background:
+  radial-gradient(ellipse 50% 45% at 85% 12%, rgba(132,57,230,.40), transparent 64%),
+  radial-gradient(ellipse 55% 45% at 12% 88%, rgba(36,136,255,.34), transparent 60%),
+  radial-gradient(ellipse 38% 30% at 60% 60%, rgba(0,255,234,.14), transparent 70%),
+  linear-gradient(220deg,#DDD6FE 0%,#C7DBFF 48%,#E5DAFF 100%)}
+.k-pp-caso__demo--ptr{background:linear-gradient(160deg,#E7EEFF 0%,#E1EEFF 100%);
+  border-bottom:2px solid #D3E2FF}
+.k-pp-caso__eyebrow{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;opacity:.7}
+.k-pp-caso__demo p{margin:0;font-size:12.8px;line-height:1.62}
+.k-pp-caso__demo code{font-family:var(--font-mono);font-size:11.5px}
+.k-pp-caso__badge{align-self:flex-start;font-size:11.5px;font-weight:700;padding:4px 11px;
+  border-radius:var(--r-pill);background:#E7EEFF;color:#2F24FF;box-shadow:inset 0 0 0 1px rgba(47,36,255,.14)}
+
+.k-pp-irmas{display:flex;align-items:stretch;gap:12px;flex-wrap:wrap;width:100%}
+.k-pp-irmas__c{flex:1 1 190px;border-radius:var(--r-md);padding:16px;color:#050634;
+  box-shadow:inset 0 0 0 1px rgba(5,6,52,.10)}
+.k-pp-irmas__c b{display:block;font-family:var(--font-display);font-size:15px}
+.k-pp-irmas__c span{display:block;font-size:12.5px;margin-top:3px;opacity:.72}
+.k-pp-irmas__arrow{display:flex;align-items:center;color:var(--ink-soft);flex:none}
+.k-pp-irmas__arrow svg{width:46px;height:22px}
+<!--CSS-FIM-->

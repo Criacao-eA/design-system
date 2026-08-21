@@ -1,0 +1,481 @@
+<section id="aulao" class="k-aulao">
+  <div class="sec-head">
+    <h2>Aulão e-A</h2>
+    <span class="tag marca">Marca</span>
+    <span class="tag evento">Evento</span>
+    <span class="tag novo">Novo na v4</span>
+  </div>
+  <p class="sec-desc">Sub-marca do webinário mensal da <span class="ea-brand">e-Auditoria</span>. O motivo é um player de mídia: o logotipo é um botão de play colado a uma pílula, e todo o resto da linguagem sai daí — controles de transporte, barra de progresso, barras de faixa. Use esta seção para montar peça de divulgação de Aulão. Não use estes elementos em peça institucional da <span class="ea-brand">e-Auditoria</span>: o magenta, o laranja e o ciano só existem dentro da sub-marca.</p>
+
+  <!-- ============================ 1. LOGOTIPO ============================ -->
+  <div class="comp">
+    <div class="comp-head"><h3>Logotipo — três versões</h3><span class="id">aulao-logo</span></div>
+    <div class="preview stack">
+      <div class="k-grid3">
+
+        <div class="k-tile">
+          <div class="k-tile-art k-on-blue">
+            <img src="{{IMG:aulao-logo-azul}}" alt="Logotipo Aulão e-A na versão para fundo azul: círculo de play preto com triângulo branco, colado a uma pílula branca com a palavra Aulão em azul e a assinatura e-A em preto" loading="lazy" decoding="async">
+          </div>
+          <div class="k-tile-foot">
+            <span>Para fundo azul</span>
+            <a class="k-dl" href="{{IMG:aulao-logo-azul}}" download="aulao-logo-fundo-azul.png">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>PNG
+            </a>
+          </div>
+        </div>
+
+        <div class="k-tile">
+          <div class="k-tile-art k-on-white">
+            <img src="{{IMG:aulao-logo-branco}}" alt="Logotipo Aulão e-A na versão para fundo branco: círculo de play preto colado a uma pílula com degradê violeta para azul, palavra Aulão em branco e assinatura e-A em preto" loading="lazy" decoding="async">
+          </div>
+          <div class="k-tile-foot">
+            <span>Para fundo branco</span>
+            <a class="k-dl" href="{{IMG:aulao-logo-branco}}" download="aulao-logo-fundo-branco.png">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>PNG
+            </a>
+          </div>
+        </div>
+
+        <div class="k-tile">
+          <div class="k-tile-art k-on-black">
+            <img src="{{IMG:aulao-logo-preto}}" alt="Logotipo Aulão e-A na versão para fundo preto: círculo branco com triângulo de play em degradê violeta para azul, colado a uma pílula com o mesmo degradê" loading="lazy" decoding="async">
+          </div>
+          <div class="k-tile-foot">
+            <span>Para fundo preto</span>
+            <a class="k-dl" href="{{IMG:aulao-logo-preto}}" download="aulao-logo-fundo-preto.png">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>PNG
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <p class="comp-note">O nome do arquivo diz o <strong>fundo de destino</strong>, não a cor do logotipo. <code>logo-bg-azul</code> é a versão que vai <em>sobre</em> azul — e ela é branca. Trocar isso é o erro mais comum da pasta.</p>
+    <p class="comp-note">O que muda entre as três: sobre azul, pílula branca e "Aulão" em azul <code>#2488FF</code>. Sobre branco, pílula com degradê <code>#4F45F5 → #2488FF</code> e "Aulão" em branco. Sobre preto, o círculo inverte para branco e o triângulo recebe o mesmo degradê da pílula. A assinatura "e-A" é sempre preta.</p>
+    <p class="comp-note warn">O trema de três pontos existe só no <strong>desenho</strong> do logotipo. Em texto corrido, em <code>alt</code>, em legenda, em assunto de e-mail e em qualquer reconstrução por CSS, escreve-se <strong>e-A</strong> e <strong>e-Auditoria</strong>, sem trema. Quando a palavra aparece sozinha — cabeçalho, rodapé, selo, rótulo — entra o logotipo, não a palavra.</p>
+    <p class="comp-note warn">Está proibido montar lockup do tipo sub-marca mais marca-mãe. O Aulão e-A é autossuficiente: não encoste o logotipo da <span class="ea-brand">e-Auditoria</span> nele, nem com barra, nem com traço, nem com "por". Quando a peça precisa das duas marcas, elas ficam em cantos opostos — é assim nas peças de social e no header de e-mail.</p>
+    <p class="comp-note warn">Não separe o círculo da pílula, não gire o triângulo, não recolora a pílula fora das três versões, nunca itálico. Abaixo de 24&nbsp;px de altura de pílula o trema fecha e vira borrão: nesse tamanho use só o círculo de play.</p>
+
+    <div class="comp-head"><h3>Reconstrução do lockup em CSS</h3><span class="id">.k-lock</span></div>
+    <div class="preview stack">
+      <div class="k-lockrow">
+        <div class="k-lockbox k-on-blue">
+          <span class="k-lock k-lock--azul"><span class="k-lock-play"><span class="k-lock-tri"></span></span><span class="k-lock-pill"><span class="k-lock-w1">Aulão</span><span class="k-lock-w2">e-A</span></span></span>
+        </div>
+        <div class="k-lockbox k-on-white">
+          <span class="k-lock k-lock--branco"><span class="k-lock-play"><span class="k-lock-tri"></span></span><span class="k-lock-pill"><span class="k-lock-w1">Aulão</span><span class="k-lock-w2">e-A</span></span></span>
+        </div>
+        <div class="k-lockbox k-on-black">
+          <span class="k-lock k-lock--preto"><span class="k-lock-play"><span class="k-lock-tri"></span></span><span class="k-lock-pill"><span class="k-lock-w1">Aulão</span><span class="k-lock-w2">e-A</span></span></span>
+        </div>
+      </div>
+    </div>
+    <p class="comp-note">Geometria medida no arquivo mestre (3338&nbsp;×&nbsp;914&nbsp;px): diâmetro do círculo = <strong>1,3&nbsp;×</strong> a altura da pílula; a pílula entra por baixo do círculo com sobreposição de <strong>0,42&nbsp;×</strong> a altura dela; o corpo do texto ocupa 0,52 da altura da pílula. Tudo escala por uma variável só, <code>--k-lock-h</code>.</p>
+    <p class="comp-note">Use a reconstrução em CSS só em web e produto (cabeçalho de LP, badge de card, rodapé de player). Para peça, e-mail e impresso use o PNG ou o vetor: o triângulo do arquivo original tem cantos arredondados que o <code>clip-path</code> não reproduz.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;span class="k-lock k-lock--azul"&gt;
+  &lt;span class="k-lock-play"&gt;&lt;span class="k-lock-tri"&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class="k-lock-pill"&gt;
+    &lt;span class="k-lock-w1"&gt;Aulão&lt;/span&gt;&lt;span class="k-lock-w2"&gt;e-A&lt;/span&gt;
+  &lt;/span&gt;
+&lt;/span&gt;
+
+/* variantes: --azul (sobre azul) | --branco (sobre branco) | --preto (sobre preto) */
+.k-lock{ --k-lock-h:44px }          /* único valor a mexer */
+.k-lock-play{ width:calc(var(--k-lock-h)*1.3); height:calc(var(--k-lock-h)*1.3) }
+.k-lock-pill{ height:var(--k-lock-h); margin-left:calc(var(--k-lock-h)*-.42) }</pre></div>
+  </div>
+
+  <!-- ==================== 2. ELEMENTOS DE APOIO ==================== -->
+  <div class="comp">
+    <div class="comp-head"><h3>Controles de transporte e aviso</h3><span class="id">aulao-controles</span></div>
+    <div class="preview stack">
+      <div class="k-grid2">
+
+        <div class="k-tile">
+          <div class="k-tile-art k-on-navy">
+            <img src="{{IMG:aulao-tema}}" alt="Ícone de avançar em ciano: duas setas triangulares apontando para a direita, com cantos arredondados" loading="lazy" decoding="async" style="max-width:96px">
+          </div>
+          <div class="k-tile-foot">
+            <span>Avançar isolado — ciano</span>
+            <a class="k-dl" href="{{IMG:aulao-tema}}" download="aulao-avancar-ciano.png">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>PNG
+            </a>
+          </div>
+        </div>
+
+        <div class="k-tile">
+          <div class="k-tile-art k-on-navy">
+            <img src="{{IMG:aulao-tema-data}}" alt="Trio de controles de transporte em ciano: voltar, pausa e avançar" loading="lazy" decoding="async">
+          </div>
+          <div class="k-tile-foot">
+            <span>Trio — ciano <code>#00FFEA</code></span>
+            <a class="k-dl" href="{{IMG:aulao-tema-data}}" download="aulao-controles-ciano.png">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>PNG
+            </a>
+          </div>
+        </div>
+
+        <div class="k-tile">
+          <div class="k-tile-art k-on-white">
+            <img src="{{IMG:aulao-tema-data-azul}}" alt="Trio de controles de transporte em degradê violeta para azul: voltar, pausa e avançar" loading="lazy" decoding="async">
+          </div>
+          <div class="k-tile-foot">
+            <span>Trio — degradê azul</span>
+            <a class="k-dl" href="{{IMG:aulao-tema-data-azul}}" download="aulao-controles-azul.png">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>PNG
+            </a>
+          </div>
+        </div>
+
+        <div class="k-tile">
+          <div class="k-tile-art k-on-white">
+            <img src="{{IMG:aulao-aviso}}" alt="Elemento de aviso: triângulo de cantos arredondados com degradê amarelo para laranja e ponto de exclamação preto" loading="lazy" decoding="async" style="max-width:120px">
+          </div>
+          <div class="k-tile-foot">
+            <span>Aviso <code>#FEC008 → #FF5C01</code></span>
+            <a class="k-dl" href="{{IMG:aulao-aviso}}" download="aulao-aviso.png">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>PNG
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <p class="comp-note">Os arquivos se chamam <code>tema.png</code> e <code>tema-data.png</code> porque esses eram os nomes de camada do KV — o de "tema" ficava ao lado do título, o de "tema-data" ao lado da data. O conteúdo, em ambos, é controle de transporte. Vá pelo desenho, não pelo nome.</p>
+    <p class="comp-note">Cada ícone do trio azul carrega o degradê <em>por ícone</em>, de <code>#4F45F5</code> à esquerda para <code>#2488FF</code> à direita — não é um degradê único atravessando os três. Se recortar um ícone só, o degradê continua completo.</p>
+    <p class="comp-note warn">Ciano <code>#00FFEA</code> só sobre fundo escuro. Sobre branco ele some (menos de 1,5:1). Sobre fundo claro use o trio azul.</p>
+    <p class="comp-note warn">O topo do triângulo de aviso é <strong>exatamente</strong> o amarelo do CTA (<code>#FEC008</code>). Nunca coloque o aviso na mesma dobra do botão: o olho lê dois amarelos e o CTA deixa de ser o ponto mais quente da peça. O aviso serve para recado operacional do Aulão (mudou o horário, última chamada) — nunca em peça institucional da <span class="ea-brand">e-Auditoria</span>, onde laranja está fora da paleta.</p>
+
+    <div class="comp-head"><h3>Controles redesenhados em SVG</h3><span class="id">svg inline</span></div>
+    <div class="preview stack dark">
+      <div class="k-icons">
+        <div class="k-asset" data-svg-name="aulao-play">
+          <svg width="56" height="56" viewBox="0 0 64 64" role="img" aria-label="Play">
+            <path d="M22 19 L46 32 L22 45 Z" fill="currentColor" stroke="currentColor" stroke-width="9" stroke-linejoin="round"/>
+          </svg>
+          <span class="k-icons-lb">play</span>
+        </div>
+        <div class="k-asset" data-svg-name="aulao-pausa">
+          <svg width="56" height="56" viewBox="0 0 64 64" role="img" aria-label="Pausa">
+            <rect x="19" y="15" width="10" height="34" rx="5" fill="currentColor"/>
+            <rect x="35" y="15" width="10" height="34" rx="5" fill="currentColor"/>
+          </svg>
+          <span class="k-icons-lb">pausa</span>
+        </div>
+        <div class="k-asset" data-svg-name="aulao-voltar">
+          <svg width="56" height="56" viewBox="0 0 64 64" role="img" aria-label="Voltar">
+            <path d="M53 21 L36 32 L53 43 Z" fill="currentColor" stroke="currentColor" stroke-width="8" stroke-linejoin="round"/>
+            <path d="M31 21 L14 32 L31 43 Z" fill="currentColor" stroke="currentColor" stroke-width="8" stroke-linejoin="round"/>
+          </svg>
+          <span class="k-icons-lb">voltar</span>
+        </div>
+        <div class="k-asset" data-svg-name="aulao-avancar">
+          <svg width="56" height="56" viewBox="0 0 64 64" role="img" aria-label="Avançar">
+            <path d="M11 21 L28 32 L11 43 Z" fill="currentColor" stroke="currentColor" stroke-width="8" stroke-linejoin="round"/>
+            <path d="M33 21 L50 32 L33 43 Z" fill="currentColor" stroke="currentColor" stroke-width="8" stroke-linejoin="round"/>
+          </svg>
+          <span class="k-icons-lb">avançar</span>
+        </div>
+      </div>
+    </div>
+    <p class="comp-note">Redesenho vetorial dos mesmos quatro gestos, em <code>currentColor</code>: herdam a cor do contexto, então servem em branco sobre a faixa, em ciano sobre navy e em azul sobre claro sem virar quatro arquivos. O arredondamento vem de <code>stroke-linejoin:round</code> com <code>stroke</code> da mesma cor do <code>fill</code> — é o que imita o canto generoso do original.</p>
+
+    <div class="comp-head"><h3>Barra de progresso e faixa de player</h3><span class="id">.k-progress · .k-player</span></div>
+    <div class="preview stack">
+      <div class="k-player">
+        <div class="k-lock k-lock--azul" style="--k-lock-h:34px"><span class="k-lock-play"><span class="k-lock-tri"></span></span><span class="k-lock-pill"><span class="k-lock-w1">Aulão</span><span class="k-lock-w2">e-A</span></span></div>
+        <div class="k-progress" role="presentation"><span></span><i></i></div>
+        <div class="k-player-ctrls">
+          <svg width="38" height="38" viewBox="0 0 64 64" aria-hidden="true"><path d="M53 21 L36 32 L53 43 Z" fill="currentColor" stroke="currentColor" stroke-width="8" stroke-linejoin="round"/><path d="M31 21 L14 32 L31 43 Z" fill="currentColor" stroke="currentColor" stroke-width="8" stroke-linejoin="round"/></svg>
+          <svg width="38" height="38" viewBox="0 0 64 64" aria-hidden="true"><rect x="19" y="15" width="10" height="34" rx="5" fill="currentColor"/><rect x="35" y="15" width="10" height="34" rx="5" fill="currentColor"/></svg>
+          <svg width="38" height="38" viewBox="0 0 64 64" aria-hidden="true"><path d="M11 21 L28 32 L11 43 Z" fill="currentColor" stroke="currentColor" stroke-width="8" stroke-linejoin="round"/><path d="M33 21 L50 32 L33 43 Z" fill="currentColor" stroke="currentColor" stroke-width="8" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </div>
+    <p class="comp-note">A barra fica sempre parada em torno de 12&nbsp;% — é assinatura gráfica, não estado real. Marcador circular branco sobre trilho branco a 45&nbsp;% de opacidade. Nas peças de social esse conjunto ocupa a faixa inferior inteira e fecha a composição.</p>
+    <p class="comp-note warn">Barra e controles são decoração: não são clicáveis. Se a peça for HTML, marque como <code>role="presentation"</code> e não dê <code>tabindex</code>, senão leitor de tela anuncia um player que não existe.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;div class="k-progress" role="presentation"&gt;&lt;span&gt;&lt;/span&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+
+.k-progress{ height:4px; border-radius:var(--r-pill); background:rgba(255,255,255,.45) }
+.k-progress span{ position:absolute; inset:0 auto 0 0; width:12%; background:#FFF }
+.k-progress i{ left:12%; width:14px; height:14px; border-radius:50%; background:#FFF }</pre></div>
+  </div>
+
+  <!-- ============================ 3. FUNDOS ============================ -->
+  <div class="comp">
+    <div class="comp-head"><h3>Fundos</h3><span class="id">aulao-bg</span></div>
+    <div class="preview stack">
+      <figure class="k-fig">
+        <img src="{{IMG:aulao-bg-degrade}}" alt="Fundo em degradê de malha, 1920 por 1080, com ciano no canto superior esquerdo, azul no centro, violeta na base e magenta concentrado no canto superior direito" loading="lazy" decoding="async">
+        <figcaption>Degradê de malha, 1920&nbsp;×&nbsp;1080. Ciano no canto superior esquerdo, azul no miolo, violeta na base, magenta só no canto superior direito e um retorno ciano no canto inferior direito. <a class="k-dl" href="{{IMG:aulao-bg-degrade}}" download="aulao-bg-degrade.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>PNG</a></figcaption>
+      </figure>
+      <figure class="k-fig">
+        <img src="{{IMG:aulao-bg-tema}}" alt="Faixa horizontal com degradê violeta para azul e, à direita, um painel arredondado com o logotipo do Aulão, barras arredondadas empilhadas, barra de progresso e os três controles de transporte em branco" loading="lazy" decoding="async">
+        <figcaption>Faixa de tema, 1920&nbsp;×&nbsp;547. Degradê horizontal <code>#4F45F5 → #2488FF</code>, painel violeta à direita com as barras arredondadas (o motivo da onda sonora), progresso e controles. <a class="k-dl" href="{{IMG:aulao-bg-tema}}" download="aulao-bg-tema.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>PNG</a></figcaption>
+      </figure>
+      <div class="k-bg-demo" role="img" aria-label="Aproximação em CSS do degradê de malha do Aulão"></div>
+      <div class="k-sw">
+        <div><b style="background:#00BFFF"></b><span>#00BFFF ciano</span></div>
+        <div><b style="background:#2488FF"></b><span>#2488FF azul</span></div>
+        <div><b style="background:#4F45F5"></b><span>#4F45F5 violeta</span></div>
+        <div><b style="background:#B032EF"></b><span>#B032EF magenta</span></div>
+        <div><b style="background:#00FFEA"></b><span>#00FFEA ciano acento</span></div>
+      </div>
+    </div>
+    <p class="comp-note">O degradê original é malha, não linear: por isso a receita em CSS empilha quatro radiais sobre uma linear. Serve para web e e-mail em HTML. Para social, thumbnail e impresso use o PNG — a malha do arquivo tem transições que o CSS não reproduz.</p>
+    <p class="comp-note warn">Texto branco não pode cair sobre os cantos ciano: branco sobre <code>#00BFFF</code> dá ~2,1:1 e reprova em qualquer tamanho. Título branco vive na metade esquerda e no miolo azul/violeta. Se precisar escrever sobre o ciano, use navy <code>#050634</code>.</p>
+    <p class="comp-note">O magenta é da sub-marca. Quando a peça fala da <span class="ea-brand">e-Auditoria</span> como empresa, corte o canto magenta e fique em azuis e lilases.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>.k-bg-degrade{
+  background-color:#3776FF;
+  background-image:
+    radial-gradient(120% 90% at 100%   0%, #B032EF 0%, rgba(176,50,239,0) 55%),
+    radial-gradient( 90% 80% at   0%   0%, #00BFFF 0%, rgba(0,191,255,0)  55%),
+    radial-gradient( 80% 80% at 100% 100%, #34BDFF 0%, rgba(52,189,255,0) 60%),
+    radial-gradient( 90% 90% at  20% 100%, #5449FF 0%, rgba(84,73,255,0)  60%),
+    linear-gradient(115deg,#31A5FF 0%,#3776FF 45%,#6E75F9 75%,#9D50F3 100%);
+}
+
+/* faixa de tema */
+.k-bg-faixa{ background:linear-gradient(90deg,#4F45F5,#2488FF) }</pre></div>
+  </div>
+
+  <!-- ==================== 4. APLICAÇÕES EM SOCIAL ==================== -->
+  <div class="comp">
+    <div class="comp-head"><h3>Aplicações em redes sociais</h3><span class="id">aulao-social</span></div>
+    <div class="preview stack">
+      <div class="k-grid3">
+        <figure class="k-fig">
+          <img src="{{IMG:aulao-social1}}" alt="Post de feed 1080 por 1350 do Aulão sobre créditos de INSS acima do teto, com logotipo no topo, título em branco, três palestrantes em círculos com anel ciano, bloco de chamada e data, e controles de player no rodapé" loading="lazy" decoding="async">
+          <figcaption>Feed 1080&nbsp;×&nbsp;1350 — peça completa, três palestrantes.</figcaption>
+        </figure>
+        <figure class="k-fig">
+          <img src="{{IMG:aulao-social2}}" alt="Story 1080 por 1920 da mesma campanha, com os mesmos blocos reancorados: logotipo no topo, título ao terço superior, palestrantes ao centro, chamada e data abaixo e controles no rodapé" loading="lazy" decoding="async">
+          <figcaption>Story 1080&nbsp;×&nbsp;1920 — mesma peça, blocos reancorados.</figcaption>
+        </figure>
+        <figure class="k-fig">
+          <img src="{{IMG:aulao-social3}}" alt="Post de teaser 1080 por 1350 sem palestrantes, com o logotipo da e-Auditoria em pílula preta no topo e o logotipo do Aulão embutido na própria frase do título" loading="lazy" decoding="async">
+          <figcaption>Teaser 1080&nbsp;×&nbsp;1350 — sem palestrantes; o logotipo entra dentro da frase.</figcaption>
+        </figure>
+      </div>
+      <ol class="k-anat">
+        <li><strong>Topo — logotipo.</strong> Na peça de divulgação, o lockup do Aulão centralizado. Na peça de teaser, quem ocupa o topo é o logotipo da <span class="ea-brand">e-Auditoria</span> em pílula preta, e o Aulão desce para dentro da frase do título.</li>
+        <li><strong>Moldura.</strong> Filete ciano de 2&nbsp;px, cantos arredondados, recuado cerca de 4&nbsp;% da borda. Nunca preenchida.</li>
+        <li><strong>Fundo.</strong> Degradê violeta para azul com barras arredondadas gigantes em baixo contraste — é o motivo do player ampliado até virar textura.</li>
+        <li><strong>Título.</strong> Branco, display 700, centralizado, no máximo três linhas no feed.</li>
+        <li><strong>Palestrantes.</strong> Círculos sobrepostos com anel ciano de 2&nbsp;px. O crachá é de três camadas: pílula preta ao fundo, triângulo de play ciano à esquerda, pílula ciano com o nome em preto e o cargo em branco na faixa preta logo abaixo.</li>
+        <li><strong>Chamada e data.</strong> Duas pílulas empilhadas, a de baixo emergindo por trás da de cima: a superior leva a chamada, a inferior a data por extenso.</li>
+        <li><strong>Rodapé.</strong> Barra de progresso branca com marcador e o trio de controles em branco, atravessando a largura útil.</li>
+      </ol>
+    </div>
+    <p class="comp-note">Títulos de Aulão quase sempre citam expressão fiscal. <span class="ea-nb">Reforma Tributária</span>, <span class="ea-nb">Simples Nacional</span>, <span class="ea-nb">Lucro Real</span> e <span class="ea-nb">Lucro Presumido</span> não quebram linha e vão com inicial maiúscula mesmo sozinhas. Dimensione a caixa de título para a expressão inteira caber numa linha antes de fechar o layout — encolher a fonte depois estraga a hierarquia.</p>
+    <p class="comp-note warn">Nas peças de 2025 o bloco de chamada é uma pílula preta com texto ciano. <strong>Não é mais o padrão.</strong> A partir de agora o CTA é <code>#FEC008</code> com texto navy <code>#050634</code> — como já está na variante de alto contraste abaixo. Ao repor qualquer peça desta pasta, troque o bloco; não é retrofit opcional.</p>
+    <p class="comp-note warn">A pílula ciano é do <strong>nome do palestrante</strong>. Não use ciano na pílula de data: as duas ficam a poucos pixels uma da outra e a peça perde a leitura de quem fala e de quando é.</p>
+    <p class="comp-note cro">As variantes de urgência ("É AMANHÃ", "É HOJE") são o mesmo arquivo com uma troca só: o texto da pílula de data. Exporte as três de uma vez no fechamento da peça, não na véspera.</p>
+    <p class="comp-note">O anel ciano das fotos não é vidro. O vidro aparece na variante de alto contraste, e ali vale o modelo de vidro já usado nas landing pages da casa — não crie um novo.</p>
+  </div>
+
+  <!-- ==================== 5. ALTO CONTRASTE ==================== -->
+  <div class="comp">
+    <div class="comp-head"><h3>Variante de alto contraste</h3><span class="id">aulao-alto-contraste</span></div>
+    <div class="preview stack">
+      <div class="k-grid2">
+        <figure class="k-fig">
+          <img src="{{IMG:aulao-sped1}}" alt="Peça lateral 960 por 1920 do Aulão do corretor do SPED, com fundo magenta para azul saturado e textura de pontos, lockup no topo, card de vidro curvo com título e palestrantes, e botão amarelo escrito Inscreva-se agora" loading="lazy" decoding="async">
+          <figcaption>Lateral 960&nbsp;×&nbsp;1920 — card de vidro, CTA amarelo, assinatura da <span class="ea-brand">e-Auditoria</span> no rodapé.</figcaption>
+        </figure>
+        <figure class="k-fig">
+          <img src="{{IMG:aulao-sped2}}" alt="Banner de miolo de blog 1920 por 512 com fundo magenta para azul, cacos de vidro tridimensionais à esquerda, pergunta em branco e ciano, e à direita um card de vidro com lockup, data e botão amarelo" loading="lazy" decoding="async">
+          <figcaption>Miolo de blog 1920&nbsp;×&nbsp;512 — pergunta à esquerda, card de decisão à direita.</figcaption>
+        </figure>
+      </div>
+      <div class="k-ctarow">
+        <a class="k-cta" href="#aulao">Inscreva-se agora</a>
+        <span class="k-ctanote">#FEC008 · texto #050634</span>
+      </div>
+      <div class="k-sw">
+        <div><b style="background:#E704FF"></b><span>#E704FF magenta</span></div>
+        <div><b style="background:#003EFE"></b><span>#003EFE azul profundo</span></div>
+        <div><b style="background:#0079FF"></b><span>#0079FF azul</span></div>
+        <div><b style="background:#FEC008"></b><span>#FEC008 CTA</span></div>
+      </div>
+    </div>
+    <p class="comp-note">O que muda para a versão padrão: o degradê sai do par violeta/azul e vai para <strong>magenta saturado até azul profundo</strong>, entra uma textura de pontos de 1&nbsp;px a ~13&nbsp;% de branco, o conteúdo sobe para um card de vidro de cantos curvos, e o CTA vira botão amarelo com texto preto/navy. É a variante do Aulão do corretor do SPED — a que teve mais retorno.</p>
+    <p class="comp-note cro"><strong>Quando escolher alto contraste:</strong> quando a peça disputa atenção num ambiente que não é seu — miolo e lateral de blog, banner em portal parceiro, mídia paga, formato pequeno onde a peça compete com texto ao redor. E quando o objetivo é inscrição direta, com um botão só e sem segunda leitura.</p>
+    <p class="comp-note cro"><strong>Quando ficar na padrão:</strong> feed e story do perfil próprio, thumbnail do YouTube, header de e-mail, comunidade — ambientes onde a peça já chega para quem conhece a marca e a saturação do alto contraste só cansa. Também fique na padrão em qualquer peça institucional: magenta é linguagem do Aulão, não da <span class="ea-brand">e-Auditoria</span>.</p>
+    <p class="comp-note warn">O alto contraste não autoriza magenta em peça da marca-mãe. Ao falar da empresa, azuis e, no máximo, lilases.</p>
+    <div class="code-wrap"><button class="copy">Copiar</button><pre>.k-bg-alto{
+  background-color:#003EFE;
+  background-image:
+    radial-gradient(1px 1px at 50% 50%, rgba(255,255,255,.13) 1px, transparent 1px),
+    radial-gradient(90% 80% at   0%   0%, #E704FF 0%, rgba(231,4,255,0) 55%),
+    radial-gradient(80% 70% at 100% 100%, #00D1FF 0%, rgba(0,209,255,0) 60%),
+    linear-gradient(150deg,#DB00FF 0%,#003EFE 45%,#0079FF 75%,#00CFFF 100%);
+  background-size:14px 14px, auto, auto, auto;
+}
+
+.k-cta{ background:#FEC008; color:#050634; border-radius:var(--r-pill) }</pre></div>
+  </div>
+
+  <!-- ==================== 6. E-MAIL — PENDENTE ==================== -->
+        <div class="comp">
+        <div class="comp-head"><h3>E-mail do Aulão</h3><span class="id">HubSpot · EMAIL_DND_TEMPLATE</span></div>
+        <p class="comp-note">Existem <b>dois</b> modelos consolidados no HubSpot (portal da e-Auditoria),
+        puxados e analisados em 31/07/2026 pela API de conteúdo:</p>
+        <div class="preview stack">
+          <div class="k-tbl-wrap">
+            <table class="k-tbl">
+              <thead><tr><th>id</th><th>Modelo</th><th>Papel</th><th>Atualizado</th></tr></thead>
+              <tbody>
+                <tr><td>210832918615</td><td>MODELO MR AULÃO EA X-1</td><td>convite do webinar</td><td>10/04/2026</td></tr>
+                <tr><td>210840317017</td><td>Resposta automática AULÃO</td><td>confirmação de inscrição</td><td>10/04/2026</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p class="comp-note warn"><b>Veredito honesto: eles não conversam com este sistema — e não devem ser replicados como estão.</b>
+        A análise do código-fonte dos dois mostra que a identidade da <span class="ea-brand">e-Auditoria</span>
+        não chegou neles:</p>
+        <div class="preview stack">
+          <div class="k-tbl-wrap">
+            <table class="k-tbl">
+              <thead><tr><th>O que o modelo usa</th><th>O que o sistema define</th><th>Situação</th></tr></thead>
+              <tbody>
+                <tr><td>Arial, e só</td><td>Familjen Grotesk + Manrope</td><td><span class="k-status bad">fora do padrão</span></td></tr>
+                <tr><td><code>#2D3E50</code> como escuro</td><td>navy <code>#050634</code></td><td><span class="k-status bad">cor padrão do HubSpot</span></td></tr>
+                <tr><td><code>#00A4BD</code> como acento</td><td>ciano <code>#00FFEA</code></td><td><span class="k-status bad">cor padrão do HubSpot</span></td></tr>
+                <tr><td><code>#4F45F5</code> e <code>#2488FF</code></td><td>violeta e azul da marca</td><td><span class="k-status ok">correto</span></td></tr>
+                <tr><td>arrastar-e-soltar (DnD)</td><td>módulo codificado, versionável</td><td><span class="k-status warn">não versionável</span></td></tr>
+                <tr><td>sem masthead, sem âncora de prazo</td><td>11 módulos do Radar</td><td><span class="k-status warn">estrutura própria</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p class="comp-note"><b>O que aproveitar.</b> A <b>estrutura editorial</b> dos dois é boa e testada:
+        saudação personalizada → quem ministra → "o que você vai entender, de forma objetiva" (lista curta) →
+        argumento de urgência → CTA. Isso é conteúdo, não forma, e vale manter.
+        O que precisa mudar é a camada visual.</p>
+        <p class="comp-note cro"><b>Recomendação.</b> Migrar o convite do Aulão para o mesmo padrão codificado do
+        <span class="ea-nb">Radar Tributário</span> (tema <code>ea-radar-news-2026</code>, que já está no ar e prova
+        que funciona): tipografia da marca, navy correto, botão bulletproof e o CTA em <code>#FEC008</code> com texto navy.
+        Ganha-se consistência, versionamento por CLI e um só lugar para corrigir.
+        <b>Não é urgente</b> — o modelo atual converte e está em produção. É dívida, não incêndio.</p>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre># baixar os dois modelos para inspecionar (CLI ja autenticado em ea-principal)
+hs api "/content/api/v2/templates/210832918615"   # convite
+hs api "/content/api/v2/templates/210840317017"   # resposta automatica
+
+# listar todos os modelos de e-mail da conta
+hs api "/content/api/v2/templates?limit=300"</pre></div>
+        <p class="comp-note"><b>Nota técnica.</b> Modelo de arrastar-e-soltar <b>não aparece</b> em
+        <code>hs cms list</code> — só templates codificados aparecem. Para alcançá-los é preciso a API de conteúdo
+        (<code>hs api /content/api/v2/templates</code>), que usa o escopo <code>content</code>. A API mais nova
+        (<code>/marketing/v3/emails</code>) exigiria o escopo <code>marketing.email.read</code>, que a chave atual não tem.</p>
+      </div>
+
+</section>
+
+<!--CSS-INICIO-->
+.k-aulao{
+  --k-au-violet:#4F45F5;
+  --k-au-blue:#2488FF;
+  --k-au-cyan:#00FFEA;
+  --k-au-magenta:#DB00FF;
+  --k-au-yellow:#FEC008;
+  --k-au-navy:#050634;
+}
+
+/* ---------- grades e tiles ---------- */
+.k-grid3{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));width:100%}
+.k-grid2{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));width:100%}
+.k-tile{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;background:var(--panel-2)}
+.k-tile-art{display:flex;align-items:center;justify-content:center;padding:24px 20px;min-height:118px}
+.k-tile-art img{display:block;width:100%;height:auto;max-width:100%}
+.k-tile-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border-top:1px solid var(--line);font:600 12px/1.35 var(--font-body);color:var(--ink-soft)}
+.k-tile-foot code{font-family:var(--font-mono);font-size:11px}
+
+.k-on-blue{background:linear-gradient(90deg,#4F45F5,#2488FF)}
+.k-on-white{background:#F2F4F8}
+.k-on-black{background:#0B0B0F}
+.k-on-navy{background:#050634}
+
+/* ---------- lockup reconstruído ---------- */
+.k-lockrow{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));width:100%}
+.k-lockbox{display:flex;align-items:center;justify-content:center;padding:26px 18px;border-radius:var(--r-lg);border:1px solid var(--line)}
+
+.k-lock{--k-lock-h:44px;display:inline-flex;align-items:center;font-family:var(--font-display);font-weight:700;line-height:1}
+.k-lock-play{position:relative;z-index:2;flex:0 0 auto;display:flex;align-items:center;justify-content:center;width:calc(var(--k-lock-h)*1.3);height:calc(var(--k-lock-h)*1.3);border-radius:50%}
+.k-lock-tri{display:block;width:42%;height:46%;background:currentColor;clip-path:polygon(6% 3%,97% 50%,6% 97%)}
+.k-lock-pill{display:flex;align-items:center;gap:.42em;height:var(--k-lock-h);margin-left:calc(var(--k-lock-h)*-.42);padding:0 1.15em 0 1.55em;border-radius:var(--r-pill);white-space:nowrap;font-size:calc(var(--k-lock-h)*.52)}
+
+.k-lock--azul .k-lock-play{background:#000;color:#FFF}
+.k-lock--azul .k-lock-pill{background:#FFF}
+.k-lock--azul .k-lock-w1{color:#2488FF}
+.k-lock--azul .k-lock-w2{color:#000}
+
+.k-lock--branco .k-lock-play{background:#000;color:#FFF}
+.k-lock--branco .k-lock-pill{background:linear-gradient(90deg,#4F45F5,#2488FF)}
+.k-lock--branco .k-lock-w1{color:#FFF}
+.k-lock--branco .k-lock-w2{color:#000}
+
+.k-lock--preto .k-lock-play{background:#FFF}
+.k-lock--preto .k-lock-tri{background:linear-gradient(120deg,#4F45F5,#2488FF)}
+.k-lock--preto .k-lock-pill{background:linear-gradient(90deg,#4F45F5,#2488FF)}
+.k-lock--preto .k-lock-w1{color:#FFF}
+.k-lock--preto .k-lock-w2{color:#000}
+
+/* ---------- ícones autorais ---------- */
+.k-icons{display:flex;flex-wrap:wrap;gap:26px;align-items:flex-start;justify-content:center;width:100%;color:#00FFEA}
+.k-icons .k-asset{display:flex;flex-direction:column;align-items:center;gap:8px}
+.k-icons-lb{font:600 11px/1 var(--font-mono);letter-spacing:.04em;color:rgba(255,255,255,.72)}
+
+/* ---------- faixa de player ---------- */
+.k-player{display:flex;flex-direction:column;gap:20px;width:100%;padding:24px 26px 28px;border-radius:var(--r-lg);background:linear-gradient(90deg,#4F45F5,#2488FF)}
+.k-progress{position:relative;width:100%;height:4px;border-radius:var(--r-pill);background:rgba(255,255,255,.45)}
+.k-progress span{position:absolute;top:0;bottom:0;left:0;width:12%;border-radius:var(--r-pill);background:#FFF}
+.k-progress i{position:absolute;top:50%;left:12%;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:#FFF}
+.k-player-ctrls{display:flex;align-items:center;justify-content:center;gap:34px;color:#FFF}
+.k-player-ctrls svg{display:block}
+
+/* ---------- figuras de aplicação ---------- */
+.k-fig{margin:0;border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;background:var(--panel-2)}
+.k-fig img{display:block;width:100%;height:auto}
+.k-fig figcaption{padding:10px 12px;border-top:1px solid var(--line);font:400 12px/1.5 var(--font-body);color:var(--ink-soft)}
+.k-fig figcaption .k-dl{margin-left:6px;vertical-align:middle}
+
+/* ---------- fundos ---------- */
+.k-bg-demo{width:100%;aspect-ratio:16/9;border-radius:var(--r-lg);border:1px solid var(--line);
+  background-color:#3776FF;
+  background-image:
+    radial-gradient(120% 90% at 100% 0%,#B032EF 0%,rgba(176,50,239,0) 55%),
+    radial-gradient(90% 80% at 0% 0%,#00BFFF 0%,rgba(0,191,255,0) 55%),
+    radial-gradient(80% 80% at 100% 100%,#34BDFF 0%,rgba(52,189,255,0) 60%),
+    radial-gradient(90% 90% at 20% 100%,#5449FF 0%,rgba(84,73,255,0) 60%),
+    linear-gradient(115deg,#31A5FF 0%,#3776FF 45%,#6E75F9 75%,#9D50F3 100%);
+}
+
+/* ---------- amostras ---------- */
+.k-sw{display:flex;flex-wrap:wrap;gap:10px;width:100%}
+.k-sw div{flex:1 1 130px;overflow:hidden;border:1px solid var(--line);border-radius:var(--r-md);background:var(--panel-2)}
+.k-sw b{display:block;height:42px}
+.k-sw span{display:block;padding:8px 10px;font:600 11px/1.3 var(--font-mono);color:var(--ink-soft)}
+
+/* ---------- anatomia numerada ---------- */
+.k-anat{counter-reset:k-a;list-style:none;margin:4px 0 0;padding:0;display:grid;gap:11px;width:100%;font:400 14px/1.55 var(--font-body);color:var(--ink)}
+.k-anat li{display:flex;gap:12px}
+.k-anat li::before{counter-increment:k-a;content:counter(k-a);flex:0 0 auto;width:22px;height:22px;margin-top:1px;border-radius:50%;background:var(--iris);color:#FFF;font:700 12px/22px var(--font-body);text-align:center}
+
+/* ---------- CTA ---------- */
+.k-ctarow{display:flex;flex-wrap:wrap;align-items:center;gap:14px}
+.k-cta{display:inline-flex;align-items:center;justify-content:center;padding:16px 32px;border-radius:var(--r-pill);background:#FEC008;color:#050634;text-decoration:none;font:700 15px/1 var(--font-body);letter-spacing:.03em;text-transform:uppercase;transition:transform .18s var(--ease)}
+.k-cta:hover{transform:translateY(-1px)}
+@media (prefers-reduced-motion:reduce){.k-cta{transition:none}.k-cta:hover{transform:none}}
+.k-ctanote{font:600 12px/1.3 var(--font-mono);color:var(--ink-soft)}
+
+/* ---------- bloco pendente ---------- */
+.k-pend{width:100%;padding:20px 22px;border:1px dashed var(--line);border-radius:var(--r-lg);background:var(--panel-2)}
+.k-pend-tag{display:inline-flex;align-items:center;padding:6px 12px;margin-bottom:14px;border:1px solid var(--line);border-radius:var(--r-pill);font:700 11px/1 var(--font-body);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-soft)}
+.k-pend-p{margin:0 0 12px;font:400 14px/1.6 var(--font-body);color:var(--ink)}
+.k-check{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:9px;font:400 14px/1.5 var(--font-body);color:var(--ink)}
+.k-check li{display:flex;gap:10px;align-items:flex-start}
+.k-check li::before{content:"";flex:0 0 auto;width:14px;height:14px;margin-top:4px;border:1.5px solid var(--line);border-radius:4px}
+<!--CSS-FIM-->

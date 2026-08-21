@@ -1,0 +1,2305 @@
+<title>Design System e-Auditoria — Catálogo</title>
+<meta name="description" content="Catálogo vivo de componentes da e-Auditoria: tokens, primitivos, blocos web, dataviz fiscal, padrões de evento e e-mail — com código para copiar.">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<!-- Material proprietario da e-Auditoria. Todos os direitos reservados. Ver LICENSE. -->
+
+<style>
+  /* ============================================================
+     TOKENS — espelham eauditoria-tokens.css + chrome do catálogo
+     ============================================================ */
+  :root {
+    /* marca */
+    --navy:#050634; --blue:#2488ff; --iris:#2f24ff; --violet:#4f45f5;
+    --purple:#8439e6; --cyan:#00ffea; --yellow:#fec008; --orange:#fb5507;
+    --pink:#ff0071; --red:#ff2f34;
+    --ice:#f5f9fc; --gray200:#a2b9da; --gray500:#576b86; --graphite:#1e2126;
+
+    /* neutras do catálogo — cinza com viés azul (escolhido, não herdado) */
+    --bg:#eef2f9;
+    --panel:#ffffff;
+    --panel-2:#f7f9fd;
+    --ink:#0b0d2e;
+    --ink-soft:#4a4f74;
+    --line:#e2e7f3;
+    --code-bg:#0c0d34;
+    --code-ink:#dfe3ff;
+
+    --primary:var(--iris);
+    --accent:var(--cyan);
+    --cta:var(--yellow);
+
+    --font-display:'Familjen Grotesk','Segoe UI',system-ui,-apple-system,sans-serif;
+    --font-body:'Manrope','Segoe UI',system-ui,-apple-system,sans-serif;
+    --font-mono:ui-monospace,'SF Mono','Cascadia Code','Fira Code',monospace;
+
+    --r-sm:12px; --r-md:20px; --r-lg:28px; --r-xl:40px; --r-pill:999px;
+    --shadow:0 12px 40px rgba(60,40,140,.13);
+    --shadow-lg:0 32px 80px rgba(47,36,255,.16);
+    --ease:cubic-bezier(.16,1,.3,1);
+    --container:1180px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#05061c; --panel:#0d0f34; --panel-2:#0a0c2a;
+      --ink:#eef0ff; --ink-soft:#a6adde; --line:#20244f;
+      --code-bg:#02031a; --code-ink:#dfe3ff;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#05061c; --panel:#0d0f34; --panel-2:#0a0c2a;
+    --ink:#eef0ff; --ink-soft:#a6adde; --line:#20244f;
+    --code-bg:#02031a; --code-ink:#dfe3ff;
+  }
+  :root[data-theme="light"]{
+    --bg:#eef2f9; --panel:#ffffff; --panel-2:#f7f9fd;
+    --ink:#0b0d2e; --ink-soft:#4a4f74; --line:#e2e7f3;
+    --code-bg:#0c0d34; --code-ink:#dfe3ff;
+  }
+
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);
+    font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.08;
+    letter-spacing:-.02em;text-wrap:balance;margin:0}
+  a{color:var(--primary);text-decoration:none}
+  code,pre{font-family:var(--font-mono)}
+  :focus-visible{outline:2px solid var(--primary);outline-offset:3px;border-radius:6px}
+
+  /* ---------- shell ---------- */
+  .layout{display:grid;grid-template-columns:248px minmax(0,1fr);
+    max-width:1440px;margin:0 auto;min-height:100vh}
+  .side{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;
+    padding:26px 18px;border-right:1px solid var(--line);background:var(--panel)}
+  .brand{display:flex;align-items:center;gap:9px;margin-bottom:4px}
+  /* o logotipo herda a cor do tema: currentColor no SVG traçado */
+  .brand-logo{display:block;color:var(--ink);line-height:0}
+  .brand-logo svg{width:158px;height:auto;display:block}
+  .brand-logo:hover{opacity:.78}
+  .brand-sub{font-size:12px;color:var(--ink-soft);margin:8px 0 22px 1px}
+  .nav-group{font-size:11px;text-transform:uppercase;letter-spacing:.12em;
+    color:var(--ink-soft);margin:18px 0 7px;font-weight:600}
+  .nav a{display:flex;align-items:center;justify-content:space-between;gap:8px;
+    color:var(--ink-soft);padding:6px 10px;border-radius:9px;
+    font-size:14px;transition:.15s var(--ease)}
+  .nav a:hover{background:var(--panel-2);color:var(--ink)}
+  .nav a .new{font-size:9px;font-weight:700;letter-spacing:.08em;color:var(--cyan);
+    background:rgba(0,255,234,.14);padding:2px 6px;border-radius:var(--r-pill);flex:none}
+
+  .main{padding:0 clamp(20px,4vw,56px) 120px}
+  .topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;
+    justify-content:space-between;gap:16px;padding:16px 0;margin-bottom:8px;
+    background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line)}
+  .topbar .crumb{font-size:13px;color:var(--ink-soft)}
+  .toggle{border:1px solid var(--line);background:var(--panel);color:var(--ink);
+    font-family:var(--font-body);font-size:13px;font-weight:600;padding:8px 14px;
+    border-radius:var(--r-pill);cursor:pointer;transition:.15s}
+  .toggle:hover{border-color:var(--primary)}
+
+  /* ---------- hero ---------- */
+  .hero{padding:52px 0 34px;border-bottom:1px solid var(--line);margin-bottom:14px}
+  .hero .eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.16em;
+    color:var(--primary);font-weight:700;font-family:var(--font-body)}
+  .hero h1{font-size:clamp(2.4rem,5vw,4rem);margin:14px 0 0}
+  /* Assunto = a marca-mãe: só azuis e lilases. Sem pink, laranja ou magenta.
+     Pink só existe quando o assunto é uma sub-marca ou vertical que o usa. */
+  .grad{background:linear-gradient(125deg,#2488ff 0%,#2f24ff 42%,#772bf2 100%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+  /* REGRA INEGOCIÁVEL: estas expressões nunca quebram linha.
+     "e-Auditoria" mantém a classe própria por ser a mais citada. */
+  .ea-brand{white-space:nowrap}
+  .ea-nb{white-space:nowrap}
+  .hero p{max-width:60ch;color:var(--ink-soft);font-size:1.1rem;margin:18px 0 0}
+  .metrics{display:flex;flex-wrap:wrap;gap:26px;margin-top:26px}
+  .metrics div{display:flex;flex-direction:column}
+  .metrics b{font-family:var(--font-display);font-size:2rem;letter-spacing:-.02em}
+  .metrics span{font-size:12.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em}
+
+  /* ---------- sections ---------- */
+  section{padding:44px 0;border-bottom:1px solid var(--line);scroll-margin-top:80px}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:6px;flex-wrap:wrap}
+  .sec-head h2{font-size:1.8rem}
+  .sec-head .tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
+    padding:4px 10px;border-radius:var(--r-pill)}
+  .tag.web{background:rgba(36,136,255,.12);color:var(--blue)}
+  .tag.email{background:rgba(132,57,230,.14);color:var(--purple)}
+  .tag.core{background:rgba(0,255,234,.16);color:#0aa}
+  .tag.dataviz{background:rgba(47,36,255,.12);color:var(--iris)}
+  .tag.evento{background:rgba(251,85,7,.13);color:#d94a06}
+  .tag.cro{background:rgba(255,0,113,.11);color:var(--pink)}
+  .tag.novo{background:var(--cyan);color:#00312c}
+  .sec-desc{color:var(--ink-soft);max-width:66ch;margin:0 0 26px}
+
+  /* divisor de grupo */
+  .group-head{padding:56px 0 4px;border:0}
+  .group-head h2{font-size:clamp(1.6rem,3vw,2.3rem)}
+  .group-head .kicker{font-size:11px;font-weight:700;text-transform:uppercase;
+    letter-spacing:.16em;color:var(--primary)}
+  .group-head p{color:var(--ink-soft);max-width:70ch;margin:12px 0 0}
+
+  /* ---------- token displays ---------- */
+  .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+  .sw{border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;background:var(--panel)}
+  .sw .chip{height:66px}
+  .sw .meta{padding:9px 11px}
+  .sw .nm{font-size:13px;font-weight:600}
+  .sw .hex{font-family:var(--font-mono);font-size:12px;color:var(--ink-soft);text-transform:uppercase}
+  .grads{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+  .gr{border-radius:var(--r-md);overflow:hidden;border:1px solid var(--line)}
+  .gr .band{height:64px}
+  .gr .meta{padding:8px 11px;background:var(--panel)}
+  .gr .nm{font-size:13px;font-weight:600}
+  .gr .rec{font-family:var(--font-mono);font-size:11px;color:var(--ink-soft)}
+
+  .type-row{display:flex;align-items:baseline;gap:16px;padding:12px 0;border-top:1px solid var(--line);flex-wrap:wrap}
+  .type-row:first-child{border-top:0}
+  .type-row .lbl{font-family:var(--font-mono);font-size:12px;color:var(--ink-soft);width:150px;flex:none}
+  .radii{display:flex;gap:20px;flex-wrap:wrap}
+  .radii .box{width:96px;height:96px;background:var(--panel);border:1px solid var(--line);
+    display:flex;align-items:flex-end;justify-content:center;padding:8px;font-size:12px;color:var(--ink-soft);font-family:var(--font-mono)}
+
+  /* escala de espaço */
+  .spaces{display:flex;flex-direction:column;gap:8px}
+  .space-row{display:flex;align-items:center;gap:14px}
+  .space-row .lbl{font-family:var(--font-mono);font-size:12px;color:var(--ink-soft);width:132px;flex:none}
+  .space-row .bar{height:16px;border-radius:4px;background:linear-gradient(90deg,var(--iris),var(--purple))}
+
+  /* ---------- component card ---------- */
+  .comp{border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;
+    background:var(--panel);margin-bottom:26px}
+  .comp-head{display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding:14px 18px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .comp-head h3{font-size:1.15rem}
+  .comp-head .id{font-family:var(--font-mono);font-size:12px;color:var(--ink-soft)}
+  .comp-note{padding:0 18px;font-size:13.5px;color:var(--ink-soft);margin:12px 0 0}
+  .comp-note.warn{color:var(--ink);background:rgba(255,0,113,.06);border-left:3px solid var(--pink);
+    margin:14px 18px 0;padding:12px 14px;border-radius:0 10px 10px 0}
+  .comp-note.cro{color:var(--ink);background:rgba(0,255,234,.07);border-left:3px solid var(--cyan);
+    margin:14px 18px 0;padding:12px 14px;border-radius:0 10px 10px 0}
+  .comp-note b{color:var(--ink)}
+  .preview{padding:26px 18px;background:var(--panel-2);display:flex;flex-wrap:wrap;
+    gap:16px;align-items:center}
+  .preview.stack{flex-direction:column;align-items:stretch}
+  .preview.dark{background:linear-gradient(140deg,#06063a,#0d0540 50%,#1c0860)}
+  .code-wrap{position:relative;border-top:1px solid var(--line)}
+  .copy{position:absolute;top:10px;right:10px;z-index:2;border:1px solid rgba(255,255,255,.18);
+    background:rgba(255,255,255,.07);color:#cfe;font-family:var(--font-body);font-size:12px;
+    font-weight:600;padding:6px 12px;border-radius:var(--r-pill);cursor:pointer}
+  .copy:hover{background:rgba(255,255,255,.16)}
+  pre{margin:0;background:var(--code-bg);color:var(--code-ink);padding:18px;
+    overflow-x:auto;font-size:12.5px;line-height:1.65}
+
+  /* ---------- live component styles (mini brand kit) ---------- */
+  .k-btn{font-family:var(--font-body);font-weight:700;border:0;cursor:pointer;
+    padding:14px 28px;border-radius:var(--r-pill);font-size:15px;transition:.2s var(--ease);
+    display:inline-flex;align-items:center;gap:9px}
+  .k-btn:hover{transform:translateY(-2px)}
+  .k-btn svg{width:16px;height:16px;flex:none}
+  .k-cta{background:var(--yellow);color:var(--navy);box-shadow:0 0 44px rgba(254,192,8,.36)}
+  .k-primary{background:var(--iris);color:#fff}
+  .k-outline{background:transparent;color:var(--iris);border:2px solid rgba(47,36,255,.35)}
+  .k-ghost{background:rgba(47,36,255,.1);color:var(--iris)}
+  .k-sm{padding:10px 18px;font-size:13.5px}
+  .k-badge{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-body);
+    font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.08em;
+    padding:7px 14px;border-radius:var(--r-pill)}
+  .k-badge.grad{background:linear-gradient(135deg,#4f45f5,#8439e6);color:#fff}
+  .k-badge.soft{background:rgba(36,136,255,.12);color:var(--blue)}
+  .k-eyebrow{font-family:var(--font-body);font-weight:700;font-size:12px;
+    text-transform:uppercase;letter-spacing:.16em;color:var(--iris)}
+  .k-pill-live{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,#fb5507,#ff2f34);
+    color:#fff;font-weight:700;font-size:12px;padding:6px 13px;border-radius:var(--r-pill);text-transform:uppercase;letter-spacing:.05em}
+  .k-pill-live .dot{width:7px;height:7px;border-radius:50%;background:#fff;animation:pulse 1.4s infinite}
+  @keyframes pulse{50%{opacity:.3}}
+  .k-glass{background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.6);
+    border-radius:var(--r-md);padding:20px;box-shadow:var(--shadow);backdrop-filter:blur(16px);min-width:210px;position:relative;overflow:hidden}
+  .k-glass::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,#2f24ff,#8439e6,#ff0071)}
+  .k-glass .ic{color:var(--iris)}
+  .k-glass .ic svg{width:26px;height:26px}
+  .k-glass h4{font-size:1.05rem;margin:10px 0 4px;font-family:var(--font-display);color:var(--navy)}
+  .k-glass p{margin:0;font-size:13.5px;color:var(--gray500)}
+
+  /* stats band (live) */
+  .k-stats{width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:14px}
+  .k-stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-md);padding:20px}
+  .k-stat b{display:block;font-family:var(--font-display);font-size:2.3rem;letter-spacing:-.02em;
+    font-variant-numeric:tabular-nums;
+    background:linear-gradient(120deg,#4f45f5,#8439e6);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .k-stat span{font-size:12.5px;color:var(--gray500);text-transform:uppercase;letter-spacing:.06em}
+
+  /* feature grid (live) */
+  .k-feats{width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+  .k-feat{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-md);padding:20px}
+  .k-feat .fi{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;
+    background:linear-gradient(135deg,#2f24ff,#8439e6);color:#fff;margin-bottom:12px}
+  .k-feat .fi svg{width:22px;height:22px}
+  .k-feat h4{font-size:1.02rem;margin:0 0 5px;font-family:var(--font-display)}
+  .k-feat p{margin:0;font-size:13px;color:var(--gray500)}
+
+  /* final cta (live, dark) */
+  .k-cta-band{width:100%;background:linear-gradient(140deg,#06063a,#0d0540 50%,#1c0860);
+    border-radius:var(--r-xl);padding:40px 30px;text-align:center;position:relative;overflow:hidden}
+  .k-cta-band h3{color:#fff;font-size:clamp(1.5rem,3vw,2.2rem);max-width:20ch;margin:0 auto 8px}
+  .k-cta-band .ye{color:var(--yellow)}
+  .k-cta-band p{color:#9aa3d6;margin:0 auto 20px;max-width:40ch;font-size:14px}
+
+  /* email deadline anchor (live) */
+  .k-anchor{background:#050634;border-radius:var(--r-md);padding:30px;max-width:520px;width:100%}
+  .k-anchor .tag{display:inline-flex;gap:6px;align-items:center;background:#171a4a;color:var(--cyan);
+    font-size:12px;font-weight:600;padding:6px 12px;border-radius:var(--r-pill)}
+  .k-anchor .big{font-family:var(--font-display);font-size:64px;color:#fff;letter-spacing:-.035em;line-height:1;margin:14px 0 0}
+  .k-anchor .sweep{width:48px;height:3px;background:var(--cyan);margin:14px 0}
+  .k-anchor p{color:#b9c0e8;margin:0;font-size:14px;max-width:40ch}
+
+  /* email article (live) */
+  .k-art{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-md);padding:20px;max-width:520px;width:100%}
+  .k-imp{display:inline-block;font-size:11px;font-weight:700;padding:5px 11px;border-radius:var(--r-pill);text-transform:uppercase;letter-spacing:.04em}
+  .k-imp.alto{background:#ffe7e7;color:#c7202b}
+  .k-imp.medio{background:#fff3d1;color:#9a6a00}
+  .k-imp.oper{background:#e2eeff;color:#1667d6}
+  .k-art h4{font-size:1.1rem;margin:12px 0 6px;font-family:var(--font-display);color:var(--navy)}
+  .k-art p{margin:0 0 10px;font-size:13.5px;color:#4a4d6b}
+  .k-art a{font-weight:700;font-size:14px}
+
+  /* ===== v2: novos primitivos ===== */
+  .k-icons{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:12px;width:100%}
+  .k-ico{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-sm);
+    padding:16px 10px;text-align:center;color:var(--iris)}
+  .k-ico svg{width:26px;height:26px}
+  .k-ico span{display:block;margin-top:9px;font-size:11px;color:var(--ink-soft);font-family:var(--font-mono)}
+
+  .k-div-grad{width:100%;height:2px;border:0;background:linear-gradient(90deg,transparent,var(--violet),var(--purple),transparent)}
+  .k-div-band{width:120px;height:4px;border-radius:var(--r-pill);background:linear-gradient(90deg,var(--iris),var(--cyan))}
+  .k-div-hair{width:100%;height:1px;background:#e4e9f5}
+
+  .k-count{font-family:var(--font-display);font-size:3rem;letter-spacing:-.03em;
+    font-variant-numeric:tabular-nums;color:var(--iris)}
+
+  .k-reveal-demo{display:flex;gap:12px;flex-wrap:wrap;width:100%}
+  .k-reveal-demo div{flex:1;min-width:120px;background:var(--panel);border:1px solid var(--line);
+    border-radius:var(--r-sm);padding:14px;font-size:12.5px;color:var(--ink-soft)}
+  .k-reveal-demo div b{display:block;color:var(--ink);font-family:var(--font-display);font-size:14px;margin-bottom:3px}
+
+  .k-orbs{position:relative;width:100%;height:180px;border-radius:var(--r-md);overflow:hidden;
+    background:#050634}
+  .k-orbs i{position:absolute;border-radius:50%;filter:blur(48px);opacity:.62}
+  .k-orbs .o1{width:210px;height:210px;background:#4f45f5;left:-40px;top:-60px}
+  .k-orbs .o2{width:180px;height:180px;background:#8439e6;right:10%;bottom:-70px}
+  .k-orbs .o3{width:130px;height:130px;background:#00ffea;right:34%;top:-40px;opacity:.32}
+  .k-orbs .mesh{position:absolute;inset:0;opacity:.5}
+
+  /* ===== v2: blocos web ===== */
+  .k-w{width:100%}
+  .k-header{display:flex;align-items:center;justify-content:space-between;gap:14px;
+    padding:11px 18px;border-radius:var(--r-pill);background:rgba(255,255,255,.72);
+    border:1px solid rgba(255,255,255,.7);backdrop-filter:blur(14px);box-shadow:var(--shadow)}
+  .k-header .lg{font-family:var(--font-display);font-weight:700;color:var(--navy);font-size:15px}
+  .k-header nav{display:flex;gap:16px;font-size:13.5px;color:var(--gray500)}
+
+  .k-hero{display:grid;grid-template-columns:1.15fr .85fr;gap:22px;align-items:center;
+    background:linear-gradient(220deg,#ddd6fe,#c7dbff 48%,#e5daff);border-radius:var(--r-lg);padding:28px}
+  .k-hero h3{color:var(--navy);font-size:clamp(1.3rem,2.6vw,2rem);margin:10px 0 8px}
+  .k-hero p{color:#3d4063;font-size:14px;margin:0 0 16px;max-width:38ch}
+  .k-hero .formcard{background:#fff;border-radius:var(--r-md);padding:18px;box-shadow:var(--shadow)}
+  .k-hero .formcard b{display:block;font-family:var(--font-display);color:var(--navy);margin-bottom:12px;font-size:15px}
+  .k-hero .fld{height:38px;border-radius:10px;background:#f1f4fb;border:1px solid #e2e7f3;margin-bottom:9px}
+  @media (max-width:640px){.k-hero{grid-template-columns:1fr}}
+
+  .k-urg{display:flex;align-items:center;justify-content:center;gap:11px;flex-wrap:wrap;
+    background:var(--navy);color:#fff;padding:11px 18px;border-radius:var(--r-sm);font-size:13.5px}
+  .k-urg b{color:var(--cyan);font-family:var(--font-display);font-size:17px;font-variant-numeric:tabular-nums}
+  .k-urg a{color:var(--yellow);font-weight:700}
+
+  .k-facade{position:relative;width:100%;aspect-ratio:16/9;border-radius:var(--r-md);overflow:hidden;
+    background:linear-gradient(140deg,#0d0540,#1c0860);display:grid;place-items:center;
+    border:1px solid rgba(255,255,255,.12);cursor:pointer}
+  .k-facade .play{width:64px;height:64px;border-radius:50%;background:var(--yellow);
+    display:grid;place-items:center;box-shadow:0 0 40px rgba(254,192,8,.4)}
+  .k-facade .play svg{width:24px;height:24px;color:var(--navy);margin-left:3px}
+  .k-facade .cap{position:absolute;left:0;right:0;bottom:0;padding:12px 16px;font-size:12.5px;
+    color:#c9cff2;background:linear-gradient(transparent,rgba(5,6,52,.85))}
+
+  .k-logos{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:center;width:100%}
+  .k-logos span{padding:10px 20px;border-radius:var(--r-sm);background:var(--panel);
+    border:1px solid var(--line);color:var(--ink-soft);font-weight:700;font-size:13px;letter-spacing:.02em}
+
+  .k-mt{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:center;width:100%}
+  .k-mt .img{aspect-ratio:4/3;border-radius:var(--r-md);background:linear-gradient(135deg,#dbe7ff,#efe6ff);
+    display:grid;place-items:center;color:var(--iris)}
+  .k-mt h4{font-size:1.25rem;margin:0 0 8px;color:var(--ink)}
+  .k-mt p{margin:0;font-size:14px;color:var(--ink-soft)}
+  @media (max-width:640px){.k-mt{grid-template-columns:1fr}}
+
+  .k-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;width:100%}
+  .k-step{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-md);padding:18px;position:relative}
+  .k-step .n{font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--iris);
+    letter-spacing:.08em;display:block;margin-bottom:8px;font-variant-numeric:tabular-nums}
+  .k-step h4{font-size:1rem;margin:0 0 5px}
+  .k-step p{margin:0;font-size:13px;color:var(--ink-soft)}
+
+  .k-cmp{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%;position:relative}
+  .k-cmp .side-c{border-radius:var(--r-md);padding:20px;border:1px solid var(--line)}
+  .k-cmp .bad{background:rgba(255,47,52,.06);border-color:rgba(255,47,52,.25)}
+  .k-cmp .good{background:rgba(0,255,234,.07);border-color:rgba(0,180,160,.3)}
+  .k-cmp h4{font-size:1rem;margin:0 0 10px}
+  .k-cmp ul{margin:0;padding-left:18px;font-size:13px;color:var(--ink-soft);display:flex;flex-direction:column;gap:6px}
+  .k-cmp .vs{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:38px;height:38px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;
+    font-family:var(--font-display);font-size:12px;font-weight:700;border:3px solid var(--panel-2)}
+  @media (max-width:640px){.k-cmp{grid-template-columns:1fr}.k-cmp .vs{display:none}}
+
+  .k-tabs{width:100%}
+  .k-tablist{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .k-tab{border:1px solid var(--line);background:var(--panel);color:var(--ink-soft);
+    font-family:var(--font-body);font-weight:600;font-size:13.5px;padding:9px 17px;
+    border-radius:var(--r-pill);cursor:pointer}
+  .k-tab[aria-selected="true"]{background:var(--iris);color:#fff;border-color:var(--iris)}
+  .k-tabpanel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-md);padding:20px;font-size:14px}
+  .k-tabpanel[hidden]{display:none}
+  .k-tabpanel h4{margin:0 0 6px;font-size:1.05rem}
+  .k-tabpanel p{margin:0;color:var(--ink-soft);font-size:13.5px}
+
+  .k-testi{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;width:100%}
+  .k-testi .c{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-md);padding:20px;position:relative}
+  .k-testi .q{font-family:var(--font-display);font-size:44px;line-height:.7;color:rgba(47,36,255,.16);display:block}
+  .k-testi p{font-size:13.5px;margin:6px 0 14px;color:var(--ink)}
+  .k-testi .who{display:flex;align-items:center;gap:10px}
+  .k-testi .av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#4f45f5,#8439e6);
+    color:#fff;display:grid;place-items:center;font-weight:700;font-size:13px;flex:none}
+  .k-testi .who b{display:block;font-size:13px}
+  .k-testi .who span{font-size:12px;color:var(--ink-soft)}
+
+  .k-bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:78px;gap:12px;width:100%}
+  .k-bento div{border-radius:var(--r-sm);padding:14px;font-size:12.5px;display:flex;flex-direction:column;justify-content:flex-end}
+  .k-bento .b1{grid-column:span 2;grid-row:span 2;background:linear-gradient(140deg,#06063a,#1c0860);color:#fff}
+  .k-bento .b1 b{font-family:var(--font-display);font-size:26px;letter-spacing:-.02em}
+  .k-bento .b2{grid-column:span 2;background:var(--pastel,#e7e2ff);color:var(--navy)}
+  .k-bento .b3{background:#dbe7ff;color:var(--navy)}
+  .k-bento .b4{background:var(--yellow);color:var(--navy);font-weight:700}
+  @media (max-width:640px){.k-bento{grid-template-columns:repeat(2,1fr)}.k-bento .b1{grid-column:span 2}}
+
+  .k-faq{width:100%;display:flex;flex-direction:column;gap:9px}
+  .k-faq details{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-sm);padding:14px 16px}
+  .k-faq summary{cursor:pointer;font-family:var(--font-display);font-size:15px;font-weight:700}
+  .k-faq p{margin:10px 0 0;font-size:13.5px;color:var(--ink-soft)}
+
+  .k-sticky{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;
+    padding:11px 16px;border-radius:var(--r-sm);background:rgba(255,255,255,.94);
+    border:1px solid var(--line);box-shadow:0 -10px 30px rgba(5,6,52,.1)}
+  .k-sticky b{display:block;font-family:var(--font-display);font-size:14px;color:var(--navy)}
+  .k-sticky span{display:block;font-size:12px;color:var(--gray500)}
+
+  /* ===== v2: dataviz fiscal ===== */
+  .k-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;width:100%}
+  .k-kpi{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-md);padding:18px;
+    border-top:3px solid var(--iris)}
+  .k-kpi .lb{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);font-weight:700}
+  .k-kpi .vl{font-family:var(--font-display);font-size:1.9rem;letter-spacing:-.02em;margin-top:6px;
+    font-variant-numeric:tabular-nums}
+  .k-kpi .dl{font-size:12px;margin-top:4px;font-weight:700}
+  .k-kpi .up{color:#c7202b} .k-kpi .down{color:#0f9d76}
+
+  .k-donut{display:flex;align-items:center;gap:18px}
+  .k-donut .ring{position:relative;width:96px;height:96px;border-radius:50%;flex:none;
+    background:conic-gradient(var(--violet) 0 62%,#e3e8f0 62% 100%);display:grid;place-items:center}
+  .k-donut .ring::after{content:"";width:64px;height:64px;border-radius:50%;background:var(--panel);position:absolute}
+  .k-donut .c{position:relative;z-index:1;text-align:center}
+  .k-donut .pct{display:block;font-family:var(--font-display);font-weight:700;font-size:1.3rem;color:var(--violet)}
+  .k-donut .lbl{font-size:.7rem;color:var(--ink-soft)}
+  .k-donut ul{margin:0;padding:0;list-style:none;font-size:13px;flex:1}
+  .k-donut li{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--line)}
+  .k-donut li:first-child{border-top:0}
+  .k-donut em{margin-left:auto;font-style:normal;font-size:12px;color:var(--ink-soft)}
+  .k-flag{width:8px;height:8px;border-radius:50%;flex:none}
+
+  .k-tbl-wrap{width:100%;overflow-x:auto}
+  .k-tbl{width:100%;border-collapse:collapse;font-size:13px;min-width:420px}
+  .k-tbl th{text-align:left;font-weight:700;color:var(--ink-soft);padding:8px 10px;
+    border-bottom:2px solid var(--line);font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+  .k-tbl td{padding:9px 10px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+  .k-status{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:var(--r-pill)}
+  .k-status.ok{background:rgba(15,157,118,.13);color:#0f9d76}
+  .k-status.warn{background:rgba(254,192,8,.2);color:#8a6600}
+  .k-status.bad{background:rgba(255,47,52,.12);color:#c7202b}
+
+  .k-chart{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-md);padding:18px}
+  .k-chart svg{width:100%;height:auto;display:block}
+  .k-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--ink-soft);margin-top:12px}
+  .k-legend i{width:10px;height:10px;border-radius:3px;display:inline-block;margin-right:6px}
+
+  .k-frame{width:100%;border-radius:var(--r-md);overflow:hidden;border:1px solid var(--line);
+    background:var(--panel);box-shadow:var(--shadow)}
+  .k-frame .bar{display:flex;align-items:center;gap:6px;padding:10px 14px;background:var(--panel-2);
+    border-bottom:1px solid var(--line)}
+  .k-frame .bar i{width:9px;height:9px;border-radius:50%;background:var(--line)}
+  .k-frame .bar span{margin-left:10px;font-size:11px;color:var(--ink-soft);font-family:var(--font-mono)}
+  .k-frame .body{aspect-ratio:16/9;background:linear-gradient(135deg,#eef3ff,#f7f2ff);
+    display:grid;place-items:center;color:var(--ink-soft);font-size:13px}
+
+  /* ===== v2: evento ===== */
+  .k-cd{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;width:100%;
+    background:linear-gradient(135deg,#fff0c4,#e7e2ff);border-radius:var(--r-lg);padding:22px}
+  .k-cd .lab b{display:block;font-family:var(--font-display);font-size:1.1rem;color:var(--navy)}
+  .k-cd .lab small{color:var(--gray500);font-size:12.5px}
+  .k-cd .timer{display:flex;gap:9px}
+  .k-cd .box{background:#fff;border-radius:var(--r-sm);padding:10px 13px;text-align:center;min-width:60px}
+  .k-cd .box .n{display:block;font-family:var(--font-display);font-size:1.6rem;color:var(--navy);
+    letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .k-cd .box .u{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--gray500)}
+
+  .k-turmas{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%}
+  .k-turma{border-radius:var(--r-md);padding:20px;color:var(--navy)}
+  .k-turma.dia{background:linear-gradient(140deg,#fff0c4,#ffe1b8)}
+  .k-turma.tarde{background:linear-gradient(140deg,#e7e2ff,#dbe7ff)}
+  .k-turma .ic{font-size:22px}
+  .k-turma h4{margin:8px 0 4px;font-size:1.05rem}
+  .k-turma p{margin:0;font-size:13px;color:#3d4063}
+  .k-turma .hr{font-family:var(--font-display);font-size:1.5rem;margin-top:10px;font-variant-numeric:tabular-nums}
+  @media (max-width:640px){.k-turmas{grid-template-columns:1fr}}
+
+  .k-speakers{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;width:100%}
+  .k-spk{border-radius:var(--r-md);overflow:hidden;position:relative;aspect-ratio:3/4;
+    background:linear-gradient(160deg,#4f45f5,#8439e6);display:flex;align-items:flex-end;padding:14px}
+  .k-spk .scrim{position:absolute;inset:0;background:linear-gradient(transparent 45%,rgba(5,6,52,.88))}
+  .k-spk .info{position:relative;color:#fff}
+  .k-spk .info b{display:block;font-family:var(--font-display);font-size:14px}
+  .k-spk .info span{font-size:11.5px;color:#c9cff2}
+
+  .k-live{display:grid;grid-template-columns:1.6fr 1fr;gap:14px;width:100%}
+  .k-live .vid{aspect-ratio:16/9;border-radius:var(--r-md);background:#050634;display:grid;place-items:center;color:#c9cff2;font-size:13px}
+  .k-live .chat{border-radius:var(--r-md);border:1px solid var(--line);background:var(--panel);
+    padding:14px;font-size:12.5px;color:var(--ink-soft);display:flex;flex-direction:column;gap:8px}
+  @media (max-width:640px){.k-live{grid-template-columns:1fr}}
+
+  /* ===== v2: e-mail ===== */
+  .k-mast{width:100%;max-width:520px;border-radius:var(--r-md);overflow:hidden;border:1px solid var(--line)}
+  .k-mast .top{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;
+    background:var(--panel);font-size:11.5px;color:var(--ink-soft)}
+  .k-mast .band{background:linear-gradient(122deg,#8439e6,#5b4bf2 46%,#2488ff);padding:26px 18px;color:#fff}
+  .k-mast .band b{font-family:var(--font-display);font-size:1.5rem;letter-spacing:-.02em;display:block}
+  .k-mast .band span{display:inline-block;margin-top:9px;background:rgba(255,255,255,.2);
+    padding:5px 12px;border-radius:var(--r-pill);font-size:11px;font-weight:700;letter-spacing:.06em}
+
+  .k-evt{background:#050634;border-radius:var(--r-md);padding:24px;max-width:520px;width:100%;color:#fff}
+  .k-evt h4{font-family:var(--font-display);font-size:1.15rem;margin:12px 0 6px}
+  .k-evt p{margin:0 0 14px;font-size:13px;color:#b9c0e8}
+  .k-evt .meta{font-size:12.5px;color:var(--cyan);font-weight:700}
+
+  .k-poll{max-width:520px;width:100%;display:flex;flex-direction:column;gap:8px}
+  .k-poll a{display:block;padding:12px 14px;border-radius:var(--r-sm);background:#f7f9fd;
+    border:1px solid var(--line);font-size:13.5px;color:var(--ink);font-weight:600}
+  .k-foot{max-width:520px;width:100%;background:#f5f8fc;border-radius:var(--r-md);padding:20px;
+    font-size:11.5px;color:#7377a0;line-height:1.7}
+
+  /* ===== v3: marca — chrome compartilhado =====
+     Definido UMA vez aqui. Nenhuma seção redefine estas classes. */
+  .tag.marca{background:rgba(43,46,111,.14);color:#2b2e6f}
+  :root[data-theme="dark"] .tag.marca{background:rgba(199,211,255,.18);color:#c7d3ff}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tag.marca{background:rgba(199,211,255,.18);color:#c7d3ff}}
+
+  /* linha de botões de download */
+  .k-dls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+  .k-dl{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-body);
+    font-size:12.5px;font-weight:700;letter-spacing:.02em;padding:8px 14px;
+    border-radius:var(--r-pill);border:1px solid var(--line);background:var(--panel);
+    color:var(--ink);text-decoration:none;transition:.16s var(--ease);cursor:pointer}
+  .k-dl:hover{border-color:var(--primary);color:var(--primary);transform:translateY(-1px)}
+  .k-dl svg{width:14px;height:14px;flex:none}
+  .k-dl .sz{font-weight:500;color:var(--ink-soft);font-family:var(--font-mono);font-size:11px}
+
+  /* moldura de exibição de um asset (logo, símbolo, marca) */
+  .k-asset{display:flex;flex-direction:column;gap:10px;align-items:flex-start;
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--r-md);
+    padding:22px;min-width:210px;flex:1}
+  .k-asset > svg, .k-asset > img{max-width:100%;height:auto;display:block}
+  .k-asset__cap{font-size:12px;color:var(--ink-soft);font-family:var(--font-mono)}
+  .k-asset--dark{background:var(--navy);border-color:rgba(255,255,255,.14)}
+  .k-asset--dark .k-asset__cap{color:#9aa3d6}
+  .k-asset--check{background-color:var(--panel);
+    background-image:linear-gradient(45deg,rgba(120,130,170,.13) 25%,transparent 25%,transparent 75%,rgba(120,130,170,.13) 75%),
+                     linear-gradient(45deg,rgba(120,130,170,.13) 25%,transparent 25%,transparent 75%,rgba(120,130,170,.13) 75%);
+    background-size:16px 16px;background-position:0 0,8px 8px}
+
+  /* grade de usos proibidos */
+  .k-donts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;width:100%}
+  .k-dont{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-md);
+    overflow:hidden;position:relative}
+  .k-dont__vis{height:104px;display:grid;place-items:center;padding:14px;overflow:hidden;
+    background:var(--panel-2);position:relative}
+  .k-dont__vis img,.k-dont__vis svg{max-width:80%;max-height:64px}
+  .k-dont__lbl{padding:11px 14px;font-size:12.5px;color:var(--ink-soft);line-height:1.45}
+  .k-dont__lbl b{display:block;color:var(--ink);font-family:var(--font-display);
+    font-size:13px;margin-bottom:2px}
+  .k-dont::after{content:"✕";position:absolute;top:8px;right:10px;z-index:2;
+    font-weight:700;font-size:15px;color:var(--red);line-height:1}
+
+  /* amostra de cor reutilizável (paletas por vertical) */
+  .k-chip{border-radius:var(--r-sm);overflow:hidden;border:1px solid var(--line);background:var(--panel)}
+  .k-chip__c{height:58px}
+  .k-chip__m{padding:8px 10px;font-family:var(--font-mono);font-size:11.5px;color:var(--ink-soft);
+    text-transform:uppercase;font-variant-numeric:tabular-nums}
+
+  /* ===== v2: regras ===== */
+  .checklist{display:flex;flex-direction:column;gap:9px;width:100%}
+  .checklist label{display:flex;gap:11px;align-items:flex-start;background:var(--panel);
+    border:1px solid var(--line);border-radius:var(--r-sm);padding:13px 15px;font-size:13.5px;cursor:pointer}
+  .checklist input{margin-top:3px;accent-color:var(--iris);flex:none;width:16px;height:16px}
+  .checklist b{font-weight:700}
+  .checklist code{background:var(--panel-2);padding:1px 6px;border-radius:6px;font-size:12px;color:var(--pink)}
+
+  @media (max-width:860px){
+    .layout{grid-template-columns:1fr}
+    .side{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms !important;transition-duration:.01ms !important}
+  }
+</style>
+
+<div class="layout">
+  <aside class="side">
+    <div class="brand"><a class="brand-logo" href="#marca" aria-label="e-Auditoria — ir para Uso da marca">{{BRAND_LOGO}}</a></div>
+    <div class="brand-sub">Design System · v2</div>
+    <nav class="nav">
+      <div class="nav-group">Fundações</div>
+      <a href="#cores">Cores</a>
+      <a href="#gradientes">Gradientes</a>
+      <a href="#tipografia">Tipografia</a>
+      <a href="#geometria">Raio &amp; sombra</a>
+      <a href="#espacamento">Espaçamento <span class="new">novo</span></a>
+      <a href="#icones-2d">Ícones <span class="new">novo</span></a>
+
+      <div class="nav-group">Primitivos</div>
+      <a href="#botoes">Botões</a>
+      <a href="#badges">Badges &amp; eyebrows</a>
+      <a href="#cards">Card de vidro</a>
+      <a href="#divisores">Divisores <span class="new">novo</span></a>
+      <a href="#contador">Contador <span class="new">novo</span></a>
+      <a href="#reveal">Scroll-reveal <span class="new">novo</span></a>
+      <a href="#fundos">Fundos &amp; orbs <span class="new">novo</span></a>
+
+      <div class="nav-group">Blocos web</div>
+      <a href="#header">Header <span class="new">novo</span></a>
+      <a href="#heros">Heros <span class="new">novo</span></a>
+      <a href="#urgencia">Barra de prazo <span class="new">novo</span></a>
+      <a href="#video">Fachada de vídeo <span class="new">novo</span></a>
+      <a href="#logos">Faixa de logos <span class="new">novo</span></a>
+      <a href="#stats">Faixa de números</a>
+      <a href="#features">Grid de benefícios</a>
+      <a href="#mediatext">Media &amp; texto <span class="new">novo</span></a>
+      <a href="#passos">Passos <span class="new">novo</span></a>
+      <a href="#comparativo">Antes × depois <span class="new">novo</span></a>
+      <a href="#abas">Abas <span class="new">novo</span></a>
+      <a href="#depoimentos">Depoimentos <span class="new">novo</span></a>
+      <a href="#bento">Bento <span class="new">novo</span></a>
+      <a href="#faq">FAQ <span class="new">novo</span></a>
+      <a href="#form">Captura <span class="new">novo</span></a>
+      <a href="#cta">CTA final</a>
+      <a href="#cta-sticky">CTA sticky <span class="new">novo</span></a>
+
+      <div class="nav-group">Dataviz fiscal</div>
+      <a href="#kpis">KPIs <span class="new">novo</span></a>
+      <a href="#donut">Donut <span class="new">novo</span></a>
+      <a href="#tabela">Alíquotas <span class="new">novo</span></a>
+      <a href="#virada">Ponto de virada <span class="new">novo</span></a>
+      <a href="#moldura">Moldura de produto <span class="new">novo</span></a>
+
+      <div class="nav-group">Evento</div>
+      <a href="#countdown">Countdown <span class="new">novo</span></a>
+      <a href="#agenda">Agenda &amp; turmas <span class="new">novo</span></a>
+      <a href="#palestrantes">Palestrantes <span class="new">novo</span></a>
+      <a href="#transmissao">Transmissão <span class="new">novo</span></a>
+
+      <div class="nav-group">Blocos e-mail</div>
+      <a href="#email-masthead">Masthead <span class="new">novo</span></a>
+      <a href="#email-btn">Botão bulletproof</a>
+      <a href="#email-anchor">Âncora de prazo</a>
+      <a href="#email-art">Lista de artigos</a>
+      <a href="#email-evento">Card de evento <span class="new">novo</span></a>
+      <a href="#email-enquete">Enquete <span class="new">novo</span></a>
+      <a href="#email-footer">Rodapé <span class="new">novo</span></a>
+
+      <div class="nav-group">Regras</div>
+      <a href="#governanca">Governança</a>
+      <a href="#pre-voo">Pré-voo <span class="new">novo</span></a>
+      <a href="#cro">CRO <span class="new">novo</span></a>
+    </nav>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <span class="crumb">Catálogo de componentes · uso interno da Criação</span>
+      <button class="toggle" id="themeBtn">◐ Tema</button>
+    </div>
+
+    <header class="hero">
+      <div class="eyebrow">Banco de elementos oficial</div>
+      <h1>O sistema visual da <span class="grad ea-brand">e-Auditoria</span>, num lugar só.</h1>
+      <p>Tokens, primitivos e blocos prontos para landing pages (WordPress + HubSpot) e newsletters — com preview ao vivo e código para copiar. Uma fonte única, controlada pela Criação, para toda peça sair consistente e escalar sem retrabalho.</p>
+      <div class="metrics">
+        <div><b>2</b><span>fontes oficiais</span></div>
+        <div><b>6</b><span>paletas por vertical</span></div>
+        <div><b>104</b><span>blocos no catálogo</span></div>
+        <div><b>14</b><span>regras de produção</span></div>
+      </div>
+    </header>
+
+    <div class="callout">
+      <b>Como usar.</b> Cada bloco tem preview e código. Clique em <b>Copiar</b>, cole na peça e troque o conteúdo. Para web, carregue os tokens (<code>eauditoria-tokens.css</code>) e as fontes uma vez no topo — e prefixe tudo com o wrapper da peça. Para e-mail, os valores vão inline (Outlook não entende variáveis). <i>Nota: no preview as fontes aparecem via fallback do sistema — em produção, o <code>@import</code> traz Familjen Grotesk + Manrope de verdade.</i>
+    </div>
+
+    <div class="callout" style="border-left-color:var(--cyan);background:linear-gradient(135deg,rgba(0,255,234,.09),rgba(47,36,255,.04))">
+      <b>O que mudou na v3.</b> O catálogo deixou de ser só de componentes e passou a cobrir a <b>identidade</b>: entraram <a href="#marca">Uso da marca</a> (com o vetor do logotipo, que não existia — os arquivos de origem eram PNG de 641px), <a href="#submarcas">Sub-marcas</a>, <a href="#mascotes">Mascotes</a>, as <a href="#paletas">6 paletas por vertical</a> extraídas por amostragem das artes oficiais, e as superfícies — <a href="#padroes">Padrões</a>, <a href="#backgrounds">Backgrounds</a> e <a href="#vidro">Vidro</a>. Os ícones foram separados em <a href="#icones-2d">2D</a> e <a href="#icones-3d">3D</a>. Onde há vetor, o botão de download gera o PNG na hora, em qualquer tamanho.
+    </div>
+    <div class="callout">
+      <b>Da v2.</b> As <b>regras aprendidas na publicação de 29/07/2026</b>, quando uma página subiu sem estilo por três causas independentes, estão em <a href="#governanca">Governança</a> (14 regras) e no <a href="#pre-voo">Pré-voo</a>. Cada bloco com armadilha conhecida traz o aviso no próprio card; onde há decisão de conversão, há nota de <a href="#cro">CRO</a>.
+    </div>
+
+    <!-- ============ CORES ============ -->
+    <section id="cores">
+      <div class="sec-head"><h2>Cores</h2><span class="tag core">Fundação</span></div>
+      <p class="sec-desc">Papéis semânticos primeiro (é o que você usa). O amarelo é a <b>cor única de CTA</b> — sempre com texto escuro, nunca branco. Ciano é acento de dados sobre fundo escuro, nunca dominante.</p>
+      <div class="swatches">
+        <div class="sw"><div class="chip" style="background:#2f24ff"></div><div class="meta"><div class="nm">Primária (UI)</div><div class="hex">#2f24ff</div></div></div>
+        <div class="sw"><div class="chip" style="background:#fec008"></div><div class="meta"><div class="nm">CTA</div><div class="hex">#fec008</div></div></div>
+        <div class="sw"><div class="chip" style="background:#00ffea"></div><div class="meta"><div class="nm">Acento / dados</div><div class="hex">#00ffea</div></div></div>
+        <div class="sw"><div class="chip" style="background:#050634"></div><div class="meta"><div class="nm">Navy / ink</div><div class="hex">#050634</div></div></div>
+        <div class="sw"><div class="chip" style="background:#2488ff"></div><div class="meta"><div class="nm">Azul coringa</div><div class="hex">#2488ff</div></div></div>
+        <div class="sw"><div class="chip" style="background:#4f45f5"></div><div class="meta"><div class="nm">Violeta</div><div class="hex">#4f45f5</div></div></div>
+        <div class="sw"><div class="chip" style="background:#8439e6"></div><div class="meta"><div class="nm">Roxo</div><div class="hex">#8439e6</div></div></div>
+        <div class="sw"><div class="chip" style="background:#fb5507"></div><div class="meta"><div class="nm">Laranja / ao vivo</div><div class="hex">#fb5507</div></div></div>
+        <div class="sw"><div class="chip" style="background:#ff0071"></div><div class="meta"><div class="nm">Pink</div><div class="hex">#ff0071</div></div></div>
+        <div class="sw"><div class="chip" style="background:#ff2f34"></div><div class="meta"><div class="nm">Vermelho / alerta</div><div class="hex">#ff2f34</div></div></div>
+        <div class="sw"><div class="chip" style="background:#f5f9fc;border-bottom:1px solid #e2e7f3"></div><div class="meta"><div class="nm">Branco gelo</div><div class="hex">#f5f9fc</div></div></div>
+        <div class="sw"><div class="chip" style="background:#576b86"></div><div class="meta"><div class="nm">Texto secundário</div><div class="hex">#576b86</div></div></div>
+      </div>
+      <div class="callout"><b>Navy é <code>#050634</code>, ponto final.</b> Alguns arquivos antigos usam <code>#06063a</code>. Ao tocar numa peça legada, normalize para o oficial.</div>
+    </section>
+
+    <!-- ============ GRADIENTES ============ -->
+    <section id="gradientes">
+      <div class="sec-head"><h2>Gradientes</h2><span class="tag core">Fundação</span></div>
+      <p class="sec-desc">Receitas oficiais. Não invente combinações novas — parta destas.</p>
+      <div class="grads">
+        <div class="gr"><div class="band" style="background:linear-gradient(135deg,#4f45f5,#8439e6)"></div><div class="meta"><div class="nm">Texto / palavra</div><div class="rec">135° violeta → roxo</div></div></div>
+        <div class="gr"><div class="band" style="background:linear-gradient(125deg,#2f24ff,#8439e6 55%,#ff0071)"></div><div class="meta"><div class="nm">Tri-tom expressivo</div><div class="rec">125° íris → roxo → pink</div></div></div>
+        <div class="gr"><div class="band" style="background:linear-gradient(90deg,#00ffea,#4f45f5,#8439e6)"></div><div class="meta"><div class="nm">Dados / tech</div><div class="rec">90° ciano → violeta → roxo</div></div></div>
+        <div class="gr"><div class="band" style="background:linear-gradient(140deg,#06063a,#0d0540 50%,#1c0860)"></div><div class="meta"><div class="nm">Fundo escuro</div><div class="rec">140° ink → violeta profundo</div></div></div>
+        <div class="gr"><div class="band" style="background:linear-gradient(220deg,#ddd6fe,#c7dbff 48%,#e5daff)"></div><div class="meta"><div class="nm">Fundo claro (lavanda)</div><div class="rec">220° tri-tom pastel</div></div></div>
+        <div class="gr"><div class="band" style="background:linear-gradient(122deg,#8439e6,#5b4bf2 46%,#2488ff)"></div><div class="meta"><div class="nm">Masthead newsletter</div><div class="rec">122° roxo → azul · fallback #4f45f5</div></div></div>
+        <div class="gr"><div class="band" style="background:linear-gradient(125deg,#f7a70a,#fec008 48%,#ffd65c)"></div><div class="meta"><div class="nm">CTA âmbar</div><div class="rec">125° faixa estreita · texto navy</div></div></div>
+        <div class="gr"><div class="band" style="background:linear-gradient(135deg,#fb5507,#ff2f34)"></div><div class="meta"><div class="nm">Ao vivo</div><div class="rec">135° laranja → vermelho</div></div></div>
+      </div>
+      <p class="comp-note" style="padding:0;margin-top:16px">O <b>CTA âmbar</b> entrou na v2: as três paradas ficam dentro de uma faixa estreita de matiz, sem salto de saturação — é o que dá a leitura de "um amarelo só, com volume" em vez de degradê chamativo. Aprovado no hero do site em 29/07/2026.</p>
+    </section>
+
+    <!-- ============ TIPOGRAFIA ============ -->
+    <section id="tipografia">
+      <div class="sec-head"><h2>Tipografia</h2><span class="tag core">Fundação</span></div>
+      <p class="sec-desc">Duas famílias, só. <b>Familjen Grotesk</b> para ser notado (títulos, números). <b>Manrope</b> para ser lido (corpo, CTA, labels).</p>
+      <div class="type-row"><span class="lbl">display / 84–40px</span><span style="font-family:var(--font-display);font-size:clamp(2rem,5vw,3.6rem);font-weight:700;letter-spacing:-.02em">Simule a Reforma</span></div>
+      <div class="type-row"><span class="lbl">h2 / 58–28px</span><span style="font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.4rem);font-weight:700;letter-spacing:-.02em">A ferramenta mais completa</span></div>
+      <div class="type-row"><span class="lbl">número-âncora / 64px</span><span style="font-family:var(--font-display);font-size:3rem;font-weight:700;letter-spacing:-.035em">Set/26</span></div>
+      <div class="type-row"><span class="lbl">lead / 19–17px</span><span style="font-size:1.15rem;color:var(--ink-soft)">Identifica, recalcula e compara — a decisão é do contador.</span></div>
+      <div class="type-row"><span class="lbl">corpo / 16px</span><span>Texto de parágrafo em Manrope, peso 400. Feito para leitura confortável em blocos longos.</span></div>
+      <div class="type-row"><span class="lbl">eyebrow / 12px</span><span style="text-transform:uppercase;letter-spacing:.16em;font-weight:700;font-size:12px;color:var(--primary)">Radar Tributário</span></div>
+      <div class="code-wrap"><button class="copy">Copiar</button><pre>@import url('https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap');
+--ea-font-display:'Familjen Grotesk',sans-serif; /* títulos, números — 700 */
+--ea-font-body:'Manrope',sans-serif;             /* corpo, CTA — 400–600 */</pre></div>
+      <div class="callout"><b>No bloco do WordPress, o <code>@import</code> vai na LINHA 1</b> — nada acima dele, nem comentário. O editor promove o <code>@import</code> para o topo e <b>descarta o que estava antes</b>. O <code>&amp;</code> da URL do Google Fonts não é problema em CSS; a restrição de <code>&amp;</code> é só do JavaScript.</div>
+    </section>
+
+    <!-- ============ GEOMETRIA ============ -->
+    <section id="geometria">
+      <div class="sec-head"><h2>Raio &amp; sombra</h2><span class="tag core">Fundação</span></div>
+      <p class="sec-desc">Escala fechada de raios e uma família de sombras violeta.</p>
+      <div class="radii">
+        <div class="box" style="border-radius:12px">12 · chip</div>
+        <div class="box" style="border-radius:20px">20 · card</div>
+        <div class="box" style="border-radius:28px">28 · card+</div>
+        <div class="box" style="border-radius:40px">40 · seção</div>
+        <div class="box" style="border-radius:999px">pílula</div>
+      </div>
+      <div class="preview" style="margin-top:20px;border-radius:var(--r-md);border:1px solid var(--line)">
+        <div style="background:var(--panel);border-radius:var(--r-md);padding:22px;box-shadow:0 4px 24px rgba(5,6,52,.08);font-size:13px">sm · <code>0 4px 24px rgba(5,6,52,.08)</code></div>
+        <div style="background:var(--panel);border-radius:var(--r-md);padding:22px;box-shadow:0 12px 40px rgba(60,40,140,.14);font-size:13px">md · <code>0 12px 40px rgba(60,40,140,.14)</code></div>
+        <div style="background:var(--panel);border-radius:var(--r-md);padding:22px;box-shadow:0 32px 80px rgba(47,36,255,.22);font-size:13px">lg · <code>0 32px 80px rgba(47,36,255,.22)</code></div>
+      </div>
+      <p class="comp-note" style="padding:0;margin-top:14px"><b>Sombra acompanha a cor do objeto.</b> Botão âmbar leva sombra âmbar (<code>rgba(254,192,8,.34)</code>); com a violeta sobra um halo roxo embaixo de um botão amarelo.</p>
+    </section>
+
+    <!-- ============ ESPAÇAMENTO (novo) ============ -->
+    <section id="espacamento">
+      <div class="sec-head"><h2>Espaçamento</h2><span class="tag core">Fundação</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">Era o único grupo de tokens que <b>não existia</b> em lugar nenhum — cada peça usava valores literais. Escala base 8px, mais um respiro de seção fluido.</p>
+      <div class="spaces">
+        <div class="space-row"><span class="lbl">--ea-space-1 · 4px</span><span class="bar" style="width:4px"></span></div>
+        <div class="space-row"><span class="lbl">--ea-space-2 · 8px</span><span class="bar" style="width:8px"></span></div>
+        <div class="space-row"><span class="lbl">--ea-space-3 · 12px</span><span class="bar" style="width:12px"></span></div>
+        <div class="space-row"><span class="lbl">--ea-space-4 · 16px</span><span class="bar" style="width:16px"></span></div>
+        <div class="space-row"><span class="lbl">--ea-space-5 · 24px</span><span class="bar" style="width:24px"></span></div>
+        <div class="space-row"><span class="lbl">--ea-space-6 · 32px</span><span class="bar" style="width:32px"></span></div>
+        <div class="space-row"><span class="lbl">--ea-space-7 · 48px</span><span class="bar" style="width:48px"></span></div>
+        <div class="space-row"><span class="lbl">--ea-space-8 · 64px</span><span class="bar" style="width:64px"></span></div>
+        <div class="space-row"><span class="lbl">--ea-space-9 · 96px</span><span class="bar" style="width:96px"></span></div>
+        <div class="space-row"><span class="lbl">--ea-section-y</span><span class="bar" style="width:120px;opacity:.55"></span></div>
+      </div>
+      <div class="code-wrap" style="margin-top:20px;border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden"><button class="copy">Copiar</button><pre>/* respiro vertical de seção — o mais usado */
+--ea-section-y: clamp(4rem, 9vw, 7.5rem);
+.ea-section{ padding-block: var(--ea-section-y); }
+
+/* espaço entre irmãos: SEMPRE por gap, nunca margin por elemento */
+.ea-stack{ display:flex; flex-direction:column; gap:var(--ea-space-5); }</pre></div>
+      <p class="comp-note" style="padding:0;margin-top:14px">Use <code>gap</code> em flex/grid em vez de <code>margin</code> por elemento: margem colapsa e duplica em silêncio, e é a origem mais comum de "por que essa seção tem espaço a mais embaixo".</p>
+    </section>
+
+    <!-- ============ ÍCONES (novo) ============ -->
+    <section id="icones">
+      <div class="sec-head"><h2>Ícones</h2><span class="tag core">Fundação</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">Débito pago: até aqui conviviam <b>três sistemas</b> — Font Awesome (Motor, Processamento, SPED), SVG inline (Simulador) e emoji (e-IRPF, Parcerias). O padrão do sistema passa a ser <b>SVG inline</b>: não depende de CDN, herda a cor por <code>currentColor</code>, escala sem serrilhar e custa ~200 bytes por ícone.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Set base</h3><span class="id">24×24 · traço 1.75 · currentColor</span></div>
+        <div class="preview stack">
+          <div class="k-icons">
+            <div class="k-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>check</span></div>
+            <div class="k-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>alerta</span></div>
+            <div class="k-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg><span>documento</span></div>
+            <div class="k-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m7 15 3.5-4 3 2.5L20 7"/></svg><span>gráfico</span></div>
+            <div class="k-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>prazo</span></div>
+            <div class="k-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg><span>conformidade</span></div>
+            <div class="k-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg><span>auditoria</span></div>
+            <div class="k-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/><circle cx="12" cy="12" r="3.5"/></svg><span>automação</span></div>
+            <div class="k-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span>seta</span></div>
+            <div class="k-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2.5"/><path d="M3 10h18M8 2v4M16 2v4"/></svg><span>agenda</span></div>
+            <div class="k-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg><span>download</span></div>
+            <div class="k-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 8v8l9 5 9-5V8Z"/><path d="M3 8l9 5 9-5M12 21v-8"/></svg><span>módulo</span></div>
+          </div>
+        </div>
+        <p class="comp-note"><b>Regra de uso.</b> O ícone nunca carrega informação sozinho — sempre acompanha um rótulo. Decorativo leva <code>aria-hidden="true"</code>; ícone que é o único conteúdo de um botão leva <code>aria-label</code>.</p>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;svg class="ea-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+     stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;
+  &lt;path d="M20 6 9 17l-5-5"/&gt;
+&lt;/svg&gt;
+
+.ea-icon{ width:1.25em; height:1.25em; flex:none; }
+/* dentro de botão o tamanho é fixo, senão o SVG "incha" se o CSS falhar */
+.ea-btn .ea-icon{ width:16px; height:16px; }</pre></div>
+        <p class="comp-note warn"><b>Armadilha real.</b> Em 29/07/2026 os SVGs de uma página publicada apareceram com 340px de largura. O motivo não era o SVG: o wrapper de escopo tinha perdido a classe, e com ela morreu a regra <code>.ea-home svg{display:block}</code>. Sempre declare largura/altura explícitas nos ícones dentro de botões — assim, mesmo que o CSS de escopo caia, o estrago é pequeno.</p>
+      </div>
+    </section>
+
+    <!-- ============ BOTÕES ============ -->
+    <section id="botoes">
+      <div class="sec-head"><h2>Botões</h2><span class="tag web">Web</span></div>
+      <p class="sec-desc">Pílula sempre. Um único CTA amarelo por dobra — se tudo destaca, nada destaca.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Variantes de botão</h3><span class="id">ea-btn</span></div>
+        <div class="preview">
+          <button class="k-btn k-cta">Agendar demonstração<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <button class="k-btn k-primary">Ver planos</button>
+          <button class="k-btn k-outline">Saber mais</button>
+          <button class="k-btn k-ghost">Baixar material</button>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;a class="ea-btn ea-btn--cta"&gt;Agendar demonstração&lt;/a&gt;
+&lt;a class="ea-btn ea-btn--primary"&gt;Ver planos&lt;/a&gt;
+&lt;a class="ea-btn ea-btn--outline"&gt;Saber mais&lt;/a&gt;
+
+.ea-btn{font-family:var(--ea-font-body);font-weight:700;padding:14px 28px;
+  border-radius:var(--ea-radius-pill);cursor:pointer;transition:.2s var(--ea-ease);
+  display:inline-flex;align-items:center;gap:9px}
+.ea-btn:hover{transform:translateY(-2px)}
+.ea-btn--cta{background:var(--ea-color-cta);color:var(--ea-color-cta-ink) !important;
+  box-shadow:0 10px 26px rgba(254,192,8,.34)}
+.ea-btn--primary{background:var(--ea-color-primary);color:#fff !important}
+.ea-btn--outline{background:transparent;color:var(--ea-color-primary) !important;
+  border:2px solid rgba(47,36,255,.35)}</pre></div>
+        <p class="comp-note warn"><b>Duas regras que custaram caro (29/07/2026).</b><br>
+        1 · <b>Cor de texto em <code>&lt;a&gt;</code> precisa de <code>!important</code>.</b> O tema tem <code>.inside-article a{color:initial !important}</code>, que vence qualquer especificidade. Sem o <code>!important</code>, os CTAs computavam preto puro em vez de <code>#050634</code>.<br>
+        2 · <b>Botão sobre fundo escuro não funciona por cor de texto.</b> Como o tema sobrescreve justamente o texto claro, variante "ghost clara sobre navy" fica preto sobre navy — ilegível. Sobre fundo escuro, use fundo âmbar ou claro com texto escuro.</p>
+        <p class="comp-note cro"><b>CRO.</b> Contraste do CTA: navy sobre âmbar dá <b>11,8:1</b>; branco sobre âmbar dá <b>1,65:1</b> — reprova em qualquer critério e some no sol da tela do celular. Não é escolha estética.</p>
+      </div>
+    </section>
+
+    <!-- ============ BADGES ============ -->
+    <section id="badges">
+      <div class="sec-head"><h2>Badges &amp; eyebrows</h2><span class="tag web">Web</span></div>
+      <p class="sec-desc">Rótulos que orientam a leitura. Eyebrow uppercase abre seção; badge de gradiente destaca; a pílula "ao vivo" sinaliza evento.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Rótulos</h3><span class="id">ea-badge · ea-eyebrow</span></div>
+        <div class="preview">
+          <span class="k-eyebrow">Radar Tributário</span>
+          <span class="k-badge grad">Novidade</span>
+          <span class="k-badge soft">Simples Nacional</span>
+          <span class="k-pill-live"><span class="dot"></span>Ao vivo</span>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;span class="ea-eyebrow"&gt;Radar Tributário&lt;/span&gt;
+&lt;span class="ea-badge ea-badge--grad"&gt;Novidade&lt;/span&gt;
+&lt;span class="ea-badge ea-badge--soft"&gt;Simples Nacional&lt;/span&gt;
+
+.ea-eyebrow{font-weight:700;font-size:12px;text-transform:uppercase;
+  letter-spacing:.16em;color:var(--ea-color-primary)}
+.ea-badge{font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.08em;
+  padding:7px 14px;border-radius:var(--ea-radius-pill);
+  display:inline-block} /* inline-BLOCK, não inline-flex */
+.ea-badge--grad{background:var(--ea-grad-text);color:#fff}</pre></div>
+        <p class="comp-note"><b>Por que <code>inline-block</code> e não <code>inline-flex</code>:</b> com flex, cada trecho de texto vira um item e o <code>gap</code> abre buracos em volta de números e pontuação. Só use flex quando houver mesmo um ícone para alinhar.</p>
+      </div>
+    </section>
+
+    <!-- ============ CARD ============ -->
+    <section id="cards">
+      <div class="sec-head"><h2>Card de vidro</h2><span class="tag web">Web</span></div>
+      <p class="sec-desc">O primitivo mais reutilizado do sistema: fundo translúcido, borda, barra de acento no topo, leve elevação no hover.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Glass card</h3><span class="id">ea-card--glass</span></div>
+        <div class="preview" style="background:linear-gradient(135deg,#d8e8ff,#f8e8ff)">
+          <div class="k-glass"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg></div><h4>Auditoria automática</h4><p>Identifica divergências no SPED antes da entrega.</p></div>
+          <div class="k-glass"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/><circle cx="12" cy="12" r="3.5"/></svg></div><h4>Recálculo em minutos</h4><p>De horas de conferência manual para poucos cliques.</p></div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;div class="ea-card ea-card--glass"&gt;
+  &lt;svg class="ea-icon" ...&gt;&lt;/svg&gt;
+  &lt;h4&gt;Auditoria automática&lt;/h4&gt;
+  &lt;p&gt;Identifica divergências no SPED antes da entrega.&lt;/p&gt;
+&lt;/div&gt;
+
+.ea-card--glass{background:var(--ea-glass-light);border:1px solid rgba(255,255,255,.6);
+  border-radius:var(--ea-radius-md);padding:20px;box-shadow:var(--ea-shadow-md);
+  backdrop-filter:blur(16px);position:relative;overflow:hidden}
+.ea-card--glass::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;
+  background:var(--ea-grad-text-tri)}</pre></div>
+      </div>
+    </section>
+
+    <!-- ============ DIVISORES (novo) ============ -->
+    <section id="divisores">
+      <div class="sec-head"><h2>Divisores</h2><span class="tag web">Web</span><span class="tag email">E-mail</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">Três formas, três funções: o fio em degradê separa seções longas; a faixa curta marca início de bloco (fica sob o título); a hairline é a versão que sobrevive no e-mail.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Fio, faixa e hairline</h3><span class="id">ea-divider</span></div>
+        <div class="preview stack">
+          <hr class="k-div-grad">
+          <div class="k-div-band"></div>
+          <div class="k-div-hair"></div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;!-- web: fio em degradê --&gt;
+&lt;hr class="ea-divider"&gt;
+.ea-divider{height:2px;border:0;
+  background:linear-gradient(90deg,transparent,var(--ea-violet),var(--ea-purple),transparent)}
+
+&lt;!-- web: faixa de abertura (sob o título da seção) --&gt;
+.ea-divider--band{width:120px;height:4px;border-radius:var(--ea-radius-pill);
+  background:linear-gradient(90deg,var(--ea-iris),var(--ea-cyan))}
+
+&lt;!-- e-mail: hairline em tabela (a única que renderiza no Outlook) --&gt;
+&lt;table role="presentation" width="100%" cellpadding="0" cellspacing="0"&gt;&lt;tr&gt;
+  &lt;td height="1" bgcolor="#e4e9f5" style="font-size:1px;line-height:1px"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;</pre></div>
+      </div>
+    </section>
+
+    <!-- ============ CONTADOR (novo) ============ -->
+    <section id="contador">
+      <div class="sec-head"><h2>Contador animado</h2><span class="tag web">Web</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">Números que sobem quando entram na tela. A regra que faz ele ser seguro: <b>o valor final já está escrito no HTML</b> — o JS só o substitui para animar. Sem JS, o número correto continua lá.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Counter com fail-safe</h3><span class="id">data-count</span></div>
+        <div class="preview">
+          <div><span class="k-count" id="demoCount">210.000</span><div style="font-size:12px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em">CNPJs auditados</div></div>
+          <button class="k-btn k-ghost k-sm" id="demoCountBtn">Rodar de novo</button>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;!-- o número JÁ vem certo no HTML: se o JS não rodar, nada se perde --&gt;
+&lt;b class="ea-count" data-count="210000"&gt;210.000&lt;/b&gt;
+
+// requestAnimationFrame, sem "e comercial" duplo (proibido no bloco WP)
+var els = document.querySelectorAll('[data-count]');
+els.forEach(function (el) {
+  var alvo = parseInt(el.getAttribute('data-count'), 10);
+  if (isNaN(alvo)) { return; }
+  var t0 = null, dur = 1200;
+  function passo(t) {
+    if (t0 === null) { t0 = t; }
+    var p = Math.min((t - t0) / dur, 1);
+    var e = 1 - Math.pow(1 - p, 3);               // ease-out cúbico
+    el.textContent = Math.round(alvo * e).toLocaleString('pt-BR');
+    if (p &lt; 1) { requestAnimationFrame(passo); }
+  }
+  requestAnimationFrame(passo);
+});</pre></div>
+        <p class="comp-note"><code>toLocaleString('pt-BR')</code> é obrigatório: sem ele o número sobe como <code>210000</code> em vez de <code>210.000</code>. Para moeda, formate com <code>{style:'currency',currency:'BRL'}</code>.</p>
+      </div>
+    </section>
+
+    <!-- ============ REVEAL (novo) ============ -->
+    <section id="reveal">
+      <div class="sec-head"><h2>Scroll-reveal</h2><span class="tag web">Web</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">Aparição suave ao rolar, com atraso escalonado. O detalhe que separa o certo do errado: <b>a classe que esconde é posta pelo JS</b> (<code>.is-armed</code>), nunca no CSS estático. Se o JS não rodar, nada fica invisível.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Reveal com escalonamento</h3><span class="id">ea-reveal · is-armed</span></div>
+        <div class="preview stack">
+          <div class="k-reveal-demo">
+            <div><b>d1</b>entra primeiro</div>
+            <div><b>d2</b>+80ms</div>
+            <div><b>d3</b>+160ms</div>
+          </div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;div class="ea-reveal ea-d1"&gt;…&lt;/div&gt;
+
+/* só esconde SE o JS tiver armado */
+.ea-lp.is-armed .ea-reveal{opacity:0;transform:translateY(16px);
+  transition:opacity .6s var(--ea-ease), transform .6s var(--ea-ease)}
+.ea-lp.is-armed .ea-reveal.is-in{opacity:1;transform:none}
+.ea-d1{transition-delay:.08s} .ea-d2{transition-delay:.16s} .ea-d3{transition-delay:.24s}
+/* acima da dobra: entra pronto, sem transição e sem atraso */
+.ea-lp.is-armed .ea-reveal.is-instant{transition:none !important;transition-delay:0s !important}
+
+@media (prefers-reduced-motion:reduce){
+  .ea-lp.is-armed .ea-reveal{opacity:1;transform:none;transition:none}
+}
+
+var raiz = document.getElementById('ea-lp');
+if (!raiz) { raiz = document.querySelector('.ea-lp'); }   // segunda via
+if (raiz) {
+  raiz.classList.add('is-armed');
+  var io = new IntersectionObserver(function (entradas) {
+    entradas.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -10% 0px' });
+  raiz.querySelectorAll('.ea-reveal').forEach(function (el) { io.observe(el); });
+}</pre></div>
+        <p class="comp-note cro"><b>CRO — o que já nasce visível NÃO ganha fade.</b> Título, subtítulo e CTA do hero recebem <code>.is-instant</code> e entram prontos. Fazer o conteúdo que a pessoa veio ver aparecer com transição atrasa o LCP percebido e empurra o CTA para depois da primeira impressão. Reveal só faz sentido abaixo da linha d'água.</p>
+        <p class="comp-note warn"><b>Gancho com segunda via.</b> Todo JS de bloco WordPress começa procurando o wrapper por <code>id</code> <i>e</i> por <code>class</code>, e sai sem erro se não achar nenhum dos dois. Foi exatamente aqui que um script inteiro abortou em silêncio quando o sanitizador apagou os atributos do wrapper.</p>
+      </div>
+    </section>
+
+    <!-- ============ FUNDOS (novo) ============ -->
+    <section id="fundos">
+      <div class="sec-head"><h2>Fundos &amp; orbs</h2><span class="tag web">Web</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">Atmosfera para seções escuras: auréolas de cor desfocadas e uma malha vetorial. Tudo decorativo, sempre atrás de <code>pointer-events:none</code>, e barato o suficiente para máquina fraca.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Auréolas + malha</h3><span class="id">ea-bg__orb · ea-bg__mesh</span></div>
+        <div class="preview stack">
+          <div class="k-orbs">
+            <svg class="mesh" viewBox="0 0 600 200" preserveAspectRatio="none" aria-hidden="true"><g stroke="rgba(0,255,234,.20)" fill="none" stroke-width="1"><path d="M0 40 Q150 10 300 45 T600 30"/><path d="M0 90 Q150 60 300 95 T600 80"/><path d="M0 140 Q150 110 300 145 T600 130"/></g></svg>
+            <i class="o1"></i><i class="o2"></i><i class="o3"></i>
+          </div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;div class="ea-bg" aria-hidden="true"&gt;
+  &lt;svg class="ea-bg__mesh" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice"
+       role="presentation"&gt;…&lt;/svg&gt;
+  &lt;i class="ea-bg__orb ea-bg__orb--1"&gt;&lt;/i&gt;
+  &lt;i class="ea-bg__orb ea-bg__orb--2"&gt;&lt;/i&gt;
+&lt;/div&gt;
+
+.ea-bg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.ea-bg__orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.6}
+.ea-bg__orb--1{width:420px;height:420px;background:var(--ea-violet);left:-8%;top:-20%}
+.ea-bg__orb--2{width:360px;height:360px;background:var(--ea-purple);right:4%;bottom:-25%}</pre></div>
+        <p class="comp-note"><b>Custo.</b> A malha vetorial pesa ~1 KB e escala em qualquer tela com custo de render zero — prefira a SVG à imagem. Já <code>filter:blur()</code> num elemento muito grande é caro justamente nas máquinas fracas que precisamos atender: use auréola desfocada com moderação e nunca anime o <code>blur</code>.</p>
+      </div>
+    </section>
+
+    <div class="group-head">
+      <div class="kicker">Camada 2</div>
+      <h2>Blocos web</h2>
+      <p>As dobras que montam uma landing page. Todas assumem um <b>wrapper único de escopo</b> (ex.: <code>.ea-lp</code>) e todo seletor prefixado por ele — inclusive dentro de <code>@media</code>. A ordem aqui é a ordem típica de uma página: chegada, prova, argumento, conversão.</p>
+    </div>
+
+    <!-- ============ HEADER (novo) ============ -->
+    <section id="header">
+      <div class="sec-head"><h2>Header</h2><span class="tag web">Web</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">Três variantes em produção: <b>pílula de vidro flutuante</b> (LP de campanha), <b>barra sticky</b> que ganha fundo ao rolar (site) e <b>absoluto transparente</b> (hero de tela cheia). Em LP dentro do site, o header é o do tema — não duplique.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Pílula de vidro flutuante</h3><span class="id">ea-header--pill</span></div>
+        <div class="preview stack" style="background:linear-gradient(135deg,#d8e8ff,#f8e8ff)">
+          <div class="k-header">
+            <span class="lg ea-brand">e-Auditoria</span>
+            <nav><span>Produto</span><span>Planos</span><span>Blog</span></nav>
+            <button class="k-btn k-cta k-sm">Agendar</button>
+          </div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;header class="ea-header ea-header--pill"&gt;
+  &lt;a class="ea-header__logo ea-brand" href="/"&gt;e-Auditoria&lt;/a&gt;
+  &lt;nav class="ea-header__nav"&gt;…&lt;/nav&gt;
+  &lt;a class="ea-btn ea-btn--cta ea-btn--sm" href="#agendar"&gt;Agendar&lt;/a&gt;
+&lt;/header&gt;
+
+.ea-header--pill{position:sticky;top:16px;z-index:var(--ea-z-header);
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:11px 18px;border-radius:var(--ea-radius-pill);
+  background:var(--ea-glass-light);border:1px solid rgba(255,255,255,.7);
+  backdrop-filter:blur(14px);box-shadow:var(--ea-shadow-md)}
+
+/* variante barra: ganha fundo só depois de rolar (classe posta pelo JS) */
+.ea-header--bar{position:sticky;top:0;background:transparent;transition:.3s var(--ea-ease)}
+.ea-header--bar.is-scrolled{background:rgba(255,255,255,.94);box-shadow:var(--ea-shadow-sm)}</pre></div>
+        <p class="comp-note warn"><b>Não reutilize <code>id="main"</code>, <code>id="header"</code> ou <code>id="site-navigation"</code></b> — colidem com o GeneratePress e o tema passa a estilizar o seu bloco. Prefixe: <code>id="ea-lp-header"</code>.</p>
+      </div>
+    </section>
+
+    <!-- ============ HEROS (novo) ============ -->
+    <section id="heros">
+      <div class="sec-head"><h2>Heros</h2><span class="tag web">Web</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">A dobra mais rica do sistema — e a que mais varia. Três famílias cobrem tudo o que já foi ao ar: <b>split com formulário</b> (captura direta), <b>centrado com a tela do produto</b> (prova visual) e <b>evento</b> (data, convidados, countdown).</p>
+
+      <div class="comp">
+        <div class="comp-head"><h3>Split — copy + formulário</h3><span class="id">ea-hero--split</span></div>
+        <div class="preview stack">
+          <div class="k-hero">
+            <div>
+              <span class="k-badge soft">Janela de setembro</span>
+              <h3>Descubra <span class="grad">qual regime paga menos</span> até 2033</h3>
+              <p>Compare Simples, Simples Híbrido, Lucro Presumido e Lucro Real ano a ano — com ou sem os documentos do cliente.</p>
+              <button class="k-btn k-cta">Falar com um especialista</button>
+            </div>
+            <div class="formcard">
+              <b>Receba a simulação</b>
+              <div class="fld"></div><div class="fld"></div><div class="fld"></div>
+              <button class="k-btn k-primary k-sm" style="width:100%;justify-content:center">Quero simular</button>
+            </div>
+          </div>
+        </div>
+        <p class="comp-note cro"><b>CRO — formulário no hero é uma aposta, não um padrão.</b> Em público quente (já sabe que precisa da ferramenta) o formulário visível costuma ganhar. Em público frio, pedir nome, e-mail e telefone antes de qualquer prova custa caro — nesse caso, botão no hero levando à âncora, e o formulário depois da primeira prova. Meça <b>início de formulário</b> separado de <b>envio</b>: são problemas opostos com soluções opostas.</p>
+      </div>
+
+      <div class="comp">
+        <div class="comp-head"><h3>Centrado — copy + tela do produto</h3><span class="id">ea-hero--stage</span></div>
+        <div class="preview stack">
+          <div style="width:100%;text-align:center;background:linear-gradient(135deg,#eef3ff,#f8e8ff);border-radius:var(--r-lg);padding:28px 20px 0;overflow:hidden">
+            <span class="k-badge soft">Faltam 32 dias</span>
+            <h3 style="color:var(--navy);font-size:clamp(1.4rem,3vw,2.2rem);margin:12px auto 8px;max-width:20ch">A IA escreve o laudo. <span class="grad">Você decide.</span></h3>
+            <p style="color:#3d4063;font-size:14px;max-width:44ch;margin:0 auto 18px">A plataforma identifica, recalcula e compara — a decisão continua sendo do contador.</p>
+            <button class="k-btn k-cta">Ver a ferramenta em 4 minutos</button>
+            <div style="margin-top:22px;height:110px;border-radius:16px 16px 0 0;background:var(--panel);border:1px solid var(--line);border-bottom:0;box-shadow:0 -20px 60px rgba(47,36,255,.18);display:grid;place-items:center;color:var(--ink-soft);font-size:12.5px">tela do produto, cortada pela dobra de propósito</div>
+          </div>
+        </div>
+        <p class="comp-note"><b>A tela tem de passar da dobra, não parar nela.</b> Se a imagem termina exatamente no limite do hero, qualquer recuo (scale &lt; 1) abre uma faixa clara entre ela e a seção seguinte. Deixe a tela ultrapassar (<code>height:calc(100% + 12vh)</code>) e deixe o <code>overflow:clip</code> do hero cortar.</p>
+        <p class="comp-note warn"><b>Hero fixado (<code>position:sticky</code>) tem duas condições.</b> 1 · A regra dentro de <code>@media</code> precisa do <b>mesmo prefixo</b> da declaração base — media query não soma especificidade, e foi por isso que um <code>sticky</code> nunca aplicou em produção (o <code>height</code> aplicava, então <i>parecia</i> funcionar). 2 · Use <code>overflow-x:clip</code> no wrapper, <b>nunca <code>hidden</code></b>: <code>hidden</code> cria contêiner de rolagem e mata o sticky.</p>
+      </div>
+
+      <div class="comp">
+        <div class="comp-head"><h3>Evento — data, convidados e chamada</h3><span class="id">ea-hero--evento</span></div>
+        <div class="preview stack">
+          <div class="k-bento">
+            <div class="b1"><span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan)">18 de setembro</span><b>Imersão <span class="ea-brand">e-A</span></b></div>
+            <div class="b2">Convidado · Especialista em Reforma</div>
+            <div class="b3">100% online</div>
+            <div class="b4">Vagas limitadas</div>
+          </div>
+        </div>
+        <p class="comp-note">Quatro layouts de hero de evento já existem no tema da Jornada (bento, fotos-no-título, orbitando, dados-ao-redor). O bento acima é o mais reaproveitável fora de evento — serve para lançamento de módulo e para campanha com convidado.</p>
+      </div>
+    </section>
+
+    <!-- ============ URGÊNCIA (novo) ============ -->
+    <section id="urgencia">
+      <div class="sec-head"><h2>Barra de prazo</h2><span class="tag web">Web</span><span class="tag cro">CRO</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">Faixa fina acima do header com o prazo que move a decisão. É o bloco mais barato de implementar e um dos que mais mexe em conversão — quando o prazo é <b>real</b>.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Faixa de contagem</h3><span class="id">ea-deadline-bar</span></div>
+        <div class="preview stack">
+          <div class="k-urg">
+            <span>Janela de opção do Simples encerra em</span>
+            <b>32 dias</b>
+            <a href="#form">Falar com um especialista →</a>
+          </div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;div class="ea-deadline-bar"&gt;
+  &lt;span&gt;Janela de opção do &lt;b&gt;Simples&amp;nbsp;Nacional&lt;/b&gt; encerra em&lt;/span&gt;
+  &lt;b class="ea-deadline-bar__n" data-deadline="2026-09-30"&gt;32 dias&lt;/b&gt;
+  &lt;a href="#agendar"&gt;Falar com um especialista&lt;/a&gt;
+&lt;/div&gt;
+
+// o HTML já traz o número; isto só o mantém certo
+var el = document.querySelector('[data-deadline]');
+if (el) {
+  var alvo = new Date(el.getAttribute('data-deadline') + 'T23:59:59');
+  var dias = Math.ceil((alvo - new Date()) / 86400000);
+  if (dias &gt; 0) { el.textContent = dias + (dias === 1 ? ' dia' : ' dias'); }
+}</pre></div>
+        <p class="comp-note cro"><b>Urgência em um lugar a mais, não em cinco.</b> Prazo real converte; prazo repetido em toda dobra vira ruído e o leitor para de ver. E marque na agenda a <b>data de morte da copy</b>: quando a janela fechar, essa faixa e tudo que fala dela ficam factualmente errados — isso é manutenção obrigatória, não teste.</p>
+      </div>
+    </section>
+
+    <!-- ============ VÍDEO (novo) ============ -->
+    <section id="video">
+      <div class="sec-head"><h2>Fachada de vídeo</h2><span class="tag web">Web</span><span class="tag cro">CRO</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">Padrão de fachada: a página carrega só a <b>capa + botão</b>. O player de verdade só entra no DOM depois do clique. Tira cerca de 1 MB e várias requisições de terceiro do carregamento, protege LCP e INP — e transforma o play em evento de conversão.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Capa clicável</h3><span class="id">ea-facade</span></div>
+        <div class="preview stack">
+          <div class="k-facade">
+            <div class="play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="cap">O player só carrega no clique — antes disso, zero requisição para o terceiro.</div>
+          </div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;button type="button" class="ea-facade" id="ea-facade" aria-label="Assistir ao vídeo"&gt;
+  &lt;img src="…capa.webp" alt="" width="1280" height="720" loading="lazy" decoding="async"&gt;
+  &lt;span class="ea-facade__play" aria-hidden="true"&gt;&lt;/span&gt;
+&lt;/button&gt;
+
+// monta o player com createElement — nunca innerHTML com dado dinâmico
+var fac = document.getElementById('ea-facade');
+if (fac) {
+  fac.addEventListener('click', function () {
+    var alvo = document.getElementById('ea-player');
+    if (!alvo) { return; }
+    var div = document.createElement('div');
+    div.className = 'hs-video-widget';
+    div.setAttribute('data-hsv-id', 'ID_DO_VIDEO');
+    alvo.appendChild(div);
+    var s = document.createElement('script');
+    s.src = 'https://static.hsappstatic.net/hsvideo/static-1/bundles/loader.js';
+    document.body.appendChild(s);
+    fac.remove();
+    // aqui entra o disparo do evento de conversão: quem assiste é lead quente
+  });
+}</pre></div>
+        <p class="comp-note cro"><b>Autoplay só no desktop.</b> A maior parte do público está no celular; puxar megabytes de vídeo sem a pessoa pedir queima plano de dados de quem está em 4G, e o player do HubSpot não tem bitrate adaptativo. No mobile fica a capa e o botão — que é uma imagem. Também não dispare com <b>economia de dados</b> ou <b>movimento reduzido</b> ligados. Quando disparar sozinho, sobe <b>mudo</b>: som sem aviso espanta visitante e o navegador bloqueia mesmo.</p>
+        <p class="comp-note warn"><b>Antes de embedar YouTube, avise sobre o pré-roll.</b> O embed do YouTube exibe anúncio antes do vídeo — numa LP de conversão, o primeiro conteúdo que o visitante vê passa a ser propaganda de terceiro, às vezes de concorrente. Foi o motivo de o vídeo migrar para o HubSpot (portal da e-Auditoria), que não tem pré-roll e ainda registra a visualização no CRM.</p>
+        <p class="comp-note"><b>Exceção ao fail-safe.</b> Este é o único bloco que não sobrevive inteiro sem JS: sem script, fica a capa e o vídeo não toca. A seção não quebra, mas planeje a copy para isso. Libere <code>static.hsappstatic.net</code> na allowlist do plugin de cache.</p>
+      </div>
+    </section>
+
+    <!-- ============ LOGOS (novo) ============ -->
+    <section id="logos">
+      <div class="sec-head"><h2>Faixa de logos</h2><span class="tag web">Web</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">Prova social em uma linha. Logos em escala de cinza com opacidade — o objetivo é reconhecimento periférico, não protagonismo.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Prova social</h3><span class="id">ea-logos</span></div>
+        <div class="preview stack">
+          <div class="k-logos"><span>Escritório A</span><span>Contabilidade B</span><span>Grupo C</span><span>Assessoria D</span><span>Consultoria E</span></div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;div class="ea-logos"&gt;
+  &lt;img src="…" alt="Nome do cliente" width="120" height="40" loading="lazy"&gt;
+&lt;/div&gt;
+
+.ea-logos{display:flex;flex-wrap:wrap;gap:var(--ea-space-5);align-items:center;justify-content:center}
+.ea-logos img{filter:grayscale(1);opacity:.62;transition:.25s var(--ea-ease)}
+.ea-logos img:hover{filter:none;opacity:1}</pre></div>
+        <p class="comp-note">Logo de cliente exige autorização de uso. Sem autorização, troque por números agregados (ver <a href="#stats">Faixa de números</a>) — que provam escala sem expor nome.</p>
+      </div>
+    </section>
+
+    <!-- ============ STATS ============ -->
+    <section id="stats">
+      <div class="sec-head"><h2>Faixa de números</h2><span class="tag web">Web</span></div>
+      <p class="sec-desc">Prova social em métricas. Números em Familjen com degradê; label em maiúsculas. Em produção, animam com contador (fail-safe: já vêm preenchidos no HTML).</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Stats band</h3><span class="id">ea-stats</span></div>
+        <div class="preview stack">
+          <div class="k-stats">
+            <div class="k-stat"><b>210 mil</b><span>CNPJs auditados</span></div>
+            <div class="k-stat"><b>143 mi</b><span>arquivos processados</span></div>
+            <div class="k-stat"><b>R$ 5,2 bi</b><span>em créditos identificados</span></div>
+            <div class="k-stat"><b>6 mil</b><span>escritórios contábeis</span></div>
+          </div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;div class="ea-stats"&gt;
+  &lt;div class="ea-stat"&gt;&lt;b data-count="210000"&gt;210 mil&lt;/b&gt;&lt;span&gt;CNPJs auditados&lt;/span&gt;&lt;/div&gt;
+  &lt;div class="ea-stat"&gt;&lt;b&gt;R$ 5,2 bi&lt;/b&gt;&lt;span&gt;em créditos identificados&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+.ea-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+.ea-stat b{font-family:var(--ea-font-display);font-size:2.3rem;font-variant-numeric:tabular-nums;
+  background:linear-gradient(120deg,#4f45f5,#8439e6);-webkit-background-clip:text;
+  background-clip:text;-webkit-text-fill-color:transparent}
+.ea-stat span{font-size:12.5px;color:var(--ea-text-muted);text-transform:uppercase;letter-spacing:.06em}</pre></div>
+        <p class="comp-note warn"><b>Cuidado com texto em degradê.</b> A técnica pinta o texto de <code>transparent</code> e depende de um token de gradiente. Se o token vive no wrapper e o wrapper perde a classe, o texto fica <b>invisível</b> — não só sem cor. Já aconteceu em produção. Onde o número é crítico, prefira cor sólida.</p>
+      </div>
+    </section>
+
+    <!-- ============ FEATURES ============ -->
+    <section id="features">
+      <div class="sec-head"><h2>Grid de benefícios</h2><span class="tag web">Web</span></div>
+      <p class="sec-desc">Cards de valor com ícone em gradiente. Responsivo por <code>auto-fit</code> — 3, 4 ou 6 conforme a campanha.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Feature grid</h3><span class="id">ea-features</span></div>
+        <div class="preview stack">
+          <div class="k-feats">
+            <div class="k-feat"><div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg></div><h4>Sem risco de multa</h4><p>Confere obrigações antes do prazo e sinaliza pendências.</p></div>
+            <div class="k-feat"><div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m7 15 3.5-4 3 2.5L20 7"/></svg></div><h4>Recuperação de crédito</h4><p>Aponta oportunidades com premissas explícitas.</p></div>
+            <div class="k-feat"><div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/><circle cx="12" cy="12" r="3.5"/></svg></div><h4>Regras sempre atualizadas</h4><p>Acompanha mudanças fiscais automaticamente.</p></div>
+          </div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;div class="ea-features"&gt;
+  &lt;div class="ea-feature"&gt;
+    &lt;div class="ea-feature__icon"&gt;&lt;svg class="ea-icon" …&gt;&lt;/svg&gt;&lt;/div&gt;
+    &lt;h3&gt;Sem risco de multa&lt;/h3&gt;
+    &lt;p&gt;Confere obrigações antes do prazo e sinaliza pendências.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+.ea-features{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.ea-feature{background:var(--ea-surface);border:1px solid var(--ea-border);
+  border-radius:var(--ea-radius-md);padding:20px}
+.ea-feature__icon{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;
+  background:var(--ea-grad-text);color:#fff;margin-bottom:12px}</pre></div>
+      </div>
+    </section>
+
+    <!-- ============ MEDIA & TEXTO (novo) ============ -->
+    <section id="mediatext">
+      <div class="sec-head"><h2>Media &amp; texto</h2><span class="tag web">Web</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">O coringa do sistema: 50/50, imagem à esquerda ou à direita, fundo claro ou escuro — quatro combinações a partir de um bloco só. É o que evita criar seção nova a cada campanha.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Seção genérica 50/50</h3><span class="id">ea-mediatext</span></div>
+        <div class="preview stack">
+          <div class="k-mt">
+            <div class="img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="m7 14 3-3 2.5 2L17 9"/></svg></div>
+            <div>
+              <span class="k-eyebrow">Modo detalhado</span>
+              <h4>Com os documentos do cliente, o cálculo deixa de ser estimativa</h4>
+              <p>Importe SPED e XML e a comparação passa a usar os números reais da empresa, não uma média de mercado.</p>
+            </div>
+          </div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;section class="ea-mediatext ea-mediatext--img-left"&gt;   &lt;!-- ou --img-right --&gt;
+  &lt;figure class="ea-mediatext__media"&gt;&lt;img src="…" alt="…" loading="lazy"&gt;&lt;/figure&gt;
+  &lt;div class="ea-mediatext__copy"&gt;
+    &lt;span class="ea-eyebrow"&gt;Modo detalhado&lt;/span&gt;
+    &lt;h2&gt;…&lt;/h2&gt;&lt;p&gt;…&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+.ea-mediatext{display:grid;grid-template-columns:1fr 1fr;gap:var(--ea-space-6);align-items:center}
+.ea-mediatext--img-right .ea-mediatext__media{order:2}
+.ea-mediatext.ea-on-dark{background:var(--ea-surface-dark);border-radius:var(--ea-radius-xl)}
+@media (max-width:760px){ .ea-mediatext{grid-template-columns:1fr} }</pre></div>
+      </div>
+    </section>
+
+    <!-- ============ PASSOS (novo) ============ -->
+    <section id="passos">
+      <div class="sec-head"><h2>Passos</h2><span class="tag web">Web</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">Processo em etapas. Só numere quando a ordem <b>for real</b> — se as etapas podem acontecer em qualquer ordem, use o <a href="#features">grid de benefícios</a>. Número que não significa nada é decoração que promete informação.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Pipeline numerado</h3><span class="id">ea-steps</span></div>
+        <div class="preview stack">
+          <div class="k-steps">
+            <div class="k-step"><span class="n">PASSO 01</span><h4>Importe os arquivos</h4><p>SPED, XML ou os dados básicos da empresa.</p></div>
+            <div class="k-step"><span class="n">PASSO 02</span><h4>A plataforma recalcula</h4><p>Os quatro regimes, ano a ano, até 2033.</p></div>
+            <div class="k-step"><span class="n">PASSO 03</span><h4>Você apresenta</h4><p>Laudo pronto para levar ao cliente, com as premissas explícitas.</p></div>
+          </div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;ol class="ea-steps"&gt;
+  &lt;li class="ea-step"&gt;
+    &lt;span class="ea-step__n"&gt;Passo 01&lt;/span&gt;
+    &lt;h3&gt;Importe os arquivos&lt;/h3&gt;
+    &lt;p&gt;SPED, XML ou os dados básicos da empresa.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+.ea-steps{list-style:none;padding:0;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:var(--ea-space-4)}
+.ea-step__n{font-family:var(--ea-font-display);font-size:13px;font-weight:700;
+  color:var(--ea-color-primary);letter-spacing:.08em;font-variant-numeric:tabular-nums}</pre></div>
+        <p class="comp-note">Use <code>&lt;ol&gt;</code> de verdade: leitor de tela anuncia "item 2 de 3" sozinho, sem precisar que o número esteja no texto.</p>
+      </div>
+    </section>
+
+    <!-- ============ COMPARATIVO (novo) ============ -->
+    <section id="comparativo">
+      <div class="sec-head"><h2>Antes × depois</h2><span class="tag web">Web</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">Dois cards lado a lado com selo "VS" no meio. Serve para manual × automático, antes × depois da Reforma, e para o contraste de risco (o lado ruim em vermelho suave, o bom em ciano).</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Comparativo de cenários</h3><span class="id">ea-compare</span></div>
+        <div class="preview stack">
+          <div class="k-cmp">
+            <div class="side-c bad">
+              <h4>Conferência manual</h4>
+              <ul><li>Horas de planilha por cliente</li><li>Erro só aparece na multa</li><li>Não escala com a carteira</li></ul>
+            </div>
+            <div class="vs">VS</div>
+            <div class="side-c good">
+              <h4>Com a plataforma</h4>
+              <ul><li>Recálculo em minutos</li><li>Divergência sinalizada antes da entrega</li><li>Mesma equipe, mais CNPJs</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;div class="ea-compare"&gt;
+  &lt;div class="ea-compare__side ea-compare__side--risk"&gt;&lt;h3&gt;…&lt;/h3&gt;&lt;ul&gt;…&lt;/ul&gt;&lt;/div&gt;
+  &lt;span class="ea-compare__vs" aria-hidden="true"&gt;VS&lt;/span&gt;
+  &lt;div class="ea-compare__side ea-compare__side--safe"&gt;&lt;h3&gt;…&lt;/h3&gt;&lt;ul&gt;…&lt;/ul&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+.ea-compare{display:grid;grid-template-columns:1fr 1fr;gap:var(--ea-space-4);position:relative}
+.ea-compare__side--risk{background:rgba(255,47,52,.06);border:1px solid rgba(255,47,52,.25)}
+.ea-compare__side--safe{background:rgba(0,255,234,.07);border:1px solid rgba(0,180,160,.3)}
+@media (max-width:640px){
+  .ea-compare{grid-template-columns:1fr}
+  .ea-compare__vs{display:none}
+}</pre></div>
+        <p class="comp-note">O selo "VS" é decorativo — leva <code>aria-hidden</code> e some no mobile, onde os cards passam a ser empilhados e a comparação já é sequencial.</p>
+      </div>
+    </section>
+
+    <!-- ============ ABAS (novo) ============ -->
+    <section id="abas">
+      <div class="sec-head"><h2>Abas</h2><span class="tag web">Web</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">Benefícios ou anos em abas acessíveis (<code>role="tab"</code>). Comprime uma seção longa sem esconder conteúdo do buscador — todos os painéis existem no HTML, só um fica visível.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Abas acessíveis</h3><span class="id">ea-tabs</span></div>
+        <div class="preview stack">
+          <div class="k-tabs">
+            <div class="k-tablist" role="tablist" aria-label="Ano da simulação">
+              <button class="k-tab" role="tab" aria-selected="true" aria-controls="kp1" id="kt1">2026</button>
+              <button class="k-tab" role="tab" aria-selected="false" aria-controls="kp2" id="kt2">2029</button>
+              <button class="k-tab" role="tab" aria-selected="false" aria-controls="kp3" id="kt3">2033</button>
+            </div>
+            <div class="k-tabpanel" role="tabpanel" id="kp1" aria-labelledby="kt1"><h4>2026 — o Simples ainda ganha</h4><p>Com as alíquotas de transição, a carga do Simples segue abaixo dos demais regimes para a maior parte das carteiras.</p></div>
+            <div class="k-tabpanel" role="tabpanel" id="kp2" aria-labelledby="kt2" hidden><h4>2029 — o ponto de virada</h4><p>O Lucro Real passa a compensar para quem tem crédito relevante na cadeia. É onde a decisão precisa ser revista.</p></div>
+            <div class="k-tabpanel" role="tabpanel" id="kp3" aria-labelledby="kt3" hidden><h4>2033 — regime pleno</h4><p>Fim da transição. A escolha feita hoje já produziu efeito acumulado — por isso a simulação vale agora.</p></div>
+          </div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;div class="ea-tabs"&gt;
+  &lt;div role="tablist" aria-label="Ano da simulação"&gt;
+    &lt;button role="tab" aria-selected="true"  aria-controls="p1" id="t1"&gt;2026&lt;/button&gt;
+    &lt;button role="tab" aria-selected="false" aria-controls="p2" id="t2"&gt;2029&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div role="tabpanel" id="p1" aria-labelledby="t1"&gt;…&lt;/div&gt;
+  &lt;div role="tabpanel" id="p2" aria-labelledby="t2" hidden&gt;…&lt;/div&gt;
+&lt;/div&gt;
+
+// sem "e comercial" duplo: guard clause em vez de AND lógico
+var abas = document.querySelectorAll('.ea-tabs [role="tab"]');
+abas.forEach(function (aba) {
+  aba.addEventListener('click', function () {
+    abas.forEach(function (o) {
+      o.setAttribute('aria-selected', 'false');
+      var p = document.getElementById(o.getAttribute('aria-controls'));
+      if (p) { p.hidden = true; }
+    });
+    aba.setAttribute('aria-selected', 'true');
+    var alvo = document.getElementById(aba.getAttribute('aria-controls'));
+    if (alvo) { alvo.hidden = false; }
+  });
+});</pre></div>
+        <p class="comp-note cro"><b>Meça o clique nas abas.</b> Mockup interativo é caro de construir; se ninguém clica, ele é decoração e a mesma informação renderia mais como gráfico estático. O clique em aba é o teste mais barato de "isso engaja ou enfeita".</p>
+      </div>
+    </section>
+
+    <!-- ============ DEPOIMENTOS (novo) ============ -->
+    <section id="depoimentos">
+      <div class="sec-head"><h2>Depoimentos</h2><span class="tag web">Web</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">Grid estático (até 3) ou carrossel (mais de 3, com setas e 3/2/1 por breakpoint). Avatar aceita foto; sem foto, cai para iniciais — nunca deixa buraco.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Grid de depoimentos</h3><span class="id">ea-testimonials</span></div>
+        <div class="preview stack">
+          <div class="k-testi">
+            <div class="c"><span class="q">“</span><p>Levava dois dias para fechar a conferência do mês. Hoje fecho na sexta de manhã e ainda sobra tempo para conversar com o cliente.</p><div class="who"><span class="av">MR</span><div><b>Contador · carteira de 180 CNPJs</b><span>Vitória / ES</span></div></div></div>
+            <div class="c"><span class="q">“</span><p>O laudo pronto mudou a conversa. Deixei de explicar planilha e passei a apresentar recomendação.</p><div class="who"><span class="av">JS</span><div><b>Sócio de escritório contábil</b><span>Belo Horizonte / MG</span></div></div></div>
+          </div>
+        </div>
+        <p class="comp-note warn"><b>Depoimento é dado de pessoa real.</b> Precisa de autorização de uso de nome e imagem, e o texto não pode ser editado a ponto de mudar o sentido. Quando não houver autorização nominal, use o formato acima: função + porte da carteira + cidade, sem nome.</p>
+      </div>
+    </section>
+
+    <!-- ============ BENTO (novo) ============ -->
+    <section id="bento">
+      <div class="sec-head"><h2>Bento</h2><span class="tag web">Web</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">Grade assimétrica para "o que você vai levar", destaque de evento ou resumo de módulo. Um bloco grande domina; os pequenos completam. Funciona porque a hierarquia é visual, não tipográfica.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Grade assimétrica</h3><span class="id">ea-bento</span></div>
+        <div class="preview stack">
+          <div class="k-bento">
+            <div class="b1"><span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan)">Você vai levar</span><b>Laudo modelo</b></div>
+            <div class="b2">Planilha de comparação dos 4 regimes</div>
+            <div class="b3">Checklist da janela de setembro</div>
+            <div class="b4">Acesso ao grupo</div>
+          </div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>.ea-bento{display:grid;grid-template-columns:repeat(4,1fr);
+  grid-auto-rows:minmax(78px,auto);gap:var(--ea-space-3)}
+.ea-bento__hero{grid-column:span 2;grid-row:span 2}
+.ea-bento__wide{grid-column:span 2}
+@media (max-width:640px){
+  .ea-bento{grid-template-columns:repeat(2,1fr)}
+  .ea-bento__hero{grid-column:span 2}
+}</pre></div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ (novo) ============ -->
+    <section id="faq">
+      <div class="sec-head"><h2>FAQ</h2><span class="tag web">Web</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">Acordeão em <code>&lt;details&gt;</code> nativo: abre sem JS, é acessível por teclado de fábrica e o buscador lê o conteúdo fechado. O texto deve espelhar o JSON-LD <code>FAQPage</code> palavra por palavra.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Acordeão nativo</h3><span class="id">ea-faq</span></div>
+        <div class="preview stack">
+          <div class="k-faq">
+            <details open><summary>A simulação serve como parecer técnico?</summary><p>Não. A ferramenta produz uma estimativa direcional amarrada à LC&nbsp;214/2025 e um laudo de apoio — a decisão e a responsabilidade técnica continuam sendo do contador.</p></details>
+            <details><summary>Preciso dos documentos do cliente?</summary><p>Não para a estimativa inicial. Com SPED e XML importados, o cálculo deixa de ser direcional e passa a usar os números reais da empresa.</p></details>
+          </div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;details class="ea-faq__item"&gt;
+  &lt;summary&gt;A simulação serve como parecer técnico?&lt;/summary&gt;
+  &lt;p&gt;Não. A ferramenta produz uma estimativa direcional…&lt;/p&gt;
+&lt;/details&gt;
+
+&lt;!-- o mesmo texto, como dado estruturado --&gt;
+&lt;script type="application/ld+json"&gt;
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+  {"@type":"Question","name":"A simulação serve como parecer técnico?",
+   "acceptedAnswer":{"@type":"Answer","text":"Não. A ferramenta produz…"}}
+]}
+&lt;/script&gt;</pre></div>
+        <p class="comp-note warn"><b>Nada de entidade HTML dentro do JSON-LD.</b> Ali o conteúdo é <i>dado</i>, não markup — um <code>&amp;nbsp;</code> apareceria cru dentro do schema. E se um plugin de segurança remover o <code>&lt;script&gt;</code> do bloco, recadastre o mesmo conteúdo no Rank Math / Yoast.</p>
+      </div>
+    </section>
+
+    <!-- ============ CAPTURA (novo) ============ -->
+    <section id="form">
+      <div class="sec-head"><h2>Captura</h2><span class="tag web">Web</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">Card branco com embed do HubSpot (portal da e-Auditoria). <b>Um só por página</b>, com <code>id="agendar"</code> — todos os CTAs apontam para essa âncora. Assim, trocar o formulário é mexer em um lugar e nenhum CTA quebra.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Card de formulário</h3><span class="id">ea-formcard · #agendar</span></div>
+        <div class="preview stack">
+          <div style="background:var(--panel);border:1px solid var(--line);border-radius:var(--r-md);padding:22px;max-width:420px;width:100%">
+            <b style="font-family:var(--font-display);font-size:1.1rem;display:block;margin-bottom:4px">Fale com um especialista</b>
+            <p style="font-size:13px;color:var(--ink-soft);margin:0 0 16px">Resposta em até 1 dia útil.</p>
+            <div class="k-hero" style="all:unset"><div class="fld" style="height:38px;border-radius:10px;background:#f1f4fb;border:1px solid #e2e7f3;margin-bottom:9px"></div><div class="fld" style="height:38px;border-radius:10px;background:#f1f4fb;border:1px solid #e2e7f3;margin-bottom:9px"></div><div class="fld" style="height:38px;border-radius:10px;background:#f1f4fb;border:1px solid #e2e7f3;margin-bottom:14px"></div></div>
+            <button class="k-btn k-cta" style="width:100%;justify-content:center">Quero falar com um especialista</button>
+          </div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;div class="ea-formcard" id="agendar"&gt;
+  &lt;h2&gt;Fale com um especialista&lt;/h2&gt;
+  &lt;div class="hs-form-frame"
+       data-region="na1"
+       data-form-id="COLOQUE_O_ID_DO_FORMULARIO"
+       data-portal-id="SEU-PORTAL-ID"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;script src="https://js.hsforms.net/forms/embed/SEU-PORTAL-ID.js" defer&gt;&lt;/script&gt;</pre></div>
+        <p class="comp-note warn"><b>Nunca um formulário próprio postando no CRM, nunca chave de API no front.</b> Se o formulário não aparecer em produção, quase sempre é plugin de cache/segurança bloqueando terceiro — libere <code>js.hsforms.net</code> na allowlist.</p>
+        <p class="comp-note cro"><b>Confira o <code>data-form-id</code> antes de publicar.</b> É o erro silencioso mais caro do repertório: a página sobe bonita, converte — e os leads caem na lista da campanha errada. Vale um item de checklist próprio.</p>
+      </div>
+    </section>
+
+    <!-- ============ CTA FINAL ============ -->
+    <section id="cta">
+      <div class="sec-head"><h2>CTA final</h2><span class="tag web">Web</span></div>
+      <p class="sec-desc">Fechamento de conversão em fundo escuro, com palavra em amarelo e um único CTA de ação.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Faixa de conversão escura</h3><span class="id">ea-cta-dark</span></div>
+        <div class="preview stack">
+          <div class="k-cta-band">
+            <h3>Comece a auditar <span class="ye">sem risco</span> hoje</h3>
+            <p>Agende uma demonstração e veja a plataforma rodando com os seus arquivos.</p>
+            <button class="k-btn k-cta">Agendar demonstração</button>
+          </div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;section class="ea-cta-dark ea-on-dark"&gt;
+  &lt;h2&gt;Comece a auditar &lt;span class="ea-cta-dark__hl"&gt;sem risco&lt;/span&gt; hoje&lt;/h2&gt;
+  &lt;p&gt;Agende uma demonstração e veja a plataforma rodando com os seus arquivos.&lt;/p&gt;
+  &lt;a class="ea-btn ea-btn--cta" href="#agendar"&gt;Agendar demonstração&lt;/a&gt;
+&lt;/section&gt;
+
+.ea-cta-dark{background:var(--ea-grad-dark);border-radius:var(--ea-radius-xl);
+  padding:56px 30px;text-align:center}
+.ea-cta-dark__hl{color:var(--ea-color-cta)}</pre></div>
+        <p class="comp-note warn"><b>O botão aqui é âmbar, não "ghost claro".</b> Sobre fundo escuro, a variante de texto claro é exatamente a que o tema sobrescreve — o resultado é preto sobre navy.</p>
+      </div>
+    </section>
+
+    <!-- ============ CTA STICKY (novo) ============ -->
+    <section id="cta-sticky">
+      <div class="sec-head"><h2>CTA sticky</h2><span class="tag web">Web</span><span class="tag cro">CRO</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">Barra fixa no rodapé, <b>só no mobile</b>, que aparece depois que o visitante passa do hero. Em página longa é o que impede o CTA de sumir por dez rolagens.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Barra fixa mobile</h3><span class="id">ea-sticky-cta</span></div>
+        <div class="preview stack">
+          <div class="k-sticky">
+            <div><b>Simule os 4 regimes</b><span>Estimativa em minutos</span></div>
+            <button class="k-btn k-cta k-sm">Começar</button>
+          </div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;div class="ea-sticky-cta"&gt;
+  &lt;div class="ea-sticky-cta__txt"&gt;&lt;strong&gt;Simule os 4 regimes&lt;/strong&gt;&lt;span&gt;Estimativa em minutos&lt;/span&gt;&lt;/div&gt;
+  &lt;a class="ea-btn ea-btn--cta ea-btn--sm" href="#agendar"&gt;Começar&lt;/a&gt;
+&lt;/div&gt;
+
+.ea-sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:999;display:none;
+  align-items:center;justify-content:space-between;gap:12px;
+  padding:11px clamp(14px,4vw,20px);
+  background:rgba(255,255,255,.94) !important;backdrop-filter:blur(16px);
+  box-shadow:0 -1px 0 var(--ea-border), 0 -10px 30px rgba(5,6,52,.1);
+  transform:translateY(110%);transition:transform .3s var(--ea-ease)}
+.ea-sticky-cta.is-on{transform:translateY(0)}
+@media (max-width:900px){
+  .ea-sticky-cta{display:flex}
+  .ea-lp main{padding-bottom:72px}   /* reserva o espaço da barra */
+}
+@media (max-width:400px){ .ea-sticky-cta__txt span{display:none} }</pre></div>
+        <p class="comp-note"><b>Reserve o espaço.</b> Sem o <code>padding-bottom</code> no conteúdo, a barra cobre a última linha da página — normalmente o rodapé legal ou o próprio CTA final.</p>
+      </div>
+    </section>
+    <div class="group-head">
+      <div class="kicker">Camada 3</div>
+      <h2>Dataviz fiscal</h2>
+      <p>O que nenhum concorrente copia rápido: mostrar número fiscal de um jeito que o contador entende em três segundos. Tudo aqui é HTML/CSS/SVG — responsivo, nítido em qualquer tela e sem depender de upload na biblioteca de mídia.</p>
+    </div>
+
+    <!-- ============ KPIs (novo) ============ -->
+    <section id="kpis">
+      <div class="sec-head"><h2>KPIs</h2><span class="tag dataviz">Dataviz</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">Cartões de indicador com barra de acento no topo. A variação vem com sinal e cor semântica — e a cor semântica é <b>independente</b> da paleta de marca: verde/vermelho aqui significam bom/ruim, não "cor da e-Auditoria".</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Painel de indicadores</h3><span class="id">ea-kpi</span></div>
+        <div class="preview stack">
+          <div class="k-kpis">
+            <div class="k-kpi"><div class="lb">Carga hoje (Simples)</div><div class="vl">8,2%</div><div class="dl down">↓ menor carga atual</div></div>
+            <div class="k-kpi"><div class="lb">Carga em 2033</div><div class="vl">16,8%</div><div class="dl up">↑ +8,6 p.p.</div></div>
+            <div class="k-kpi"><div class="lb">Diferença acumulada</div><div class="vl">R$ 214 mil</div><div class="dl">até 2033 · exemplo ilustrativo</div></div>
+          </div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;div class="ea-kpis"&gt;
+  &lt;div class="ea-kpi"&gt;
+    &lt;span class="ea-kpi__label"&gt;Carga em 2033&lt;/span&gt;
+    &lt;strong class="ea-kpi__value"&gt;16,8%&lt;/strong&gt;
+    &lt;span class="ea-kpi__delta ea-kpi__delta--up"&gt;&amp;uarr; +8,6&amp;nbsp;p.p.&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+.ea-kpi{background:var(--ea-surface);border:1px solid var(--ea-border);
+  border-radius:var(--ea-radius-md);padding:18px;border-top:3px solid var(--ea-color-primary)}
+.ea-kpi__value{font-family:var(--ea-font-display);font-size:1.9rem;
+  font-variant-numeric:tabular-nums;display:block}
+.ea-kpi__delta--up{color:#c7202b}    /* subir imposto é ruim */
+.ea-kpi__delta--down{color:#0f9d76}</pre></div>
+        <p class="comp-note warn"><b>Todo número ilustrativo precisa dizer que é ilustrativo</b> — no próprio card, não só no rodapé da página. E nunca use nome de empresa real num exemplo inventado.</p>
+      </div>
+    </section>
+
+    <!-- ============ DONUT (novo) ============ -->
+    <section id="donut">
+      <div class="sec-head"><h2>Donut</h2><span class="tag dataviz">Dataviz</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">Rosca em CSS puro com <code>conic-gradient</code> — zero biblioteca, zero requisição, funciona com JS desligado. Use para <b>uma</b> proporção; para comparar várias, tabela é mais honesta.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Proporção + lista de status</h3><span class="id">ea-donut</span></div>
+        <div class="preview stack">
+          <div style="background:var(--panel);border:1px solid var(--line);border-radius:var(--r-md);padding:20px">
+            <div class="k-donut">
+              <div class="ring"><div class="c"><span class="pct">62%</span><span class="lbl">com crédito</span></div></div>
+              <ul>
+                <li><span class="k-flag" style="background:var(--violet)"></span> Notas com crédito aproveitável <em>62%</em></li>
+                <li><span class="k-flag" style="background:#e3e8f0"></span> Sem crédito na cadeia <em>31%</em></li>
+                <li><span class="k-flag" style="background:var(--yellow)"></span> Pendente de classificação <em>7%</em></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;div class="ea-donut"&gt;
+  &lt;div class="ea-donut__ring" role="img" aria-label="62% das notas com crédito aproveitável"&gt;
+    &lt;div class="ea-donut__c"&gt;&lt;span class="ea-donut__pct"&gt;62%&lt;/span&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;ul class="ea-donut__rows"&gt;…&lt;/ul&gt;
+&lt;/div&gt;
+
+.ea-donut__ring{position:relative;width:96px;height:96px;border-radius:50%;flex:none;
+  background:conic-gradient(var(--ea-violet) 0 62%, #e3e8f0 62% 100%);
+  display:grid;place-items:center}
+.ea-donut__ring::after{content:"";width:64px;height:64px;border-radius:50%;
+  background:var(--ea-surface);position:absolute}</pre></div>
+        <p class="comp-note">A rosca é imagem semântica: leva <code>role="img"</code> e <code>aria-label</code> com o número por extenso. Sem isso, quem usa leitor de tela recebe silêncio.</p>
+      </div>
+    </section>
+
+    <!-- ============ TABELA (novo) ============ -->
+    <section id="tabela">
+      <div class="sec-head"><h2>Alíquotas antes × depois</h2><span class="tag dataviz">Dataviz</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">A tabela é o formato que o contador mais confia — não substitua por gráfico só por estética. Números alinhados por <code>tabular-nums</code>, status em pílula, e rolagem horizontal própria para não estourar o mobile.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Comparativo por NCM</h3><span class="id">ea-table</span></div>
+        <div class="preview stack">
+          <div class="k-tbl-wrap">
+            <table class="k-tbl">
+              <thead><tr><th>NCM</th><th>Hoje (PIS/COFINS)</th><th>IBS + CBS</th><th>Variação</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>2106.90.90</td><td>9,25%</td><td>26,50%</td><td>+17,25 p.p.</td><td><span class="k-status bad">Revisar preço</span></td></tr>
+                <tr><td>3004.90.99</td><td>9,25%</td><td>10,60%</td><td>+1,35 p.p.</td><td><span class="k-status warn">Atenção</span></td></tr>
+                <tr><td>1006.30.21</td><td>9,25%</td><td>0,00%</td><td>−9,25 p.p.</td><td><span class="k-status ok">Cesta básica</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;div class="ea-table-wrap"&gt;   &lt;!-- rolagem própria: o body da página nunca rola de lado --&gt;
+  &lt;table class="ea-table"&gt;
+    &lt;caption class="sr-only"&gt;Comparativo de alíquotas por NCM&lt;/caption&gt;
+    &lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;NCM&lt;/th&gt;…&lt;/tr&gt;&lt;/thead&gt;
+    &lt;tbody&gt;&lt;tr&gt;&lt;td&gt;2106.90.90&lt;/td&gt;…
+      &lt;td&gt;&lt;span class="ea-status ea-status--bad"&gt;Revisar preço&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;
+
+.ea-table-wrap{overflow-x:auto}
+.ea-table{width:100%;border-collapse:collapse;min-width:420px}
+.ea-table td{font-variant-numeric:tabular-nums}
+.ea-status--ok{background:rgba(15,157,118,.13);color:#0f9d76}
+.ea-status--warn{background:rgba(254,192,8,.2);color:#8a6600}
+.ea-status--bad{background:rgba(255,47,52,.12);color:#c7202b}</pre></div>
+        <p class="comp-note"><b>O status nunca é só cor.</b> Cada pílula carrega texto ("Revisar preço", "Atenção") — quem não distingue vermelho de verde precisa ler a mesma informação.</p>
+      </div>
+    </section>
+
+    <!-- ============ PONTO DE VIRADA (novo) ============ -->
+    <section id="virada">
+      <div class="sec-head"><h2>Ponto de virada</h2><span class="tag dataviz">Dataviz</span><span class="tag cro">CRO</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">Duas séries que se cruzam. É o bloco mais persuasivo do repertório porque <b>prova o mecanismo em vez de afirmá-lo</b>: mostra que a resposta muda com o tempo, e que por isso vale simular agora. Grade discreta, endpoint destacado, cruzamento anotado.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Comparativo de regimes até 2033</h3><span class="id">ea-linechart</span></div>
+        <div class="preview stack">
+          <div class="k-chart">
+            <svg viewBox="0 0 640 260" role="img" aria-label="Carga tributária projetada: o Simples Nacional é menor até 2028 e o Lucro Real passa a ser menor a partir de 2029.">
+              <g stroke="currentColor" opacity=".12" stroke-width="1">
+                <line x1="44" y1="220" x2="620" y2="220"/>
+                <line x1="44" y1="172" x2="620" y2="172"/>
+                <line x1="44" y1="124" x2="620" y2="124"/>
+                <line x1="44" y1="76" x2="620" y2="76"/>
+                <line x1="44" y1="30" x2="620" y2="30"/>
+              </g>
+              <g font-size="11" fill="currentColor" opacity=".55" font-family="ui-monospace,monospace">
+                <text x="8" y="224">6%</text><text x="4" y="128">13%</text><text x="4" y="34">20%</text>
+                <text x="30" y="243">2026</text><text x="270" y="243">2029</text><text x="580" y="243">2033</text>
+              </g>
+              <line x1="284" y1="30" x2="284" y2="220" stroke="#ff0071" stroke-width="1.5" stroke-dasharray="4 4" opacity=".6"/>
+              <polyline fill="none" stroke="#2f24ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                points="44,190 124,171 204,148 284,120 364,99 444,87 524,79 604,73"/>
+              <polyline fill="none" stroke="#00b9a8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                points="44,58 124,73 204,95 284,120 364,128 444,133 524,137 604,139"/>
+              <circle cx="284" cy="120" r="5.5" fill="#ff0071"/>
+              <circle cx="604" cy="73" r="4" fill="#2f24ff"/>
+              <circle cx="604" cy="139" r="4" fill="#00b9a8"/>
+              <text x="298" y="46" font-size="12" font-weight="700" fill="#ff0071" font-family="system-ui,sans-serif">ponto de virada · 2029</text>
+            </svg>
+            <div class="k-legend">
+              <span><i style="background:#2f24ff"></i>Simples Nacional</span>
+              <span><i style="background:#00b9a8"></i>Lucro Real</span>
+              <span><i style="background:#ff0071"></i>cruzamento</span>
+              <span style="margin-left:auto">série hipotética · exemplo ilustrativo</span>
+            </div>
+          </div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;div class="ea-chart"&gt;
+  &lt;svg viewBox="0 0 640 260" role="img"
+       aria-label="Carga projetada: o Simples é menor até 2028 e o Lucro Real
+                   passa a ser menor a partir de 2029."&gt;
+    &lt;!-- grade discreta --&gt;
+    &lt;g stroke="currentColor" opacity=".12"&gt;&lt;line x1="44" y1="220" x2="620" y2="220"/&gt;…&lt;/g&gt;
+    &lt;!-- séries --&gt;
+    &lt;polyline fill="none" stroke="#2f24ff" stroke-width="2.5" points="44,190 124,171 …"/&gt;
+    &lt;polyline fill="none" stroke="#00b9a8" stroke-width="2.5" points="44,58 124,73 …"/&gt;
+    &lt;!-- o cruzamento é o argumento: destaque-o --&gt;
+    &lt;circle cx="284" cy="120" r="5.5" fill="#ff0071"/&gt;
+  &lt;/svg&gt;
+&lt;/div&gt;
+
+.ea-chart svg{width:100%;height:auto;display:block}</pre></div>
+        <p class="comp-note cro"><b>CRO — este bloco merece subir na página.</b> Prova concreta costuma valer mais que quatro dobras de texto antes dela. Se o hero tem espaço, testar o gráfico ao lado (ou no lugar) do formulário é uma das mudanças de maior amplitude possíveis — e das poucas que produzem sinal legível mesmo com pouca amostra.</p>
+        <p class="comp-note warn"><b>Cor de série é compromisso com o produto.</b> Se a interface da plataforma usa roxo para Lucro Presumido, a LP usa roxo para Lucro Presumido. Não mexa numa sem mexer na outra — a pessoa vai comparar as duas telas lado a lado.</p>
+      </div>
+    </section>
+
+    <!-- ============ MOLDURA (novo) ============ -->
+    <section id="moldura">
+      <div class="sec-head"><h2>Moldura de produto</h2><span class="tag dataviz">Dataviz</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">Janela de navegador ou tablet em volta de um print (ou de uma reconstrução em HTML). Contextualiza que aquilo é a ferramenta de verdade, não uma ilustração.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Janela de navegador</h3><span class="id">ea-frame</span></div>
+        <div class="preview stack">
+          <div class="k-frame">
+            <div class="bar"><i></i><i></i><i></i><span>app.e-auditoria.com.br/simulador</span></div>
+            <div class="body">print do produto ou reconstrução em HTML</div>
+          </div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;figure class="ea-frame"&gt;
+  &lt;div class="ea-frame__bar" aria-hidden="true"&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;
+    &lt;span&gt;app.e-auditoria.com.br/simulador&lt;/span&gt;&lt;/div&gt;
+  &lt;img src="…" alt="Tela do simulador comparando os quatro regimes"
+       width="1600" height="900" loading="lazy" decoding="async"&gt;
+&lt;/figure&gt;
+
+.ea-frame img{width:100%;aspect-ratio:16/9;object-fit:cover;object-position:top center}</pre></div>
+        <p class="comp-note"><b>Sempre <code>aspect-ratio</code> e <code>width</code>/<code>height</code> na imagem</b> — reserva o espaço antes de carregar e zera o CLS. O público mais velho é o que mais sofre com layout que pula depois de carregar.</p>
+        <p class="comp-note warn"><b>Caminho relativo não resolve dentro do bloco.</b> Suba a imagem na Biblioteca de Mídia e use URL absoluta, com o <code>srcset</code> dos tamanhos que o WordPress gerou no upload — sem ele, todo visitante baixa o arquivo de 2560px.</p>
+      </div>
+    </section>
+    <div class="group-head">
+      <div class="kicker">Camada 5 · padrões de domínio</div>
+      <h2>Evento</h2>
+      <p>Os blocos que só existem porque a <span class="ea-brand">e-Auditoria</span> faz evento com regularidade — Aulão, Imersão, Jornada do Especialista. Nasceram no tema da Jornada e são os mais reaproveitáveis entre frentes: mesma estrutura, sotaque diferente.</p>
+    </div>
+
+    <!-- ============ COUNTDOWN (novo) ============ -->
+    <section id="countdown">
+      <div class="sec-head"><h2>Countdown</h2><span class="tag evento">Evento</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">Barra de contagem regressiva com data-alvo em ISO. Tema "sunrise → dusk" (☀️ → 🌙) é o motivo visual da Jornada; em outras frentes, troque o fundo mantendo a estrutura.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Contagem regressiva</h3><span class="id">ea-countdown</span></div>
+        <div class="preview stack">
+          <div class="k-cd">
+            <div class="lab"><b>Imersão <span class="ea-brand">e-A</span> começa em</b><small>18 de setembro · 100% online</small></div>
+            <div class="timer">
+              <div class="box"><span class="n">32</span><span class="u">dias</span></div>
+              <div class="box"><span class="n">08</span><span class="u">horas</span></div>
+              <div class="box"><span class="n">14</span><span class="u">min</span></div>
+              <div class="box"><span class="n">05</span><span class="u">seg</span></div>
+            </div>
+            <button class="k-btn k-cta k-sm">Garantir vaga</button>
+          </div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;div class="ea-countdown" id="eaCd" data-target="2026-09-18T09:00:00-03:00"&gt;
+  &lt;div class="ea-countdown__box"&gt;&lt;span class="n" data-cd="d"&gt;32&lt;/span&gt;&lt;span class="u"&gt;dias&lt;/span&gt;&lt;/div&gt;
+  &lt;div class="ea-countdown__box"&gt;&lt;span class="n" data-cd="h"&gt;08&lt;/span&gt;&lt;span class="u"&gt;horas&lt;/span&gt;&lt;/div&gt;
+  &lt;div class="ea-countdown__box"&gt;&lt;span class="n" data-cd="m"&gt;14&lt;/span&gt;&lt;span class="u"&gt;min&lt;/span&gt;&lt;/div&gt;
+  &lt;div class="ea-countdown__box"&gt;&lt;span class="n" data-cd="s"&gt;05&lt;/span&gt;&lt;span class="u"&gt;seg&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+var cd = document.getElementById('eaCd');
+if (cd) {
+  var alvo = new Date(cd.getAttribute('data-target')).getTime();
+  var tick = function () {
+    var falta = alvo - Date.now();
+    if (falta &lt; 0) { falta = 0; }
+    var s = Math.floor(falta / 1000);
+    var set = function (k, v) {
+      var el = cd.querySelector('[data-cd="' + k + '"]');
+      if (el) { el.textContent = String(v).padStart(2, '0'); }
+    };
+    set('d', Math.floor(s / 86400));
+    set('h', Math.floor(s / 3600) % 24);
+    set('m', Math.floor(s / 60) % 60);
+    set('s', s % 60);
+  };
+  tick();
+  setInterval(tick, 1000);
+}</pre></div>
+        <p class="comp-note"><b>Fuso explícito na data-alvo</b> (<code>-03:00</code>). Sem ele, quem abre a página com o relógio em outro fuso vê um número diferente do da peça. E os números já vêm preenchidos no HTML — o JS só os mantém certos.</p>
+        <p class="comp-note warn"><b>Planeje o depois.</b> Quando o evento passa, a contagem zera e a barra vira uma faixa dizendo "0 dias". Decida antes se o bloco esconde, vira "acesse a gravação" ou sai da página.</p>
+      </div>
+    </section>
+
+    <!-- ============ AGENDA (novo) ============ -->
+    <section id="agenda">
+      <div class="sec-head"><h2>Agenda &amp; turmas</h2><span class="tag evento">Evento</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">O motivo mais reutilizado do tema de evento: dois cards de turma, manhã (☀️ quente) e tarde (🌙 violeta). Aparece no hero e de novo na programação — e é o que faz a pessoa escolher horário antes de se inscrever.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Turma manhã / turma tarde</h3><span class="id">ea-turma</span></div>
+        <div class="preview stack">
+          <div class="k-turmas">
+            <div class="k-turma dia"><div class="ic">☀️</div><h4>Turma da manhã</h4><p>Para quem fecha o expediente à tarde.</p><div class="hr">09h00</div></div>
+            <div class="k-turma tarde"><div class="ic">🌙</div><h4>Turma da tarde</h4><p>Mesma aula, mesmo material, outro horário.</p><div class="hr">19h30</div></div>
+          </div>
+        </div>
+        <p class="comp-note">O emoji aqui é <b>ilustração de motivo</b>, não ícone de interface — é a única exceção à regra de SVG inline, e vale só para o par ☀️/🌙 que já é reconhecido pelo público da Jornada. Em qualquer outro lugar, use o <a href="#icones-2d">set SVG</a>.</p>
+      </div>
+    </section>
+
+    <!-- ============ PALESTRANTES (novo) ============ -->
+    <section id="palestrantes">
+      <div class="sec-head"><h2>Palestrantes</h2><span class="tag evento">Evento</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">Cartões retrato 3:4 com scrim escuro na base para o nome ficar legível sobre qualquer foto. A bio aparece no hover — no toque, ela precisa estar visível ou acessível por clique.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Grade de convidados</h3><span class="id">ea-speakers</span></div>
+        <div class="preview stack">
+          <div class="k-speakers">
+            <div class="k-spk"><div class="scrim"></div><div class="info"><b>Convidado</b><span>Especialista em Reforma</span></div></div>
+            <div class="k-spk"><div class="scrim"></div><div class="info"><b>Convidada</b><span>Consultora tributária</span></div></div>
+            <div class="k-spk"><div class="scrim"></div><div class="info"><b>Anfitriã</b><span><span class="ea-brand">e-Auditoria</span></span></div></div>
+          </div>
+        </div>
+        <p class="comp-note warn"><b>Hover não existe no celular.</b> Se a bio só aparece no <code>:hover</code>, metade do público nunca a vê. Em telas de toque, mostre a bio recolhida em duas linhas ou transforme o card em botão que abre o detalhe.</p>
+      </div>
+    </section>
+
+    <!-- ============ TRANSMISSÃO (novo) ============ -->
+    <section id="transmissao">
+      <div class="sec-head"><h2>Transmissão</h2><span class="tag evento">Evento</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">Vídeo + chat ao vivo lado a lado, com estado vazio para antes de começar. Depois do evento, o mesmo bloco vira "gravação disponível" — é só desligar o selo "ao vivo".</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Player + chat</h3><span class="id">ea-livestream</span></div>
+        <div class="preview stack">
+          <div class="k-live">
+            <div class="vid"><span class="k-pill-live"><span class="dot"></span>Ao vivo</span></div>
+            <div class="chat"><b style="color:var(--ink)">Chat da transmissão</b><span>O chat aparece quando a transmissão começa.</span><span style="margin-top:auto;font-size:11.5px">Precisa do domínio publicado para carregar.</span></div>
+          </div>
+        </div>
+        <p class="comp-note warn"><b>O chat do YouTube só carrega no domínio publicado.</b> O embed exige o parâmetro de domínio pai; no preview do HubSpot ou em <code>file://</code> ele fica em branco. Teste sempre na página no ar antes de dizer que quebrou.</p>
+        <p class="comp-note">Links externos do bloco levam <code>rel="noopener noreferrer"</code>, sem exceção.</p>
+      </div>
+    </section>
+
+    <div class="group-head">
+      <div class="kicker">Camada 4</div>
+      <h2>Blocos de e-mail</h2>
+      <p>Mundo técnico separado: <b>tabelas e estilos inline</b>, nunca flexbox nem <code>var()</code> — o Outlook não entende. Larguras fixas: 640px o e-mail, 560px a imagem cheia, 436px dentro de card. Estes onze módulos são o Radar Tributário.</p>
+    </div>
+
+    <!-- ============ EMAIL MASTHEAD (novo) ============ -->
+    <section id="email-masthead">
+      <div class="sec-head"><h2>Masthead</h2><span class="tag email">E-mail</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">O cabeçalho que identifica a newsletter em meio segundo. Gradiente de 122° com <b>fallback sólido obrigatório</b>: parte dos clientes não renderiza gradiente e cairia num fundo branco com texto branco.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Cabeçalho do Radar</h3><span class="id">ea-news-cabecalho</span></div>
+        <div class="preview stack">
+          <div class="k-mast">
+            <div class="top"><span class="ea-brand">e-Auditoria</span><span>ver no navegador</span></div>
+            <div class="band"><b>Radar Tributário</b><span>Edição 42 · agosto/2026</span></div>
+          </div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;!-- bgcolor sólido PRIMEIRO: é o fallback de quem não renderiza gradiente --&gt;
+&lt;table role="presentation" width="640" cellpadding="0" cellspacing="0"&gt;&lt;tr&gt;
+  &lt;td bgcolor="#4f45f5"
+      style="background:#4f45f5;
+             background-image:linear-gradient(122deg,#8439e6 0%,#5b4bf2 46%,#2488ff 100%);
+             padding:26px 40px"&gt;
+    &lt;span style="font-family:'Familjen Grotesk',Arial,sans-serif;font-size:24px;
+      font-weight:700;color:#ffffff"&gt;Radar Tributário&lt;/span&gt;
+  &lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;</pre></div>
+        <p class="comp-note"><b>Preheader oculto</b> logo após o <code>&lt;body&gt;</code>: é o texto que a caixa de entrada mostra ao lado do assunto. Sem ele, o cliente exibe o começo do HTML.<br><code>&lt;div style="display:none;max-height:0;overflow:hidden;mso-hide:all"&gt;Resumo da edição…&lt;/div&gt;</code></p>
+      </div>
+    </section>
+
+    <!-- ============ EMAIL BTN ============ -->
+    <section id="email-btn">
+      <div class="sec-head"><h2>Botão bulletproof</h2><span class="tag email">E-mail</span></div>
+      <p class="sec-desc">Botão de e-mail que sobrevive ao Outlook: construído em tabela, com <code>mso-padding-alt</code> e a cor do texto blindada com <code>!important</code>.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>CTA de newsletter</h3><span class="id">ea-email-button</span></div>
+        <div class="preview">
+          <button class="k-btn k-primary" style="border-radius:100px">Ler a análise completa →</button>
+        </div>
+        <p class="comp-note">Preview aproximado. O código real é uma tabela (não um &lt;a&gt; estilizado), porque é assim que renderiza igual em todos os clientes.</p>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;table role="presentation" cellpadding="0" cellspacing="0"&gt;&lt;tr&gt;
+  &lt;td bgcolor="#2f24ff" style="border-radius:100px;mso-padding-alt:14px 28px"&gt;
+    &lt;a href="{{ link }}" style="display:inline-block;padding:14px 28px;
+       border-radius:100px;font-family:Manrope,Arial,sans-serif;font-weight:700;
+       font-size:15px;text-decoration:none;color:#ffffff"&gt;
+      &lt;span style="color:#ffffff !important"&gt;Ler a análise completa &amp;rarr;&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;</pre></div>
+      </div>
+    </section>
+
+    <!-- ============ EMAIL ANCHOR ============ -->
+    <section id="email-anchor">
+      <div class="sec-head"><h2>Âncora de prazo</h2><span class="tag email">E-mail</span></div>
+      <p class="sec-desc">O bloco-assinatura da newsletter: card navy com o número-herói da edição e o acento ciano. Alto contraste para ancorar o olhar.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Prazo no Radar</h3><span class="id">ea-news-prazo</span></div>
+        <div class="preview stack">
+          <div class="k-anchor">
+            <span class="tag">⏱ Prazo no Radar</span>
+            <div class="big">Set/26</div>
+            <div class="sweep"></div>
+            <p>Entrega da EFD-Contribuições da competência. Programe a conferência com antecedência.</p>
+          </div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;table role="presentation" width="100%" cellpadding="0" cellspacing="0"&gt;&lt;tr&gt;
+  &lt;td bgcolor="#050634" style="border-radius:20px;padding:30px"&gt;
+    &lt;span style="display:inline-block;background:#171a4a;color:#00ffea;font-size:12px;
+      font-weight:600;padding:6px 12px;border-radius:100px"&gt;&amp;#9201; Prazo no Radar&lt;/span&gt;
+    &lt;div style="font-family:'Familjen Grotesk',Arial,sans-serif;font-size:64px;
+      color:#ffffff;letter-spacing:-.035em;line-height:1;margin-top:14px"&gt;Set/26&lt;/div&gt;
+    &lt;table cellpadding="0" cellspacing="0"&gt;&lt;tr&gt;&lt;td height="3" width="48"
+      bgcolor="#00ffea" style="font-size:1px;line-height:1px"&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+    &lt;p style="color:#b9c0e8;font-family:Manrope,Arial,sans-serif;font-size:14px;margin:14px 0 0"&gt;
+      Entrega da EFD-Contribuições da competência.&lt;/p&gt;
+  &lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;</pre></div>
+        <p class="comp-note"><b>Ciano só sobre navy.</b> Fora do fundo escuro ele perde contraste e vira ruído — é acento de dados, nunca cor de texto em fundo claro.</p>
+      </div>
+    </section>
+
+    <!-- ============ EMAIL ARTICLE ============ -->
+    <section id="email-art">
+      <div class="sec-head"><h2>Lista de artigos</h2><span class="tag email">E-mail</span></div>
+      <p class="sec-desc">Item editorial com pílula de impacto colorida — o código de cor ensina o leitor a priorizar: 🔴 alto, 🟡 médio, 🔵 operacional.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Item de conteúdo</h3><span class="id">ea-news-artigo</span></div>
+        <div class="preview stack">
+          <div class="k-art">
+            <span class="k-imp alto">🔴 Alto impacto</span>
+            <h4>Reforma Tributária: o que muda no Simples em 2026</h4>
+            <p>A transição do IBS/CBS afeta o cálculo do DAS para empresas híbridas. Veja quem precisa recalcular.</p>
+            <a href="#">Ler a análise completa →</a>
+          </div>
+          <div class="k-art">
+            <span class="k-imp oper">🔵 Operacional</span>
+            <h4>Nova versão do validador SPED disponível</h4>
+            <p>Atualização de layout já ativa na plataforma. Nenhuma ação necessária.</p>
+            <a href="#">Ver detalhes →</a>
+          </div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;!-- pílula de impacto: troque a cor conforme a prioridade --&gt;
+&lt;span style="display:inline-block;background:#ffe7e7;color:#c7202b;font-size:11px;
+  font-weight:700;padding:5px 11px;border-radius:100px"&gt;&amp;#128308; Alto impacto&lt;/span&gt;
+&lt;!-- médio: bg #fff3d1 / txt #9a6a00 · operacional: bg #e2eeff / txt #1667d6 --&gt;
+&lt;h3 style="font-family:'Familjen Grotesk',Arial,sans-serif;color:#050634;
+  font-size:19px;margin:12px 0 6px"&gt;Reforma Tributária: o que muda no Simples&lt;/h3&gt;
+&lt;p style="font-family:Manrope,Arial,sans-serif;color:#4a4d6b;font-size:14px"&gt;...&lt;/p&gt;
+&lt;a href="{{ link }}" style="color:#2f24ff;font-weight:700;text-decoration:none"&gt;Ler &amp;rarr;&lt;/a&gt;</pre></div>
+        <p class="comp-note">A legenda do código de cor entra <b>uma vez por edição</b>, perto do primeiro item. Sem ela, a pílula é só enfeite colorido.</p>
+      </div>
+    </section>
+
+    <!-- ============ EMAIL EVENTO (novo) ============ -->
+    <section id="email-evento">
+      <div class="sec-head"><h2>Card de evento</h2><span class="tag email">E-mail</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">Bloco navy com selo "AO VIVO" em degradê laranja→vermelho. É o único lugar da newsletter onde a temperatura sobe — por isso funciona.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Convite na newsletter</h3><span class="id">ea-news-evento</span></div>
+        <div class="preview stack">
+          <div class="k-evt">
+            <span class="k-pill-live"><span class="dot"></span>Ao vivo</span>
+            <h4>Aulão <span class="ea-brand">e-A</span>: fechando o mês na Reforma</h4>
+            <p>Uma hora de prática, com espaço para perguntas ao vivo.</p>
+            <div class="meta">18/09 · 19h30 · online e gratuito</div>
+          </div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;td bgcolor="#fb5507"
+    style="background:#fb5507;
+           background-image:linear-gradient(135deg,#fb5507,#ff2f34);
+           border-radius:100px;padding:6px 13px"&gt;
+  &lt;span style="font-family:Manrope,Arial,sans-serif;font-size:11px;font-weight:700;
+    letter-spacing:.05em;color:#ffffff !important"&gt;AO VIVO&lt;/span&gt;
+&lt;/td&gt;</pre></div>
+      </div>
+    </section>
+
+    <!-- ============ EMAIL ENQUETE (novo) ============ -->
+    <section id="email-enquete">
+      <div class="sec-head"><h2>Enquete</h2><span class="tag email">E-mail</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">E-mail não roda formulário. A enquete funciona porque <b>cada opção é um link rastreável diferente</b> — o clique é o voto, e o destino é uma página de agradecimento.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Voto por clique</h3><span class="id">ea-news-enquete</span></div>
+        <div class="preview stack">
+          <div class="k-poll">
+            <b style="font-family:var(--font-display);font-size:15px">Qual assunto você quer na próxima edição?</b>
+            <a href="#">Crédito presumido no Simples Híbrido</a>
+            <a href="#">Split payment na prática</a>
+            <a href="#">Precificação depois da Reforma</a>
+          </div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;!-- cada opção = um link com UTM próprio; o clique É o voto --&gt;
+&lt;table role="presentation" width="100%" cellpadding="0" cellspacing="0"&gt;&lt;tr&gt;
+  &lt;td bgcolor="#f7f9fd" style="border:1px solid #e4e9f5;border-radius:12px;padding:12px 14px"&gt;
+    &lt;a href="https://…/obrigado?voto=credito-presumido"
+       style="font-family:Manrope,Arial,sans-serif;font-size:14px;font-weight:600;
+              color:#050634 !important;text-decoration:none;display:block"&gt;
+      Crédito presumido no Simples Híbrido&lt;/a&gt;
+  &lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;</pre></div>
+      </div>
+    </section>
+
+    <!-- ============ EMAIL FOOTER (novo) ============ -->
+    <section id="email-footer">
+      <div class="sec-head"><h2>Rodapé</h2><span class="tag email">E-mail</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">Não é decoração: é conformidade. Razão social, endereço físico e link de descadastro funcional são obrigatórios — e é o que mantém a reputação do domínio de envio.</p>
+      <div class="comp">
+        <div class="comp-head"><h3>Rodapé de conformidade</h3><span class="id">ea-news-footer</span></div>
+        <div class="preview stack">
+          <div class="k-foot">
+            <b style="color:var(--navy);font-family:var(--font-display);font-size:14px" class="ea-brand">e-Auditoria</b><br>
+            Razão social · CNPJ 00.000.000/0001-00<br>
+            Endereço completo · Vitória / ES<br><br>
+            Você recebe este e-mail porque se cadastrou no Radar Tributário.<br>
+            <a href="#">Cancelar inscrição</a> · <a href="#">Preferências de envio</a>
+          </div>
+        </div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>&lt;a href="{{ unsubscribe_link }}" data-unsubscribe="true"
+   style="color:#7377a0;text-decoration:underline"&gt;Cancelar inscrição&lt;/a&gt;
+&amp;nbsp;·&amp;nbsp;
+&lt;a href="{{ subscription_preferences_url }}"
+   style="color:#7377a0;text-decoration:underline"&gt;Preferências de envio&lt;/a&gt;</pre></div>
+        <p class="comp-note warn">O atributo <code>data-unsubscribe="true"</code> é o que faz o HubSpot reconhecer o link como descadastro oficial. Sem ele, o envio pode ser barrado na validação.</p>
+      </div>
+    </section>
+    <div class="group-head">
+      <div class="kicker">Camada 0 · o que não se negocia</div>
+      <h2>Regras</h2>
+      <p>Sete destas regras vieram do repertório da casa. As outras sete foram aprendidas em <b>29/07/2026</b>, quando o hero do site subiu completamente sem estilo — botão virado em link sublinhado, SVGs de 340px, texto em degradê invisível. Três causas independentes, e nenhuma delas era o CSS estar malformado.</p>
+    </div>
+
+    <!-- ============ GOVERNANCA ============ -->
+    <section id="governanca">
+      <div class="sec-head"><h2>Governança</h2><span class="tag core">Obrigatório</span></div>
+      <p class="sec-desc">O que faz um bloco funcionar ou quebrar em produção.</p>
+      <div class="rules">
+        <div class="rule"><div class="n">01</div><h4>Nada de <code>&amp;&amp;</code> no JS do WordPress</h4><p>O editor recodifica o caractere dentro de <code>script</code> e derruba o arquivo inteiro — vale até dentro de comentário. Use <code>if</code> aninhado ou guard clause. Se o <code>&amp;</code> for mesmo necessário, monte-o com <code>String.fromCharCode(38)</code>.</p></div>
+
+        <div class="rule"><div class="n">02</div><h4>Escopo por wrapper único</h4><p>Todo CSS prefixado por um id/classe da peça. Nunca seletor global (<code>body</code>, <code>.card</code> solto). É o que isola a peça do tema.</p></div>
+
+        <div class="rule" style="border-color:var(--pink);border-left:3px solid var(--pink)"><div class="n" style="color:var(--pink)">03 · novo</div><h4>Nenhum <code>data-*</code> no wrapper de escopo</h4><p>O sanitizador do WordPress apaga <code>data-*</code> do conteúdo salvo — e nesse elemento levou <code>class</code> e <code>id</code> junto. Sem a classe, 91 regras morreram de uma vez. A forma que sobrevive é só <code>class</code> e <code>id</code>. <code>data-*</code> criado por JS em runtime é seguro.</p></div>
+
+        <div class="rule" style="border-color:var(--pink);border-left:3px solid var(--pink)"><div class="n" style="color:var(--pink)">04 · novo</div><h4>Estado normal não depende de atributo</h4><p>Uma regra como <code>.ea-lp[data-fx="on"] .hero{…}</code> nunca aplica em produção. O comportamento padrão vira a regra base; o atributo fica só como válvula de escape no mockup.</p></div>
+
+        <div class="rule" style="border-color:var(--pink);border-left:3px solid var(--pink)"><div class="n" style="color:var(--pink)">05 · novo</div><h4>Prefixo também dentro de <code>@media</code></h4><p>Media query <b>não soma especificidade</b>. <code>.ea-lp .hero</code> (0,2,0) vence <code>@media{.hero}</code> (0,1,0) — e a override morre calada. Se o componente foi declarado prefixado, toda override dele leva o mesmo prefixo, em qualquer lugar.</p></div>
+
+        <div class="rule" style="border-color:var(--pink);border-left:3px solid var(--pink)"><div class="n" style="color:var(--pink)">06 · novo</div><h4>Cor de <code>&lt;a&gt;</code> com <code>!important</code></h4><p>O tema tem <code>.inside-article a{color:initial !important}</code>, que vence qualquer especificidade. Corolário de design: botão sobre fundo escuro não pode depender de texto claro — use fundo âmbar com texto navy.</p></div>
+
+        <div class="rule" style="border-color:var(--pink);border-left:3px solid var(--pink)"><div class="n" style="color:var(--pink)">07 · novo</div><h4>Arquivo de entrega sem comentário</h4><p>Um <code>*/</code> órfão engoliu um bloco <code>@media</code> inteiro, em silêncio. Comentário é a parte mais frágil do que se cola — e é ruído para quem cola. Explicação e histórico vão para documento à parte.</p></div>
+
+        <div class="rule" style="border-color:var(--pink);border-left:3px solid var(--pink)"><div class="n" style="color:var(--pink)">08 · novo</div><h4><code>@import</code> na linha 1</h4><p>Nada acima dele, nem comentário: o editor promove o <code>@import</code> ao topo e <b>descarta o que estava antes</b>. E <code>@import</code> só vale antes de qualquer outra regra — depois de um seletor, o navegador ignora em silêncio e a tipografia desaba.</p></div>
+
+        <div class="rule"><div class="n">09</div><h4>Fail-safe sem JS</h4><p>Conteúdo e números pré-preenchidos no HTML; o JS só adiciona animação. Com WP Rocket ou Perfmatters adiando scripts, a página precisa continuar completa. Única exceção conhecida: o player de vídeo.</p></div>
+
+        <div class="rule"><div class="n">10</div><h4>Captura sempre por HubSpot</h4><p>Embed do portal da e-Auditoria. Nunca form próprio postando no CRM, nunca chave de API no front. Confira o <code>data-form-id</code> antes de publicar.</p></div>
+
+        <div class="rule"><div class="n">11</div><h4>E-mail é tabela, não flexbox</h4><p>Layout por <code>&lt;table&gt;</code>, estilos inline, larguras fixas, gradiente sempre com <code>bgcolor</code> sólido de fallback.</p></div>
+
+        <div class="rule"><div class="n">12</div><h4>Um CTA amarelo por dobra</h4><p>Amarelo só no botão de ação, texto escuro. Se tudo destaca, nada destaca.</p></div>
+
+        <div class="rule" style="border-color:var(--pink);border-left:3px solid var(--pink)"><div class="n" style="color:var(--pink)">13 · novo</div><h4>Validar no ar, não no preview</h4><p>O painel de pré-visualização do editor renderiza sem aplicar as abas por completo. Só a página publicada diz a verdade — e é lá que se roda a checagem do <a href="#pre-voo">pré-voo</a>.</p></div>
+
+        <div class="rule" style="border-color:var(--violet);border-left:3px solid var(--violet)"><div class="n" style="color:var(--violet)">14 · marca</div><h4>Expressões que nunca quebram linha</h4><p><b><span class="ea-brand">e-Auditoria</span></b> — nunca por hífen nem por quebra entre "e-" e "Auditoria". E também: <b>Simples&nbsp;Nacional</b>, <b>Simples&nbsp;Híbrido</b>, <b>Lucro&nbsp;Real</b>, <b>Lucro&nbsp;Presumido</b>, <b>Reforma&nbsp;Tributária</b>. Envolver em <code>&lt;span class="ea-nb"&gt;</code>.</p></div>
+
+        <div class="rule" style="border-color:var(--violet);border-left:3px solid var(--violet)"><div class="n" style="color:var(--violet)">15 · marca</div><h4>Sempre <code>e-A</code>, nunca <code>ë-A</code></h4><p>O trema existe no <b>desenho</b> do logotipo, não na palavra escrita. Em texto corrido: <b>e-A</b> e <b><span class="ea-brand">e-Auditoria</span></b>. E sempre que o nome aparecer <b>sozinho</b> — cabeçalho, rodapé, assinatura, selo, rótulo — use o <b>logotipo</b>, não a palavra. A palavra escrita só sobrevive dentro de uma frase.</p></div>
+
+        <div class="rule" style="border-color:var(--violet);border-left:3px solid var(--violet)"><div class="n" style="color:var(--violet)">16 · marca</div><h4>Sub-marca não carrega a marca-mãe</h4><p>Não existe lockup <code>Sub-marca | <span class="ea-brand">e-Auditoria</span></code>. Toda sub-marca é autossuficiente. A assinatura só entra junto quando a solicitação de produção pedir explicitamente.</p></div>
+
+        <div class="rule" style="border-color:var(--violet);border-left:3px solid var(--violet)"><div class="n" style="color:var(--violet)">17 · marca</div><h4>Iniciais maiúsculas, mesmo sozinhas</h4><p>"o <b>Simples</b>", "a <b>Reforma</b>" — são nomes próprios do domínio fiscal, não adjetivos. Minúscula só quando a palavra for mesmo o adjetivo ("de forma simples").</p></div>
+
+        <div class="rule" style="border-color:var(--violet);border-left:3px solid var(--violet)"><div class="n" style="color:var(--violet)">18 · cor</div><h4>Marca-mãe fala em azul</h4><p>Quando o assunto é a <span class="ea-brand">e-Auditoria</span>, a paleta é <b>azul e, no máximo, lilás</b>. Pink, laranja e magenta só quando o assunto for uma sub-marca ou vertical que os tenha.</p></div>
+      </div>
+    </section>
+
+    <!-- ============ PRÉ-VOO (novo) ============ -->
+    <section id="pre-voo">
+      <div class="sec-head"><h2>Pré-voo</h2><span class="tag core">Obrigatório</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">Rodar <b>antes</b> de colar, na pasta do projeto — e de novo depois de publicar. A lição mais cara de 29/07: quando um bloco vai ao ar sem estilo, <b>não olhe o CSS primeiro; olhe se o wrapper ainda tem a classe</b>.</p>
+
+      <div class="comp">
+        <div class="comp-head"><h3>Checklist de publicação</h3><span class="id">antes de colar</span></div>
+        <div class="preview stack">
+          <div class="checklist">
+            <label><input type="checkbox"><span>Wrapper com <b>só</b> <code>class</code> e <code>id</code>. Nenhum <code>data-*</code> no markup salvo.</span></label>
+            <label><input type="checkbox"><span>Nenhuma regra de estado normal dependendo de <code>[data-*]</code>.</span></label>
+            <label><input type="checkbox"><span>JS com fallback de gancho (<code>getElementById</code> → <code>querySelector</code>) e <b>sem nenhum</b> <code>&amp;</code>.</span></label>
+            <label><input type="checkbox"><span>Toda override prefixada com o wrapper — <b>inclusive dentro de <code>@media</code></b>.</span></label>
+            <label><input type="checkbox"><span><code>@import</code> na linha 1; arquivos do bloco sem comentário.</span></label>
+            <label><input type="checkbox"><span>Comentários e chaves do CSS balanceados; CSS em ASCII puro, sem <code>&lt;</code> nem <code>&gt;</code>.</span></label>
+            <label><input type="checkbox"><span>Cor de texto em <code>&lt;a&gt;</code> com <code>!important</code>; nenhum botão de fundo escuro dependendo de texto claro.</span></label>
+            <label><input type="checkbox"><span><code>data-form-id</code> conferido — é o da <b>campanha certa</b>.</span></label>
+            <label><input type="checkbox"><span>Template da página em <b>Full Width</b>, sem barra lateral (o full-bleed depende disso).</span></label>
+            <label><input type="checkbox"><span>Colado no <b>campo de código</b> de UM bloco — nunca no canvas.</span></label>
+            <label><input type="checkbox"><span>Teste local com os <code>data-*</code> removidos e o CSS do tema carregado antes do seu.</span></label>
+            <label><input type="checkbox"><span>Conferido em <b>celular real</b> e numa máquina fraca.</span></label>
+          </div>
+        </div>
+        <p class="comp-note cro">O item do celular não é formalidade: a maior parte do público está no mobile. Validar responsivo só por código já deixou passar entrega inteira sem conferência visual.</p>
+      </div>
+
+      <div class="comp">
+        <div class="comp-head"><h3>Roteiro automático</h3><span class="id">PowerShell · na pasta do projeto</span></div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>$dir='arquivos-wordpress'
+$h=Get-Content "$dir\*-1-html.html" -Raw
+$c=Get-Content "$dir\*-2-css.css"  -Raw
+$j=Get-Content "$dir\*-3-js.js"    -Raw
+
+"data-* no HTML          : $(([regex]::Matches($h,'\sdata-[a-zA-Z-]+=')).Count)   deve ser 0"
+"CSS depende de data-*   : $($c.Contains('[data-'))                              deve ser False"
+"JS  contem e-comercial  : $($j.Contains('&amp;'))                                   deve ser False"
+"CSS nao-ASCII           : $([regex]::Matches($c,'[^\x00-\x7F]').Count)           deve ser 0"
+"CSS sinal de menor      : $($c.Contains('&lt;'))                                   deve ser False"
+"CSS comentarios         : $(([regex]::Matches($c,'/\*')).Count) / $(([regex]::Matches($c,'\*/')).Count)  devem ser iguais"
+"CSS chaves              : $(([regex]::Matches($c,'\{')).Count) / $(([regex]::Matches($c,'\}')).Count)   devem ser iguais"
+"CSS @import na linha 1  : $((($c -split "`r?`n")[0]) -match '^@import')          deve ser True"
+"regras sem prefixo em @media:"
+Select-String -Path "$dir\*-2-css.css" -Pattern '^\s*\.ea-[a-z-]+\s*\{'</pre></div>
+        <p class="comp-note">Comentário mal fechado não dá erro no console — a regra seguinte só para de existir. Por isso a contagem de <code>/*</code> e <code>*/</code> entra no roteiro.</p>
+      </div>
+
+      <div class="comp">
+        <div class="comp-head"><h3>Validação depois de publicar</h3><span class="id">console da página no ar</span></div>
+        <div class="code-wrap"><button class="copy">Copiar</button><pre>// o teste de 10 segundos: null aqui = achou o problema
+document.querySelector('.ea-lp')
+
+// o diagnóstico completo
+const wrap = document.querySelector('.ea-lp');
+const btn  = document.querySelector('.ea-btn--cta');
+({
+  wrapper_atributos: wrap ? [...wrap.attributes].map(a =&gt; a.name) : 'SEM WRAPPER',
+  data_sobreviveu:   document.querySelectorAll('[data-fx],[data-motion]').length,
+  botao_e_botao:     getComputedStyle(btn).display + ' ' + getComputedStyle(btn).borderRadius,
+  cor_do_botao:      getComputedStyle(btn).color,        // navy, nao preto puro
+  seta_px:           btn.querySelector('svg').getBoundingClientRect().width,
+  token_resolveu:    getComputedStyle(wrap).getPropertyValue('--ea-navy'),
+  js_armou:          wrap.classList.contains('is-armed'),
+  // clientWidth, NAO innerWidth: innerWidth ja inclui a barra de rolagem
+  barra_horizontal:  document.documentElement.scrollWidth &gt; document.documentElement.clientWidth
+})</pre></div>
+        <p class="comp-note">Esperado: wrapper com <code>["class","id"]</code>, botão <code>flex 999px</code>, seta <code>16</code>, token resolvendo, <code>js_armou: true</code> e <code>barra_horizontal: false</code>.</p>
+      </div>
+    </section>
+
+    <!-- ============ CRO (novo) ============ -->
+    <section id="cro">
+      <div class="sec-head"><h2>CRO</h2><span class="tag cro">Conversão</span><span class="tag novo">Novo na v2</span></div>
+      <p class="sec-desc">Design system não é só consistência visual — é também não repetir erro de conversão. O que segue vale para landing page de campanha da <span class="ea-brand">e-Auditoria</span>, com o público e o volume que temos.</p>
+
+      <div class="comp">
+        <div class="comp-head"><h3>Instrumentar antes de testar</h3><span class="id">sem isto, nenhum teste é legível</span></div>
+        <div class="preview stack">
+          <div class="checklist">
+            <label><input type="checkbox"><span><b>Scroll depth por dobra.</b> Diz se o problema é a página ser longa ou a copy não segurar.</span></label>
+            <label><input type="checkbox"><span><b>Clique de CTA por seção.</b> Sem saber quais convertem, não dá para cortar nenhum com segurança.</span></label>
+            <label><input type="checkbox"><span><b>Início × envio do formulário.</b> Separa "ninguém chega" de "chega e desiste" — problemas opostos.</span></label>
+            <label><input type="checkbox"><span><b>Play do vídeo e tempo assistido.</b> O vídeo custa uma dobra inteira na posição mais nobre.</span></label>
+            <label><input type="checkbox"><span><b>Cliques em elemento interativo</b> (abas, simulador). Mede se engaja ou se é decoração cara.</span></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="comp">
+        <div class="comp-head"><h3>Princípios que já valem para o próximo projeto</h3></div>
+        <div class="preview stack">
+          <div class="rules" style="width:100%">
+            <div class="rule"><h4>Amostra pequena não sustenta teste pequeno</h4><p>LP B2B de nicho não dá significância para testar cor de botão em três semanas. Priorize <b>mudanças grandes</b> (efeito legível com pouca amostra) e método qualitativo — gravação de sessão, mapa de calor, cinco entrevistas com contador.</p></div>
+            <div class="rule"><h4>O calendário manda</h4><p>Campanha com janela fiscal tem data de congelamento. Teste que precisa de três semanas começa na primeira semana, não na terceira — e perto do pico não se mexe na página que está convertendo.</p></div>
+            <div class="rule"><h4>Copy com prazo tem data de morte</h4><p>Quando a janela fecha, contador de dias e "sobre a janela de setembro" viram erro factual. Programar a versão pós-janela é manutenção obrigatória, não teste — e ela bate justamente quando a página começa a ranquear.</p></div>
+            <div class="rule"><h4>CTA repetido demais anestesia</h4><p>Dezesseis CTAs quase idênticos para a mesma âncora deixam de ser lidos. Menos CTAs, em pontos de scroll medido, com verbos distintos. Olhe clique bruto <b>e</b> conversão juntos: menos clique com mais conversão é vitória.</p></div>
+            <div class="rule"><h4>Prova concreta bate argumento</h4><p>Um gráfico que mostra o mecanismo vale mais que quatro dobras afirmando que ele existe. Se a página tem um ativo assim enterrado no meio, subir é a hipótese mais barata da lista.</p></div>
+            <div class="rule"><h4>Número inventado custa confiança</h4><p>Para contador — o público mais numérico que existe — valor ilustrativo que não bate com a realidade dele vira objeção. Um caso real anonimizado ("escritório de Vitória/ES, carteira de 180 CNPJs") converte melhor <b>e</b> reduz risco.</p></div>
+            <div class="rule"><h4>Mobile primeiro na hora de validar</h4><p>Se a maior parte do tráfego é mobile, otimizar desktop primeiro é otimizar o lugar errado. Abrir em aparelho real é pré-requisito, não teste.</p></div>
+            <div class="rule"><h4>Um teste por vez</h4><p>Com esse volume, dois testes simultâneos na mesma página tornam os dois ilegíveis.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Design System <span class="ea-brand">e-Auditoria</span> · v2 — construído a partir de 6 LPs WordPress + 41 módulos HubSpot + brandbook oficial + os aprendizados de produção de 29/07/2026.
+      Próxima versão: recorte por frentes (institucional, verticais, Aulão, Radar Tributário, Jornada do Especialista, Parcerias, Imersão).
+    </footer>
+  </div>
+</div>
+
+<script>
+  // tema
+  var root=document.documentElement,btn=document.getElementById('themeBtn');
+  btn.addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme');
+    if(!cur){cur=window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';}
+    root.setAttribute('data-theme',cur==='dark'?'light':'dark');
+  });
+  // copiar
+  document.querySelectorAll('.copy').forEach(function(b){
+    b.addEventListener('click',function(){
+      var pre=b.parentElement.querySelector('pre');
+      navigator.clipboard.writeText(pre.innerText).then(function(){
+        var t=b.textContent;b.textContent='✓ Copiado';setTimeout(function(){b.textContent=t;},1400);
+      });
+    });
+  });
+  // ---- exportador de marca: SVG inline -> arquivo -------------------
+  // O material de origem so tinha PNG pequeno (o horizontal oficial tem 641px
+  // de largura). Como agora existe o vetor, a alta resolucao e gerada no
+  // clique, em canvas: qualquer largura, qualquer cor, sem peso na pagina.
+  (function(){
+    var CORES = {azul:'#2B2E6F', preto:'#050634', branco:'#FFFFFF'};
+
+    function baixar(url, nome){
+      var a = document.createElement('a');
+      a.href = url; a.download = nome;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+    }
+
+    function prepara(svgEl, cor, largura){
+      var c = svgEl.cloneNode(true);
+      c.setAttribute('xmlns','http://www.w3.org/2000/svg');
+      c.setAttribute('fill', cor);
+      var vb = (c.getAttribute('viewBox') || '0 0 100 100').trim().split(/[\s,]+/).map(Number);
+      var alt = Math.max(1, Math.round(largura * vb[3] / vb[2]));
+      c.setAttribute('width', largura);
+      c.setAttribute('height', alt);
+      return {texto:new XMLSerializer().serializeToString(c), largura:largura, altura:alt};
+    }
+
+    function baixarSVG(svgEl, cor, nome){
+      var p = prepara(svgEl, cor, 1000);
+      var blob = new Blob([p.texto], {type:'image/svg+xml;charset=utf-8'});
+      baixar(URL.createObjectURL(blob), nome + '.svg');
+    }
+
+    function baixarPNG(svgEl, cor, largura, nome, botao){
+      var p = prepara(svgEl, cor, largura);
+      var blob = new Blob([p.texto], {type:'image/svg+xml;charset=utf-8'});
+      var url = URL.createObjectURL(blob);
+      var img = new Image();
+      img.onload = function(){
+        var cv = document.createElement('canvas');
+        cv.width = p.largura; cv.height = p.altura;
+        cv.getContext('2d').drawImage(img, 0, 0, p.largura, p.altura);
+        URL.revokeObjectURL(url);
+        cv.toBlob(function(b){
+          if(!b){ falhou(botao); return; }
+          baixar(URL.createObjectURL(b), nome + '-' + largura + 'w.png');
+        }, 'image/png');
+      };
+      img.onerror = function(){ URL.revokeObjectURL(url); falhou(botao); };
+      img.src = url;
+    }
+
+    function falhou(botao){
+      if(!botao){ return; }
+      var t = botao.textContent;
+      botao.textContent = 'ver assets/';
+      setTimeout(function(){ botao.textContent = t; }, 2600);
+    }
+
+    var ICONE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"'
+      + ' stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+      + '<path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>';
+
+    document.querySelectorAll('.k-asset[data-svg-name]').forEach(function(caixa){
+      var svgEl = caixa.querySelector('svg');
+      if(!svgEl){ return; }
+      var nome = caixa.getAttribute('data-svg-name');
+      var cor = CORES[caixa.getAttribute('data-cor')] || 'currentColor';
+      if(cor === 'currentColor'){ cor = getComputedStyle(caixa).color; }
+
+      var linha = document.createElement('div');
+      linha.className = 'k-dls';
+
+      var bs = document.createElement('button');
+      bs.type = 'button'; bs.className = 'k-dl';
+      bs.innerHTML = ICONE + 'SVG';
+      bs.addEventListener('click', function(){ baixarSVG(svgEl, cor, nome); });
+      linha.appendChild(bs);
+
+      [1000, 2000, 4000].forEach(function(w){
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'k-dl';
+        b.innerHTML = ICONE + 'PNG <span class="sz">' + w + 'px</span>';
+        b.addEventListener('click', function(){ baixarPNG(svgEl, cor, w, nome, b); });
+        linha.appendChild(b);
+      });
+
+      caixa.appendChild(linha);
+    });
+  })();
+
+  // demo do contador
+  (function(){
+    var el=document.getElementById('demoCount'),bt=document.getElementById('demoCountBtn');
+    if(!el){return;}
+    function rodar(){
+      var alvo=210000,t0=null,dur=1200;
+      function passo(t){
+        if(t0===null){t0=t;}
+        var p=Math.min((t-t0)/dur,1),e=1-Math.pow(1-p,3);
+        el.textContent=Math.round(alvo*e).toLocaleString('pt-BR');
+        if(p<1){requestAnimationFrame(passo);}
+      }
+      requestAnimationFrame(passo);
+    }
+    if(bt){bt.addEventListener('click',rodar);}
+    if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){return;}
+    rodar();
+  })();
+</script>
